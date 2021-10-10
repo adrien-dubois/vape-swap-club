@@ -107,7 +107,6 @@ body{
     width: 420px;
     height: 260px;
     background-color: white;
-    opacity: 1;
     border-radius: 5px;
     text-align: center;
     padding: 20px;
@@ -194,7 +193,6 @@ input{
 
 main{
     height: 800px;
-    /* margin-top: 5px; */
 }
 
 /* HERO SECTION */
@@ -203,7 +201,6 @@ main{
     background: url('../images/hero2.jpg');
     background-size: 100%;
     background-position-y: center;
-    /* background-attachment: fixed; */
     background-repeat: no-repeat;
     width: 100%;
     height: 70vh;
@@ -339,21 +336,44 @@ main{
 
 /* BANNER PICTO PART */
 
-.picto{
-    height: 90px;
-    margin: 0;
-    background-color: #313131;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
-}
+
 
 .picto ul{
-    position: absolute;
-    /* top: 50%; */
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: static;
     margin: 0;
     padding: 20px 0;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+}
+
+.picto ul li{
+    list-style: none;
+    text-align: center;
+    display: block;
+    border-right: 1px solid #222222;
+}
+
+.picto ul li:last-child {
+    border-right: none;
+}
+
+.picto ul li a{
+    text-decoration: none;
+    padding: 5px 50px;
+    margin-bottom: 5px;
+    display: block;
+    color: white;
+    cursor: default;
+    pointer-events: none;
+}
+
+.picto ul li a .icon{
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    margin: 0 auto ;
 }
 
 /* FOOTER */

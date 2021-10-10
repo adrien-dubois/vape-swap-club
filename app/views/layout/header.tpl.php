@@ -80,64 +80,66 @@
         </div>
     </div>
 
-    <!-- SCRIPT FOR THE MODAL -->
-    <script type="text/javascript">
-    document.getElementById('btn-one').addEventListener('click', function(){
-        document.querySelector('.bg-modal').style.display = 'flex';
-    });
+            <!-- SCRIPT FOR THE MODAL -->
+            <script type="text/javascript">
+            document.getElementById('btn-one').addEventListener('click', function(){
+                document.querySelector('.bg-modal').style.display = 'flex';
+            });
+            
+            document.querySelector('.close').addEventListener('click', function(){
+                document.querySelector('.bg-modal').style.display = 'none';
+            });
+        </script>
     
-    document.querySelector('.close').addEventListener('click', function(){
-        document.querySelector('.bg-modal').style.display = 'none';
-    });
-</script>
-
     <div class="picto">
+
         <ul>
             <li>
-                <a href="#">
+                <a href="">
                     <div class="icon">
-                    <i class="fas fa-medal"></i>
+                        <i class="fas fa-medal"></i>
                     </div>
                     <div class="name">Originaux certifiés</div>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="">
                     <div class="icon">
-                    <i class="far fa-thumbs-up"></i>
-                    </div>
-                    <div class="name">Utilisateurs notés</div>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <div class="icon">
+                    <i class="far fa-star"></i>
+                </div>
+                <div class="name">Utilisateurs notés</div>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <div class="icon">
                     <i class="far fa-handshake"></i>
-                    </div>
-                    <div class="name">Confiance</div>
-                </a>
-            </li>
-            <li>
-                <a href="#">
+                </div>
+                <div class="name">Confiance</div>
+            </a>
+        </li>
+        <li>
+                <a href="">
                     <div class="icon">
-                    <i class="fab fa-paypal"></i>
+                        <i class="fab fa-paypal"></i>
                     </div>
                     <div class="name">Paiement PayPal</div>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="">
                     <div class="icon">
-                    <i class="far fa-comments"></i>
+                        <i class="far fa-comments"></i>
                     </div>
                     <div class="name">Messagerie Privée</div>
                 </a>
             </li>
         </ul>
     </div>
-
-</main>
-
+ 
+        
+    </main>
+    
     <!-- FOOTER -->
     <footer class="footer-distributed">
         <div class="footer-left">
