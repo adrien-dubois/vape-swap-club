@@ -17,41 +17,40 @@
 <body>
     <!-- NAVBAR -->
 <header>
-
     <nav class="navigation">   
         <a href="/" class="logo-link">
-        <img src="<?= $assetsBaseUri; ?>images/logo.png" alt="" class="logo-image">
-    </a>
-    <div class="links">
-        <a href="#" class="nav-links">Accueil</a>
-        <a href="#" class="nav-links">Annonces</a>
-        <a href="#" class="nav-links">Catégories</a>
-        <a href="#" class="nav-links">Contact</a>
-    </div>
-    <aside class="menu">
-        <div class="menu-content">
-            <a href="#" id="button" class="nav-menu"><i class="fas fa-user"></i> Login</a>
+            <img src="<?= $assetsBaseUri; ?>images/logo.png" alt="" class="logo-image">
+        </a>
+        <div class="links">
+            <a href="#" class="nav-links">Accueil</a>
+            <a href="#" class="nav-links">Annonces</a>
+            <a href="#" class="nav-links">Catégories</a>
+            <a href="#" class="nav-links">Contact</a>
         </div>
-    </aside>  
-</nav>
+        <aside class="menu">
+            <div class="menu-content">
+                <a href="#" id="button" class="nav-menu"><i class="fas fa-user"></i> Login</a>
+            </div>
+        </aside>  
+    </nav>
 
-<!-- LOGIN MODAL -->
-<div class="bg-modal">
-    <div class="modal-content">
-        <div class="close">+</div>
-        <span style="font-size: 64px; color: #2C3E50;">
-            <i class="fas fa-user-circle"></i>
-        </span>
-        <form action="">
-            <input type="text" placeholder="E-Mail">
-            <input type="password" placeholder="Mot de passe">
-            <a href="" class="button">Connexion</a>
-        </form>
+    <!-- LOGIN MODAL -->
+    <div class="bg-modal">
+        <div class="modal-content">
+            <div class="close">+</div>
+            <span style="font-size: 64px; color: #2C3E50;">
+                <i class="fas fa-user-circle"></i>
+            </span>
+            <form action="">
+                <input type="text" placeholder="E-Mail">
+                <input type="password" placeholder="Mot de passe">
+                <a href="" class="button">Connexion</a>
+            </form>
+        </div>
     </div>
-</div>
 
-<!-- SCRIPT FOR THE MODAL -->
-<script type="text/javascript">
+    <!-- SCRIPT FOR THE MODAL -->
+    <script type="text/javascript">
         document.getElementById('button').addEventListener('click', function(){
             document.querySelector('.bg-modal').style.display = 'flex';
         });
@@ -59,18 +58,35 @@
         document.querySelector('.close').addEventListener('click', function(){
             document.querySelector('.bg-modal').style.display = 'none';
         });
-        </script>
+    </script>
 
 </header>
+
+<!-- MAIN PART -->
 <main class="main">
-    Site web de Vape swap
-    </main>
+
+    <!-- HERO SECTION -->
+    <div class="banner">
+        <div class="container">
+            <div class="banner-content">
+                <span>Nouvelles annonces</span>
+                <h1>Rare mods</h1>
+
+                <p>Velit est ea laboris est duis ipsum.Sunt minim cupidatat magna irure esse qui mollit mollit sint dolore anim.Reprehenderit labore proident cillum ut exercitation dolore eu aute sint elit.</p>
+
+                <a href="#" class="btn-one">Se connecter</a>
+                <a href="#" class="btn-two">S'inscrire</a>
+            </div>
+        </div>
+    </div>
+
+</main>
 
     <!-- FOOTER -->
     <footer class="footer-distributed">
         <div class="footer-left">
-            <img src="<?= $assetsBaseUri; ?>images/logo-simple.png" alt="logo" style="width: 120px;">
-            <h3>À Propos <span>Vape Swap Club</span> </h3>
+            <img src="<?= $assetsBaseUri; ?>images/logo-simple.png" alt="logo" style="width: 120px; margin-left: 55px;">
+            <h3>Vape <span>Swap Club</span> </h3>
             <p class="footer-links">
                 <a href="#">Accueil</a>
                 <a href="#">Annonces</a>
@@ -98,6 +114,7 @@
         <div class="footer-right">
             <p class="footer-comp-about">
                 <span>Réseaux Sociaux</span>
+                Officia aute est ipsum duis laborum occaecat ut incididunt dolore. Aliquip culpa minim reprehenderit do. Laborum Lorem est exercitation elit do ut incididunt adipisicing consequat nulla sit adipisicing. Laboris do velit laboris qui exercitation aute et ad. Incididunt nostrud cillum quis non et incididunt cupidatat eu cupidatat pariatur voluptate.
             </p>
             <div class="footer-icons">
                 <a href="#"><i class="fa fa-linkedin"></i></a>
