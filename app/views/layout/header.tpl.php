@@ -69,15 +69,71 @@
     <div class="banner">
         <div class="container">
             <div class="banner-content">
-                <span>Nouvelles annonces</span>
+                <span>Be part of the club</span>
                 <h1>Rare mods</h1>
 
                 <p>Velit est ea laboris est duis ipsum.Sunt minim cupidatat magna irure esse qui mollit mollit sint dolore anim.Reprehenderit labore proident cillum ut exercitation dolore eu aute sint elit.</p>
 
-                <a href="#" class="btn-one">Se connecter</a>
+                <a href="#" class="btn-one" id="btn-one">Se connecter</a>
                 <a href="#" class="btn-two">S'inscrire</a>
             </div>
         </div>
+    </div>
+
+    <!-- SCRIPT FOR THE MODAL -->
+    <script type="text/javascript">
+    document.getElementById('btn-one').addEventListener('click', function(){
+        document.querySelector('.bg-modal').style.display = 'flex';
+    });
+    
+    document.querySelector('.close').addEventListener('click', function(){
+        document.querySelector('.bg-modal').style.display = 'none';
+    });
+</script>
+
+    <div class="picto">
+        <ul>
+            <li>
+                <a href="#">
+                    <div class="icon">
+                    <i class="fas fa-medal"></i>
+                    </div>
+                    <div class="name">Originaux certifiés</div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="icon">
+                    <i class="far fa-thumbs-up"></i>
+                    </div>
+                    <div class="name">Utilisateurs notés</div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="icon">
+                    <i class="far fa-handshake"></i>
+                    </div>
+                    <div class="name">Confiance</div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="icon">
+                    <i class="fab fa-paypal"></i>
+                    </div>
+                    <div class="name">Paiement PayPal</div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="icon">
+                    <i class="far fa-comments"></i>
+                    </div>
+                    <div class="name">Messagerie Privée</div>
+                </a>
+            </li>
+        </ul>
     </div>
 
 </main>

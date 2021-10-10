@@ -26,7 +26,7 @@ body{
     padding: 10px 100px;
     display: flex;
     align-items: center;
-    box-shadow: 0px 3px 15px rgba(0, 0, 0,.3);
+    box-shadow: 4px -15px 20px rgba(0, 0, 0,.7) inset;
 }
 
 .logo-link{
@@ -194,7 +194,7 @@ input{
 
 main{
     height: 800px;
-    margin-top: 0.6rem;
+    /* margin-top: 5px; */
 }
 
 /* HERO SECTION */
@@ -203,6 +203,8 @@ main{
     background: url('../images/hero2.jpg');
     background-size: 100%;
     background-position-y: center;
+    /* background-attachment: fixed; */
+    background-repeat: no-repeat;
     width: 100%;
     height: 70vh;
 }
@@ -230,6 +232,7 @@ main{
     font-weight: 600;
     letter-spacing: 3px;
     font-family: sans-serif;
+    text-transform: uppercase;
 }
 
 .banner-content p{
@@ -253,6 +256,7 @@ main{
     font-weight: 600;
     font-style: italic;
     color: white;
+    transition: .4s;
 }
 
 .banner-content .btn-two{
@@ -264,9 +268,93 @@ main{
     font-weight: 600;
     font-style: italic;
     color: black;
+    transition: .4s;
 }
 
+.banner-content .btn-one:hover{
+    background-color: white;
+    border: 2px solid white;
+    color: black;
+}
 
+.banner-content .btn-two:hover{
+    background-color: black;
+    color: white;
+}
+
+@media(max-width: 1080px){
+    .banner-content{
+        padding-top: 100px;
+    }
+}
+
+@media(max-width: 970px){
+    .banner{
+        height: 50vh;
+    }
+    .banner-content span{
+        font-size: 12px;
+    }
+    .banner-content h1{
+        font-size: 30px;
+        font-weight: 400;
+    }
+
+    .banner-content p{
+        font-size: 12px;
+    }
+}
+
+@media(max-width: 860px){
+    .banner-content .btn-one,
+    .banner-content .btn-two{
+        padding: 5px 15px;
+        font-size: 14px;
+        font-weight: 400;
+    }
+}
+
+@media(max-width: 610px){
+    .banner{
+        height: 40vh;
+    }
+    .banner-content{
+        padding-top: 5px;
+    }
+    .banner-content h1{
+        font-size: 18px;
+        font-weight: 300;
+    }
+    .banner-content .btn-one,
+    .banner-content .btn-two{
+        display: block;
+        margin-bottom: 10px;
+    }
+    .banner-content span,
+    .banner-content p{
+        font-size: 8px;
+    }
+
+}
+
+/* BANNER PICTO PART */
+
+.picto{
+    height: 90px;
+    margin: 0;
+    background-color: #313131;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+}
+
+.picto ul{
+    position: absolute;
+    /* top: 50%; */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 20px 0;
+    display: flex;
+}
 
 /* FOOTER */
 
