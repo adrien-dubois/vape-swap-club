@@ -91,6 +91,7 @@
             });
         </script>
     
+    <!-- PICTO BAR -->
     <div class="picto">
 
         <ul>
@@ -137,7 +138,38 @@
         </ul>
     </div>
  
-        
+    <!-- CARDS PART -->
+    <div class="body-card">
+        <div class="contain">
+            <div class="card">
+                <div class="imgBx">
+                    <img src="<?= $assetsBaseUri; ?>uploads/bolt.jpg">
+                </div>
+                <div class="content">
+                    <h2>Bolt Mod</h2>
+                    <p>Lorem commodo dolore aute dolor eiusmod veniam deserunt cillum nulla esse consequat occaecat.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="imgBx">
+                    <img src="<?= $assetsBaseUri; ?>uploads/cobra-slam.jpg">
+                </div>
+                <div class="content">
+                    <h2>Cobra Slam Piece</h2>
+                    <p>Lorem commodo dolore aute dolor eiusmod veniam deserunt cillum nulla esse consequat occaecat.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="imgBx">
+                    <img src="<?= $assetsBaseUri; ?>uploads/reckoning.jpg">
+                </div>
+                <div class="content">
+                    <h2>Reckoning RDA</h2>
+                    <p>Lorem commodo dolore aute dolor eiusmod veniam deserunt cillum nulla esse consequat occaecat.</p>
+                </div>
+            </div>
+        </div>
+    </div>  
     </main>
     
     <!-- FOOTER -->
