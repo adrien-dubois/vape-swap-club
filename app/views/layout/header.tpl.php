@@ -16,49 +16,94 @@
 
 <body>
     <!-- NAVBAR -->
+<header>
+
     <nav class="navigation">   
         <a href="/" class="logo-link">
-            <img src="<?= $assetsBaseUri; ?>images/logo.png" alt="" class="logo-image">
-        </a>
-        <div class="links">
-            <a href="#" class="nav-links">Accueil</a>
-            <a href="#" class="nav-links">Annonces</a>
-            <a href="#" class="nav-links">Catégories</a>
-            <a href="#" class="nav-links">Contact</a>
-        </div>
-        <aside class="menu">
-            <div class="menu-content">
-                <a href="#" id="button" class="nav-menu"><i class="fas fa-user"></i> Login</a>
-            </div>
-        </aside>  
-    </nav>
-
-    <!-- LOGIN MODAL -->
-    <div class="bg-modal">
-        <div class="modal-content">
-            <div class="close">+</div>
-            <span style="font-size: 64px; color: #2C3E50;">
-                <i class="fas fa-user-circle"></i>
-            </span>
-            <form action="">
-                <input type="text" placeholder="E-Mail">
-                <input type="password" placeholder="Mot de passe">
-                <a href="" class="button">Connexion</a>
-            </form>
-        </div>
+        <img src="<?= $assetsBaseUri; ?>images/logo.png" alt="" class="logo-image">
+    </a>
+    <div class="links">
+        <a href="#" class="nav-links">Accueil</a>
+        <a href="#" class="nav-links">Annonces</a>
+        <a href="#" class="nav-links">Catégories</a>
+        <a href="#" class="nav-links">Contact</a>
     </div>
+    <aside class="menu">
+        <div class="menu-content">
+            <a href="#" id="button" class="nav-menu"><i class="fas fa-user"></i> Login</a>
+        </div>
+    </aside>  
+</nav>
 
-    <!-- SCRIPT FOR THE MODAL -->
-    <script type="text/javascript">
+<!-- LOGIN MODAL -->
+<div class="bg-modal">
+    <div class="modal-content">
+        <div class="close">+</div>
+        <span style="font-size: 64px; color: #2C3E50;">
+            <i class="fas fa-user-circle"></i>
+        </span>
+        <form action="">
+            <input type="text" placeholder="E-Mail">
+            <input type="password" placeholder="Mot de passe">
+            <a href="" class="button">Connexion</a>
+        </form>
+    </div>
+</div>
+
+<!-- SCRIPT FOR THE MODAL -->
+<script type="text/javascript">
         document.getElementById('button').addEventListener('click', function(){
             document.querySelector('.bg-modal').style.display = 'flex';
         });
-
+        
         document.querySelector('.close').addEventListener('click', function(){
             document.querySelector('.bg-modal').style.display = 'none';
         });
-    </script>
+        </script>
 
-    <main class="main">
-        Site web de Vape swap
+</header>
+<main class="main">
+    Site web de Vape swap
     </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-distributed">
+        <div class="footer-left">
+            <img src="<?= $assetsBaseUri; ?>images/logo-simple.png" alt="logo" style="width: 120px;">
+            <h3>À Propos <span>Vape Swap Club</span> </h3>
+            <p class="footer-links">
+                <a href="#">Accueil</a>
+                <a href="#">Annonces</a>
+                <a href="#">Catégories</a>
+                <a href="#">Contact</a>
+            </p>
+            <p class="footer-comp-name">&copy;2021 Adrien Dubois Dev</p>
+        </div>
+
+        <div class="footer-center">
+            <div>
+                <i class="fa fa-map-marker"></i>
+                <p><span>Vape Swap Club</span>Vape World, France</p>
+            </div>
+            <div>
+                <i class="fa fa-phone"></i>
+                <p>+33 240 506 070</p>
+            </div>
+            <div>
+                <i class="fa fa-envelope"></i>
+                <p><a href="mailto: dubois.adrien.dev@gmail.com">Webmaster Contact</a></p>
+            </div>
+        </div>
+
+        <div class="footer-right">
+            <p class="footer-comp-about">
+                <span>Réseaux Sociaux</span>
+            </p>
+            <div class="footer-icons">
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-github"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+        </div>
+            
+    </footer>
