@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Roboto:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/989bb3bd5d.js" crossorigin="anonymous"></script>
     <script type="text/javascript" ></script>
 </head>
@@ -93,7 +94,6 @@
     
     <!-- PICTO BAR -->
     <div class="picto">
-
         <ul>
             <li>
                 <a href="">
@@ -136,18 +136,21 @@
                 </a>
             </li>
         </ul>
-    </div>
+    </div> 
  
     <!-- CARDS PART -->
-    <div class="body-card">
-        <div class="contain">
-            <div class="card">
-                <div class="imgBx">
-                    <img src="<?= $assetsBaseUri; ?>uploads/bolt.jpg">
-                </div>
-                <div class="content">
-                    <h2>Bolt Mod</h2>
+    <div class="card-section">    
+        <h2 id="title">Last trending</h2>
+        <div class="body-card">
+            <div class="contain">
+                <div class="card">
+                    <div class="imgBx">
+                        <img src="<?= $assetsBaseUri; ?>uploads/bolt.jpg">
+                    </div>
+                    <div class="content">
+                        <h2>Bolt Mod</h2>
                     <p>Lorem commodo dolore aute dolor eiusmod veniam deserunt cillum nulla esse consequat occaecat.</p>
+                    <a href="#" class="btn-cards">Détails</a>
                 </div>
             </div>
             <div class="card">
@@ -157,6 +160,7 @@
                 <div class="content">
                     <h2>Cobra Slam Piece</h2>
                     <p>Lorem commodo dolore aute dolor eiusmod veniam deserunt cillum nulla esse consequat occaecat.</p>
+                    <a href="#" class="btn-cards">Détails</a>
                 </div>
             </div>
             <div class="card">
@@ -166,33 +170,35 @@
                 <div class="content">
                     <h2>Reckoning RDA</h2>
                     <p>Lorem commodo dolore aute dolor eiusmod veniam deserunt cillum nulla esse consequat occaecat.</p>
+                    <a href="#" class="btn-cards">Détails</a>
                 </div>
             </div>
         </div>
     </div>  
-    </main>
+</div>
+</main>
     
-    <!-- FOOTER -->
-    <footer class="footer-distributed">
-        <div class="footer-left">
-            <img src="<?= $assetsBaseUri; ?>images/logo-simple.png" alt="logo" style="width: 120px; margin-left: 55px;">
-            <h3>Vape <span>Swap Club</span> </h3>
-            <p class="footer-links">
-                <a href="#">Accueil</a>
-                <a href="#">Annonces</a>
-                <a href="#">Catégories</a>
-                <a href="#">Contact</a>
-            </p>
-            <p class="footer-comp-name">&copy;2021 Adrien Dubois Dev</p>
+<!-- FOOTER -->
+<footer class="footer-distributed">
+    <div class="footer-left">
+        <img src="<?= $assetsBaseUri; ?>images/logo-simple.png" alt="logo" style="width: 120px; margin-left: 55px;">
+        <h3>Vape <span>Swap Club</span> </h3>
+        <p class="footer-links">
+            <a href="#">Accueil</a>
+            <a href="#">Annonces</a>
+            <a href="#">Catégories</a>
+            <a href="#">Contact</a>
+        </p>
+        <p class="footer-comp-name">&copy;2021 Adrien Dubois Dev</p>
+    </div>
+    
+    <div class="footer-center">
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>Vape Swap Club</span>Vape World, France</p>
         </div>
-
-        <div class="footer-center">
-            <div>
-                <i class="fa fa-map-marker"></i>
-                <p><span>Vape Swap Club</span>Vape World, France</p>
-            </div>
-            <div>
-                <i class="fa fa-phone"></i>
+        <div>
+            <i class="fa fa-phone"></i>
                 <p>+33 240 506 070</p>
             </div>
             <div>
@@ -200,7 +206,7 @@
                 <p><a href="mailto: dubois.adrien.dev@gmail.com">Webmaster Contact</a></p>
             </div>
         </div>
-
+        
         <div class="footer-right">
             <p class="footer-comp-about">
                 <span>Réseaux Sociaux</span>

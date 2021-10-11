@@ -370,13 +370,35 @@ main{
 }
 
 .picto ul li a .icon{
-    width: 25px;
-    height: 25px;
+    width: 40px;
+    height: 40px;
     text-align: center;
     margin: 0 auto ;
 }
 
+.picto ul li a .icon .fas,
+.picto ul li a .icon .far,
+.picto ul li a .icon .fab{
+    width: 100%;
+    height: 100%;
+    font-size: 28px;
+}
+
 /* CARDS PART */
+
+.card-section #title{
+    font-family: 'Roboto', sans-serif;
+    color: #5A5D62;
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+    font-size: 50px;
+    font-weight: 900;
+    letter-spacing: 1.6px;
+    font-style: italic;
+    text-transform: uppercase;
+    text-shadow: 6px 10px 6px rgba(0, 0, 0,.7);
+}
 
 .body-card{
     display: flex;
@@ -443,6 +465,32 @@ main{
     opacity: 1;
     margin-top: -40px;
     transition-delay: 0.3s;
+}
+
+.contain .card:hover .content p{
+    margin-bottom: 5px;
+}
+
+.contain .card .content a{
+    text-decoration: none;
+}
+
+.contain .card .content .btn-cards{
+    padding: 5px 8px;
+    background-color: #222222;
+    border: 1px solid white;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 300;
+    color: white;
+    transition: .4s;
+    margin-top: 15px;
+}
+
+.contain .card .content .btn-cards:hover{
+    background-color: white;
+    border: 1px solid white;
+    color: #222222;
 }
 
 /* FOOTER */
