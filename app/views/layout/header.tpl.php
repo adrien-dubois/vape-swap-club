@@ -12,7 +12,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Roboto:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/989bb3bd5d.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" ></script>
+    <link type="text/css" rel="stylesheet" href="<?= $assetsBaseUri; ?>css/lightslider.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="<?= $assetsBaseUri; ?>js/lightslider.js"></script>
 </head>
 
 <body>
@@ -65,15 +67,7 @@
     </div>
 
     <!-- SCRIPT FOR THE MODAL -->
-    <script type="text/javascript">
-        document.getElementById('button').addEventListener('click', function(){
-            document.querySelector('.bg-modal').style.display = 'flex';
-        });
-        
-        document.querySelector('.close').addEventListener('click', function(){
-            document.querySelector('.bg-modal').style.display = 'none';
-        });
-    </script>
+
 
 </header>
 
@@ -95,16 +89,7 @@
         </div>
     </div>
 
-            <!-- SCRIPT FOR THE MODAL -->
-            <script type="text/javascript">
-            document.getElementById('btn-one').addEventListener('click', function(){
-                document.querySelector('.bg-modal').style.display = 'flex';
-            });
-            
-            document.querySelector('.close').addEventListener('click', function(){
-                document.querySelector('.bg-modal').style.display = 'none';
-            });
-        </script>
+
     
     <!-- PICTO BAR -->
     <div class="picto">
@@ -154,7 +139,7 @@
  
     <!-- CARDS PART -->
     <div class="card-section">    
-        <h2 id="title">Last trending</h2>
+        <h2 id="title">Last arrivals</h2>
         <div class="body-card">
             <div class="contain">
                 <div class="card">
@@ -190,6 +175,108 @@
         </div>
     </div>  
 </div>
+
+<hr style="height: 2px;border: none;background-color: #5A5D62; color: #5A5D62; margin-bottom: 2rem; ">
+<h2 id="trend">Trends</h2>
+<!-- CAROUSEL PART -->
+    <div class="carousel">
+        <!-- slider ------------------>
+        <ul id="autoWidth" class="cs-hidden">
+        <!--1------------------------->
+            <li class="item-a">
+                 <!--slider-box-->
+                <div class="box">
+                    <p class="cig">C2MNT RDA</p>
+                    <!--model-->
+                    <img src="<?= $assetsBaseUri; ?>uploads/d5.png" class="model">
+                    <!--details-->
+                    <div class="details">
+                        <!--product-details-->
+                        <p>Commodo est anim qui aliqua est Lorem pariatur voluptate excepteur.</p>
+                    </div>
+                    <a href="#" class="btn-cards">Détails</a>
+                </div>
+            </li>
+        <!--2------------------------->
+            <li class="item-a">
+                 <!--slider-box-->
+                <div class="box">
+                    <p class="cig">Battle Deck CompLyfe</p>
+                    <!--model-->
+                    <img src="<?= $assetsBaseUri; ?>uploads/cl.png" class="model">
+                    <!--details-->
+                    <div class="details">
+                        <!--product-details-->
+                        <p>Commodo est anim qui aliqua est Lorem pariatur voluptate excepteur.</p>
+                    </div>
+                    <a href="#" class="btn-cards">Détails</a>
+                </div>
+            </li>
+        <!--3------------------------->
+            <li class="item-a">
+                 <!--slider-box-->
+                <div class="box">
+                    <p class="cig">Goon 25 RDA</p>
+                    <!--model-->
+                    <img src="<?= $assetsBaseUri; ?>uploads/go.png" class="model">
+                    <!--details-->
+                    <div class="details">
+                        <!--product-details-->
+                        <p>Commodo est anim qui aliqua est Lorem pariatur voluptate excepteur.</p>
+                    </div>
+                    <a href="#" class="btn-cards">Détails</a>
+                </div>
+            </li>
+        <!--4------------------------->
+            <li class="item-a">
+                 <!--slider-box-->
+                <div class="box">
+                    <p class="cig">Gold Hadaly RDA</p>
+                    <!--model-->
+                    <img src="<?= $assetsBaseUri; ?>uploads/had.png" class="model">
+                    <!--details-->
+                    <div class="details">
+                        <!--product-details-->
+                        <p>Commodo est anim qui aliqua est Lorem pariatur voluptate excepteur.</p>
+                    </div>
+                    <a href="#" class="btn-cards">Détails</a>
+                </div>
+            </li>
+        <!--5------------------------->
+            <li class="item-a">
+                 <!--slider-box-->
+                <div class="box">
+                    <p class="cig">C2MNT RDA</p>
+                    <!--model-->
+                    <img src="<?= $assetsBaseUri; ?>uploads/d5.png" class="model">
+                    <!--details-->
+                    <div class="details">
+                        <!--product-details-->
+                        <p>Commodo est anim qui aliqua est Lorem pariatur voluptate excepteur.</p>
+                    </div>
+                    <a href="#" class="btn-cards">Détails</a>
+                </div>
+            </li>
+        <!--6------------------------->
+            <li class="item-a">
+                 <!--slider-box-->
+                <div class="box">
+                    <p class="cig">C2MNT RDA</p>
+                    <!--model-->
+                    <img src="<?= $assetsBaseUri; ?>uploads/d5.png" class="model">
+                    <!--details-->
+                    <div class="details">
+                        <!--product-details-->
+                        <p>Commodo est anim qui aliqua est Lorem pariatur voluptate excepteur.</p>
+                    </div>
+                    <a href="#" class="btn-cards">Détails</a>
+                </div>
+            </li>
+        </ul>
+       
+    </div>
+
+
 </main>
     
 <!-- FOOTER -->
