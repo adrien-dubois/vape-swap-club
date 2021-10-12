@@ -470,6 +470,7 @@ main{
     display: flex;
     justify-content: center;
     margin-top: 3rem;
+    text-decoration: underline overline solid #5A5D62;
     font-size: 50px;
     font-weight: 900;
     letter-spacing: 1.6px;
@@ -535,7 +536,12 @@ main{
     color: white;
     visibility: hidden;
     opacity: 0;
+    font-style: italic;
     transition: 0.3s ease-in-out;
+}
+
+.contain .card .content h2{
+    font-style: normal;
 }
 
 .contain .card:hover .content{
@@ -547,6 +553,7 @@ main{
 
 .contain .card:hover .content p{
     margin-bottom: 5px;
+    font-style: italic;
 }
 
 .contain .card .content a{
@@ -556,7 +563,7 @@ main{
 .contain .card .content .btn-cards{
     padding: 5px 8px;
     background-color: #222222;
-    border: 1px solid white;
+    border: 1px solid #5A5D62;
     border-radius: 12px;
     font-size: 14px;
     font-weight: 300;
@@ -566,9 +573,8 @@ main{
 }
 
 .contain .card .content .btn-cards:hover{
-    background-color: white;
-    border: 1px solid white;
-    color: #222222;
+    color: #FC833C;
+    border: 1px solid #FC833C;
 }
 
 /* FOOTER */
