@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Roboto:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/989bb3bd5d.js" crossorigin="anonymous"></script>
     <script type="text/javascript" ></script>
 </head>
@@ -38,14 +39,28 @@
     <div class="bg-modal">
         <div class="modal-content">
             <div class="close">+</div>
-            <span style="font-size: 64px; color: #2C3E50;">
+            <span style="font-size: 64px; color: #FC833C;">
                 <i class="fas fa-user-circle"></i>
             </span>
-            <form action="">
-                <input type="text" placeholder="E-Mail">
-                <input type="password" placeholder="Mot de passe">
-                <a href="" class="button">Connexion</a>
-            </form>
+
+            <div class="l-form">
+                <form action="" class="form">
+                    <h1 class="form__title">Connexion</h1>
+
+                    <div class="form__div">
+                        <input type="text" placeholder=" " class="form__input">
+                        <label for="" class="form__label">Email</label>
+                    </div>
+
+                    <div class="form__div">
+                        <input type="password" placeholder=" " class="form__input">
+                        <label for="" class="form__label">Mot de passe</label>
+                    </div>
+
+                    <input type="submit" class="form__button" value="Connexion">
+                    
+                </form>
+            </div>
         </div>
     </div>
 
@@ -91,8 +106,8 @@
             });
         </script>
     
+    <!-- PICTO BAR -->
     <div class="picto">
-
         <ul>
             <li>
                 <a href="">
@@ -135,32 +150,69 @@
                 </a>
             </li>
         </ul>
-    </div>
+    </div> 
  
-        
-    </main>
-    
-    <!-- FOOTER -->
-    <footer class="footer-distributed">
-        <div class="footer-left">
-            <img src="<?= $assetsBaseUri; ?>images/logo-simple.png" alt="logo" style="width: 120px; margin-left: 55px;">
-            <h3>Vape <span>Swap Club</span> </h3>
-            <p class="footer-links">
-                <a href="#">Accueil</a>
-                <a href="#">Annonces</a>
-                <a href="#">Catégories</a>
-                <a href="#">Contact</a>
-            </p>
-            <p class="footer-comp-name">&copy;2021 Adrien Dubois Dev</p>
-        </div>
-
-        <div class="footer-center">
-            <div>
-                <i class="fa fa-map-marker"></i>
-                <p><span>Vape Swap Club</span>Vape World, France</p>
+    <!-- CARDS PART -->
+    <div class="card-section">    
+        <h2 id="title">Last trending</h2>
+        <div class="body-card">
+            <div class="contain">
+                <div class="card">
+                    <div class="imgBx">
+                        <img src="<?= $assetsBaseUri; ?>uploads/bolt.jpg">
+                    </div>
+                    <div class="content">
+                        <h2>Bolt Mod</h2>
+                    <p>Lorem commodo dolore aute dolor eiusmod veniam deserunt cillum nulla esse consequat occaecat.</p>
+                    <a href="#" class="btn-cards">Détails</a>
+                </div>
             </div>
-            <div>
-                <i class="fa fa-phone"></i>
+            <div class="card">
+                <div class="imgBx">
+                    <img src="<?= $assetsBaseUri; ?>uploads/cobra-slam.jpg">
+                </div>
+                <div class="content">
+                    <h2>Cobra Slam Piece</h2>
+                    <p>Lorem commodo dolore aute dolor eiusmod veniam deserunt cillum nulla esse consequat occaecat.</p>
+                    <a href="#" class="btn-cards">Détails</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="imgBx">
+                    <img src="<?= $assetsBaseUri; ?>uploads/reckoning.jpg">
+                </div>
+                <div class="content">
+                    <h2>Reckoning RDA</h2>
+                    <p>Lorem commodo dolore aute dolor eiusmod veniam deserunt cillum nulla esse consequat occaecat.</p>
+                    <a href="#" class="btn-cards">Détails</a>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>
+</main>
+    
+<!-- FOOTER -->
+<footer class="footer-distributed">
+    <div class="footer-left">
+        <img src="<?= $assetsBaseUri; ?>images/logo-simple.png" alt="logo" style="width: 120px; margin-left: 55px;">
+        <h3>Vape <span>Swap Club</span> </h3>
+        <p class="footer-links">
+            <a href="#">Accueil</a>
+            <a href="#">Annonces</a>
+            <a href="#">Catégories</a>
+            <a href="#">Contact</a>
+        </p>
+        <p class="footer-comp-name">&copy;2021 Adrien Dubois Dev</p>
+    </div>
+    
+    <div class="footer-center">
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>Vape Swap Club</span>Vape World, France</p>
+        </div>
+        <div>
+            <i class="fa fa-phone"></i>
                 <p>+33 240 506 070</p>
             </div>
             <div>
@@ -168,7 +220,7 @@
                 <p><a href="mailto: dubois.adrien.dev@gmail.com">Webmaster Contact</a></p>
             </div>
         </div>
-
+        
         <div class="footer-right">
             <p class="footer-comp-about">
                 <span>Réseaux Sociaux</span>
