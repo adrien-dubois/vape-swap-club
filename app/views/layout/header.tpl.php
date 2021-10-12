@@ -39,14 +39,28 @@
     <div class="bg-modal">
         <div class="modal-content">
             <div class="close">+</div>
-            <span style="font-size: 64px; color: #2C3E50;">
+            <span style="font-size: 64px; color: #FC833C;">
                 <i class="fas fa-user-circle"></i>
             </span>
-            <form action="">
-                <input type="text" placeholder="E-Mail">
-                <input type="password" placeholder="Mot de passe">
-                <a href="" class="button">Connexion</a>
-            </form>
+
+            <div class="l-form">
+                <form action="" class="form">
+                    <h1 class="form__title">Connexion</h1>
+
+                    <div class="form__div">
+                        <input type="text" placeholder=" " class="form__input">
+                        <label for="" class="form__label">Email</label>
+                    </div>
+
+                    <div class="form__div">
+                        <input type="password" placeholder=" " class="form__input">
+                        <label for="" class="form__label">Mot de passe</label>
+                    </div>
+
+                    <input type="submit" class="form__button" value="Connexion">
+                    
+                </form>
+            </div>
         </div>
     </div>
 
