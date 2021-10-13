@@ -139,7 +139,8 @@
  
     <!-- CARDS PART -->
     <div class="card-section">    
-        <h2 id="title">Last arrivals</h2>
+        <h2 id="title">Brand news</h2>
+        <p id="subtitle">Voici nos dernières rentrées</p>
         <div class="body-card">
             <div class="contain">
                 <div class="card">
@@ -177,7 +178,7 @@
 </div>
 
 <hr style="height: 2px;border: none;background-color: #5A5D62; color: #5A5D62; margin-bottom: 2rem; ">
-<h2 id="trend">Trends</h2>
+<h2 id="trend">Tendances</h2>
 <!-- CAROUSEL PART -->
     <div class="carousel">
         <!-- slider ------------------>
@@ -246,9 +247,9 @@
             <li class="item-a">
                  <!--slider-box-->
                 <div class="box">
-                    <p class="cig">C2MNT RDA</p>
+                    <p class="cig">Origen V2 MK-II</p>
                     <!--model-->
-                    <img src="<?= $assetsBaseUri; ?>uploads/d5.png" class="model">
+                    <img src="<?= $assetsBaseUri; ?>uploads/origen.png" class="model">
                     <!--details-->
                     <div class="details">
                         <!--product-details-->
@@ -261,9 +262,9 @@
             <li class="item-a">
                  <!--slider-box-->
                 <div class="box">
-                    <p class="cig">C2MNT RDA</p>
+                    <p class="cig">Spade 21700</p>
                     <!--model-->
-                    <img src="<?= $assetsBaseUri; ?>uploads/d5.png" class="model">
+                    <img src="<?= $assetsBaseUri; ?>uploads/spade.png" class="model">
                     <!--details-->
                     <div class="details">
                         <!--product-details-->

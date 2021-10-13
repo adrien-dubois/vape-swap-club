@@ -488,6 +488,16 @@ main{
     text-shadow: 6px 10px 6px rgba(0, 0, 0,.7);
 }
 
+.card-section #subtitle{
+    /* font-family: 'Roboto', sans-serif; */
+    display: flex;
+    justify-content: center;
+    letter-spacing: 1px;
+    font-style: italic;
+    margin-top: 2rem;
+    font-weight: 200;
+}
+
 .body-card{
     display: flex;
     justify-content: center;
