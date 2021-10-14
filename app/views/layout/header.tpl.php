@@ -140,7 +140,7 @@
     <!-- CARDS PART -->
     <div class="card-section">    
         <h2 id="title">Brand news</h2>
-        <p id="subtitle">Voici nos dernières rentrées</p>
+        <p id="subtitle">Découvrez les dernières rentrées</p>
         <div class="body-card">
             <div class="contain">
                 <div class="card">
