@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Utils\Database;
 use PDO;
 
-class Brand extends CoreModel{
+class Type extends CoreModel{
 
     /**
      * @var string
@@ -17,71 +17,61 @@ class Brand extends CoreModel{
     private $footer_order;
 
     /**
-     * @var string
-     */
-    private $picture;
-    
-
-    /**
-     * Find a brand by its ID
+     * Find type by ID
      *
-     * @param int $brandId
-     * @return Brand
+     * @param int $typeId
+     * @return Type
      */
-    public static function find($brandId)
+    public static function find($typeId)
     {
         $pdo = Database::getPDO();
 
-        $sql = '
-            SELECT *
-            FROM `brand`
-            WHERE id = ' . $brandId;
+        $sql = 'SELECT * FROM `type` WHERE `id` =' . $typeId;
 
         $pdoStatement = $pdo->query($sql);
-        $brand = $pdoStatement->fetchObject('App\Models\Brand');
+        $type = $pdoStatement->fetchObject('App\Models\Type');
 
-        return $brand;
+        return $type;
     }
 
+
     /**
-     * Find all brands
+     * Find all types
      *
-     * @return Brand[]
+     * @return Type[]
      */
     public static function findAll()
     {
         $pdo = Database::getPDO();
-        $sql = '
-            SELECT *
-            FROM `brand`';
+        $sql = 'SELECT * FROM `type`';
         $pdoStatement = $pdo->query($sql);
-        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Brand');
-
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Type');
+        
         return $results;
     }
 
     /**
-     * Get the five brands configure for the footer
+     * Find the 5 types configures for the footer
      *
-     * @return void
+     * @return Type[]
      */
     public static function findAllFooter()
     {
         $pdo = Database::getPDO();
         $sql = '
             SELECT *
-            FROM brand
+            FROM type
             WHERE footer_order > 0
             ORDER BY footer_order ASC
         ';
         $pdoStatement = $pdo->query($sql);
-        $brands = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Brand');
+        $types = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Type');
         
-        return $brands;
+        return $types;
     }
 
     /**
-     * create a new brand
+     * create a new type
      *
      * @return bool
      */
@@ -90,8 +80,8 @@ class Brand extends CoreModel{
         $pdo = Database::getPDO();
 
         $sql = "
-            INSERT INTO `brand` (name, footer_order, picture)
-            VALUES ('{$this->name}', '{$this->footer_order}', '{$this->picture}')
+            INSERT INTO `type` (name, footer_order)
+            VALUES ('{$this->name}', '{$this->footer_order}')
         ";
 
         $insertedRow = $pdo->exec($sql);
@@ -104,7 +94,7 @@ class Brand extends CoreModel{
     }
 
     /**
-     * Update a brand
+     * Update a type
      *
      * @return bool
      */
@@ -113,11 +103,10 @@ class Brand extends CoreModel{
         $pdo = Database::getPDO();
 
         $sql = "
-            UPDATE `brand`
+            UPDATE `type`
             SET
                 name = '{$this->name}',
                 footer_order = '{$this->footer_order}',
-                picture = '{$this->picture}',
                 updated_at = NOW()
             WHERE id = {$this->id}
         ";
@@ -128,19 +117,20 @@ class Brand extends CoreModel{
     }
 
     /**
-     * Delete an existing Brand
+     * Delete an existing type
      *
-     * @param int $brandId
+     * @param int $typeId
      * @return void
      */
-    public static function delete($brandId)
+    public static function delete($typeId)
     {
         $pdo = Database::getPDO();
 
-        $sql = 'DELETE FROM `brand` WHERE id = ' . $brandId;
+        $sql = 'DELETE FROM `type` WHERE id = ' . $typeId;
 
         $pdo->exec($sql);
     }
+
 
     /**
      * Get the value of name
@@ -178,26 +168,6 @@ class Brand extends CoreModel{
     public function setFooter_order($footer_order)
     {
         $this->footer_order = $footer_order;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of picture
-     */ 
-    public function getPicture()
-    {
-        return $this->picture;
-    }
-
-    /**
-     * Set the value of picture
-     *
-     * @return  self
-     */ 
-    public function setPicture($picture)
-    {
-        $this->picture = $picture;
 
         return $this;
     }
