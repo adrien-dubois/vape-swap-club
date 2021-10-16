@@ -7,7 +7,19 @@ $(document).ready(function() {
             $('#autoWidth').removeClass('cS-hidden');
         } 
     });  
-  });
+});
+
+// FLASH MESSAGES
+
+$('.close-btn').click(function(){
+    $('.alert').addClass("hide");
+    $('.alert').removeClass("show");
+});
+$('.alert')
+setTimeout(function(){
+    $('.alert').addClass("hide");
+    $('.alert').removeClass("show");
+}, 5000);
   
   
 // HERO SECTION

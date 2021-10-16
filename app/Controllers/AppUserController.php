@@ -46,10 +46,10 @@ class AppUserController extends CoreController{
                     $_SESSION['userId'] = $newConnect->getId();
                     $_SESSION['username'] = $newConnect->getFirstname();
 
-                    // self::addFlash(
-                    //     'success', 
-                    //     'Connexion effectuée'
-                    // );
+                    self::addFlash(
+                        'success', 
+                        'Connexion effectuée'
+                    );
                     $data = ["Location" => $this->router->generate('main-home'), "formIsValid" => $formIsValid];
                 }else{
                     $errorList[] = "E-Mail/Mot de passe incorrect";
