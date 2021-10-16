@@ -126,4 +126,9 @@ class CoreController{
     }
 
 
+    protected function send(string $jsonData) {
+        header("Content-Type :'application/json'");
+        echo($jsonData);
+    }
+
 }

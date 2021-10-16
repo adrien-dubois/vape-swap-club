@@ -1,3 +1,4 @@
+// CAROUSEL
 $(document).ready(function() {
     $('#autoWidth').lightSlider({
         autoWidth:true,
@@ -33,3 +34,31 @@ document.querySelector('.close').addEventListener('click', function(){
 });
 
 
+// LOGIN FORM
+
+const form = document.getElementById('form');
+form.addEventListener('submit', event => {
+    event.preventDefault();
+    const url = form.action;
+    const formData = new FormData(form);
+    fetch(url, {
+        method: 'POST',
+        body: formData
+    }).then(data => {
+        return data.json()
+    }).then(json => {
+        if(json.formIsValid) {
+            window.location = json.Location
+        } else {
+            const errors = document.getElementById('errors');
+            errors.innerHTML = null
+            for (error of json.errorList) {
+                let p = document.createElement("p")
+                p.innerHTML = error
+                p.classList.add('error')
+                errors.append(p)
+            }
+            form.password.value = null
+        }
+    })
+})

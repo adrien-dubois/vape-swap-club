@@ -37,7 +37,26 @@ $router->map(
     'main-home'
 );
 
+$router->map(
+        'POST',
+        '/',
+        [
+            'method' => 'connect',
+            'controller' => '\App\Controllers\AppUserController'
+        ],
+        'main-connect'
 
+);
+
+$router->map(
+    'GET',
+    '/logout',
+    [
+        'method' => 'logout',
+        'controller' => '\App\Controllers\AppUserController'
+    ],
+    'main-logout'
+);
 
 /* -------------
 --- DISPATCH ---
