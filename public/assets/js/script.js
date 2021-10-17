@@ -71,6 +71,7 @@ form.addEventListener('submit', event => {
                 errors.append(p)
             }
             form.password.value = null
+
         }
     })
 })

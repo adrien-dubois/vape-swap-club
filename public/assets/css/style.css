@@ -148,6 +148,10 @@ main{
     height: auto;
 }
 
+.links{
+    margin-right: 20px;
+}
+
 .nav-links:link,
 .nav-links:visited{
     text-decoration: none;
@@ -198,31 +202,109 @@ main{
     color: #222222;
     border-radius: 5px;
 }
-.menu>.menu-logout{
-    width: 200px;
-    float: right;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    font-weight: bold;
-    letter-spacing: -0.05em;
-    text-transform: uppercase;
-    text-align: center;
+
+/* NAVBAR DROPDOWN */
+
+.action{
+    position: absolute;
+    top: 50px;
+    right: 50px;
+}
+
+.action .profile{
     position: relative;
-    color: #FC833C;
-    line-height: 65px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
 }
 
-.menu>.menu-logout>a{
-    color: #FC833C;
+.action .profile img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.action .menu-dropdown{
+    position: absolute;
+    top: 120px;
+    right: -10px;
+    padding: 10px 20px;
+    background: white;
+    width: 200px;
+    box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1 );
+    border-radius: 15px;
+    transition: 0.5s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.action .menu-dropdown.active{
+    top: 80px;
+    visibility: visible;
+    opacity: 1;
+}
+
+.action .menu-dropdown::before{
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 28px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    transform: rotate(45deg);
+}
+
+.action .menu-dropdown h3{
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    padding: 20px 0;
+    font-weight: 500;
+    color: #555;
+    line-height: 1.2em;   
+}
+
+.action .menu-dropdown h3 span{
+    font-size: 14px;
+    color: #cecece;
+    font-weight: 400;
+}
+
+.action .menu-dropdown ul li{
+    list-style: none;
+    padding: 10px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+}
+
+.action .menu-dropdown ul li i{
+    max-width: 20px;
+    margin-right: 10px;
+    opacity: 0.5;
+    transition: 0.5s;
+}
+
+.action .menu-dropdown ul li i:hover{
+    opacity: 1;
+}
+
+.action .menu-dropdown ul li a{
+    display: inline-block;
     text-decoration: none;
-    padding: 5px 15px;
-    transition: all .5s;
+    color: #555;
+    font-weight: 500;
+    transition: 0.5s;
 }
 
-.menu>.menu-logout>a:hover{
-    background-color: #FC833C;
-    color: #222222;
-    border-radius: 5px;
+.action .menu-dropdown ul li a:hover{
+    color: #ff5d94;
 }
 
 /* MODAL */

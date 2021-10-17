@@ -44,7 +44,7 @@ class AppUserController extends CoreController{
                 if (password_verify($password, $userPass)) {
                     $_SESSION['userObject'] = $newConnect;
                     $_SESSION['userId'] = $newConnect->getId();
-                    $_SESSION['username'] = $newConnect->getFirstname();
+                    $_SESSION['username'] = $newConnect->getFirstname() . ' ' . $newConnect->getLastname();
 
                     self::addFlash(
                         'success', 
