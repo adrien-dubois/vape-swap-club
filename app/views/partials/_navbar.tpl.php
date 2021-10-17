@@ -4,7 +4,7 @@
             <img src="<?= $assetsBaseUri; ?>images/logo.png" alt="" class="logo-image">
         </a>
         <div class="links">
-            <a href="#" class="nav-links">Accueil</a>
+            <a href="<?= $this->router->generate('main-home'); ?>" class="nav-links <?php if ($currentPage === 'main/home') : echo 'act'; endif; ?>">Accueil</a>
             <a href="#" class="nav-links">Annonces</a>
             <a href="#" class="nav-links">Catégories</a>
             <a href="#" class="nav-links">Contact</a>
@@ -30,12 +30,6 @@
                     </ul>
                 </div>
             </div>
-            <script>
-                function menuToggle(){
-                    const toggleMenu = document.querySelector('.menu-dropdown');
-                    toggleMenu.classList.toggle('active')
-                }
-            </script>
             <?php else : ?>
             <div class="menu-content">
                 <a href="#" id="button" class="nav-menu"><i class="fas fa-user"></i> Login</a>

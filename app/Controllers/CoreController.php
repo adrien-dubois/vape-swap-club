@@ -60,7 +60,7 @@ class CoreController{
 
                 // If tokens are not the sames, or empty, we stop everything
                 if(empty($tokenSession) || empty($formToken) || $formToken != $tokenSession){
-                    $errorController = new ErrorController();
+                    $errorController = new ErrorController;
                     // And then call error 403
                     $errorController->err403;
                 }

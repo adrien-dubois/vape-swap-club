@@ -95,7 +95,7 @@ main{
     }
   }
 
-.alert .fa-exclamation-circle{
+.alert .fa-check-circle{
     position: absolute;
     left: 20px;
     top: 50%;
@@ -164,6 +164,10 @@ main{
     width: 100px;
     text-align: center;
     transition: all .5s;
+}
+
+.nav-links.act{
+    color: #FC833C;
 }
 
 .nav-links:not(:last-child){
@@ -272,8 +276,9 @@ main{
 
 .action .menu-dropdown h3 span{
     font-size: 14px;
-    color: #cecece;
+    color: #555;
     font-weight: 400;
+    text-transform: uppercase;
 }
 
 .action .menu-dropdown ul li{
@@ -298,13 +303,13 @@ main{
 .action .menu-dropdown ul li a{
     display: inline-block;
     text-decoration: none;
-    color: #555;
+    color: #212121;
     font-weight: 500;
     transition: 0.5s;
 }
 
 .action .menu-dropdown ul li a:hover{
-    color: #ff5d94;
+    color: #FC833C;
 }
 
 /* MODAL */

@@ -20,6 +20,13 @@ setTimeout(function(){
     $('.alert').addClass("hide");
     $('.alert').removeClass("show");
 }, 5000);
+
+// Toggle personnal menu
+
+function menuToggle(){
+    const toggleMenu = document.querySelector('.menu-dropdown');
+    toggleMenu.classList.toggle('active')
+}
   
   
 // HERO SECTION

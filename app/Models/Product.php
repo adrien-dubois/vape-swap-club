@@ -41,6 +41,11 @@ class Product extends CoreModel {
      */
     private $type_id;
 
+    /**
+     * @var int
+     */
+    private $category_id;
+
 
     /**
      * Method which allows to get a product by its ID
@@ -90,8 +95,8 @@ class Product extends CoreModel {
         $pdo = Database::getPDO();
 
         $sql = '
-        INSERT INTO `product` (name, description, picture, price, rate, status, brand_id, type_id)
-        VALUES (:name :description, :picture, :price, :rate, :status, :brand_id, :type_id)
+        INSERT INTO `product` (name, description, picture, price, rate, status, brand_id, type_id, category_id)
+        VALUES (:name :description, :picture, :price, :rate, :status, :brand_id, :type_id, :category_id)
         ';
 
         $pdoStatement = $pdo->prepare($sql);
@@ -105,6 +110,7 @@ class Product extends CoreModel {
             ':status' => $this->status,
             ':brand_id' => $this->brand_id,
             ':type_id' => $this->type_id,
+            ':category_id' => $this->category_id
         ]);
 
         if ($pdoStatement->rowCount() > 0) {
@@ -136,6 +142,7 @@ class Product extends CoreModel {
                 status = :status,
                 brand_id = :brand_id,
                 type_id = :type_id,
+                category_id = :category_id,
                 updated_at = NOW()
                 WHERE id = :id
         ";
@@ -151,6 +158,7 @@ class Product extends CoreModel {
         $pdoStatement->bindValue(':status', $this->status, PDO::PARAM_INT);
         $pdoStatement->bindValue(':brand_id', $this->brand_id, PDO::PARAM_STR);
         $pdoStatement->bindValue(':type_id', $this->type_id, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':category_id', $this->category_id, PDO::PARAM_STR);
 
         $updatedRows = $pdoStatement->execute();
 
@@ -357,6 +365,26 @@ class Product extends CoreModel {
     public function setTypeId(int $type_id)
     {
         $this->type_id = $type_id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of category_id
+     */ 
+    public function getCategory_id()
+    {
+        return $this->category_id;
+    }
+
+    /**
+     * Set the value of category_id
+     *
+     * @return  self
+     */ 
+    public function setCategory_id($category_id)
+    {
+        $this->category_id = $category_id;
 
         return $this;
     }
