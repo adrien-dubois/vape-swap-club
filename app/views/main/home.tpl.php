@@ -3,7 +3,7 @@
 
     <!-- HERO SECTION -->
     <div class="banner">
-        <div class="container">
+        <div class="hero">
             <div class="banner-content">
                 <span>Be part of the club</span>
                 <h1>Rare mods</h1>

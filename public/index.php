@@ -58,6 +58,20 @@ $router->map(
     'main-logout'
 );
 
+/* -----------
+--- PRODUCT ---
+------------*/
+
+$router->map(
+    'GET',
+    '/products',
+    [
+        'method' => 'list',
+        'controller' => '\App\Controllers\ProductController'
+    ],
+    'product-list'
+);
+
 /* -------------
 --- DISPATCH ---
 -------------*/
