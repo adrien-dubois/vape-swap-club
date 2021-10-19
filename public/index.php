@@ -72,6 +72,16 @@ $router->map(
     'product-list'
 );
 
+$router->map(
+    'GET',
+    '/products/[i:productId]',
+    [
+        'method' => 'single',
+        'controller' => '\App\Controllers\ProductController'
+    ],
+    'product-single'
+);
+
 /* -------------
 --- DISPATCH ---
 -------------*/

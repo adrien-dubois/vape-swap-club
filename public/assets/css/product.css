@@ -39,7 +39,7 @@
 }
 
 .column-2{
-    flex-basis: 50%;
+    flex-basis: 49%;
     min-width: 300px;
 }
 
@@ -88,6 +88,32 @@
 .column-4:hover{
     transform: translateY(-10px);
 }
+.italic{
+    font-style: italic;
+}
+
+/* BUTTONS */
+
+.page-btn{
+    margin: 0 auto 80px;
+}
+
+.page-btn span{
+    display: inline-block;
+    border: 1px solid var(--second-color);
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.page-btn span:hover{
+    background: var(--second-color);
+    color: var(--background-color);
+}
 
 .btn-primary{
     display: inline-block;
@@ -96,6 +122,7 @@
     padding: 8px 30px;
     margin: 30px 0;
     border-radius: 30px;
+    transition: background 0.5s;
 }
 
 .btn-secondary{
@@ -107,7 +134,18 @@
     margin: 5px 0;
     border-radius: 15px;
     text-align: center;
+    transition: background 0.5s;
 }
+
+.btn-primary:hover{
+    background: #563434;
+}
+
+.btn-secondary:hover{
+    background: var(--input-color);
+}
+
+/* PRODUCT LIST */
 
 .list-title{
     text-align: center;
@@ -139,27 +177,45 @@ h4{
     color: var(--second-color);
 }
 
-.brand{
+
+/* PRODUCT DETAILS */
+
+.single-product{
+    margin-top: 80px;
+}
+
+.single-product .column-2 img{
+    padding: 0;
+    width: 100%;
+}
+
+.single-product .column-2 h1{
+    font-size: 35px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    font-family: sans-serif;
+    text-transform: uppercase;
+}
+
+.single-product .column-2 h4{
+    margin: 20px 0;
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--first-color);
+}
+
+.single-product .column-2 h3{
+    color: var(--input-color);
+    text-transform: uppercase;
     font-style: italic;
 }
 
-.page-btn{
-    margin: 0 auto 80px;
+.small-img-row{
+    display: flex;
+    justify-content: space-between;
 }
 
-.page-btn span{
-    display: inline-block;
-    border: 1px solid var(--second-color);
-    margin-left: 10px;
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    line-height: 40px;
+.small-img-col{
+    flex-basis: 24%;
     cursor: pointer;
-    transition: .5s;
-}
-
-.page-btn span:hover{
-    background: var(--second-color);
-    color: var(--background-color);
 }
