@@ -305,7 +305,7 @@ main{
     text-decoration: none;
     color: #212121;
     font-weight: 500;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 .action .menu-dropdown ul li a:hover{

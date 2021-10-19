@@ -1,5 +1,15 @@
+:root{
+    --first-color: #FFF;
+    --second-color: #FC833C;
+    --third-color: #5A5D62;
+    --input-color: #555;
+    --background-color : #212121;
+    --border-color: #DADCE0;
+    --button-color: #FF523B;
+}
+
 .header{
-    background: radial-gradient( #222222, #212121);
+    background: radial-gradient( #222222, --background-color);
 }
 
 .container{
@@ -21,6 +31,11 @@
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-around;
+}
+
+.row-2{
+    justify-content: space-between;
+    margin: 100px auto 50px;
 }
 
 .column-2{
@@ -59,17 +74,92 @@
     padding: 10px;
     max-width: 250px;
     margin-bottom: 50px;
+    transition: 0.5s;
 }
 
 .column-4 img{
     width: 100%;
 }
 
+.column-4 p{
+    font-size: 14px;
+}
+
+.column-4:hover{
+    transform: translateY(-10px);
+}
+
 .btn-primary{
     display: inline-block;
-    background: #ff523b;
-    color: white;
+    background: var(--button-color);
+    color: var(--first-color);
     padding: 8px 30px;
     margin: 30px 0;
     border-radius: 30px;
+}
+
+.btn-secondary{
+    display: inline-block;
+    font-size: 14px;
+    background: var(--second-color);
+    color: var(--first-color);
+    padding: 4px 10px;
+    margin: 5px 0;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.list-title{
+    text-align: center;
+    margin: 80px auto;
+    position: relative;
+    line-height: 60px;
+    color: var(--input-color);
+}
+
+.list-title::after{
+    content: '';
+    background: var(--second-color);
+    width: 80px;
+    height: 5px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+h4{
+    color: var(--input-color);
+    font-weight: bold;
+}
+
+.rating .fa,
+.rating .fas{
+    color: var(--second-color);
+}
+
+.brand{
+    font-style: italic;
+}
+
+.page-btn{
+    margin: 0 auto 80px;
+}
+
+.page-btn span{
+    display: inline-block;
+    border: 1px solid var(--second-color);
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.page-btn span:hover{
+    background: var(--second-color);
+    color: var(--background-color);
 }
