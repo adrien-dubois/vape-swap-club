@@ -1,27 +1,27 @@
 <div class="small-container single-product">
     <div class="row row-2">
         <div class="column-2">
-            <img src="<?= $assetsBaseUri; ?>uploads/had.png">
+            <img src="<?= $assetsBaseUri; ?>uploads/had.png" id="ProductImg">
 
             <div class="small-img-row">
                 <div class="small-img-col">
-                    <img src="<?= $assetsBaseUri; ?>uploads/had.png" width="100%">
+                    <img src="<?= $assetsBaseUri; ?>uploads/had.png" width="100%" class="small-img">
                 </div>
                 <div class="small-img-col">
-                    <img src="<?= $assetsBaseUri; ?>uploads/had2.jpg" width="100%">
+                    <img src="<?= $assetsBaseUri; ?>uploads/had2.jpg" width="100%" class="small-img">
                 </div>
                 <div class="small-img-col">
-                    <img src="<?= $assetsBaseUri; ?>uploads/had3.jpg" width="100%">
+                    <img src="<?= $assetsBaseUri; ?>uploads/had3.jpg" width="100%" class="small-img">
                 </div>
                 <div class="small-img-col">
-                    <img src="<?= $assetsBaseUri; ?>uploads/had4.png" width="100%">
+                    <img src="<?= $assetsBaseUri; ?>uploads/had4.png" width="100%" class="small-img">
                 </div>
             </div>
 
         </div>
         <div class="column-2">
             <p>Annonces / RDA</p>
-            <h1>Hadaly RDA Gold Edition</h1>
+            <h1>Hadaly RDA</h1>
             <p class="italic">Psyclone mods</p>
             <div class="rating">
                 <i class="fa fa-star"></i>
@@ -39,3 +39,22 @@
         </div>
     </div>
 </div>
+
+<script>
+    var ProductImg = document.getElementById("ProductImg");
+    var SmallImg = document.getElementsByClassName("small-img");
+
+    SmallImg[0].onclick = function(){
+        ProductImg.src = SmallImg[0].src;
+    }
+    SmallImg[1].onclick = function(){
+        ProductImg.src = SmallImg[1].src;
+    }
+    SmallImg[2].onclick = function(){
+        ProductImg.src = SmallImg[2].src;
+    }
+    SmallImg[3].onclick = function(){
+        ProductImg.src = SmallImg[3].src;
+    }
+
+</script>
