@@ -10,8 +10,8 @@
 }
 
 :root{
-    --first-color: #FC833C;
-    --input-color: gray;
+    --primo-color: #FC833C;
+    --input-color: #555;
     --border-color: #DADCE0;
     --body-font: 'Roboto', sans-serif;
     --normal-font-size: 1rem;
@@ -398,7 +398,7 @@ main{
     padding: .75rem 2rem;
     outline: none;
     border: none;
-    background-color: var(--first-color);
+    background-color: var(--primo-color);
     color: white;
     font-size: var(--normal-font-size);
     border-radius: .5rem;
@@ -414,7 +414,7 @@ main{
 .form__input:focus + .form__label{
     top: -.5rem;
     left: .8rem;
-    color: var(--first-color);
+    color: var(--primo-color);
     font-size: var(--small-font-size);
     font-weight: 500;
     z-index: 10;
@@ -429,7 +429,7 @@ main{
 }
 
 .form__input:focus{
-    border: 1.5px solid var(--first-color);
+    border: 1.5px solid var(--primo-color);
 }
 
 .error {

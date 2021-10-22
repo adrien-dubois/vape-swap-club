@@ -64,6 +64,11 @@ class AppUserController extends CoreController{
         $this->send(json_encode($data));
     }
 
+   /**
+    * Method to logout
+    *
+    * @return void
+    */
     public function logout()
     {
         unset($_SESSION['userId']);
@@ -71,5 +76,17 @@ class AppUserController extends CoreController{
         unset($_SESSION['username']);
 
         $this->redirect('main-home');
+    }
+
+    /**
+     * Method to register a new account
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->show('main/register', [
+            'pageTitle' => 'S\'enregistrer'
+        ]);
     }
 }

@@ -12,7 +12,7 @@
 
                 <?php if(!isset($_SESSION['userId'])): ?>
                 <a href="#" class="btn-one" id="btn-one">Se connecter</a>
-                <a href="#" class="btn-two">S'inscrire</a>
+                <a href="<?= $this->router->generate('main-register'); ?>" class="btn-two">S'inscrire</a>
                 <?php endif; ?>
             </div>
         </div>

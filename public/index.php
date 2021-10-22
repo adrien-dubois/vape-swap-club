@@ -49,6 +49,17 @@ $router->map(
 );
 
 $router->map(
+        'GET',
+        '/register',
+        [
+            'method' => 'register',
+            'controller' => '\App\Controllers\AppUserController'
+        ],
+        'main-register'
+
+);
+
+$router->map(
     'GET',
     '/logout',
     [

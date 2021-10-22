@@ -27,7 +27,9 @@ class CoreController{
 
         $this->router = $router;
 
-        if(!empty($match)){
+        if($match == false){
+            return;
+        }
             $currentRoute = $match['name'];
 
             $acl = [
@@ -36,7 +38,7 @@ class CoreController{
 
             // We check if the current route is a protected route
 
-            if(isset($acl[$currentRoute])){
+            if(array_key_exists($currentRoute, $acl)){
                 // We get the ACL array for this route
                 $authorizedRoles = $acl[$currentRoute];
 
@@ -62,10 +64,10 @@ class CoreController{
                 if(empty($tokenSession) || empty($formToken) || $formToken != $tokenSession){
                     $errorController = new ErrorController;
                     // And then call error 403
-                    $errorController->err403;
+                    $errorController->err403();
                 }
             }
-        }
+        
         
     }
 
@@ -109,6 +111,8 @@ class CoreController{
         $viewData['currentPage'] = $viewName;
 
         $viewData['assetsBaseUri'] = $_SERVER['BASE_URI'] . 'assets/';
+
+        $viewData['uploadsUri'] = $_SERVER['BASE_URI'] . 'assets/uploads';
 
         $viewData['baseUri'] = $_SERVER['BASE_URI'];
 
