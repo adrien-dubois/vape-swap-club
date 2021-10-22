@@ -112,7 +112,7 @@ class CoreController{
 
         $viewData['assetsBaseUri'] = $_SERVER['BASE_URI'] . 'assets/';
 
-        $viewData['uploadsUri'] = $_SERVER['BASE_URI'] . 'assets/uploads';
+        $viewData['uploadsUri'] = $_SERVER['BASE_URI'] . 'assets/uploads/';
 
         $viewData['baseUri'] = $_SERVER['BASE_URI'];
 

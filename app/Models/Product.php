@@ -19,6 +19,10 @@ class Product extends CoreModel {
     /**
      * @var string
      */
+    private $subtitle;
+    /**
+     * @var string
+     */
     private $picture;
     /**
      * @var float
@@ -28,6 +32,10 @@ class Product extends CoreModel {
      * @var int
      */
     private $rate;
+    /**
+     * @var int
+     */
+    private $news;
     /**
      * @var int
      */
@@ -95,8 +103,8 @@ class Product extends CoreModel {
         $pdo = Database::getPDO();
 
         $sql = '
-        INSERT INTO `product` (name, description, picture, price, rate, status, brand_id, type_id, category_id)
-        VALUES (:name :description, :picture, :price, :rate, :status, :brand_id, :type_id, :category_id)
+        INSERT INTO `product` (name, description, subtitle, picture, price, rate, status, news, brand_id, type_id, category_id)
+        VALUES (:name :description, :subtitle, :picture, :price, :rate, :status, :brand_id, :type_id, :category_id)
         ';
 
         $pdoStatement = $pdo->prepare($sql);
@@ -104,10 +112,12 @@ class Product extends CoreModel {
         $pdoStatement->execute([
             ':name' => $this->name,
             ':description' => $this->description,
+            ':subtitle' =>$this->subtitle,
             ':picture' => $this->picture,
             ':price' => $this->price,
             ':rate' => $this->rate,
             ':status' => $this->status,
+            ':news' => $this->news,
             ':brand_id' => $this->brand_id,
             ':type_id' => $this->type_id,
             ':category_id' => $this->category_id
@@ -136,10 +146,12 @@ class Product extends CoreModel {
                 SET
                 name = :name,
                 description = :description ,
+                subtitle = :subtitle,
                 picture = :picture,
                 price = :price,
                 rate = :rate,
                 status = :status,
+                news = :news,
                 brand_id = :brand_id,
                 type_id = :type_id,
                 category_id = :category_id,
@@ -152,10 +164,12 @@ class Product extends CoreModel {
         $pdoStatement->bindValue(':id', $this->id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':name', $this->name, PDO::PARAM_STR);
         $pdoStatement->bindValue(':description', $this->description, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':subtitle', $this->subtitle, PDO::PARAM_STR);
         $pdoStatement->bindValue(':picture', $this->picture, PDO::PARAM_STR);
         $pdoStatement->bindValue(':price', $this->price, PDO::PARAM_INT);
         $pdoStatement->bindValue(':rate', $this->rate, PDO::PARAM_INT);
         $pdoStatement->bindValue(':status', $this->status, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':news', $this->news, PDO::PARAM_INT);
         $pdoStatement->bindValue(':brand_id', $this->brand_id, PDO::PARAM_STR);
         $pdoStatement->bindValue(':type_id', $this->type_id, PDO::PARAM_STR);
         $pdoStatement->bindValue(':category_id', $this->category_id, PDO::PARAM_STR);
@@ -385,6 +399,54 @@ class Product extends CoreModel {
     public function setCategory_id($category_id)
     {
         $this->category_id = $category_id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of news
+     *
+     * @return  int
+     */ 
+    public function getNews()
+    {
+        return $this->news;
+    }
+
+    /**
+     * Set the value of news
+     *
+     * @param  int  $news
+     *
+     * @return  self
+     */ 
+    public function setNews(int $news)
+    {
+        $this->news = $news;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of subtitle
+     *
+     * @return  string
+     */ 
+    public function getSubtitle()
+    {
+        return $this->subtitle;
+    }
+
+    /**
+     * Set the value of subtitle
+     *
+     * @param  string  $subtitle
+     *
+     * @return  self
+     */ 
+    public function setSubtitle(string $subtitle)
+    {
+        $this->subtitle = $subtitle;
 
         return $this;
     }

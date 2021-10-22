@@ -72,6 +72,7 @@
         <p id="subtitle">Découvrez les dernières rentrées</p>
         <div class="body-card">
             <div class="contain">
+
                 <div class="card">
                     <div class="imgBx">
                         <img src="<?= $assetsBaseUri; ?>uploads/bolt.jpg">
@@ -82,6 +83,7 @@
                     <a href="#" class="btn-cards">Détails</a>
                 </div>
             </div>
+
             <div class="card">
                 <div class="imgBx">
                     <img src="<?= $assetsBaseUri; ?>uploads/cobra-slam.jpg">
@@ -92,6 +94,7 @@
                     <a href="#" class="btn-cards">Détails</a>
                 </div>
             </div>
+
             <div class="card">
                 <div class="imgBx">
                     <img src="<?= $assetsBaseUri; ?>uploads/reckoning.jpg">
@@ -102,6 +105,7 @@
                     <a href="#" class="btn-cards">Détails</a>
                 </div>
             </div>
+
         </div>
     </div>  
 </div>
@@ -113,95 +117,22 @@
         <!-- slider ------------------>
         <ul id="autoWidth" class="cs-hidden">
         <!--1------------------------->
+        <?php foreach($carousel as $currentCarousel): ?>
             <li class="item-a">
                  <!--slider-box-->
                 <div class="box">
-                    <p class="cig">C2MNT RDA</p>
+                    <p class="cig"><?= $currentCarousel->getName() ?></p>
                     <!--model-->
-                    <img src="<?= $assetsBaseUri; ?>uploads/d5.png" class="model">
+                    <img src="<?= $uploadsUri . $currentCarousel->getpicture() ?>" class="model">
                     <!--details-->
                     <div class="details">
                         <!--product-details-->
-                        <p>Commodo est anim qui aliqua est Lorem pariatur voluptate excepteur.</p>
+                        <p><?= $currentCarousel->getSubtitle() ?></p>
                     </div>
                     <a href="#" class="btn-cards">Détails</a>
                 </div>
             </li>
-        <!--2------------------------->
-            <li class="item-a">
-                 <!--slider-box-->
-                <div class="box">
-                    <p class="cig">Battle Deck CompLyfe</p>
-                    <!--model-->
-                    <img src="<?= $assetsBaseUri; ?>uploads/cl.png" class="model">
-                    <!--details-->
-                    <div class="details">
-                        <!--product-details-->
-                        <p>Commodo est anim qui aliqua est Lorem pariatur voluptate excepteur.</p>
-                    </div>
-                    <a href="#" class="btn-cards">Détails</a>
-                </div>
-            </li>
-        <!--3------------------------->
-            <li class="item-a">
-                 <!--slider-box-->
-                <div class="box">
-                    <p class="cig">Goon 25 RDA</p>
-                    <!--model-->
-                    <img src="<?= $assetsBaseUri; ?>uploads/go.png" class="model">
-                    <!--details-->
-                    <div class="details">
-                        <!--product-details-->
-                        <p>Commodo est anim qui aliqua est Lorem pariatur voluptate excepteur.</p>
-                    </div>
-                    <a href="#" class="btn-cards">Détails</a>
-                </div>
-            </li>
-        <!--4------------------------->
-            <li class="item-a">
-                 <!--slider-box-->
-                <div class="box">
-                    <p class="cig">Gold Hadaly RDA</p>
-                    <!--model-->
-                    <img src="<?= $assetsBaseUri; ?>uploads/had.png" class="model">
-                    <!--details-->
-                    <div class="details">
-                        <!--product-details-->
-                        <p>Commodo est anim qui aliqua est Lorem pariatur voluptate excepteur.</p>
-                    </div>
-                    <a href="#" class="btn-cards">Détails</a>
-                </div>
-            </li>
-        <!--5------------------------->
-            <li class="item-a">
-                 <!--slider-box-->
-                <div class="box">
-                    <p class="cig">Origen V2 MK-II</p>
-                    <!--model-->
-                    <img src="<?= $assetsBaseUri; ?>uploads/origen.png" class="model">
-                    <!--details-->
-                    <div class="details">
-                        <!--product-details-->
-                        <p>Commodo est anim qui aliqua est Lorem pariatur voluptate excepteur.</p>
-                    </div>
-                    <a href="#" class="btn-cards">Détails</a>
-                </div>
-            </li>
-        <!--6------------------------->
-            <li class="item-a">
-                 <!--slider-box-->
-                <div class="box">
-                    <p class="cig">Spade 21700</p>
-                    <!--model-->
-                    <img src="<?= $assetsBaseUri; ?>uploads/spade.png" class="model">
-                    <!--details-->
-                    <div class="details">
-                        <!--product-details-->
-                        <p>Commodo est anim qui aliqua est Lorem pariatur voluptate excepteur.</p>
-                    </div>
-                    <a href="#" class="btn-cards">Détails</a>
-                </div>
-            </li>
+        <?php endforeach ?>
         </ul>
        
     </div>
