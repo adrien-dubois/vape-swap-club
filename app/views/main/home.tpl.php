@@ -73,39 +73,18 @@
         <div class="body-card">
             <div class="contain">
 
+            <?php foreach($newsCards as $currentCards): ?>
                 <div class="card">
                     <div class="imgBx">
-                        <img src="<?= $assetsBaseUri; ?>uploads/bolt.jpg">
+                        <img src="<?= $uploadsUri . $currentCards->getPicture() ?>">
                     </div>
                     <div class="content">
-                        <h2>Bolt Mod</h2>
-                    <p>Lorem commodo dolore aute dolor eiusmod veniam deserunt cillum nulla esse consequat occaecat.</p>
-                    <a href="#" class="btn-cards">Détails</a>
+                        <h2><?= $currentCards->getName() ?></h2>
+                        <p><?= $currentCards->getSubtitle() ?></p>
+                        <a href="<?= $this->router->generate('product-single',['productId'=>$currentCards->getId()]) ?>" class="btn-cards">Détails</a>
+                    </div>
                 </div>
-            </div>
-
-            <div class="card">
-                <div class="imgBx">
-                    <img src="<?= $assetsBaseUri; ?>uploads/cobra-slam.jpg">
-                </div>
-                <div class="content">
-                    <h2>Cobra Slam Piece</h2>
-                    <p>Lorem commodo dolore aute dolor eiusmod veniam deserunt cillum nulla esse consequat occaecat.</p>
-                    <a href="#" class="btn-cards">Détails</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="imgBx">
-                    <img src="<?= $assetsBaseUri; ?>uploads/reckoning.jpg">
-                </div>
-                <div class="content">
-                    <h2>Reckoning RDA</h2>
-                    <p>Lorem commodo dolore aute dolor eiusmod veniam deserunt cillum nulla esse consequat occaecat.</p>
-                    <a href="#" class="btn-cards">Détails</a>
-                </div>
-            </div>
-
+            <?php endforeach ?>
         </div>
     </div>  
 </div>

@@ -35,10 +35,6 @@ class Product extends CoreModel {
     /**
      * @var int
      */
-    private $news;
-    /**
-     * @var int
-     */
     private $status;
     /**
      * @var int
@@ -80,6 +76,11 @@ class Product extends CoreModel {
 
     }
 
+    /**
+     * Method to find all products that are in DB
+     *
+     * @return Product
+     */
     public static function findAll(){
 
         $pdo = Database::getPDO();
@@ -92,6 +93,27 @@ class Product extends CoreModel {
         return $result;
     }
 
+
+    /**
+     * Method to find the 3 products to displays in the news cards on the homepage
+     *
+     * @return Product
+     */
+    public function findCards(){
+
+        $pdo = Database::getPDO();
+
+        $sql = "SELECT *
+                FROM `product`
+                ORDER BY `created_at` DESC
+                LIMIT 3 
+        ";
+
+        $pdoStatement = $pdo->query($sql);
+        $newsCards = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Product');
+
+        return $newsCards;
+    }
     
     /**
      * Method to create a new product in DB
@@ -103,7 +125,7 @@ class Product extends CoreModel {
         $pdo = Database::getPDO();
 
         $sql = '
-        INSERT INTO `product` (name, description, subtitle, picture, price, rate, status, news, brand_id, type_id, category_id)
+        INSERT INTO `product` (name, description, subtitle, picture, price, rate, status, brand_id, type_id, category_id)
         VALUES (:name :description, :subtitle, :picture, :price, :rate, :status, :brand_id, :type_id, :category_id)
         ';
 
@@ -117,7 +139,6 @@ class Product extends CoreModel {
             ':price' => $this->price,
             ':rate' => $this->rate,
             ':status' => $this->status,
-            ':news' => $this->news,
             ':brand_id' => $this->brand_id,
             ':type_id' => $this->type_id,
             ':category_id' => $this->category_id
@@ -151,7 +172,6 @@ class Product extends CoreModel {
                 price = :price,
                 rate = :rate,
                 status = :status,
-                news = :news,
                 brand_id = :brand_id,
                 type_id = :type_id,
                 category_id = :category_id,
@@ -169,7 +189,6 @@ class Product extends CoreModel {
         $pdoStatement->bindValue(':price', $this->price, PDO::PARAM_INT);
         $pdoStatement->bindValue(':rate', $this->rate, PDO::PARAM_INT);
         $pdoStatement->bindValue(':status', $this->status, PDO::PARAM_INT);
-        $pdoStatement->bindValue(':news', $this->news, PDO::PARAM_INT);
         $pdoStatement->bindValue(':brand_id', $this->brand_id, PDO::PARAM_STR);
         $pdoStatement->bindValue(':type_id', $this->type_id, PDO::PARAM_STR);
         $pdoStatement->bindValue(':category_id', $this->category_id, PDO::PARAM_STR);
@@ -399,30 +418,6 @@ class Product extends CoreModel {
     public function setCategory_id($category_id)
     {
         $this->category_id = $category_id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of news
-     *
-     * @return  int
-     */ 
-    public function getNews()
-    {
-        return $this->news;
-    }
-
-    /**
-     * Set the value of news
-     *
-     * @param  int  $news
-     *
-     * @return  self
-     */ 
-    public function setNews(int $news)
-    {
-        $this->news = $news;
 
         return $this;
     }

@@ -766,12 +766,13 @@ input:-webkit-autofill:active{
 .contain .card .content{
     position: relative;
     margin-top: -140px;
-    padding: 10px 15px;
+    padding: 10px 15px 18px;
     text-align: center;
     color: white;
     visibility: hidden;
     opacity: 0;
     font-style: italic;
+    font-size: 14px;
     transition: 0.3s ease-in-out;
 }
 
@@ -787,29 +788,27 @@ input:-webkit-autofill:active{
 }
 
 .contain .card:hover .content p{
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     font-style: italic;
+    font-size: 14px;
 }
+
 
 .contain .card .content a{
-    text-decoration: none;
-}
-
-.contain .card .content .btn-cards{
     padding: 5px 8px;
     background-color: #5A5D62;
     border: 1px solid #5A5D62;
     text-transform: uppercase;
+    text-decoration: none;
     border-radius: 12px;
     font-size: 14px;
     font-weight: 300;
     color: white;
     transition: .4s;
-    margin-top: 15px;
     font-style: normal;
 }
 
-.contain .card .content .btn-cards:hover{
+.contain .card .content a:hover{
     color: #FC833C;
     border: 1px solid #FC833C;
 }
