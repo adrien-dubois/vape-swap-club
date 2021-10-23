@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Controllers\CoreController;
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
 
 class ProductController extends CoreController{
@@ -25,10 +27,20 @@ class ProductController extends CoreController{
     public function single($id)
     {
         $product = Product::find($id);
+        $relatedBrand = $product->getBrandId();
+        $relatedCategory = $product->getCategory_id();
+
+        $brandModel = new Brand();
+        $brand = $brandModel->find($relatedBrand);
+
+        $categoryModel = new Category();
+        $category = $categoryModel->find($relatedCategory);
 
         $this->show('product/single', [
             'pageTitle' => 'Annonce',
-            'product' => $product
+            'product' => $product,
+            'brand' => $brand,
+            'category' => $category
         ]);
     }
 }

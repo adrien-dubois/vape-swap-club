@@ -108,7 +108,7 @@
                         <!--product-details-->
                         <p><?= $currentCarousel->getSubtitle() ?></p>
                     </div>
-                    <a href="#" class="btn-cards">Détails</a>
+                    <a href="<?= $this->router->generate('product-single',['productId'=>$currentCarousel->getId()]) ?>" class="btn-cards">Détails</a>
                 </div>
             </li>
         <?php endforeach ?>

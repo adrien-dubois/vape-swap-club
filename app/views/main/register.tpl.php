@@ -27,7 +27,7 @@
                         <input type="text" placeholder="Nom">
                         <input type="text" placeholder="Prénom">
                         <input type="password" placeholder="Mot de passe" name="" id="">
-                        <button type="submit" class="btn-primary">Connect</button>
+                        <button type="submit" class="btn-primary">Register</button>
                     </form>
                 </div>
             </div>

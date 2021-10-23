@@ -1,11 +1,15 @@
+<?php 
+$available = $product->getStatus();
+$rating = $product->getRate();
+?>
 <div class="small-container single-product">
     <div class="row row-2">
         <div class="column-2">
-            <img src="<?= $assetsBaseUri; ?>uploads/had.png" id="ProductImg">
+            <img src="<?= $uploadsUri . $product->getPicture() ?>" id="ProductImg">
 
             <div class="small-img-row">
                 <div class="small-img-col">
-                    <img src="<?= $assetsBaseUri; ?>uploads/had.png" width="100%" class="small-img">
+                    <img src="<?= $uploadsUri . $product->getPicture() ?>" width="100%" class="small-img">
                 </div>
                 <div class="small-img-col">
                     <img src="<?= $assetsBaseUri; ?>uploads/had2.jpg" width="100%" class="small-img">
@@ -20,22 +24,26 @@
 
         </div>
         <div class="column-2">
-            <p>Annonces / RDA</p>
-            <h1>Hadaly RDA</h1>
-            <p class="italic">Psyclone mods</p>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <h4>40.00 €</h4>
-            <a href="#" class="btn-secondary">AJOUTER</a>
-
+            <p>Annonces / <?= $category->getName() ?></p>
+            <h1><?= $product->getName() ?></h1>
+            <p class="italic"><?= $brand->getName() ?></p>
+            <?php include_once __DIR__ . '/../partials/_rating.tpl.php';
+            ?>
+            <h4><?= $product->getPrice() ?> €</h4>
             <h3>Description :</h3>
             <br>
-            <p class="description">Cupidatat ut ad nisi enim cupidatat officia pariatur est. Et ut exercitation veniam do proident dolor tempor sit eiusmod exercitation exercitation anim dolor incididunt. Excepteur sint ad ipsum aliquip exercitation occaecat labore quis veniam Lorem pariatur ipsum.</p>
+            <p class="description"><?= $product->getDescription() ?></p>
+            <br>
+            <a href="#" class="btn-secondary">AJOUTER <i class="fas fa-shopping-cart"></i></a>
+            <div class="badges">
+                <ul>
+                    <?php if($available == 1){ ?>
+                    <li><i class="fas fa-check-circle"></i> Disponibilité:<span> En stock</span></li>
+                    <?php } else { ?>
+                    <li><i class="far fa-times-circle"></i> Disponibilité:<span>  Out of stock</span></li> <?php } ?>
+                    <li><i class="fas fa-check-circle"></i> Catégorie:<span> <?= $category->getName() ?></span></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
