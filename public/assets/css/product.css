@@ -75,10 +75,23 @@
     max-width: 250px;
     margin-bottom: 50px;
     transition: 0.5s;
+    position: relative;
+    z-index: 1;
 }
 
 .column-4 img{
     width: 100%;
+    transition: 0.5s;
+}
+
+.column-4 .sub{
+    position: absolute;
+    text-align: center;
+    top: 20%;
+    margin: 0 10px;
+    opacity: 0;
+    transition: 0.5s;
+    z-index: 2;
 }
 
 .column-4 p{
@@ -88,6 +101,15 @@
 .column-4:hover{
     transform: translateY(-10px);
 }
+
+.column-4:hover img{
+    opacity: .3;
+}
+
+.column-4:hover .sub{
+    opacity: 1;
+}
+
 .italic{
     font-style: italic;
 }

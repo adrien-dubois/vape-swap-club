@@ -85,12 +85,34 @@ class Product extends CoreModel {
 
         $pdo = Database::getPDO();
         $sql = '
-        SELECT *
-        FROM `product`';
+            SELECT *
+            FROM `product`
+            ';
         $pdoStatement = $pdo->query($sql);
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Product');
 
         return $result;
+    }
+
+    /**
+     * Method to count the number of products that are in DB for the pagination
+     *
+     * @return Product
+     */
+    public function findNbProducts(){
+        $pdo = Database::getPDO();
+        $sql = '
+            SELECT COUNT(*)
+            AS nb_products
+            FROM `product`
+            ';
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->execute();
+        $result = $pdoStatement->fetch();
+
+        $nbProducts = (int) $result['nb_products'];
+
+        return $nbProducts;
     }
 
 

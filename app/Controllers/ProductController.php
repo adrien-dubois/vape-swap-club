@@ -17,10 +17,17 @@ class ProductController extends CoreController{
     public function list()
     {
         $allProducts = Product::findAll();
+        $allBrands = Brand::findAll();
+
+        // Get the number of products for the pagination
+        $productModel = new Product();
+        $nbProducts = $productModel->findNbProducts();
 
         $this->show('product/list',[
             'pageTitle' => 'Annonces',
-            'productList'=>$allProducts
+            'products'=>$allProducts,
+            'brands'=>$allBrands,
+            'nbProducts'=>$nbProducts,
         ]);
     }
 

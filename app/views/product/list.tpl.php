@@ -1,3 +1,12 @@
+<?php use App\Models\Brand; 
+
+if(isset($_GET['page']) && !empty($_GET['page'])){
+    $thisPage = (int) strip_tags($_GET['page']);
+} else {
+    $thisPage = 1;
+}
+
+?>
 <!-- LITTLE HERO SECTION -->
     <div class="header">
         <div class="container">
@@ -22,121 +31,25 @@
             <h2 class="list-title">Nos produits disponibles</h2>
         </div>
         <div class="row">
-            <div class="column-4">
-                <img src="<?= $assetsBaseUri; ?>uploads/had.png">
-                <h4>Hadaly Gold RDA</h4>
-                <p class="brand">Psyclone mods</p>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                    <i class="fa fa-star-o"></i>
+            <?php foreach($products as $currentProduct) : ?>
+                <div class="column-4">
+                    <img src="<?= $uploadsUri . $currentProduct->getPicture() ?>">
+                    <p class="sub"><?= $currentProduct->getSubtitle() ?></p>
+                    <h4><?= $currentProduct->getName() ?></h4>
+                    <?php $brandId = $currentProduct->getBrandId();
+                    $brandModel = new Brand();
+                    $currentBrand = $brandModel->find($brandId);
+                    $brandName = $currentBrand->getName();
+                    ?>
+                    <p class="brand"><?= $brandName ?></p>
+                    <?php $rating = $currentProduct->getRate(); 
+                     include __DIR__ . '/../partials/_rating.tpl.php'; ?>
+                    <p><?= $currentProduct->getPrice(); ?> €</p>
+                    <a href="#" class="btn-secondary">VOIR</a>
                 </div>
-                <p>40.00 €</p>
-                <a href="#" class="btn-secondary">VOIR</a>
-            </div>
-            <div class="column-4">
-                <img src="<?= $assetsBaseUri; ?>uploads/d5.png">
-                <h4>C2MNT RDA</h4>
-                <p class="brand">District F5ve</p>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <p>40.00 €</p>
-                <a href="#" class="btn-secondary">VOIR</a>
-            </div>
-            <div class="column-4">
-                <img src="<?= $assetsBaseUri; ?>uploads/origen.png">
-                <h4>Origen V2 MK-II</h4>
-                <p class="brand">Norbert</p>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                </div>
-                <p>40.00 €</p>
-                <a href="#" class="btn-secondary">VOIR</a>
-            </div>
-            <div class="column-4">
-                <img src="<?= $assetsBaseUri; ?>uploads/reckoning.jpg">
-                <h4>Reckoning RDA</h4>
-                <p class="brand">Immortal Modz</p>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                </div>
-                <p>40.00 €</p>
-                <a href="#" class="btn-secondary">VOIR</a>
-            </div>
+            <?php endforeach ?>
         </div>
-        <div class="row">
-            <div class="column-4">
-                <img src="<?= $assetsBaseUri; ?>uploads/bolt.jpg">
-                <h4>Bolt Mod</h4>
-                <p class="brand">Comp Lyfe</p>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                    <i class="fa fa-star-o"></i>
-                </div>
-                <p>40.00 €</p>
-                <a href="#" class="btn-secondary">VOIR</a>
-            </div>
-            <div class="column-4">
-                <img src="<?= $assetsBaseUri; ?>uploads/spade.png">
-                <h4>Spade Box BF</h4>
-                <p class="brand">Vicious Ant</p>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <p>40.00 €</p>
-                <a href="#" class="btn-secondary">VOIR</a>
-            </div>
-            <div class="column-4">
-                <img src="<?= $assetsBaseUri; ?>uploads/cl-stark.jpeg">
-                <h4>Stark Mod</h4>
-                <p class="brand">CompLyfe </p>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                </div>
-                <p>40.00 €</p>
-                <a href="#" class="btn-secondary">VOIR</a>
-            </div>
-            <div class="column-4">
-                <img src="<?= $assetsBaseUri; ?>uploads/cobra-slam.jpg">
-                <h4>Cobra Slam Hagerman Edition</h4>
-                <p class="brand">Purge Mods</p>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                </div>
-                <p>40.00 €</p>
-                <a href="#" class="btn-secondary">VOIR</a>
-            </div>
-        </div>
+
 
         <div class="page-btn">
             <span>1</span>
