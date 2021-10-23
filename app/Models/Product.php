@@ -115,6 +115,34 @@ class Product extends CoreModel {
         return $nbProducts;
     }
 
+    /**
+     * Find all products for the product list, calculated for the pagination
+     *
+     * @param int $first
+     * @param int $perPage
+     * @return Product
+     */
+    public function findAllForList($first, $perPage){
+
+        $pdo = Database::getPDO();
+        $sql = '
+            SELECT *
+            FROM `product`
+            ORDER BY `created_at` DESC
+            LIMIT :first, :perPage
+            ';
+        $pdoStatement = $pdo->prepare($sql);
+
+        $pdoStatement->bindValue(':first', $first, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':perPage', $perPage, PDO::PARAM_INT);
+
+        $pdoStatement->execute();
+        $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Product');
+
+        return $result;
+
+    }
+
 
     /**
      * Method to find the 3 products to displays in the news cards on the homepage

@@ -1,12 +1,4 @@
-<?php use App\Models\Brand; 
-
-if(isset($_GET['page']) && !empty($_GET['page'])){
-    $thisPage = (int) strip_tags($_GET['page']);
-} else {
-    $thisPage = 1;
-}
-
-?>
+<?php use App\Models\Brand; ?>
 <!-- LITTLE HERO SECTION -->
     <div class="header">
         <div class="container">
@@ -45,18 +37,18 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
                     <?php $rating = $currentProduct->getRate(); 
                      include __DIR__ . '/../partials/_rating.tpl.php'; ?>
                     <p><?= $currentProduct->getPrice(); ?> €</p>
-                    <a href="#" class="btn-secondary">VOIR</a>
+                    <a href="<?= $this->router->generate('product-single', ['productId'=> $currentProduct->getId()]) ?>" class="btn-secondary">VOIR</a>
                 </div>
             <?php endforeach ?>
         </div>
 
 
+        <!-- PAGINATION -->
         <div class="page-btn">
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>&#8594;</span>
+            <?php for ($page = 1; $page <= $nbPages; $page++): ?>
+                <a href="/products?page=<?= $page ?>" class=" "><span><?= $page ?></span></a>
+            <?php endfor ?>
+            <a href="/products?page=<?= $thisPage + 1 ?>" class=" <?= ($thisPage == $nbPages) ? 'disabled' : '' ?> "><span>&#8594;</span></a>
         </div>
 
     </div>

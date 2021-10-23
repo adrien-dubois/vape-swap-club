@@ -24,7 +24,7 @@ $rating = $product->getRate();
 
         </div>
         <div class="column-2">
-            <p>Annonces / <?= $category->getName() ?></p>
+            <p><a href="<?= $this->router->generate('product-list') ?>" class="breadcrumb">Annonces</a>  / <?= $category->getName() ?></p>
             <h1><?= $product->getName() ?></h1>
             <p class="italic"><?= $brand->getName() ?></p>
             <?php include_once __DIR__ . '/../partials/_rating.tpl.php';

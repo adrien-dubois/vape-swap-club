@@ -10,24 +10,44 @@ use App\Models\Product;
 class ProductController extends CoreController{
 
     /**
-     * Method to display all products
+     * Method to display all products list with pagination to have 8 products per page
      *
      * @return void
      */
     public function list()
     {
-        $allProducts = Product::findAll();
-        $allBrands = Brand::findAll();
-
+        // Setup the pagination & the current page
+        if(isset($_GET['page']) && !empty($_GET['page'])){
+            $thisPage = (int) strip_tags($_GET['page']);
+        } else {
+            $thisPage = 1;
+        }
+        
+        // Number of products per pages
+        $perPage = 8;
+        
         // Get the number of products for the pagination
         $productModel = new Product();
         $nbProducts = $productModel->findNbProducts();
+
+        // Calculate the number of pages
+        /**@var int $nbProducts */
+        $nbPages = ceil($nbProducts / $perPage);
+        
+        // Calculate first product of the page
+        $first = ($thisPage * $perPage) - $perPage;
+        
+        // Get the products in DB that are calculated for the pagination
+        $allProducts = $productModel->findAllForList($first, $perPage);
+
+        $allBrands = Brand::findAll();
 
         $this->show('product/list',[
             'pageTitle' => 'Annonces',
             'products'=>$allProducts,
             'brands'=>$allBrands,
-            'nbProducts'=>$nbProducts,
+            'nbPages'=>$nbPages,
+            'thisPage'=>$thisPage,
         ]);
     }
 

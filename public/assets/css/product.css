@@ -114,6 +114,20 @@
     font-style: italic;
 }
 
+.breadcrumb{
+    color: var(--first-color);
+    transition: .4s;
+}
+
+.breadcrumb:hover{
+    color: var(--second-color);
+}
+
+.disabled{
+    cursor: default;
+    pointer-events: none;
+}
+
 /* BUTTONS */
 
 .page-btn{
@@ -135,6 +149,15 @@
 .page-btn span:hover{
     background: var(--second-color);
     color: var(--background-color);
+}
+
+.page-btn a{
+    text-decoration: none;
+    color: var(--first-color);
+}
+
+.page-btn a.disabled{
+    color: var(--third-color);
 }
 
 .btn-primary{

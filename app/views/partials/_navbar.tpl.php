@@ -6,8 +6,8 @@
 
         <!-- LINKS NAVIGATION -->
         <div class="links">
-            <a href="<?= $this->router->generate('main-home'); ?>" class="nav-links <?php if ($currentPage === 'main/home') : echo 'act'; endif; ?>">Accueil</a>
-            <a href="<?= $this->router->generate('product-list') ?>" class="nav-links <?php if($currentPage === 'product/list' || $currentPage === 'product/single') : echo 'act'; endif; ?>">Annonces</a>
+            <a href="<?= $this->router->generate('main-home'); ?>" class="nav-links <?= ($currentPage === 'main/home') ? 'act' : '' ?>">Accueil</a>
+            <a href="<?= $this->router->generate('product-list') ?>" class="nav-links <?= ($currentPage === 'product/list' || $currentPage === 'product/single') ? 'act' : '' ?>">Annonces</a>
             <a href="#" class="nav-links">Catégories</a>
             <a href="#" class="nav-links">Contact</a>
         </div>
