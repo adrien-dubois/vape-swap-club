@@ -1,56 +1,45 @@
-<div class="account-page">
-    <div class="container">
-        <div class="row">
-            <div class="column-2">
-                <img src="<?= $assetsBaseUri; ?>images/back.png" width="100%">
-            </div>
-            <div class="column-2">
+<div class="container-register">
+    <div class="r-form">
+        <div class="heading">
+            <h1>Créer un compte</h1>
+        </div>
 
-
-                <div class="form-container">
-                    <div class="form-btn">
-                        <span onclick="login()">Login</span>
-                        <span onclick="register()">Register</span>
-                        <hr id="Indicator">
-                    </div>
-
-                    <form id="LoginForm" class="register-form">
-                        <input type="text" placeholder="Email">
-                        <input type="password" placeholder="Mot de passe" name="" id="">
-                        <button type="submit" class="btn-primary">Connect</button>
-                        <a href="#" class="italic">Mot de passe oublié?</a>
-                    </form>
-
-
-                    <form id="RegForm" class="register-form">
-                        <input type="text" placeholder="Email">
-                        <input type="text" placeholder="Nom">
-                        <input type="text" placeholder="Prénom">
-                        <input type="password" placeholder="Mot de passe" name="" id="">
-                        <button type="submit" class="btn-primary">Register</button>
-                    </form>
+        <!-- FORM -->
+        <form action="" method="post" enctype="multipart/form-data" class="user-form">
+            <div class="wrap">
+                <div class="f1">
+                    <label class="label">Nom</label>
+                    <input class="input" name="lastname" type="text"/>
+                    <span class="focus-input"></span>
+                </div>
+                <div class="f2">
+                    <label class="label">Prénom</label>
+                    <input class="input" name="firstname" type="text"/>
+                    <span class="focus-input"></span>
                 </div>
             </div>
-        </div>
+            <div class="wrap2">
+                <label class="label">E-Mail</label>
+                <input class="input" name="email" type="text">
+                <span class="focus-input2"></span>
+            </div>
+            <div class="wrap2">
+                <label class="label">Mot de passe</label>
+                <input class="input" name="password" type="password">
+                <span class="focus-input2"></span>
+            </div>
+            <div class="wrap2">
+                <label class="label">Avatar</label>
+                <input class="input" name="picture" type="file">
+                <span class="focus-input2"></span>
+            </div>
+
+            <button class="btn-register" type="submit">Enregistrer</button>
+        </form>
+    </div>
+
+    <!-- IMAGE -->
+    <div class="side-img"> <!--image-->
+        <img src="<?= $assetsBaseUri ?>images/register2.png" class="right-img" alt=""> <!-- img -->
     </div>
 </div>
-
-<!-- TOGGLE LOGIN FORM -->
-
-<script>
-    var LoginForm = document.getElementById("LoginForm");
-    var RegForm = document.getElementById("RegForm");
-    var Indicator = document.getElementById("Indicator");
-
-        function register(){
-            RegForm.style.transform = "translateX(0px)";
-            LoginForm.style.transform = "translateX(0px)";
-            Indicator.style.transform = "translateX(135px)";
-        }
-        function login(){
-            RegForm.style.transform = "translateX(300px)";
-            LoginForm.style.transform = "translateX(300px)";
-            Indicator.style.transform = "translateX(10px)";
-        }
-
-</script>

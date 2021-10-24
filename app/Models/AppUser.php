@@ -31,11 +31,14 @@ class AppUser extends CoreModel{
     * @var string
     */
     private $role;
-
     /**
-    * @var int
-    */
-    private $status;
+     * @var string
+     */
+    private $picture;
+    /**
+     * @var string
+     */
+    private $adress;
 
 
     
@@ -88,8 +91,8 @@ class AppUser extends CoreModel{
         $pdo = Database::getPDO();
 
         $sql="
-            INSERT INTO `app_user` (email, password, firstname, lastname, role, status)
-            VALUES (:email, :password, :firstname, :lastname, :role, :status)
+            INSERT INTO `app_user` (email, password, firstname, lastname, role, picture, adress)
+            VALUES (:email, :password, :firstname, :lastname, :role, :picture, :adress)
         ";
 
         $pdoStatement = $pdo->prepare($sql);
@@ -100,7 +103,8 @@ class AppUser extends CoreModel{
             ':firstname' => $this->firstname ,
             ':lastname' => $this-> lastname,
             ':role' => $this-> role,
-            ':status' => $this-> status,
+            ':picture' => $this-> picture,
+            ':adress' => $this->adress,
         ]
     );
 
@@ -132,7 +136,8 @@ class AppUser extends CoreModel{
                 firstname = :firstname,
                 lastname = :lastname,
                 role = :role,
-                status = :status,
+                picture = :picture,
+                adress = :adress,
                 updated_at = NOW()
                 WHERE id = :id
                 ";
@@ -146,7 +151,8 @@ class AppUser extends CoreModel{
         $pdoStatement->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);
         $pdoStatement->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
         $pdoStatement->bindValue(':role', $this->role, PDO::PARAM_STR);
-        $pdoStatement->bindValue(':status', $this->status, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':picture', $this->picture, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':adress', $this->adress, PDO::PARAM_STR);
 
         $updatedRows = $pdoStatement->execute();
 
@@ -302,22 +308,43 @@ class AppUser extends CoreModel{
         return $this;
     }
 
+
     /**
-     * Get the value of status
-     */
-    public function getStatus()
+     * Get the value of picture
+     */ 
+    public function getPicture()
     {
-        return $this->status;
+        return $this->picture;
     }
 
     /**
-     * Set the value of status
+     * Set the value of picture
      *
      * @return  self
-     */
-    public function setStatus($status)
+     */ 
+    public function setPicture($picture)
     {
-        $this->status = $status;
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of adress
+     */ 
+    public function getAdress()
+    {
+        return $this->adress;
+    }
+
+    /**
+     * Set the value of adress
+     *
+     * @return  self
+     */ 
+    public function setAdress($adress)
+    {
+        $this->adress = $adress;
 
         return $this;
     }

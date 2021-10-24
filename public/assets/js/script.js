@@ -83,3 +83,8 @@ form.addEventListener('submit', event => {
     })
 })
 
+// Put all forms autocompletion off
+
+$(document).ready(function(){
+    $('form').attr('autocomplete', 'off');
+});

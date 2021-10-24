@@ -436,10 +436,10 @@ main{
     color: red;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
+.form__input:-webkit-autofill,
+.form__input:-webkit-autofill:hover, 
+.form__input:-webkit-autofill:focus, 
+.form__input:-webkit-autofill:active{
     box-shadow: 0 0 0 40px #212121 inset !important;
     -webkit-text-fill-color: gray !important;
 }

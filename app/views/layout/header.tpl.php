@@ -8,10 +8,12 @@
     <title><?= $viewData['pageTitle'] ?> - Vape Swap Club</title>
     <link rel="stylesheet" href="<?= $assetsBaseUri; ?>css/style.css">
     <link rel="stylesheet" href="<?= $assetsBaseUri; ?>css/product.css">
+    <link rel="stylesheet" href="<?= $assetsBaseUri; ?>css/appuser.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Roboto:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/989bb3bd5d.js" crossorigin="anonymous"></script>
     <link type="text/css" rel="stylesheet" href="<?= $assetsBaseUri; ?>css/lightslider.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
