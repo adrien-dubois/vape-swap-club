@@ -49,17 +49,6 @@ $router->map(
 );
 
 $router->map(
-        'GET',
-        '/register',
-        [
-            'method' => 'register',
-            'controller' => '\App\Controllers\AppUserController'
-        ],
-        'main-register'
-
-);
-
-$router->map(
     'GET',
     '/logout',
     [
@@ -91,6 +80,32 @@ $router->map(
         'controller' => '\App\Controllers\ProductController'
     ],
     'product-single'
+);
+
+/* -----------
+--- USERS  ---
+------------*/
+
+$router->map(
+    'GET',
+    '/register',
+    [
+        'method' => 'register',
+        'controller' => '\App\Controllers\AppUserController'
+    ],
+    'main-register'
+
+);
+
+$router->map(
+    'POST',
+    '/register',
+    [
+        'method' => 'insert',
+        'controller' => '\App\Controllers\AppUserController'
+    ],
+    'user-insert'
+
 );
 
 /* -------------

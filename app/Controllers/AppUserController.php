@@ -79,31 +79,75 @@ class AppUserController extends CoreController{
     }
 
     /**
+     * Method displaying the register form
+     *
+     * @return void
+     */
+    public function register(){
+
+        $this->show('main/register', [
+            'pageTitle' => 'S\'enregistrer',
+        ]);
+
+    }
+
+
+    /**
      * Method to register a new account
      *
      * @return void
      */
-    public function register()
+    public function insert()
     {
-
         // We get the datas sended by form POST and sanitize it
         $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
         $firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
         $pass = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
-        // hashing right now the password
+        // Hashing right now the password
         $password = password_hash($pass,PASSWORD_DEFAULT);
         $role = 'Vaper';
-
-        /*********************
-         * Manage mistakes   *
-         *********************/
 
         // creating variables and array to check and manage errors
 
         $formIsValid = true;
         $errorList = [];
+
+        // Manage the avatar picture
+        if(isset($_FILES['picture'])){
+            $tmpName = $_FILES['picture']['tmp_name'];
+            $name = $_FILES['picture']['name'];
+            $error = $_FILES['picture']['error'];
+            
+            $tabExtension = explode('.', $name);
+            $extension = strtolower(end($tabExtension));
+
+            // var that authorized extensions
+            $authorizedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+            if(in_array($extension, $authorizedExtensions) && $error == 0){
+
+                $uniqueName = uniqid('', true);
+                $pictureName = $uniqueName.'.'.$extension;
+
+                move_uploaded_file($tmpName, __DIR__.'/../../public/assets/uploads/'.$pictureName);
+            } else {
+                self::addFlash(
+                    'danger',
+                    'Image non compatible'
+                );
+            }
+
+        } else {
+            $pictureName = 'nopic.png';
+        }
+
+        /*********************
+         * Manage mistakes   *
+         *********************/
+
+        // Testing if fields are emptys
 
         if(empty($lastname)){
             $errorList[] = "Merci de renseigner votre nom de famille";
@@ -146,6 +190,7 @@ class AppUserController extends CoreController{
             $newUser->setEmail($email);
             $newUser->setPassword($password);
             $newUser->setRole($role);
+            $newUser->setPicture($pictureName);
 
             // If insert works great, then we redirect to homepage
             if($newUser->save()){

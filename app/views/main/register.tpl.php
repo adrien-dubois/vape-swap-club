@@ -39,10 +39,34 @@
 
             <!-- AVATAR -->
             <div class="wrap2">
-                <label class="label">Avatar</label>
-                <input class="input" name="picture" type="file">
+                <input id="file" class="input-file" name="picture" type="file" data-multiple-caption="{count} files selected" multiple />
+                <label for="file" class="label l-file"><i class="fas fa-upload"></i> <span>Avatar </span></label>
                 <span class="focus-input2"></span>
             </div>
+
+            <script>
+                var inputs = document.querySelectorAll( '.input-file' );
+                Array.prototype.forEach.call( inputs, function( input )
+                {
+                    var label	 = input.nextElementSibling,
+                        labelVal = label.innerHTML;
+
+                    input.addEventListener( 'change', function( e )
+                    {
+                        var fileName = '';
+                        if( this.files && this.files.length > 1 )
+                            fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+                        else
+                            fileName = e.target.value.split( '\\' ).pop();
+
+                        if( fileName )
+                            label.querySelector( 'span' ).innerHTML = fileName;
+                        else
+                            label.innerHTML = labelVal;
+                    });
+                });
+
+            </script>
 
             <button class="btn-register" type="submit">Enregistrer</button>
         </form>
