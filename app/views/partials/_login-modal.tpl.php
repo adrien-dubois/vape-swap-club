@@ -20,7 +20,7 @@
                     </div>
                     <div id="errors"></div>
 
-                    <input type="submit" id="submit" class="form__button" value="Connexion">
+                    <input type="submit" id="submit" class="btn-register" style="text-align: center;" value="Connexion">
                     
                 </form>
 

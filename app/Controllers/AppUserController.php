@@ -85,8 +85,92 @@ class AppUserController extends CoreController{
      */
     public function register()
     {
+
+        // We get the datas sended by form POST and sanitize it
+        $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
+        $firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+        $pass = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+
+        // hashing right now the password
+        $password = password_hash($pass,PASSWORD_DEFAULT);
+        $role = 'Vaper';
+
+        /*********************
+         * Manage mistakes   *
+         *********************/
+
+        // creating variables and array to check and manage errors
+
+        $formIsValid = true;
+        $errorList = [];
+
+        if(empty($lastname)){
+            $errorList[] = "Merci de renseigner votre nom de famille";
+            $formIsValid = false;
+        }
+
+        if(empty($firstname)){
+            $errorList[] = "Merci de renseigner votre prénom";
+            $formIsValid = false;
+        }
+
+        if(empty($email)){
+            $errorList[] = "Il faut saisir votre adresse mail";
+            $formIsValid = false;
+        }
+
+        if (empty($password))
+        {
+            $errorList[] = 'Attention il faut définir un mot de passe';
+            $formIsValid = false;
+        }
+
+        // Add regex for the password and test it
+        if(preg_match('/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/', $password)){
+            $formIsValid = true;
+        } else {
+            $formIsValid = false;
+            $errorList[] = 'Attention, votre mot de passe doit contenir au moins 8 caractères, une lettre en minuscule, une lettre en majuscule, ainsi qu\'un chiffre';
+        }
+
+        // INSERT IN DB
+
+        // If all is OK, then we move to next step
+        if($formIsValid === true){
+
+            // We insert datas in the appropriate setters
+            $newUser = new AppUser();
+            $newUser->setLastname($lastname);
+            $newUser->setFirstname($firstname);
+            $newUser->setEmail($email);
+            $newUser->setPassword($password);
+            $newUser->setRole($role);
+
+            // If insert works great, then we redirect to homepage
+            if($newUser->save()){
+                self::addFlash(
+                    'success',
+                    'Votre inscription a bien été prise en compte !'
+                );
+                header('Location: ' . $this->router->generate('main-home'));
+                exit;
+            }
+            // If we are here, there was a problem on the insertion, so we display it
+            $errorList[] = "Une erreur s'est produite lors de la création de votre compte. Merci réessayer plus tard";
+        }
+
+        // We instanciate a new FOO to fill the fields with previous datas
+
+        $user = new AppUser();
+        $user->setLastname(filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING));
+        $user->setFirstname(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING));
+        $user->setEmail(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING));
+
         $this->show('main/register', [
-            'pageTitle' => 'S\'enregistrer'
+            'pageTitle' => 'S\'enregistrer',
+            'user'=>$user,
+            'errorList'=>$errorList,
         ]);
     }
 }

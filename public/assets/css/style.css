@@ -394,7 +394,6 @@ main{
 .form__button{
     display: block;
     margin-left: auto;
-    /* margin-top: 4rem; */
     padding: .75rem 2rem;
     outline: none;
     border: none;
