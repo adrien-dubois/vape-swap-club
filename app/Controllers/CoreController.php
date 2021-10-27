@@ -109,6 +109,7 @@ class CoreController{
      */
     protected function sendmail($subject, $body, $recipient)
     {
+        // The mail password is hide in the config.ini for gitignore
         $ini = parse_ini_file(__DIR__.'/../config.ini');
 
         // Config all email properties
