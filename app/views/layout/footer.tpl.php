@@ -41,7 +41,7 @@
             
     </footer>
 
-<script src="<?= $assetsBaseUri; ?>js/script.js" type="text/javascript"></script>
+<script src="<?= $assetsBaseUri; ?>js/script.js"></script>
 </body>
 
 </html>

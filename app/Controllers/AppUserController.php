@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 use App\Models\AppUser;
 
 class AppUserController extends CoreController{
@@ -42,20 +40,30 @@ class AppUserController extends CoreController{
                 $formIsValid = false;
 
             } else {
-                $userPass = $newConnect->getPassword();
-                if (password_verify($password, $userPass)) {
-                    $_SESSION['userObject'] = $newConnect;
-                    $_SESSION['userId'] = $newConnect->getId();
-                    $_SESSION['username'] = $newConnect->getFirstname() . ' ' . $newConnect->getLastname();
-
+                $userCode = $newConnect->getActivation_code();
+                $userStatus = $newConnect->getStatus();
+                if($userStatus === "not verified"){
                     self::addFlash(
-                        'success', 
-                        'Connexion effectuée'
+                        'danger',
+                        'Vous devez activer votre compte'
                     );
-                    $data = ["Location" => $this->router->generate('main-home'), "formIsValid" => $formIsValid];
-                }else{
-                    $errorList[] = "E-Mail/Mot de passe incorrect";
-                    $formIsValid = false;
+                    $data = ["Location" => 'register/otp?code=' . $userCode, "formIsValid" => $formIsValid];
+                } else {
+                    $userPass = $newConnect->getPassword();
+                    if (password_verify($password, $userPass)) {
+                        $_SESSION['userObject'] = $newConnect;
+                        $_SESSION['userId'] = $newConnect->getId();
+                        $_SESSION['username'] = $newConnect->getFirstname() . ' ' . $newConnect->getLastname();
+    
+                        self::addFlash(
+                            'success', 
+                            'Connexion effectuée'
+                        );
+                        $data = ["Location" => $this->router->generate('main-home'), "formIsValid" => $formIsValid];
+                    }else{
+                        $errorList[] = "E-Mail/Mot de passe incorrect";
+                        $formIsValid = false;
+                    }
                 }
             }
         }
@@ -77,6 +85,10 @@ class AppUserController extends CoreController{
         unset($_SESSION['userObject']);
         unset($_SESSION['username']);
 
+        self::addFlash(
+            'danger',
+            'Déconnecté'
+        );
         $this->redirect('main-home');
     }
 
@@ -202,10 +214,6 @@ class AppUserController extends CoreController{
 
             // If insert works great, then we redirect to homepage
             if($newUser->save()){
-                self::addFlash(
-                    'success',
-                    'Votre inscription a bien été prise en compte !'
-                );
 
                 // Preparing email for OTP
                 $recipient = $email;
@@ -218,9 +226,13 @@ class AppUserController extends CoreController{
 
                 $mailer = $this->sendmail($subject, $body, $recipient);
 
-                if($mailer == true){
-                    echo '<script>alert("Veuillez vérifier votre mail, le code de confirmation d\'inscription vous a été envoyé")';
+                if($mailer === true){
+                    self::addFlash(
+                        'success',
+                        'Code de vérification envoyé par mail'
+                    );
                     header('Location: register/otp?code=' . $activation_code);
+                    exit;
                 } else {
                     self::addFlash(
                         'danger',
@@ -228,9 +240,10 @@ class AppUserController extends CoreController{
                     );
                 }
 
+            } else{
+                // If we are here, there was a problem on the insertion, so we display it
+                $errorList[] = "Une erreur s'est produite lors de la création de votre compte. Merci réessayer plus tard";
             }
-            // If we are here, there was a problem on the insertion, so we display it
-            $errorList[] = "Une erreur s'est produite lors de la création de votre compte. Merci réessayer plus tard";
         }
 
         // We instanciate a new FOO to fill the fields with previous datas
@@ -259,6 +272,11 @@ class AppUserController extends CoreController{
         ]);
     }
 
+    /**
+     * Method to change the statut to activate user
+     *
+     * @return void
+     */
     public function activation(){
 
         // declare variables
@@ -298,6 +316,7 @@ class AppUserController extends CoreController{
                             );
             
                             header('Location: ' . $this->router->generate('main-home'));
+                            exit;
                         }
                     }
                 }

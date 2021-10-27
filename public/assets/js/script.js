@@ -9,18 +9,6 @@ $(document).ready(function() {
     });  
 });
 
-// FLASH MESSAGES
-
-$('.close-btn').click(function(){
-    $('.alert').addClass("hide");
-    $('.alert').removeClass("show");
-});
-$('.alert')
-setTimeout(function(){
-    $('.alert').addClass("hide");
-    $('.alert').removeClass("show");
-}, 5000);
-
 // Toggle personnal menu
 
 function menuToggle(){
@@ -28,20 +16,8 @@ function menuToggle(){
     toggleMenu.classList.toggle('active')
 }
   
-  
-// HERO SECTION
 
-
-document.getElementById('btn-one').addEventListener('click', function(){
-    document.querySelector('.bg-modal').style.display = 'flex';
-});
-
-document.querySelector('.close').addEventListener('click', function(){
-    document.querySelector('.bg-modal').style.display = 'none';
-});
-
-
-//LOGIN SECTION
+//LOGIN SECTION - MODAL
 
 
 document.getElementById('button').addEventListener('click', function(){

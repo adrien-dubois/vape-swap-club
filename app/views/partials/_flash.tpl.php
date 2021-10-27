@@ -8,7 +8,7 @@
                     <div class="alert show">
                         <span class="far fa-check-circle"></span>
                         <span class="msg"> <?= $currentMessage; ?> </span>
-                        <span class="close-btn">
+                        <span id="close-btn" class="close-btn">
                             <span class="fas fa-times"></span>
                         </span>
                     </div>
@@ -29,3 +29,29 @@
         endforeach;
         unset($_SESSION['flashMessage']);
     endif; 
+?>
+
+<!-- FOR SUCCESS -->
+<script>
+    $('.close-btn').click(function(){
+        $('.alert').addClass("hide");
+        $('.alert').removeClass("show");
+    });
+    $('.alert')
+    setTimeout(function(){
+        $('.alert').addClass("hide");
+        $('.alert').removeClass("show");
+    }, 5000);
+</script>
+<!-- FOR DANGER -->
+<script>
+    $('.close-btn2').click(function(){
+        $('.alert2').addClass("hide");
+        $('.alert2').removeClass("show");
+    });
+    $('.alert2')
+    setTimeout(function(){
+        $('.alert2').addClass("hide");
+        $('.alert2').removeClass("show");
+    }, 5000);
+</script>

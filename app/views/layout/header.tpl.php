@@ -14,10 +14,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Roboto:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <script defer src="<?= $assetsBaseUri; ?>js/lightslider.js"></script>
     <script src="https://kit.fontawesome.com/989bb3bd5d.js" crossorigin="anonymous"></script>
     <link type="text/css" rel="stylesheet" href="<?= $assetsBaseUri; ?>css/lightslider.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <script src="<?= $assetsBaseUri; ?>js/lightslider.js"></script>
 </head>
 
 <body>
@@ -27,5 +27,4 @@
     require __DIR__ . '/../partials/_navbar.tpl.php'; 
     require __DIR__ . '/../partials/_login-modal.tpl.php';
     require __DIR__ . '/../partials/_flash.tpl.php';
-    // require __DIR__ . '/../partials/_errors.tpl.php';
     ?>

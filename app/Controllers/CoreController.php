@@ -99,8 +99,19 @@ class CoreController{
         }
     }
 
+    /**
+     * Method which send an email to the current User
+     *
+     * @param string $subject
+     * @param string $body
+     * @param string $recipient
+     * @return bool
+     */
     protected function sendmail($subject, $body, $recipient)
     {
+        $ini = parse_ini_file(__DIR__.'/../config.ini');
+
+        // Config all email properties
         $mail = new PHPMailer(true);
         $mail->IsSMTP();
         $mail->SMTPAuth = true; 
@@ -108,7 +119,7 @@ class CoreController{
         $mail->Host = 'smtp.gmail.com';
         $mail->Port = 465;  
         $mail->Username = 'mcsnoos@gmail.com';
-        $mail->Password = 'jljelxlkienvzavu';   
+        $mail->Password = $ini['PWD_MAIL'];   
         $mail->IsHTML(true);
         $mail->From="mcsnoos@gmail.com";
         $mail->FromName="Vape Swap Club";
@@ -116,6 +127,7 @@ class CoreController{
         $mail->Body = $body;
         $mail->AddAddress($recipient);
 
+        // Send and test if it works or not
         if($mail->Send()){
             return true;
         } else {

@@ -1,5 +1,5 @@
 <!-- MAIN PART -->
-<main class="main">
+<!-- <main class="main"> -->
 
     <!-- HERO SECTION -->
     <div class="banner">
@@ -117,4 +117,14 @@
     </div>
 
 
-</main>
+<!-- </main> -->
+
+<script>
+    document.getElementById('btn-one').addEventListener('click', function(){
+    document.querySelector('.bg-modal').style.display = 'flex';
+    });
+
+    document.querySelector('.close').addEventListener('click', function(){
+        document.querySelector('.bg-modal').style.display = 'none';
+    });
+</script>
