@@ -12,19 +12,20 @@
             <a href="#" class="nav-links">Contact</a>
         </div>
 
-        <!-- PERSONNAL MENU AFTER CONNECT -->
+        <!-- PERSONNAL MENU -->
         <aside class="menu">
-            <?php if(isset($_SESSION['userId'])) :  ?>
-            <?php 
+            
+            <!-- If user is connected -->
+            <?php if(isset($_SESSION['userId'])) : 
+            $currentUser = $_SESSION['userObject'];
             $username = $_SESSION['username']; 
-            $role = $_SESSION['userObject']->getRole();
             ?>
             <div class="action">
                 <div class="profile" onclick="menuToggle();">
-                    <img src="<?= $assetsBaseUri; ?>uploads/id.jpg" alt="">
+                    <img src="<?= $uploadsUri . $currentUser->getPicture() ?>" alt="">
                 </div>
                 <div class="menu-dropdown">
-                    <h3><?= $username; ?> <br><span><?= $role; ?></span></h3>
+                    <h3><?= $username; ?> <br><span><?= $currentUser->getRole(); ?></span></h3>
                     <ul>
                         <li><a href="#"><i class="fas fa-shopping-cart"></i>Mon Panier</a></li>
                         <li><a href="#"><i class="far fa-user-circle"></i>Mon Profil</a></li>
@@ -34,6 +35,8 @@
                     </ul>
                 </div>
             </div>
+
+            <!-- If user is a visitor not connected -->
             <?php else : ?>
             <div class="menu-content">
                 <a href="#" id="button" class="nav-menu"><i class="fas fa-user"></i> Login</a>

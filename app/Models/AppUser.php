@@ -31,14 +31,31 @@ class AppUser extends CoreModel{
     * @var string
     */
     private $role;
+
     /**
      * @var string
      */
     private $picture;
+
     /**
      * @var string
      */
     private $adress;
+
+    /**
+     * @var string
+     */
+    private $activation_code;
+
+    /**
+     * @var string
+     */
+    private $status;
+
+    /**
+     * @var int
+     */
+    private $otp;
 
 
     
@@ -91,8 +108,8 @@ class AppUser extends CoreModel{
         $pdo = Database::getPDO();
 
         $sql="
-            INSERT INTO `app_user` (email, password, firstname, lastname, role, picture, adress)
-            VALUES (:email, :password, :firstname, :lastname, :role, :picture, :adress)
+            INSERT INTO `app_user` (email, password, firstname, lastname, role, picture, adress, activation_code, status, otp)
+            VALUES (:email, :password, :firstname, :lastname, :role, :picture, :adress, :activation_code, :status, :otp)
         ";
 
         $pdoStatement = $pdo->prepare($sql);
@@ -105,6 +122,9 @@ class AppUser extends CoreModel{
             ':role' => $this-> role,
             ':picture' => $this-> picture,
             ':adress' => $this->adress,
+            ':activation_code' => $this->activation_code,
+            ':status' => $this->status,
+            ':otp' => $this->otp,
         ]
     );
 
@@ -138,6 +158,9 @@ class AppUser extends CoreModel{
                 role = :role,
                 picture = :picture,
                 adress = :adress,
+                activation_code = :activation_code,
+                status = :status,
+                otp = :otp,
                 updated_at = NOW()
                 WHERE id = :id
                 ";
@@ -153,6 +176,9 @@ class AppUser extends CoreModel{
         $pdoStatement->bindValue(':role', $this->role, PDO::PARAM_STR);
         $pdoStatement->bindValue(':picture', $this->picture, PDO::PARAM_STR);
         $pdoStatement->bindValue(':adress', $this->adress, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':activation_code', $this->activation_code, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':status', $this->status, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':otp', $this->otp, PDO::PARAM_STR);
 
         $updatedRows = $pdoStatement->execute();
 
@@ -206,6 +232,63 @@ class AppUser extends CoreModel{
         }
 
         return false ;
+    }
+
+    /**
+     * Method which verify if the activation code for the current user is good
+     *
+     * @param string $activationCode
+     * @param int $otp
+     * @return bool
+     */
+    public function findUserActivationCode($activationCode, $otp)
+    {
+        $pdo = Database::getPDO();
+
+        $sql = '
+            SELECT *
+            FROM `app_user`
+            WHERE `activation_code` = :activationCode
+            AND `otp` = :otp
+        ';
+
+        $pdoStatement = $pdo->prepare($sql);
+
+        $pdoStatement->bindParam(':activationCode', $activationCode, PDO::PARAM_STR);
+        $pdoStatement->bindParam(':otp', $otp, PDO::PARAM_INT);
+
+        $pdoStatement->execute();
+
+        if($pdoStatement->rowCount() > 0){
+            return true;
+        }
+            return false;
+    }
+
+    /**
+     * Method which activate user that provides the good activation number
+     *
+     * @param string $activationCode
+     * @return void
+     */
+    public function activateUser($activationCode)
+    {
+        $pdo = Database::getPDO();
+
+        $sql = "
+        UPDATE `app_user`
+        SET 
+        `status` = :status,
+        `updated_at` = NOW()
+        WHERE `activation_code` =  '" .$activationCode . "'  " ;
+
+        $pdoStatement = $pdo->prepare($sql);
+
+        $pdoStatement->bindValue(':status', 'verified', PDO::PARAM_STR);
+
+        $updatedRows = $pdoStatement->execute();
+
+        return ($updatedRows > 0);
     }
 
     /**
@@ -345,6 +428,71 @@ class AppUser extends CoreModel{
     public function setAdress($adress)
     {
         $this->adress = $adress;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of otp
+     */ 
+    public function getOtp()
+    {
+        return $this->otp;
+    }
+
+    /**
+     * Set the value of otp
+     *
+     * @return  self
+     */ 
+    public function setOtp($otp)
+    {
+        $this->otp = $otp;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of status
+     */ 
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set the value of status
+     *
+     * @return  self
+     */ 
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+
+    /**
+     * Get the value of activation_code
+     *
+     * @return  string
+     */ 
+    public function getActivation_code()
+    {
+        return $this->activation_code;
+    }
+
+    /**
+     * Set the value of activation_code
+     *
+     * @param  string  $activation_code
+     *
+     * @return  self
+     */ 
+    public function setActivation_code(string $activation_code)
+    {
+        $this->activation_code = $activation_code;
 
         return $this;
     }

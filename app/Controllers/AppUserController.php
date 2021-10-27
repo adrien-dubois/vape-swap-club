@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 use App\Models\AppUser;
 
 class AppUserController extends CoreController{
@@ -108,6 +110,9 @@ class AppUserController extends CoreController{
         // Hashing right now the password
         $password = password_hash($pass,PASSWORD_DEFAULT);
         $role = 'Vaper';
+        $activation_code = md5(rand());
+        $otp = rand(100000, 999999);
+        $status = 'not verified';
 
         // creating variables and array to check and manage errors
 
@@ -191,6 +196,9 @@ class AppUserController extends CoreController{
             $newUser->setPassword($password);
             $newUser->setRole($role);
             $newUser->setPicture($pictureName);
+            $newUser->setActivation_code($activation_code);
+            $newUser->setOtp($otp);
+            $newUser->setStatus($status);
 
             // If insert works great, then we redirect to homepage
             if($newUser->save()){
@@ -198,8 +206,28 @@ class AppUserController extends CoreController{
                     'success',
                     'Votre inscription a bien été prise en compte !'
                 );
-                header('Location: ' . $this->router->generate('main-home'));
-                exit;
+
+                // Preparing email for OTP
+                $recipient = $email;
+                $subject = 'Code de confirmation d\'inscription - Vape Swap Club';
+                $body = '
+                    <p>Afin de vérifier votre adresse mail pour votre inscription sur Vape Swap Club, entrez ce code de vérification : <b>'.$otp.'</b>.</p>
+                    <p>Merci de votre confiance, bonne vape, </p>
+                    <p><i>Vape Swap Club</i></p>
+                ';
+
+                $mailer = $this->sendmail($subject, $body, $recipient);
+
+                if($mailer == true){
+                    echo '<script>alert("Veuillez vérifier votre mail, le code de confirmation d\'inscription vous a été envoyé")';
+                    header('Location: register/otp?code=' . $activation_code);
+                } else {
+                    self::addFlash(
+                        'danger',
+                        'L\'email de confirmation n\'a pû être envoyé, essayez plus tard'
+                    );
+                }
+
             }
             // If we are here, there was a problem on the insertion, so we display it
             $errorList[] = "Une erreur s'est produite lors de la création de votre compte. Merci réessayer plus tard";
@@ -216,6 +244,68 @@ class AppUserController extends CoreController{
             'pageTitle' => 'S\'enregistrer',
             'user'=>$user,
             'errorList'=>$errorList,
+        ]);
+    }
+
+    /**
+     * Display activation code page
+     *
+     * @return void
+     */
+    public function otp(){
+
+        $this->show('main/otp', [
+            'pageTitle' => 'Confirmation d\'inscription'
+        ]);
+    }
+
+    public function activation(){
+
+        // declare variables
+        $errorList = [];
+        $userActivationCode = '';
+        $user = new AppUser();
+
+        if(isset($_GET["code"])){
+
+            $userActivationCode = $_GET["code"];
+
+                if(isset($_POST["submit"]))
+                {
+                   
+                    if(empty($_POST["user_otp"]))
+                    {
+                        $errorList[] = 'Veuillez saisir votre code d\'activation';
+                    }
+                    else 
+                    {
+                        $otp = $_POST["user_otp"];
+                        $user->findUserActivationCode($userActivationCode, $otp);
+            
+                        if($user === false)
+                        {
+                            $errorList[] = 'Numéro d\'activation invalide';
+                        } 
+                        else 
+                        { 
+                            // dd('coucou');
+                            $activate = new AppUser();
+                            $activate->activateUser($userActivationCode);
+            
+                            self::addFlash(
+                                'success',
+                                'Votre compte a bien été activé'
+                            );
+            
+                            header('Location: ' . $this->router->generate('main-home'));
+                        }
+                    }
+                }
+        } 
+
+        $this->show('main/otp', [
+            'pageTitle' => 'Confirmation d\'inscription',
+            'errorList' => $errorList,
         ]);
     }
 }

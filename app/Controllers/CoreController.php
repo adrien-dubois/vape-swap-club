@@ -2,6 +2,10 @@
 
 namespace App\Controllers;
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use App\Controllers\ErrorController;
+
 class CoreController{
 
     public $router;
@@ -62,7 +66,7 @@ class CoreController{
 
                 // If tokens are not the sames, or empty, we stop everything
                 if(empty($tokenSession) || empty($formToken) || $formToken != $tokenSession){
-                    $errorController = new ErrorController;
+                    $errorController = new ErrorController();
                     // And then call error 403
                     $errorController->err403();
                 }
@@ -89,9 +93,33 @@ class CoreController{
             // If the user's role is not in the acl, display a 403 error
             // Unless the table of authorized roles is not empty.
             if(!in_array($userRole, $roles) && !empty($roles)) {
-                $errorController = new ErrorController;
+                $errorController = new ErrorController();
                 $errorController->err403();
             }
+        }
+    }
+
+    protected function sendmail($subject, $body, $recipient)
+    {
+        $mail = new PHPMailer(true);
+        $mail->IsSMTP();
+        $mail->SMTPAuth = true; 
+        $mail->SMTPSecure = 'ssl'; 
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 465;  
+        $mail->Username = 'mcsnoos@gmail.com';
+        $mail->Password = 'jljelxlkienvzavu';   
+        $mail->IsHTML(true);
+        $mail->From="mcsnoos@gmail.com";
+        $mail->FromName="Vape Swap Club";
+        $mail->Subject = $subject;
+        $mail->Body = $body;
+        $mail->AddAddress($recipient);
+
+        if($mail->Send()){
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -124,6 +152,7 @@ class CoreController{
 
         // => $baseUri is now available for this value : $_SERVER['BASE_URI']
 
+        // Mounting th full template of the page with header / body and footer
         require_once __DIR__.'/../views/layout/header.tpl.php';
         require_once __DIR__.'/../views/'.$viewName.'.tpl.php';
         require_once __DIR__.'/../views/layout/footer.tpl.php';

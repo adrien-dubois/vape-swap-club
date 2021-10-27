@@ -2,6 +2,7 @@
 
 use App\Utils\Database;
 
+
 require_once '../vendor/autoload.php';
 
 // STARTING SESSION HERE
@@ -106,6 +107,26 @@ $router->map(
     ],
     'user-insert'
 
+);
+
+$router->map(
+    'GET',
+    '/register/otp',
+    [
+        'method' => 'otp',
+        'controller' => '\App\Controllers\AppUserController'
+    ],
+    'user-otp'
+);
+
+$router->map(
+    'POST',
+    '/register/otp',
+    [
+        'method' => 'activation',
+        'controller' => '\App\Controllers\AppUserController'
+    ],
+    'user-activation'
 );
 
 /* -------------
