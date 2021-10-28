@@ -15,13 +15,13 @@ abstract class CoreModel {
      *
      * @var string
      */
-    protected $createdAt;
+    protected $created_at;
 
     /**
      *
      * @var string
      */
-    protected $updatedAt;
+    protected $updated_at;
 
 
     /**
@@ -34,25 +34,6 @@ abstract class CoreModel {
         return $this->id;
     }
 
-    /**
-     * Get the value of createdAt
-     *
-     * @return  string
-     */
-    public function getCreatedAt() : string
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Get the value of updatedAt
-     *
-     * @return  string
-     */
-    public function getUpdatedAt() : string
-    {
-        return $this->updatedAt;
-    }
 
     public function save()
     {
@@ -64,11 +45,31 @@ abstract class CoreModel {
             return $this->insert();
         }
     }
+    
+    /**
+     * Get the value of updated_at
+     *
+     * @return  string
+     */ 
+    public function getUpdated_at()
+    {
+        return $this->updated_at;
+    }
 
+    /**
+     * Get the value of created_at
+     *
+     * @return  string
+     */ 
+    public function getCreated_at()
+    {
+        return $this->created_at;
+    }
     // To harmonize our code, we indicate abstract methods. These methods must be implemented by the child classes of CoreModel
     abstract static public function findAll();
     abstract static public function find($id);
     abstract public function insert();
     abstract public function update();
     abstract static public function delete($id);
+
 }

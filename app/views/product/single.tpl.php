@@ -34,7 +34,7 @@ $rating = $product->getRate();
             <br>
             <p class="description"><?= $product->getDescription() ?></p>
             <br>
-            <a href="#" class="btn-secondary">AJOUTER <i class="fas fa-shopping-cart"></i></a>
+            <a href="<?= $this->router->generate('cart-add', ['productId' => $product->getId()]) ?>" class="btn-secondary">AJOUTER <i class="fas fa-shopping-cart"></i></a>
             <div class="badges">
                 <ul>
                     <?php if($available == 1){ ?>

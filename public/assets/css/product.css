@@ -128,6 +128,12 @@
     pointer-events: none;
 }
 
+.disable{
+    cursor: default;
+    pointer-events: none;
+    color: grey;
+}
+
 /* BUTTONS */
 
 .page-btn{
@@ -301,3 +307,66 @@ h4{
     color: red;
 }
 
+/* -------- CART ITEMS ---------*/
+
+.cart-page{
+    margin: 80px auto;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th{
+    text-align: left;
+    padding: 5px;
+    font-weight: bold;
+    background: var(--input-color);
+    color: var(--second-color);
+}
+
+td{
+    padding: 10px 5px;
+}
+
+td input{
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+}
+
+td a{
+    color: var(--second-color);
+    font-size: 12px;
+}
+
+td img{
+    width: 100px;
+    margin-right: 10px;
+}
+
+.cart-info{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.total-price{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.total-price table{
+    width: 100%;
+    border-top: 3px solid var(--second-color);
+    max-width: 500px;
+}
+
+td:last-child{
+    text-align: right;
+}
+
+th:last-child{
+    text-align: right;
+}

@@ -129,6 +129,41 @@ $router->map(
     'user-activation'
 );
 
+
+/* -----------
+--- CART   ---
+------------*/
+
+$router->map(
+    'GET',
+    '/cart',
+    [
+        'method' => 'cart',
+        'controller' => '\App\Controllers\CartController'
+    ],
+    'cart-home'
+);
+
+$router->map(
+    'GET',
+    '/cart/add/[i:productId]',
+    [
+        'method' => 'addToCart',
+        'controller' => '\App\Controllers\CartController'
+    ],
+    'cart-add'
+);
+
+$router->map(
+    'GET',
+    '/cart/del/[i:productId]',
+    [
+        'method' => 'removeToCart',
+        'controller' => '\App\Controllers\CartController'
+    ],
+    'cart-remove'
+);
+
 /* -------------
 --- DISPATCH ---
 -------------*/

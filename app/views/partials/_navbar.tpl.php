@@ -28,17 +28,35 @@
                     <h3><?= $username; ?> <br><span><?= $currentUser->getRole(); ?></span></h3>
                     <ul>
                         <li>
-                            <a id="cart-popover" class="btn-basic">
+                            <a href="<?= $this->router->generate('cart-home'); ?>">
                                 <i class="fas fa-shopping-cart"></i>
                                 Mon Panier 
-                                <span class="badge"></span> 
-                                <span class="total_price">€ 0.00</span>
                             </a>
                         </li>
-                        <li><a href="#"><i class="far fa-user-circle"></i>Mon Profil</a></li>
-                        <li><a href="#"><i class="far fa-edit"></i>Vendre du matos</a></li>
-                        <li><a href="#"><i class="far fa-envelope"></i>Messagerie</a></li>
-                        <li><a href="<?= $router->generate('main-logout') ?>"><i class="fas fa-sign-out-alt"></i>Se déconnecter</a></li>
+                        <li>
+                            <a href="#">
+                                <i class="far fa-user-circle"></i>
+                                Mon Profil
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="far fa-edit"></i>
+                                Vendre du matos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="far fa-envelope"></i>
+                                Messagerie
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= $router->generate('main-logout') ?>">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Se déconnecter
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -51,13 +69,3 @@
             <?php endif; ?>
         </aside>  
     </nav>
-
-    <div id="popover_content_wrapper" style="display: none;">
-        <span id="card_details"></span>
-        <div class="right">
-            <a href="#" class="btn-register" id="check_out_cart">
-                <i class="fas fa-shopping-cart"></i>
-                Paiement
-            </a>
-        </div>
-    </div>
