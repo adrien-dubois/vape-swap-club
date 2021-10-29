@@ -18,7 +18,7 @@
         <tr>
             <td>
                 <div class="cart-info">
-                    <img src="<?= $uploadsUri . $product->getPicture() ?>">
+                   <a href="<?= $this->router->generate('product-single', ['productId'=> $product->getId()]) ?>"> <img src="<?= $uploadsUri . $product->getPicture() ?>"></a>
                     <div>
                         <p><?= $product->getName() ?></p>
                         <small>Prix: <?= $product->getPrice() ?>€</small>
@@ -28,7 +28,7 @@
                 </div>
             </td>
             <td><p style="margin-left: 25px;"><?= $_SESSION['cart'][$product->getId()] ?></p></td>
-            <td><?= $product->getPrice() ?>€</td>
+            <td><?= $product->getPrice() * $_SESSION['cart'][$product->getId()]  ?>€</td>
         </tr>
         <?php endforeach;
         else :
@@ -52,15 +52,15 @@
         <table>
             <tr>
                 <td>Sous-Total</td>
-                <td>200.00€</td>
+                <td><?= $total ?>€</td>
             </tr>
             <tr>
                 <td>TVA</td>
-                <td>5.00€</td>
+                <td>19.6%</td>
             </tr>
             <tr>
                 <td>Total</td>
-                <td>205.00€</td>
+                <td><?= $total * 1.196 ?>€</td>
             </tr>
         </table>
             

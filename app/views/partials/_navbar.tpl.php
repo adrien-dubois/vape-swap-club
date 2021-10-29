@@ -30,7 +30,7 @@
                         <li>
                             <a href="<?= $this->router->generate('cart-home'); ?>">
                                 <i class="fas fa-shopping-cart"></i>
-                                Mon Panier 
+                                Mon Panier <span class="cart-number"> <?= array_sum($_SESSION['cart']) ?> </span>
                             </a>
                         </li>
                         <li>
