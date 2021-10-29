@@ -41,6 +41,8 @@
             
     </footer>
 
+<script src="https://js.stripe.com/v3/"></script>
+<script src="<?= $assetsBaseUri; ?>js/stripe.js"></script>
 <script src="<?= $assetsBaseUri; ?>js/script.js"></script>
 </body>
 

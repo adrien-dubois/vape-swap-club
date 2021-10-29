@@ -56,17 +56,20 @@
             </tr>
             <tr>
                 <td>TVA</td>
-                <td>19.6%</td>
+                <td>19,6%</td>
             </tr>
             <tr>
                 <td>Total</td>
-                <td><?= $total * 1.196 ?>€</td>
+                <td><?= $totalTva = number_format($total * 1.196,2,',',' ') ?>€</td>
             </tr>
         </table>
             
     </div>
     <div>
-        <a href="#" class="btn-primary" style="float:right">Paiement</a>
+        <form action="/cart/pay" method="post">
+            <input value="<?= $totalTva ?>" type="hidden" name="price" id="price">
+            <button class="btn-primary" style="float:right">Paiement</button>
+        </form>
     </div>
 
 

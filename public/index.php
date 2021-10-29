@@ -164,6 +164,26 @@ $router->map(
     'cart-remove'
 );
 
+$router->map(
+    'POST',
+    '/cart/pay',
+    [
+        'method' => 'paiement',
+        'controller' => '\App\Controllers\CartController'
+    ],
+    'cart-paiement'
+);
+
+$router->map(
+    'GET',
+    '/cart/pay',
+    [
+        'method'=>'cardForm',
+        'controller' => '\App\Controllers\CartController'
+    ],
+    'cart-form'
+);
+
 /* -------------
 --- DISPATCH ---
 -------------*/

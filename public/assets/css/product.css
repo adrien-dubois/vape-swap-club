@@ -166,6 +166,7 @@
     color: var(--third-color);
 }
 
+button .btn-primary,
 .btn-primary{
     display: inline-block;
     background: var(--button-color);
@@ -174,6 +175,7 @@
     margin: 30px 0;
     border-radius: 30px;
     transition: background 0.5s;
+    border: none;
 }
 
 .btn-secondary{

@@ -85,4 +85,43 @@ class CartController extends CoreController{
         header("Location: " . $_SERVER['HTTP_REFERER']);
         exit;
     }
+
+    /**
+     * Method wich manages the paiement with stripe
+     *
+     * @return void
+     */
+    public function paiement(){
+
+        if(isset($_POST['price']) && !empty($_POST['price'])){
+            $price = $_POST['price'];
+
+            // GET THE STRIPE API SECRET KEY IN THE INI FILE
+            $ini = parse_ini_file(__DIR__.'/../config.ini');
+
+            // PUT THE KEY THAT IS IN THE INI FILE HERE
+            \Stripe\Stripe::setApiKey($ini['STRIPE_KEY']);
+            
+            $intent = \Stripe\PaymentIntent::create([
+                'amount'=> $price*100,
+                'currency'=>'eur'
+            ]);
+
+
+        } else {
+            $this->router->generate('cart-home');
+        }
+
+        $this->show('cart/paiement',[
+            'intent'=>$intent,
+            'pageTitle'=>'Paiement'
+        ]);
+    }
+
+    public function cardForm(){
+
+        $this->show('cart/paiement',[
+            'pageTitle'=>"Paiement"
+        ]);
+    }
 }
