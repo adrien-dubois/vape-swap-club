@@ -29,6 +29,12 @@
     text-align: center;
 }
 
+.stripe-form{
+    width: 50%;
+    text-align: center;
+    margin: 0 auto;
+}
+
 .input{
     outline: none;
     border: none;

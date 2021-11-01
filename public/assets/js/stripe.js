@@ -1,20 +1,28 @@
 window.onload = () => {
     // variables
     let stripe = Stripe('pk_test_51JpySjKyQTIUNcxLn7kxOVC4R3BEa1yWEJx3oXYUHSo0yjk26yATyVsw4TfvFD0VVLPLxFRxtUlzhBl70yiPXVvq00c2N5C1tB');
-    let elements = stripe.elements();
-    let redirect = "/";
-
+    let redirect = "/cart/accept";
+    
     // Page objects
     let cardHolderName = document.getElementById("cardholder-name");
     let cardButton = document.getElementById("card-button");
     let clientSecret = cardButton.dataset.secret;
+    const options = {
+        clientSecret: clientSecret,
+    };
+    const appearance = {
+        theme: 'night',
+    };
+    const elements = stripe.elements({ clientSecret, appearance });
+   
+
 
     // Create form elements for the credit card
-    let card = elements.create("card");
-    card.mount('#card-elements');
+    const payment = elements.create("payment");
+    payment.mount("#payment-element");
 
     // Manage typing errors
-    card.addEventListener("change", (event)=>{
+    payment.addEventListener("change", (event)=>{
         let displayError = document.getElementById("card-errors")
         if(event.error){
             displayError.textContent = event.error.message;
@@ -23,15 +31,20 @@ window.onload = () => {
         }
     })
 
-    // Manage paiement
+    // Manage payment
     cardButton.addEventListener("click", () => {
-        stripe.handleCardPayment(
-            clientSecret, card, {
+        stripe.confirmPayment({
+            elements, 
+            confirmParams:{
+                return_url: 'http://localhost:8080/cart/accept',
                 payment_method_data: {
-                    billing_details: {name: cardHolderName.value}
+                        billing_details: {
+                            name: cardHolderName.value
+                        }
                 }
-            }
-        ).then((result) => {
+            },
+            
+        }).then((result) => {
             if(result.error){
                 document.getElementById("errors").innerText = result.error.message
             } else {

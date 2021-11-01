@@ -87,6 +87,25 @@ class CartController extends CoreController{
     }
 
     /**
+     * Method which will epty etire cart to abort command
+     *
+     * @return void
+     */
+    public function emptyCart(){
+        if(isset($_SESSION['cart'])){
+            unset($_SESSION['cart']);
+        }
+
+        self::addFlash(
+            'danger',
+            'La commande a été annulée'
+        );
+        header("Location: " . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+
+    /**
      * Method wich manages the paiement with stripe
      *
      * @return void
@@ -104,7 +123,9 @@ class CartController extends CoreController{
             
             $intent = \Stripe\PaymentIntent::create([
                 'amount'=> $price*100,
-                'currency'=>'eur'
+                'currency'=>'eur',
+                'payment_method_types' =>['card'],
+                
             ]);
 
 
@@ -123,5 +144,17 @@ class CartController extends CoreController{
         $this->show('cart/paiement',[
             'pageTitle'=>"Paiement"
         ]);
+    }
+
+    public function cartRedirect(){
+
+        unset($_SESSION['cart']);
+
+        self::addFlash(
+            'success',
+            'Votre paiement a bien été accepté'
+        );
+
+        $this->show('cart/redirect');
     }
 }

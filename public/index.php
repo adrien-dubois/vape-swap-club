@@ -165,6 +165,16 @@ $router->map(
 );
 
 $router->map(
+    'GET',
+    '/cart/del',
+    [
+        'method' => 'emptyCart',
+        'controller' => '\App\Controllers\CartController'
+    ],
+    'cart-empty'
+);
+
+$router->map(
     'POST',
     '/cart/pay',
     [
@@ -182,6 +192,16 @@ $router->map(
         'controller' => '\App\Controllers\CartController'
     ],
     'cart-form'
+);
+
+$router->map(
+    'GET',
+    '/cart/accept',
+    [
+        'method'=>'cartRedirect',
+        'controller' => '\App\Controllers\CartController'
+    ],
+    'cart-redirect'
 );
 
 /* -------------

@@ -38,9 +38,9 @@ class AppUser extends CoreModel{
     private $picture;
 
     /**
-     * @var string
+     * @var int
      */
-    private $adress;
+    private $adress_id;
 
     /**
      * @var string
@@ -108,8 +108,8 @@ class AppUser extends CoreModel{
         $pdo = Database::getPDO();
 
         $sql="
-            INSERT INTO `app_user` (email, password, firstname, lastname, role, picture, adress, activation_code, status, otp)
-            VALUES (:email, :password, :firstname, :lastname, :role, :picture, :adress, :activation_code, :status, :otp)
+            INSERT INTO `app_user` (email, password, firstname, lastname, role, picture, adress_id, activation_code, status, otp)
+            VALUES (:email, :password, :firstname, :lastname, :role, :picture, :adress_id, :activation_code, :status, :otp)
         ";
 
         $pdoStatement = $pdo->prepare($sql);
@@ -121,7 +121,7 @@ class AppUser extends CoreModel{
             ':lastname' => $this-> lastname,
             ':role' => $this-> role,
             ':picture' => $this-> picture,
-            ':adress' => $this->adress,
+            ':adress_id' => $this->adress_id,
             ':activation_code' => $this->activation_code,
             ':status' => $this->status,
             ':otp' => $this->otp,
@@ -157,7 +157,7 @@ class AppUser extends CoreModel{
                 lastname = :lastname,
                 role = :role,
                 picture = :picture,
-                adress = :adress,
+                adress_id = :adress_id,
                 activation_code = :activation_code,
                 status = :status,
                 otp = :otp,
@@ -175,7 +175,7 @@ class AppUser extends CoreModel{
         $pdoStatement->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
         $pdoStatement->bindValue(':role', $this->role, PDO::PARAM_STR);
         $pdoStatement->bindValue(':picture', $this->picture, PDO::PARAM_STR);
-        $pdoStatement->bindValue(':adress', $this->adress, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':adress_id', $this->adress_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':activation_code', $this->activation_code, PDO::PARAM_STR);
         $pdoStatement->bindValue(':status', $this->status, PDO::PARAM_STR);
         $pdoStatement->bindValue(':otp', $this->otp, PDO::PARAM_STR);
@@ -413,26 +413,6 @@ class AppUser extends CoreModel{
     }
 
     /**
-     * Get the value of adress
-     */ 
-    public function getAdress()
-    {
-        return $this->adress;
-    }
-
-    /**
-     * Set the value of adress
-     *
-     * @return  self
-     */ 
-    public function setAdress($adress)
-    {
-        $this->adress = $adress;
-
-        return $this;
-    }
-
-    /**
      * Get the value of otp
      */ 
     public function getOtp()
@@ -493,6 +473,30 @@ class AppUser extends CoreModel{
     public function setActivation_code(string $activation_code)
     {
         $this->activation_code = $activation_code;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of adress_id
+     *
+     * @return  string
+     */ 
+    public function getAdress_id()
+    {
+        return $this->adress_id;
+    }
+
+    /**
+     * Set the value of adress_id
+     *
+     * @param  string  $adress_id
+     *
+     * @return  self
+     */ 
+    public function setAdress_id(string $adress_id)
+    {
+        $this->adress_id = $adress_id;
 
         return $this;
     }

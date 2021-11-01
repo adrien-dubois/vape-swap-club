@@ -213,8 +213,6 @@ class Product extends CoreModel {
         $sql = "
                 UPDATE `product`
                 SET
-                UPDATE `product`
-                SET
                 name = :name,
                 description = :description ,
                 subtitle = :subtitle,
