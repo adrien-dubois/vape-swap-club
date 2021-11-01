@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\Adress;
+use App\Models\Order;
+use App\Models\OrderHasProduct;
 use App\Models\Product;
 
 class CartController extends CoreController{
@@ -75,13 +77,31 @@ class CartController extends CoreController{
         ]);
     }
 
-    
     /**
      * Create a new adress
      *
      * @return void
      */
     public function order(){
+
+        if(!isset($_SESSION['cart'])){
+            $_SESSION['cart'] = [];
+        }
+
+        $total = 0;
+        $cart = $_SESSION['cart'];
+
+        if(isset($cart)){
+            foreach ($cart as $key => $value) {
+                $getCart[$key] = Product::find($key);
+            }
+            foreach($getCart as $product){
+                $total += $product->getPrice() * $_SESSION['cart'][$product->getId()];
+            }
+        }
+
+        $totalTva = number_format($total * 1.196,2,',',' ');
+        $totalPrice = $total * 1.196;
 
         // Received and filter adress elements
         $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
@@ -137,36 +157,35 @@ class CartController extends CoreController{
 
             if($newAdress->save()){
 
-                self::addFlash(
-                    'success',
-                    'L\'adresse de livraison a bien été enregistrée'
-                );
-                $this->redirect('cart-confirm');
-                exit;
+                $adress_id = $newAdress->getId();
+
+                $newOrder = new Order();
+                $newOrder->setApp_user_id($app_user_id);
+                $newOrder->setAdress_id($adress_id);
+                $newOrder->setPrice($totalPrice);
+
+                if($newOrder->save()){
+
+                    $order_id = $newOrder->getId();
+
+                    $newOrderProducts = new OrderHasProduct();
+
+                    foreach ($cart as $key => $value) {
+                        $newOrderProducts->setOrder_id($order_id);
+                        $newOrderProducts->setProduct_id($key);
+                        $newOrderProducts->addOrderProduct();
+                    }
+                    
+                    $this->redirect('cart-confirm');
+
+                }
+                $errorList[] = "Une erreur s'est produite lors de l'enregistrement, merci réessayer plus tard";
+                
             }
 
             $errorList[] = "Une erreur s'est produite lors de l'enregistrement, merci réessayer plus tard";
         }
-
-        if(!isset($_SESSION['cart'])){
-            $_SESSION['cart'] = [];
-        }
-
-        $total = 0;
-        $cart = $_SESSION['cart'];
-
-        if(isset($cart)){
-            foreach ($cart as $key => $value) {
-                $getCart[$key] = Product::find($key);
-            }
-            foreach($getCart as $product){
-                $total += $product->getPrice() * $_SESSION['cart'][$product->getId()];
-            }
-        }
-
-        $totalTva = number_format($total * 1.196,2,',',' ');
-
-
+        $errorList[] = "Une erreur s'est produite lors de l'enregistrement, merci réessayer plus tard";
 
         $this->show('cart/command',[
             'pageTitle' => 'Commande',

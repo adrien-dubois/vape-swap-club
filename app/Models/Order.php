@@ -18,6 +18,10 @@ class Order extends CoreModel{
      * @var int
      */
     private $price;
+    /**
+     * @var int
+     */
+    private $status;
 
     public static function find($orderId)
     {
@@ -51,12 +55,18 @@ class Order extends CoreModel{
 
         $sql = "
             INSERT INTO `order` (app_user_id, adress_id, price)
-            VALUES ('{$this->app_user_id}', '{$this->adress_id}', '{$this->price}')
+            VALUES (:app_user_id, :adress_id, :price)
         ";
 
-        $insertedRow = $pdo->exec($sql);
+        $pdoStatement = $pdo->prepare($sql);
 
-        if($insertedRow > 0) {
+        $pdoStatement->execute([
+            ':app_user_id' => $this->app_user_id,
+            ':adress_id' => $this->adress_id,
+            ':price' => $this->price
+        ]);
+
+        if($pdoStatement->rowCount() > 0 ){
             $this->id = $pdo->lastInsertId();
             return true;
         }
@@ -70,14 +80,21 @@ class Order extends CoreModel{
         $sql = "
             UPDATE `order`
             SET
-                app_user_id = '{$this->app_user_id}',
-                adress_id = '{$this->adress_id}',
-                price = '{$this->price}',
-                updated_at = NOW()
-            WHERE id = {$this->id}
+            app_user_id = :app_user_id,
+            adress_id = :adress_id,
+            price = :price,
+            updated_at = NOW()
+            WHERE id = :id
         ";
 
-        $updatedRows = $pdo->exec($sql);
+        $pdoStatement = $pdo->prepare($sql);
+
+        $pdoStatement->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':app_user_id', $this->app_user_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':adress_id', $this->adress_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':price', $this->price, PDO::PARAM_INT);
+
+        $updatedRows = $pdoStatement->execute();
 
         return ($updatedRows > 0);
     }
@@ -86,7 +103,10 @@ class Order extends CoreModel{
     {
         $pdo = Database::getPDO();
 
-        $sql = 'DELETE FROM `order` WHERE id = ' . $orderId;
+        $sql = '
+        DELETE 
+        FROM `order` 
+        WHERE id = ' . $orderId;
 
         $pdo->exec($sql);
     }
@@ -147,6 +167,30 @@ class Order extends CoreModel{
     public function setApp_user_id($app_user_id)
     {
         $this->app_user_id = $app_user_id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of status
+     *
+     * @return  int
+     */ 
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set the value of status
+     *
+     * @param  int  $status
+     *
+     * @return  self
+     */ 
+    public function setStatus(int $status)
+    {
+        $this->status = $status;
 
         return $this;
     }
