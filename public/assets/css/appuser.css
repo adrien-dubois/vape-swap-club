@@ -91,6 +91,11 @@
     width: 40%;
     position: relative;
 }
+.f3{
+    border-bottom: 2px solid grey;
+    width: 15%;
+    position: relative;
+}
 
 .f2{
     border-bottom: 2px solid grey;
@@ -247,4 +252,80 @@
 
 .has-val.input + .focus-input2::before{
     width: 100%;
+}
+
+/* ADRESS FORM */
+
+.a-form{
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    letter-spacing: unset;
+}
+
+.titling h3{
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--second-color);
+    margin-top: -50px;
+    position: relative;
+}
+
+.titling h3::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 92px;
+    background: var(--second-color);
+}
+
+.cont form .user-details{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+form .user-details .input-box{
+    margin: 20px 0 12px 0;
+    width: calc(100% / 2 - 20px);
+}
+
+.user-details .input-box .detail{
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.user-details .input-box input,
+.user-details .input-box textarea{
+    height: 45px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid grey;
+    color: grey;
+    background: var(--background-color);
+    padding-left: 15px;
+    font-size: 16px;
+    transition: 0.5s;
+}
+
+.user-details .input-box input:focus,
+.user-details .input-box textarea:focus{
+    border-color: var(--second-color);
+}
+
+#street{
+    width: 100px;
+}
+
+#zip{
+    width: 100px;
 }

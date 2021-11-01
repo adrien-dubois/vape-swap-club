@@ -51,6 +51,11 @@
     min-width: 300px;
 }
 
+.column-20{
+    flex-basis: 49%;
+    min-width: 300px;
+}
+
 .column-2 img{
     max-width: 100%;
     padding: 50px 0;

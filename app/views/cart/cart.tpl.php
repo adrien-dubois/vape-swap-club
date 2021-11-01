@@ -66,8 +66,11 @@
             
     </div>
     <div>
-        <form action="/cart/pay" method="post">
+        <!-- <form action="/cart/pay" method="post">
             <input value="<?= $totalTva ?>" type="hidden" name="price" id="price">
+            <button class="btn-primary" style="float: right;">Paiement</button>
+        </form> -->
+        <form action="/cart/command" method="get">
             <button class="btn-primary" style="float: right;">Paiement</button>
         </form>
         <form action="/cart/del" method="get">

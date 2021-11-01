@@ -41,6 +41,34 @@ class CartController extends CoreController{
         ]);
     }
 
+    public function command(){
+
+        if(!isset($_SESSION['cart'])){
+            $_SESSION['cart'] = [];
+        }
+
+        $total = 0;
+        $cart = $_SESSION['cart'];
+
+        if(isset($cart)){
+            foreach ($cart as $key => $value) {
+                $getCart[$key] = Product::find($key);
+            }
+            foreach($getCart as $product){
+                $total += $product->getPrice() * $_SESSION['cart'][$product->getId()];
+            }
+        }
+
+        $totalTva = number_format($total * 1.196,2,',',' ');
+
+        $this->show('cart/command',[
+            'pageTitle'=>'Commande',
+            'cart' => $getCart,
+            'total' => $total,
+            'totalTva' => $totalTva,
+        ]);
+    }
+
 
     /**
      * Add a product to cart

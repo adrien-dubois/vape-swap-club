@@ -146,6 +146,16 @@ $router->map(
 
 $router->map(
     'GET',
+    '/cart/command',
+    [
+        'method' => 'command',
+        'controller' => '\App\Controllers\CartController'
+    ],
+    'cart-command'
+);
+
+$router->map(
+    'GET',
     '/cart/add/[i:productId]',
     [
         'method' => 'addToCart',
