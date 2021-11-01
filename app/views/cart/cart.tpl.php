@@ -70,9 +70,9 @@
             <input value="<?= $totalTva ?>" type="hidden" name="price" id="price">
             <button class="btn-primary" style="float: right;">Paiement</button>
         </form> -->
-        <form action="/cart/command" method="get">
-            <button class="btn-primary" style="float: right;">Paiement</button>
-        </form>
+        
+        <a href="<?= $this->router->generate('cart-command') ?>"><button class="btn-primary" style="float: right;">Paiement</button></a>
+        
         <form action="/cart/del" method="get">
             <button class="btn-delete" style="float: right;">Annuler la commande</button>
         </form>

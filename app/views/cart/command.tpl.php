@@ -83,36 +83,54 @@
                     <form action="" method="POST" autocomplete="off">
     
                         <div class="user-details">
+
+                            <!-- NAME -->
                             <div class="input-box">
                                 <span class="detail">Nom complet</span>
                                 <input name="name" type="text" placeholder="Entrez nom / prénom" required>
                             </div>
+
+                            <!-- PHONE -->
                             <div class="input-box">
                                 <span class="detail">Tél. <i>(facultatif)</i> </span>
-                                <input name="phone" type="tel" placeholder="Entrez votre numéro" pattern="[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}" >
+                                <input name="phone" type="tel" placeholder="Entrez votre numéro" pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" >
                             </div>
+
+                            <!-- STREET NUMBER -->
                             <div class="input-box">
                                 <span class="detail">Numéro de rue</span>
                                 <input id="street" type="number" name="number" required>
                             </div>
+
+                            <!-- ADRESS -->
                             <div class="input-box">
                                 <span class="detail">Adresse</span>
                                 <textarea type="text" name="adress" required> </textarea>
                             </div>
+
+                            <!-- ZIP -->
                             <div class="input-box">
                                 <span class="detail">Code Postal</span>
                                 <input id="zip" type="number" name="zip" required>
                             </div>
+
+                            <!-- CITY -->
                             <div class="input-box">
                                 <span class="detail">Ville</span>
                                 <input type="text" name="city" placeholder="Entrez votre ville" required>
                             </div>
+
+                            <!-- MESSAGE -->
                             <div class="input-box">
-                                <span class="detail">Message complémentaire</span>
+                                <span class="detail">Message <i>(facultatif)</i> </span>
                                 <textarea type="text" name="message" > </textarea>
                             </div>
                         </div>
+
+                        <!-- TOTAL PRICE -->
+                        <input value="<?= $totalTva ?>" type="hidden" name="price" id="price">
     
+                        <!-- SUBMIT -->
                         <div class="btn-adress">
                             <input class="btn-register" type="submit" value="Commander">
                         </div>

@@ -23,7 +23,7 @@ class Adress extends CoreModel{
      */
     private $message;
     /**
-     * @var int
+     * @var str
      */
     private $zip;
     /**
@@ -31,7 +31,7 @@ class Adress extends CoreModel{
      */
     private $city;
     /**
-     * @var int
+     * @var str
      */
     private $phone;
     /**
@@ -94,7 +94,7 @@ class Adress extends CoreModel{
 
         $sql = '
         INSERT INTO `adress` (name, number, adress, message, zip, city, phone, app_user_id)
-        VALUES (:name :number, :adress, :message, :zip, :city, :phone, :app_user_id)
+        VALUES (:name, :number, :adress, :message, :zip, :city, :phone, :app_user_id)
         ';
 
         $pdoStatement = $pdo->prepare($sql);
@@ -326,9 +326,9 @@ class Adress extends CoreModel{
     /**
      * Set the value of app_user_id
      *
-     * @return  self
+     * @param int $app_user_id
      */ 
-    public function setApp_user_id($app_user_id)
+    public function setApp_user_id(int $app_user_id)
     {
         $this->app_user_id = $app_user_id;
 

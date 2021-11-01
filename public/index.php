@@ -155,6 +155,26 @@ $router->map(
 );
 
 $router->map(
+    'POST',
+    '/cart/command',
+    [
+        'method' => 'order',
+        'controller' => '\App\Controllers\CartController'
+    ],
+    'cart-order'
+);
+
+$router->map(
+    'GET',
+    '/cart/confirm',
+    [
+        'method' => 'confirm',
+        'controller' => '\App\Controllers\CartController'
+    ],
+    'cart-confirm'
+);
+
+$router->map(
     'GET',
     '/cart/add/[i:productId]',
     [

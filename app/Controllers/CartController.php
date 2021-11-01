@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Adress;
 use App\Models\Product;
 
 class CartController extends CoreController{
@@ -41,6 +42,11 @@ class CartController extends CoreController{
         ]);
     }
 
+    /**
+     * Display command and form shipment adress
+     *
+     * @return void
+     */
     public function command(){
 
         if(!isset($_SESSION['cart'])){
@@ -69,6 +75,112 @@ class CartController extends CoreController{
         ]);
     }
 
+    
+    /**
+     * Create a new adress
+     *
+     * @return void
+     */
+    public function order(){
+
+        // Received and filter adress elements
+        $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+        $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING);
+        $number = filter_input(INPUT_POST, 'number', FILTER_SANITIZE_NUMBER_INT);
+        $adress = filter_input(INPUT_POST, 'adress', FILTER_SANITIZE_STRING);
+        $zip = filter_input(INPUT_POST, 'zip', FILTER_SANITIZE_STRING);
+        $city = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING);
+        $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING);
+        $app_user_id = $_SESSION['userId'];
+
+
+        // Create variables for testing
+        $formIsValid = true;
+        $errorList = [];
+
+        // Manage mistakes
+
+        if(empty($name)){
+            $errorList[] = "Merci de renseigner nom & prénom";
+            $formIsValid = false;
+        }
+        if(empty($number)){
+            $errorList[] = "Merci de renseigner le n° de voie";
+            $formIsValid = false;
+        }
+        if(empty($adress)){
+            $errorList[] = "Vous devez saisir une adresse de livraison";
+            $formIsValid = false;
+        }
+        if(empty($zip)){
+            $errorList[] = "Il faut remplir le code postal";
+            $formIsValid = false;
+        }
+        if(empty($city)){
+            $errorList[] = "Merci de préciser la ville de livraison";
+            $formIsValid = false;
+        }
+
+        // CREATING ADRESS IN DB
+
+        if($formIsValid === true){
+
+            $newAdress = new Adress();
+            $newAdress->setName($name);
+            $newAdress->setNumber($number);
+            $newAdress->setAdress($adress);
+            $newAdress->setZip($zip);
+            $newAdress->setCity($city);
+            $newAdress->setPhone($phone);
+            $newAdress->setMessage($message);
+            $newAdress->setApp_user_id($app_user_id);
+
+            if($newAdress->save()){
+
+                self::addFlash(
+                    'success',
+                    'L\'adresse de livraison a bien été enregistrée'
+                );
+                $this->redirect('cart-confirm');
+                exit;
+            }
+
+            $errorList[] = "Une erreur s'est produite lors de l'enregistrement, merci réessayer plus tard";
+        }
+
+        if(!isset($_SESSION['cart'])){
+            $_SESSION['cart'] = [];
+        }
+
+        $total = 0;
+        $cart = $_SESSION['cart'];
+
+        if(isset($cart)){
+            foreach ($cart as $key => $value) {
+                $getCart[$key] = Product::find($key);
+            }
+            foreach($getCart as $product){
+                $total += $product->getPrice() * $_SESSION['cart'][$product->getId()];
+            }
+        }
+
+        $totalTva = number_format($total * 1.196,2,',',' ');
+
+
+
+        $this->show('cart/command',[
+            'pageTitle' => 'Commande',
+            'errorList' => $errorList,
+            'cart' => $getCart,
+            'total' => $total,
+            'totalTva' => $totalTva,
+        ]);
+    }
+
+    public function confirm(){
+
+        $this->show('cart/confirm');
+    }
 
     /**
      * Add a product to cart

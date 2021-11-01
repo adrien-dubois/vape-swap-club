@@ -322,6 +322,18 @@ form .user-details .input-box{
     border-color: var(--second-color);
 }
 
+.user-details .input-box input:-webkit-autofill,
+.user-details .input-box textarea:-webkit-autofill,
+.user-details .input-box input:-webkit-autofill:hover, 
+.user-details .input-box textarea:-webkit-autofill:hover, 
+.user-details .input-box input:-webkit-autofill:focus, 
+.user-details .input-box textarea:-webkit-autofill:focus, 
+.user-details .input-box input:-webkit-autofill:active,
+.user-details .input-box textarea:-webkit-autofill:active{
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: gray !important;
+}
+
 #street{
     width: 100px;
 }
