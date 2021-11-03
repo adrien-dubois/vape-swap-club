@@ -12,10 +12,4 @@ class ErrorController extends CoreController{
             'pageTitle'=>'Page non trouvée'
         ]);
     }
-
-    public function err403(){
-        http_response_code(403);
-        $this->show('error/error403');
-        exit;
-    }
 }

@@ -66,10 +66,6 @@
             
     </div>
     <div>
-        <!-- <form action="/cart/pay" method="post">
-            <input value="<?= $totalTva ?>" type="hidden" name="price" id="price">
-            <button class="btn-primary" style="float: right;">Paiement</button>
-        </form> -->
         
         <a href="<?= $this->router->generate('cart-command') ?>"><button class="btn-primary" style="float: right;">Paiement</button></a>
         

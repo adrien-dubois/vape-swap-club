@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use App\Controllers\ErrorController;
 
 class CoreController{
 
@@ -66,9 +65,9 @@ class CoreController{
 
                 // If tokens are not the sames, or empty, we stop everything
                 if(empty($tokenSession) || empty($formToken) || $formToken != $tokenSession){
-                    $errorController = new ErrorController();
+
                     // And then call error 403
-                    $errorController->err403();
+                    $this->err403('Vous n\'avez pas les droits nécessaires afin d\'accéder à cette page');
                 }
             }
         
@@ -81,20 +80,24 @@ class CoreController{
 
     public function checkAuthorization($roles = []){
         // If user not connected, redirect to home
-        if(!isset($_SESSION['connectedUser'])){
-            $this->redirect('user-login');
+        if(!isset($_SESSION['userObject'])){
+            self::addFlash(
+                'danger',
+                'Merci de vous connecter'
+            );
+            $this->redirect('main-home');
+            exit;
         } else {
             // else we check the user role
             // starting by getting user's object
-            $connectedUser = $_SESSION['connectedUser'];
+            $connectedUser = $_SESSION['userObject'];
             // and his role
             $userRole = $connectedUser->getRole();
 
             // If the user's role is not in the acl, display a 403 error
             // Unless the table of authorized roles is not empty.
             if(!in_array($userRole, $roles) && !empty($roles)) {
-                $errorController = new ErrorController();
-                $errorController->err403();
+                $this->err403('Vous n\'avez pas les droits nécessaires afin d\'accéder à cette page');
             }
         }
     }
@@ -175,6 +178,17 @@ class CoreController{
     protected function send(string $jsonData) {
         header("Content-Type :'application/json'");
         echo($jsonData);
+    }
+
+    public function err403($message){
+
+        http_response_code(403);
+
+        $this->show('error/error403',[
+            'pageTitle' => 'Droits insuffisants',
+            'message' => $message,
+        ]);
+        exit;
     }
 
 }

@@ -256,7 +256,22 @@ class Product extends CoreModel {
         $pdo->exec($sql);
     }
 
+    public static function findListForOrder($orderId)
+    {
+        $pdo = Database::getPDO();
 
+        $sql = "
+            SELECT *
+            FROM `product`
+            WHERE id IN (
+                SELECT product_id FROM `order_has_product`
+                WHERE order_id = {$orderId}
+        )";
+        $pdoStatement = $pdo->query($sql);
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
+
+        return $results;
+    }
 
     /**
      * Get the value of name

@@ -8,7 +8,7 @@
                 <span>Be part of the club</span>
                 <h1>Rare mods</h1>
 
-                <p>Velit est ea laboris est duis ipsum.Sunt minim cupidatat magna irure esse qui mollit mollit sint dolore anim.Reprehenderit labore proident cillum ut exercitation dolore eu aute sint elit.</p>
+                <p>Bienvenue au Vape Swap Club. Nous sommes des passionnés de beau matériel, rare, qui construit des setups uniques. Mais au vu de la difficulté à trouver certaines pièces, nous avons décidé d'ouvrir le club afin que les aficionados souhaitant faire tourner leur belles pièces puissent en faire profiter d'autres passionnés...</p>
 
                 <?php if(!isset($_SESSION['userId'])): ?>
                 <a href="#" class="btn-one" id="btn-one">Se connecter</a>
@@ -77,6 +77,9 @@
                 <div class="card">
                     <div class="imgBx">
                         <img src="<?= $uploadsUri . $currentCards->getPicture() ?>">
+                        <?php if($currentCards->getStatus() == 2) : ?>
+                            <img src="<?= $assetsBaseUri ?>images/out.png" style="position: absolute; bottom: 0px; right: 0px;">
+                        <?php endif; ?>
                     </div>
                     <div class="content">
                         <h2><?= $currentCards->getName() ?></h2>
@@ -101,8 +104,11 @@
                  <!--slider-box-->
                 <div class="box">
                     <p class="cig"><?= $currentCarousel->getName() ?></p>
-                    <!--model-->
+                    <!--image-->
                     <img src="<?= $uploadsUri . $currentCarousel->getpicture() ?>" class="model">
+                    <?php if($currentCarousel->getStatus() == 2) : ?>
+                            <img src="<?= $assetsBaseUri ?>images/out.png" style="position: absolute; bottom: 0px; right: 0px;">
+                        <?php endif; ?>
                     <!--details-->
                     <div class="details">
                         <!--product-details-->

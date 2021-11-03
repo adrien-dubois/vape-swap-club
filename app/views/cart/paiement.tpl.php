@@ -20,6 +20,6 @@ if(isset($_SESSION['userObject'])){
      
         <!-- ERRORS RELATIVE TO THE CARD -->
         <div id="card-errors" role="alert"></div>
-        <button id="card-button"  type="button" data-secret="<?= $intent['client_secret'] ?>">Procéder au paiement</button>
+        <button id="card-button" class="btn-primary" type="button" data-secret="<?= $intent['client_secret'] ?>">Procéder au paiement</button>
     </form>
 </div>

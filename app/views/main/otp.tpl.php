@@ -15,7 +15,7 @@
                 <span class="focus-input2"></span>
             </div>
 
-            <input type="submit" name="submit" class="btn-register" value="Submit" />
+            <input type="submit" name="submit" class="btn-register" value="Activer" />
         </form>
     </div>
 

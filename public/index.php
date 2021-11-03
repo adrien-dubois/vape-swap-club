@@ -166,7 +166,7 @@ $router->map(
 
 $router->map(
     'GET',
-    '/cart/confirm',
+    '/cart/order/[i:orderId]',
     [
         'method' => 'confirm',
         'controller' => '\App\Controllers\CartController'

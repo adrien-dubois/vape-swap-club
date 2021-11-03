@@ -176,7 +176,7 @@ class CartController extends CoreController{
                         $newOrderProducts->addOrderProduct();
                     }
                     
-                    $this->redirect('cart-confirm');
+                    header('Location: ' . $this->router->generate ('cart-confirm', ['orderId'=>$order_id]));
 
                 }
                 $errorList[] = "Une erreur s'est produite lors de l'enregistrement, merci réessayer plus tard";
@@ -196,9 +196,144 @@ class CartController extends CoreController{
         ]);
     }
 
-    public function confirm(){
+    /**
+     * Displaying all summary of the order before payment
+     *
+     * @param int $order_id
+     * @return void
+     */
+    public function confirm($order_id){
 
-        $this->show('cart/confirm');
+        $orderModel = new Order();
+        $adressModel = new Adress();
+        $currentOrder = $orderModel->find($order_id);
+
+        $_SESSION['order'] = $currentOrder;
+
+        $relatedAdress = $currentOrder->getAdress_id();
+
+        $adress = $adressModel->find($relatedAdress);
+        $products = Product::findListForOrder($order_id);
+
+        $this->show('cart/confirm', [
+            'pageTitle' => 'Confirmation commande',
+            'order' => $currentOrder,
+            'products' => $products,
+            'adress' => $adress,
+        ]);
+    }
+
+     /**
+     * Method wich manages the paiement with stripe
+     *
+     * @return void
+     */
+    public function paiement(){
+
+        $order = $_SESSION['order'];
+        $order_id = $order->getId();
+        $currentOrder = Order::find($order_id);
+        $relatedAdress = $currentOrder->getAdress_id();
+        $adress = Adress::find($relatedAdress);
+
+        if(isset($_POST['price']) && !empty($_POST['price'])){
+            $price = number_format($_POST['price'], 2) ;
+
+            // GET THE STRIPE API SECRET KEY IN THE INI FILE
+            $ini = parse_ini_file(__DIR__.'/../config.ini');
+
+            // PUT THE KEY THAT IS IN THE INI FILE HERE
+            \Stripe\Stripe::setApiKey($ini['STRIPE_KEY']);
+            
+            $intent = \Stripe\PaymentIntent::create([
+                'amount'=> $price*100,
+                'currency'=>'eur',
+                'payment_method_types' =>['card'],
+                'shipping' => [
+                    'address' => [
+                        'city' => $adress->getCity(),
+                        'postal_code' => $adress->getZip(),
+                        'line1' => $adress->getNumber() .' '. $adress->getAdress(),
+                    ],
+                    'name' => $adress->getName()
+                ],
+            ]);
+
+
+        } else {
+            $this->router->generate('cart-home');
+        }
+
+        $this->show('cart/paiement',[
+            'intent'=>$intent,
+            'pageTitle'=>'Paiement'
+        ]);
+    }
+
+    public function cardForm(){
+
+        $this->show('cart/paiement',[
+            'pageTitle'=>"Paiement"
+        ]);
+    }
+
+    /**
+     * Redirection after payment is confirmed, send a confirmation mail, empty the cart, & change the stock and the status of the order.
+     *
+     * @return void
+     */
+    public function cartRedirect(){
+
+        // Variable for the confirmation mail
+        $connectedUser = $_SESSION['userObject'];
+        $currentOrder = $_SESSION['order'];
+        $order_id = $currentOrder->getId();
+
+        // Mail construction with elements
+        $recipient = $connectedUser->getEmail();
+        $subject = 'Confirmation de votre commande - Vape Swap Club';
+
+        $body = '
+                <h2>Confirmation de votre commande n°' . $order_id .' <strong>Vape Swap Club</strong> </h2>
+
+                <p> Bonjour ' . $_SESSION['username'] .', la commande que vous venez de passer chez nous, d\'un montant de ' . $currentOrder->getPrice()  .  ' € viens d\'être confirmée et est actuellement en préparation.</p>
+                <br>
+                <p>Vous recevrez bientôt un mail quand la commande sera expédiée, ainsi que le numéro de suivi afin de savoir où en est cotre commande, à tout moment.</p>
+                <br>
+                <p>Merci de votre confiance, bonne vape, </p>
+                <p><i>Vape Swap Club</i></p>
+        ';
+        // Send the confirmation email
+        $this->sendmail($subject, $body, $recipient);
+
+        // Get the order
+        $updateStatus = Order::find($order_id);
+
+        // Update status on paid
+        $updateStatus->setStatus(2);
+        $updateStatus->update();
+
+        // Get all products that are selled on this order and foreach, update status on out of stock
+        $products = Product::findListForOrder($order_id);
+        foreach($products as $currentProduct){
+            $currentProduct->setStatus(2);
+            $currentProduct->update();
+        }
+        
+        // Unset cart & order on session
+        unset($_SESSION['cart']);
+        unset($_SESSION['order']);
+
+        // Display that payment is well done
+        self::addFlash(
+            'success',
+            'Votre paiement a bien été accepté'
+        );
+
+        // And display redirection page
+        $this->show('cart/redirect', [
+            'pageTitle' => 'Paiement accepté'
+        ]);
     }
 
     /**
@@ -261,59 +396,5 @@ class CartController extends CoreController{
         );
         header("Location: " . $_SERVER['HTTP_REFERER']);
         exit;
-    }
-
-
-    /**
-     * Method wich manages the paiement with stripe
-     *
-     * @return void
-     */
-    public function paiement(){
-
-        if(isset($_POST['price']) && !empty($_POST['price'])){
-            $price = $_POST['price'];
-
-            // GET THE STRIPE API SECRET KEY IN THE INI FILE
-            $ini = parse_ini_file(__DIR__.'/../config.ini');
-
-            // PUT THE KEY THAT IS IN THE INI FILE HERE
-            \Stripe\Stripe::setApiKey($ini['STRIPE_KEY']);
-            
-            $intent = \Stripe\PaymentIntent::create([
-                'amount'=> $price*100,
-                'currency'=>'eur',
-                'payment_method_types' =>['card'],
-                
-            ]);
-
-
-        } else {
-            $this->router->generate('cart-home');
-        }
-
-        $this->show('cart/paiement',[
-            'intent'=>$intent,
-            'pageTitle'=>'Paiement'
-        ]);
-    }
-
-    public function cardForm(){
-
-        $this->show('cart/paiement',[
-            'pageTitle'=>"Paiement"
-        ]);
-    }
-
-    public function cartRedirect(){
-
-        unset($_SESSION['cart']);
-
-        self::addFlash(
-            'success',
-            'Votre paiement a bien été accepté'
-        );
-
-        $this->show('cart/redirect');
     }
 }

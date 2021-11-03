@@ -83,6 +83,7 @@ class Order extends CoreModel{
             app_user_id = :app_user_id,
             adress_id = :adress_id,
             price = :price,
+            status = :status,
             updated_at = NOW()
             WHERE id = :id
         ";
@@ -93,6 +94,7 @@ class Order extends CoreModel{
         $pdoStatement->bindValue(':app_user_id', $this->app_user_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':adress_id', $this->adress_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':price', $this->price, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':status', $this->status, PDO::PARAM_INT);
 
         $updatedRows = $pdoStatement->execute();
 
