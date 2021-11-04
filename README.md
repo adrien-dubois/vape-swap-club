@@ -17,11 +17,15 @@ This is a E-Commerce website, with register / account. Sell by announces or buy.
 - HTML
 - CSS Vanilla
 - JS Vanilla
-- PHP personal framework with :
+- PHP personal framework with those dependencies:
     - Composer
     - Alto Router
     - Alto Dispatcher
     - Var Dump
     - PHP Mailer
     - Stripe
+
+- For dev unit test :
+    - PhpUnit
+    - Spatie PhpUnit Watcher
   
