@@ -70,11 +70,14 @@
                     </div>
                 </div>
             </div>
+            <?php if($order->getStatus() == 1 ) : ?>
             <form action="/cart/pay" method="post">
                 <input value="<?= $order->getPrice() ?>" type="hidden" name="price" id="price">
                 <button class="btn-register" style="top: 10px;">Payer</button>
             </form>
-            
+            <?php else : ?>
+                <h3 style="color: #FC833C; text-transform: uppercase; ">Commande payée</h3>
+            <?php endif; ?>
         </div>
     </div>
 </div>

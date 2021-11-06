@@ -3,9 +3,13 @@
 namespace App\Controllers;
 
 use App\Models\Adress;
+use App\Models\AppUser;
 use App\Models\Order;
 use App\Models\OrderHasProduct;
 use App\Models\Product;
+use App\Utils\OrderVoter;
+use App\Utils\Permissions;
+use App\Utils\TestOrder;
 
 class CartController extends CoreController{
 
@@ -205,22 +209,32 @@ class CartController extends CoreController{
     public function confirm($order_id){
 
         $orderModel = new Order();
-        $adressModel = new Adress();
+        /**@var Order $currentOrder */
         $currentOrder = $orderModel->find($order_id);
+        $user = AppUser::find($_SESSION['userId']);
 
-        $_SESSION['order'] = $currentOrder;
+        $permission = new Permissions();
+        $post = $currentOrder;
+        $permission->addVoter(new OrderVoter());
 
-        $relatedAdress = $currentOrder->getAdress_id();
+        if($permission->can($user, OrderVoter::READ, $post)){
+            
+            $adressModel = new Adress();
 
-        $adress = $adressModel->find($relatedAdress);
-        $products = Product::findListForOrder($order_id);
+            $_SESSION['order'] = $currentOrder;
 
-        $this->show('cart/confirm', [
+            $relatedAdress = $currentOrder->getAdress_id();
+
+            $adress = $adressModel->find($relatedAdress);
+            $products = Product::findListForOrder($order_id);
+
+            $this->show('cart/confirm', [
             'pageTitle' => 'Confirmation commande',
             'order' => $currentOrder,
             'products' => $products,
             'adress' => $adress,
         ]);
+        } $this->err403('Vous n\'avez pas le droit d\'accéder à cette facture');
     }
 
      /**

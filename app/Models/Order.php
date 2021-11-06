@@ -49,6 +49,26 @@ class Order extends CoreModel{
         return $results;
     }
 
+    /**
+     * Find all orders from on user, searched by his ID
+     *
+     * @param int $app_user_id
+     * @return void
+     */
+    public static function findOwnerOrder($app_user_id)
+    {
+        $pdo = Database::getPDO();
+        $sql = '
+        SELECT *
+        FROM `order`
+        WHERE `app_user_id` = ' . $app_user_id;
+
+        $pdoStatement = $pdo->query($sql);
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Order');
+
+        return $results;
+    }
+
     public function insert()
     {
         $pdo = Database::getPDO();
