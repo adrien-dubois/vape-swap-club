@@ -72,9 +72,40 @@ class CartController extends CoreController{
         }
 
         $totalTva = number_format($total * 1.196,2,',',' ');
+        $totalPrice = $total * 1.196;
         $app_user_id = $_SESSION['userId'];
 
         $findAdress = Adress::findByUser($app_user_id);
+        $adress_id = $findAdress -> getId();
+
+        // IF THE USER HAVE ALREADY SAVED AN ADRESS
+        if(!empty($findAdress)){
+
+            // CREATE THE NEW ORDER WITH THE ADRESS
+            $newOrder = new Order();
+            $newOrder->setApp_user_id($app_user_id);
+            $newOrder->setAdress_id($adress_id);
+            $newOrder->setPrice($totalPrice);
+
+            if($newOrder->save()){
+
+                $order_id = $newOrder->getId();
+
+                // ADD PRODUCTS TO THE ORDER
+
+                $newOrderProducts = new OrderHasProduct();
+
+                foreach ($cart as $key => $value) {
+                    $newOrderProducts->setOrder_id($order_id);
+                    $newOrderProducts->setProduct_id($key);
+                    $newOrderProducts->addOrderProduct();
+                }
+                
+                header('Location: ' . $this->router->generate ('cart-confirm', ['orderId'=>$order_id]));
+
+            }
+            $errorList[] = "Une erreur s'est produite lors de l'enregistrement, merci réessayer plus tard";
+        }
 
         $this->show('cart/command',[
             'pageTitle'=>'Commande',
@@ -111,38 +142,6 @@ class CartController extends CoreController{
 
         $totalTva = number_format($total * 1.196,2,',',' ');
         $totalPrice = $total * 1.196;
-
-        // FOR ADRESSES ALREADY SAVED :
-
-        if(isset($_POST['confirm']) && $_POST['confirm'] === "yes"){
-            
-            $app_user_id = $_SESSION['userId'];
-            $findAdress = Adress::findByUser($app_user_id);
-
-            $newOrder = new Order();
-                $newOrder->setApp_user_id($app_user_id);
-                $newOrder->setAdress_id($findAdress);
-                $newOrder->setPrice($totalPrice);
-
-                if($newOrder->save()){
-
-                    $order_id = $newOrder->getId();
-
-                    // ADD PRODUCTS TO THE ORDER
-
-                    $newOrderProducts = new OrderHasProduct();
-
-                    foreach ($cart as $key => $value) {
-                        $newOrderProducts->setOrder_id($order_id);
-                        $newOrderProducts->setProduct_id($key);
-                        $newOrderProducts->addOrderProduct();
-                    }
-                    
-                    header('Location: ' . $this->router->generate ('cart-confirm', ['orderId'=>$order_id]));
-
-                }
-                $errorList[] = "Une erreur s'est produite lors de l'enregistrement, merci réessayer plus tard";
-        }
 
         // Received and filter adress elements
         $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
@@ -249,6 +248,115 @@ class CartController extends CoreController{
             'cart' => $getCart,
             'total' => $total,
             'totalTva' => $totalTva,
+            'adress' => $adress,
+        ]);
+    }
+
+    /**
+     * Displaying the page to edit shipping adress
+     *
+     * @param int $adress_id
+     * @return void
+     */
+    public function update($adress_id){
+
+        $adress = Adress::find($adress_id);
+
+        $this->show('cart/adress', [
+            'adress' => $adress,
+            'pageTitle' => 'Changer l\'adresse',
+        ]);
+    }
+
+    /**
+     * Edit the shipping adress
+     *
+     * @param int $adress_id
+     * @return void
+     */
+    public function editAdress($adress_id){
+
+        // Get the right adress
+        $update = Adress::find($adress_id);
+
+        // Get the current order ID
+
+        $currentOrder = $_SESSION['order'];
+        $order_id = $currentOrder->getId();
+
+        // Get the input posts & sanitize it
+        $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+        $number = filter_input(INPUT_POST, 'number', FILTER_SANITIZE_NUMBER_INT);
+        $adress = filter_input(INPUT_POST, 'adress', FILTER_SANITIZE_STRING);
+        $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING);
+        $zip = filter_input(INPUT_POST, 'zip', FILTER_SANITIZE_STRING);
+        $city = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING);
+        $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING);
+
+        // Create variables for testing
+        $formIsValid = true;
+        $errorList = [];
+
+        // Manage mistakes
+
+        if(empty($name)){
+            $errorList[] = "Merci de renseigner nom & prénom";
+            $formIsValid = false;
+        }
+        if(empty($number)){
+            $errorList[] = "Merci de renseigner le n° de voie";
+            $formIsValid = false;
+        }
+        if(empty($adress)){
+            $errorList[] = "Vous devez saisir une adresse de livraison";
+            $formIsValid = false;
+        }
+        if(empty($zip)){
+            $errorList[] = "Il faut remplir le code postal";
+            $formIsValid = false;
+        }
+        if(empty($city)){
+            $errorList[] = "Merci de préciser la ville de livraison";
+            $formIsValid = false;
+        }
+
+        if($formIsValid === true) // ther is no mistake so we can set
+        {
+            $update->setName($name);
+            $update->setNumber($number);
+            $update->setAdress($adress);
+            $update->setMessage($message);
+            $update->setZip($zip);
+            $update->setCity($city);
+            $update->setPhone($phone);
+
+            // Update it and then, redirect
+            if($update->update()){
+
+                self::addFlash(
+                    'success',
+                    'L\'adresse a été modifiée'
+                );
+
+                header('Location: ' . $this->router->generate ('cart-confirm', ['orderId' => $order_id]));
+                exit;
+            }
+            $errorList[] = "Une erreur s'est produite lors de l'insertion, merci réessayer plus tard";
+        }
+
+        $adress = new Adress();
+
+        $adress->setName(filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING));
+        $adress->setNumber((int) filter_input(INPUT_POST, 'number', FILTER_SANITIZE_NUMBER_INT));
+        $adress->setAdress(filter_input(INPUT_POST, 'adress', FILTER_SANITIZE_STRING));
+        $adress->setMessage(filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING));
+        $adress->setZip(filter_input(INPUT_POST, 'zip', FILTER_SANITIZE_STRING));
+        $adress->setPhone(filter_input((int) INPUT_POST, 'phone', FILTER_SANITIZE_STRING));
+        $adress->setCity(filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING));
+        $adress->setApp_user_id((int) filter_input(INPUT_POST, '', FILTER_SANITIZE_NUMBER_INT));
+
+        $this->show('cart/adress', [
+            'pageTitle' => 'Changer l\'adresse',
             'adress' => $adress,
         ]);
     }

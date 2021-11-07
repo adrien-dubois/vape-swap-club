@@ -73,10 +73,14 @@
                 </div>
             </div>
             <?php if($order->getStatus() == 1 ) : ?>
-            <form action="/cart/pay" method="post">
-                <input value="<?= $order->getPrice() ?>" type="hidden" name="price" id="price">
-                <button class="btn-register" style="top: 10px;">Payer</button>
-            </form>
+            <div class="choose">
+                <a href="<?= $this->router->generate('adress-edit',['adressId' => $adress->getId()]) ?>"><button class="btn-modify">Modifier l'adresse</button></a>
+    
+                <form action="/cart/pay" method="post">
+                    <input value="<?= $order->getPrice() ?>" type="hidden" name="price" id="price">
+                    <button class="btn-register" style="top: 10px; margin-right: inherit;">Payer</button>
+                </form>
+            </div>
             <?php else : ?>
                 <h3 style="color: #FC833C; text-transform: uppercase; ">Commande payée</h3>
             <?php endif; ?>

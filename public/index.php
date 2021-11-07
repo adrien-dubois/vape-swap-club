@@ -166,6 +166,26 @@ $router->map(
 
 $router->map(
     'GET',
+    '/adress/edit/[i:adressId]',
+    [
+        'method' => 'update',
+        'controller' => '\App\Controllers\CartController'
+    ],
+    'adress-update'
+);
+
+$router->map(
+    'POST',
+    '/adress/edit/[i:adressId]',
+    [
+        'method' => 'editAdress',
+        'controller' => '\App\Controllers\CartController'
+    ],
+    'adress-edit'
+);
+
+$router->map(
+    'GET',
     '/cart/order/[i:orderId]',
     [
         'method' => 'confirm',

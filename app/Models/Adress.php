@@ -169,9 +169,9 @@ class Adress extends CoreModel{
         $pdoStatement->bindValue(':number', $this->number, PDO::PARAM_INT);
         $pdoStatement->bindValue(':adress', $this->adress, PDO::PARAM_STR);
         $pdoStatement->bindValue(':message', $this->message, PDO::PARAM_STR);
-        $pdoStatement->bindValue(':zip', $this->zip, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':zip', $this->zip, PDO::PARAM_STR);
         $pdoStatement->bindValue(':city', $this->city, PDO::PARAM_STR);
-        $pdoStatement->bindValue(':phone', $this->phone, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':phone', $this->phone, PDO::PARAM_STR);
         $pdoStatement->bindValue(':app_user_id', $this->app_user_id, PDO::PARAM_INT);
 
         $updatedRows = $pdoStatement->execute();

@@ -182,27 +182,7 @@
     transition: background-color 5000s ease-in-out 0s;
     -webkit-text-fill-color: gray !important;
 }
-.btn-register{
-    margin-top: 20px;
-    margin-right: 150px;
-    width: 200px;
-    height: 50px;
-    border-radius: 40px;
-    outline: none;
-    font-weight: 500;
-    font-size: 1rem;
-    border: none;
-    background: var(--second-color);
-    color: var(--first-color);
-    cursor: pointer;
-    box-shadow: 8px 10px 30px rgba(0, 0, 0, 0.493);
-    transition: 0.4s;
-}
 
-.btn-register:hover{
-    background-color: #c7662e;
-    color: var(--first-color);
-}
 
 .focus-input{
     position: absolute;
