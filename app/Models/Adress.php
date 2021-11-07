@@ -84,6 +84,27 @@ class Adress extends CoreModel{
     }
 
     /**
+     * Find an adress for the connected user
+     *
+     * @param int $app_user_id
+     * @return Adress
+     */
+    public static function findByUser($app_user_id){
+
+        $pdo = Database::getPDO();
+
+        $sql = '
+            SELECT *
+            FROM adress
+            WHERE app_user_id = ' . $app_user_id;
+
+        $pdoStatement = $pdo->query($sql);
+        $result = $pdoStatement->fetchObject('App\Models\Adress');
+
+        return $result;
+    }
+
+    /**
      * Create a new adress
      *
      * @return bool

@@ -72,12 +72,17 @@ class CartController extends CoreController{
         }
 
         $totalTva = number_format($total * 1.196,2,',',' ');
+        $app_user_id = $_SESSION['userId'];
+
+        $findAdress = Adress::findByUser($app_user_id);
 
         $this->show('cart/command',[
             'pageTitle'=>'Commande',
             'cart' => $getCart,
             'total' => $total,
             'totalTva' => $totalTva,
+            'adress' => new Adress(),
+            'findAdress' => $findAdress,
         ]);
     }
 
@@ -106,6 +111,38 @@ class CartController extends CoreController{
 
         $totalTva = number_format($total * 1.196,2,',',' ');
         $totalPrice = $total * 1.196;
+
+        // FOR ADRESSES ALREADY SAVED :
+
+        if(isset($_POST['confirm']) && $_POST['confirm'] === "yes"){
+            
+            $app_user_id = $_SESSION['userId'];
+            $findAdress = Adress::findByUser($app_user_id);
+
+            $newOrder = new Order();
+                $newOrder->setApp_user_id($app_user_id);
+                $newOrder->setAdress_id($findAdress);
+                $newOrder->setPrice($totalPrice);
+
+                if($newOrder->save()){
+
+                    $order_id = $newOrder->getId();
+
+                    // ADD PRODUCTS TO THE ORDER
+
+                    $newOrderProducts = new OrderHasProduct();
+
+                    foreach ($cart as $key => $value) {
+                        $newOrderProducts->setOrder_id($order_id);
+                        $newOrderProducts->setProduct_id($key);
+                        $newOrderProducts->addOrderProduct();
+                    }
+                    
+                    header('Location: ' . $this->router->generate ('cart-confirm', ['orderId'=>$order_id]));
+
+                }
+                $errorList[] = "Une erreur s'est produite lors de l'enregistrement, merci réessayer plus tard";
+        }
 
         // Received and filter adress elements
         $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
@@ -161,6 +198,8 @@ class CartController extends CoreController{
 
             if($newAdress->save()){
 
+                // CREATING ORDER IN DB
+
                 $adress_id = $newAdress->getId();
 
                 $newOrder = new Order();
@@ -171,6 +210,8 @@ class CartController extends CoreController{
                 if($newOrder->save()){
 
                     $order_id = $newOrder->getId();
+
+                    // ADD PRODUCTS TO THE ORDER
 
                     $newOrderProducts = new OrderHasProduct();
 
@@ -189,7 +230,18 @@ class CartController extends CoreController{
 
             $errorList[] = "Une erreur s'est produite lors de l'enregistrement, merci réessayer plus tard";
         }
-        $errorList[] = "Une erreur s'est produite lors de l'enregistrement, merci réessayer plus tard";
+        
+        // In case of error, we can display again
+        $adress = new Adress();
+
+        $adress->setName(filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING));
+        $adress->setNumber((int) filter_input(INPUT_POST, 'number', FILTER_SANITIZE_NUMBER_INT));
+        $adress->setAdress(filter_input(INPUT_POST, 'adress', FILTER_SANITIZE_STRING));
+        $adress->setMessage(filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING));
+        $adress->setZip(filter_input(INPUT_POST, 'zip', FILTER_SANITIZE_STRING));
+        $adress->setPhone(filter_input((int) INPUT_POST, 'phone', FILTER_SANITIZE_NUMBER_INT));
+        $adress->setCity(filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING));
+        $adress->setApp_user_id((int) filter_input(INPUT_POST, '', FILTER_SANITIZE_NUMBER_INT));
 
         $this->show('cart/command',[
             'pageTitle' => 'Commande',
@@ -197,6 +249,7 @@ class CartController extends CoreController{
             'cart' => $getCart,
             'total' => $total,
             'totalTva' => $totalTva,
+            'adress' => $adress,
         ]);
     }
 

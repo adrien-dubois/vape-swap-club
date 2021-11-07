@@ -44,6 +44,8 @@
             </div>
         </div>
 
+        <!-- ADRESS PART -->
+
         <div class="column-20" style="margin-left: 20px;">
 
             <div class="containeur">
