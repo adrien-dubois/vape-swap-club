@@ -1,10 +1,12 @@
 # Vape Swap Club
 
-This is a project for a bargain website around vape stuff
+This is a project for a bargain website around vape stuff on the base of an e-commerce website.
 
 You'll can sell your vape stuff, but just high end / moders pieces. To be part of the club, you have to sell / research a certain kind of vape stuff.
 
-### Project
+## Project
+
+/!\ __*WORK IN PROGRESS*__ /!\
 
 The purpose of this project is to just back to the basics. After long time on Symfony, I don't want to miss my PHP Vanilla skills. I love PHP to much for that!
 
@@ -12,7 +14,7 @@ So I'm making all functionnality from scratch : cart / commands / orders / annou
 
 This is a E-Commerce website, with register / account. Sell by announces or buy. I will think about a system to check originals
 
-### Technos
+## Technos
 
 - HTML
 - CSS Vanilla
@@ -25,7 +27,16 @@ This is a E-Commerce website, with register / account. Sell by announces or buy.
     - PHP Mailer
     - Stripe
 
-- For dev unit test :
+- For unit & fonctional tests :
     - PhpUnit
     - Spatie PhpUnit Watcher
-  
+
+## Install
+
+If you want to test it, you'll have to :
+
+    - Make a composer install
+    - Create a DataBase named `vapeswap`
+    - Make the tables, I put a tables.sql if you want to import it directly
+    - Make a config.ini and configure it as explained in the config.ini.dist in `\app\`
+    - Run with PHP server, you can run the `server.sh` script if you want

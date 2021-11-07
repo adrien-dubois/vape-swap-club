@@ -9,5 +9,7 @@ DB_USERNAME=login_de_connexion
 DB_PASSWORD=mdp_connexion
 
 ; For dependencies to get the mailer and Stripe
+; Don't forget to put your own email adress into CoreController, sendmail method
+; Same for Stripe, you'll have to put your own
 PWD_MAIL=mdp_de_votre_mail
 STRIPE_KEY=clé_de_stripe
