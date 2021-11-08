@@ -109,7 +109,7 @@
                         <!-- ADRESS -->
                         <div class="input-box">
                             <span class="detail">Adresse</span>
-                            <textarea type="text" name="adress" value="<?= $adress->getAdress(); ?>" required> </textarea>
+                            <textarea type="text" name="adress" required> <?= $adress->getAdress(); ?> </textarea>
                         </div>
 
                         <!-- ZIP -->
@@ -127,7 +127,7 @@
                         <!-- MESSAGE -->
                         <div class="input-box">
                             <span class="detail">Message <i>(facultatif)</i> </span>
-                            <textarea type="text" name="message" value="<?= $adress->getMessage(); ?>" > </textarea>
+                            <textarea type="text" name="message"> <?= $adress->getMessage(); ?> </textarea>
                         </div>
                     </div>
 

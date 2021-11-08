@@ -1,8 +1,11 @@
-Finir out of stock home + annonces ( rubban / bloquer boutons achat)
-Commencer ACL
-Modifier le visuel de la page de redirection ( pas centré )
+- Commencer ACL
+- Modifier le visuel de la page de redirection ( pas centré )
+- Gérer les photos du carousel single product --> la création de produits 
+- sidebar
 
 DONE :
 
-Changer système adresse livraison pour ne pas enregistrer à chaque fois / modification ->
-Empêcher autre user d'accéder à une commande qui n'est pas la sienne -> CHECK
+- Finir out of stock home + annonces ( rubban / bloquer boutons achat) -> CHECK
+- Changer système adresse livraison pour ne pas enregistrer à chaque fois / modification -> CHECK
+- Empêcher autre user d'accéder à une commande qui n'est pas la sienne -> CHECK
+- Sur modifier adresse --> préremplir textarea -> CHECK
