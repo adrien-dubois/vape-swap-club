@@ -228,7 +228,7 @@ main{
 }
 
 .logo-image{
-    width: 180px;
+    width: 270px;
     height: auto;
 }
 
@@ -1047,7 +1047,9 @@ footer{
 
 .footer-distributed .footer-left h3{
     color: white;
-    font: normal 36px 'cookie',cursive;
+    font-size: 36px;
+    font-family: Montserrat;
+    text-shadow: 8px 8px 4px rgba(0, 0, 0, 0.5);
     margin: 0;
 }
 

@@ -26,6 +26,9 @@
             <?php foreach($products as $currentProduct) : ?>
                 <div class="column-4">
                     <img src="<?= $uploadsUri . $currentProduct->getPicture() ?>">
+                    <?php if($currentProduct->getStatus() == 2): ?>
+                        <img src="<?= $assetsBaseUri ?>images/out.png" style="position: absolute; top: 0px; right: 0px;">
+                    <?php endif; ?>
                     <p class="sub"><?= $currentProduct->getSubtitle() ?></p>
                     <h4><?= $currentProduct->getName() ?></h4>
                     <?php $brandId = $currentProduct->getBrandId();

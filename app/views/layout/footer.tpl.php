@@ -1,7 +1,7 @@
 <!-- FOOTER -->
 <footer class="footer-distributed">
     <div class="footer-left">
-        <img src="<?= $assetsBaseUri; ?>images/logo-simple.png" alt="logo" style="width: 120px; margin-left: 55px;">
+        <img src="<?= $assetsBaseUri; ?>images/logo-footer.png" alt="logo" style="width: 100px; margin-left: 75px;">
         <h3>Vape <span>Swap Club</span> </h3>
         <p class="footer-links">
             <a href="#">Accueil</a>

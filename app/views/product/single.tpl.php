@@ -34,7 +34,11 @@ $rating = $product->getRate();
             <br>
             <p class="description"><?= $product->getDescription() ?></p>
             <br>
-            <a href="<?= $this->router->generate('cart-add', ['productId' => $product->getId()]) ?>" class="btn-secondary">AJOUTER <i class="fas fa-shopping-cart"></i></a>
+            <?php if($available == 1): ?>
+                <a href="<?= $this->router->generate('cart-add', ['productId' => $product->getId()]) ?>" class="btn-secondary">AJOUTER <i class="fas fa-shopping-cart"></i></a>
+            <?php elseif($available ==2): ?>
+                <a class="btn-disable">PLUS DISPO <i class="fas fa-exclamation-triangle"></i></a>
+            <?php endif; ?>
             <div class="badges">
                 <ul>
                     <?php if($available == 1){ ?>

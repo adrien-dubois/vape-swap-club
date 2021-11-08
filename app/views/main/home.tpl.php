@@ -107,7 +107,7 @@
                     <!--image-->
                     <img src="<?= $uploadsUri . $currentCarousel->getpicture() ?>" class="model">
                     <?php if($currentCarousel->getStatus() == 2) : ?>
-                            <img src="<?= $assetsBaseUri ?>images/out.png" style="position: absolute; bottom: 0px; right: 0px;">
+                            <img src="<?= $assetsBaseUri ?>images/out.png" width="320px" style="position: absolute; top: 20%; right: 3%;">
                         <?php endif; ?>
                     <!--details-->
                     <div class="details">
