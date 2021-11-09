@@ -83,6 +83,16 @@ $router->map(
     'product-single'
 );
 
+$router->map(
+    'GET',
+    '/products/add',
+    [
+        'method' => 'add',
+        'controller' => 'App\Controllers\ProductController'
+    ],
+    'product-add'
+);
+
 /* -----------
 --- USERS  ---
 ------------*/

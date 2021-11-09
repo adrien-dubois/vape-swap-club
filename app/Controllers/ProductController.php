@@ -6,6 +6,7 @@ use App\Controllers\CoreController;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Type;
 
 class ProductController extends CoreController{
 
@@ -51,6 +52,12 @@ class ProductController extends CoreController{
         ]);
     }
 
+    /**
+     * Display a single product and add to cart
+     *
+     * @param int $id
+     * @return void
+     */
     public function single($id)
     {
         $product = Product::find($id);
@@ -68,6 +75,27 @@ class ProductController extends CoreController{
             'product' => $product,
             'brand' => $brand,
             'category' => $category
+        ]);
+    }
+
+    /**
+     * Display an adding product page
+     *
+     * @return void
+     */
+    public function add()
+    {
+
+        $allBrands = Brand::findAll();
+        $allTypes = Type::findAll();
+        $allCategories = Category::findAll();
+
+        $this-> show('product/add', [
+            'pageTitle' => 'Ajouter une annonce',
+            'allBrands' => $allBrands,
+            'allTypes' => $allTypes,
+            'allCategories' => $allCategories,
+            'product' => new Product(),
         ]);
     }
 }
