@@ -79,22 +79,47 @@ class ProductController extends CoreController{
     }
 
     /**
-     * Display an adding product page
+     * Display the first adding a new product page
      *
      * @return void
      */
     public function add()
     {
 
-        $allBrands = Brand::findAll();
         $allTypes = Type::findAll();
         $allCategories = Category::findAll();
+        $allBrands = Brand::findAll();
 
         $this-> show('product/add', [
             'pageTitle' => 'Ajouter une annonce',
-            'allBrands' => $allBrands,
             'allTypes' => $allTypes,
             'allCategories' => $allCategories,
+            'allBrands' => $allBrands,
+            'product' => new Product(),
+        ]);
+    }
+
+    /**
+     * Register the first part of new product
+     *
+     * @return void
+     */
+    public function insert(){
+
+    }
+
+    /**
+     * Displaying the second part of adding a new product
+     *
+     * @return void
+     */
+    public function adding(){
+
+        
+
+        $this->show('product/adding',[
+            'pageTitle' => 'Ajouterune annonce',
+            
             'product' => new Product(),
         ]);
     }

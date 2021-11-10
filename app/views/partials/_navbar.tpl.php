@@ -40,7 +40,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="<?= $this->router->generate('product-add') ?>">
                                 <i class="far fa-edit"></i>
                                 Vendre du matos
                             </a>

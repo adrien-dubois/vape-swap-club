@@ -24,6 +24,16 @@
     margin-top: -50px;
 }
 
+.heading h3{
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--second-color);
+    /* margin-top: -50px; */
+    position: relative;
+    text-align: center;
+}
+
 .user-form{
     width: 80%;
     text-align: center;
@@ -57,8 +67,22 @@
     top: 50%;
     transform: translate(-50%,-50%);
     height: 90vh;
-    background-color: var(--background-register);
     display: flex;
+    background-color: var(--background-register);
+    box-shadow: 5px 10px 38px rgba(0, 0, 0, 0.527);
+    border-radius: 15px;
+}
+
+.container-product{
+    font-family: var(--register-font);
+    width: 80%;
+    position: relative;
+    left: 50%;
+    top: 70%;
+    transform: translate(-50%,-50%);
+    height: 1200px;
+    display: flex;
+    background-color: var(--background-register);
     box-shadow: 5px 10px 38px rgba(0, 0, 0, 0.527);
     border-radius: 15px;
 }
@@ -71,6 +95,21 @@
     width: 55%;
 }
 
+.pl-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+}
+
+.pr-form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+}
+
 .side-img{
     width: 45%;
 }
@@ -80,6 +119,12 @@
     height: 100%;
     object-fit: cover;
     border-radius: 15px;
+}
+
+.add-img{
+    width: 80%;
+    object-fit: cover;
+
 }
 
 .wrap2{
@@ -241,6 +286,12 @@
 
 .has-val.input + .focus-input2::before{
     width: 100%;
+}
+
+#check{
+    margin-right: 40px;
+    /* display: flex; */
+    /* justify-content: start; */
 }
 
 /* ADRESS FORM */

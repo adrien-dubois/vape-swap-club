@@ -6,6 +6,9 @@
             <div class="titling">
                 <h3 style="top: -70px;">Récapitulatif complet</h3>
             </div>
+            <div class="heading">
+                <h3 style="margin-left: -19rem;">Commande N° <?= $order->getId() ?></h3>
+            </div>
             <table>
                 <!-- CART TITLES -->
                 <tr>
@@ -26,9 +29,9 @@
                             </div>
                         </td>
                         <td>
-                            <p style="margin-left: 25px;"><?= $_SESSION['cart'][$product->getId()] ?></p>
+                            <p style="margin-left: 25px;">1</p>
                         </td>
-                        <td><?= $product->getPrice() * $_SESSION['cart'][$product->getId()]  ?>€</td>
+                        <td><?= $product->getPrice() ?>€</td>
                     </tr>
                 <?php endforeach; ?>
             </table>

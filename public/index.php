@@ -93,6 +93,26 @@ $router->map(
     'product-add'
 );
 
+$router->map(
+    'POST',
+    'products/add',
+    [
+        'method' => 'insert',
+        'controller' => 'App\Controllers\ProductController'
+    ],
+    'product-insert'
+);
+
+$router->map(
+    'GET',
+    '/products/adding',
+    [
+        'method' => 'adding',
+        'controller' => 'App\Controllers\ProductController'
+    ],
+    'product-adding'
+);
+
 /* -----------
 --- USERS  ---
 ------------*/

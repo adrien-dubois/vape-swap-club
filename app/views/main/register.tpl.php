@@ -39,7 +39,7 @@
 
             <!-- AVATAR -->
             <div class="wrap2">
-                <input id="file" class="input-file" name="picture" type="file" data-multiple-caption="{count} files selected" multiple />
+                <input id="file" class="input-file" name="picture" type="file"  />
                 <label for="file" class="label l-file"><i class="fas fa-upload"></i> <span>Avatar </span></label>
                 <span class="focus-input2"></span>
             </div>
@@ -54,9 +54,6 @@
                     input.addEventListener( 'change', function( e )
                     {
                         var fileName = '';
-                        if( this.files && this.files.length > 1 )
-                            fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
-                        else
                             fileName = e.target.value.split( '\\' ).pop();
 
                         if( fileName )

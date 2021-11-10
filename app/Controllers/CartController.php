@@ -76,11 +76,11 @@ class CartController extends CoreController{
         $app_user_id = $_SESSION['userId'];
 
         $findAdress = Adress::findByUser($app_user_id);
-        $adress_id = $findAdress -> getId();
-
+        
         // IF THE USER HAVE ALREADY SAVED AN ADRESS
         if(!empty($findAdress)){
-
+            
+            $adress_id = $findAdress -> getId();
             // CREATE THE NEW ORDER WITH THE ADRESS
             $newOrder = new Order();
             $newOrder->setApp_user_id($app_user_id);
