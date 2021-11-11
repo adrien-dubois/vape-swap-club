@@ -1,5 +1,4 @@
 <!-- MAIN PART -->
-<!-- <main class="main"> -->
 
     <!-- HERO SECTION -->
     <div class="banner">
@@ -50,9 +49,9 @@
         <li>
                 <a href="">
                     <div class="icon">
-                        <i class="fab fa-paypal"></i>
+                    <i class="fab fa-cc-stripe"></i>
                     </div>
-                    <div class="name">Paiement PayPal</div>
+                    <div class="name">Paiement Stripe</div>
                 </a>
             </li>
             <li>
@@ -122,8 +121,6 @@
        
     </div>
 
-
-<!-- </main> -->
 
 <script>
     document.getElementById('btn-one').addEventListener('click', function(){

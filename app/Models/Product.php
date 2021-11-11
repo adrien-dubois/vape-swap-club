@@ -175,8 +175,8 @@ class Product extends CoreModel {
         $pdo = Database::getPDO();
 
         $sql = '
-        INSERT INTO `product` (name, description, subtitle, picture, price, rate, status, brand_id, type_id, category_id)
-        VALUES (:name :description, :subtitle, :picture, :price, :rate, :status, :brand_id, :type_id, :category_id)
+        INSERT INTO `product` (name, description, subtitle, picture, price, rate, brand_id, type_id, category_id)
+        VALUES (:name, :description, :subtitle, :picture, :price, :rate,  :brand_id, :type_id, :category_id)
         ';
 
         $pdoStatement = $pdo->prepare($sql);
@@ -188,7 +188,6 @@ class Product extends CoreModel {
             ':picture' => $this->picture,
             ':price' => $this->price,
             ':rate' => $this->rate,
-            ':status' => $this->status,
             ':brand_id' => $this->brand_id,
             ':type_id' => $this->type_id,
             ':category_id' => $this->category_id

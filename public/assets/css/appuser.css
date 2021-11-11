@@ -186,6 +186,18 @@
     padding: 10px 0px;
 }
 
+.input2{
+    display: block;
+    width: 100%;
+    font-size: 18px;
+    background: transparent;
+    color: gray;
+    font-weight: 500;
+    padding: 10px 0px;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
 .l-file{
     cursor: pointer;
     width: 40%;
@@ -374,10 +386,10 @@ form .user-details .input-box{
     -webkit-text-fill-color: gray !important;
 }
 
-#street{
+input-box input.numb{
     width: 100px;
 }
 
-#zip{
+#street, #zip, #price, #rate{
     width: 100px;
 }

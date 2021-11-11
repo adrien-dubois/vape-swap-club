@@ -562,3 +562,36 @@ th:last-child{
     display: flex;
     justify-content: center;
 }
+
+/* NEW PRODUCT */
+
+.input-cover{
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.input-cover + label {
+    font-size: 1.15em;
+    font-weight: 700;
+    color: grey;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: var(--backgroundOG-color);
+    display: inline-block;
+    cursor: pointer;
+}
+
+.input-cover:focus + label,
+.input-cover + label:hover{
+    background-color: var(--second-color);
+    color: var(--backgroundOG-color);
+}
+
+.input-cover:focus + label{
+    outline: 1px dotted var(--second-color);
+    outline: -webkit-focus-ring-color auto 5px;
+}

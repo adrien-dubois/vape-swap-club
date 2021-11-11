@@ -95,7 +95,7 @@ $router->map(
 
 $router->map(
     'POST',
-    'products/add',
+    '/products/add',
     [
         'method' => 'insert',
         'controller' => 'App\Controllers\ProductController'
