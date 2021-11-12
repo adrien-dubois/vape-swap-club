@@ -5,7 +5,9 @@ namespace App\Controllers;
 use App\Controllers\CoreController;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Picture;
 use App\Models\Product;
+use App\Models\ProductHasPicture;
 use App\Models\Type;
 
 class ProductController extends CoreController
@@ -118,6 +120,7 @@ class ProductController extends CoreController
         $brand = filter_input(INPUT_POST, 'brand', FILTER_SANITIZE_NUMBER_INT);
         $newBrand = filter_input(INPUT_POST, 'new-brand', FILTER_SANITIZE_STRING);
 
+        $app_user_id = $_SESSION['userId'];
         // Variables to manage errors
         $formIsValid = true;
         $errorList = [];
@@ -136,7 +139,7 @@ class ProductController extends CoreController
 
             if (in_array($extension, $authorizedExtensions) && $error == 0) {
 
-                $uniqueName = uniqid('', true);
+                $uniqueName = uniqid('IMG-', true);
                 $pictureName = $uniqueName . '.' . $extension;
 
                 move_uploaded_file($tmpName, __DIR__ . '/../../public/assets/uploads/' . $pictureName);
@@ -209,6 +212,7 @@ class ProductController extends CoreController
             $newProduct->setCategory_id($category);
             $newProduct->setTypeId($type);
             $newProduct->setPicture($pictureName);
+            $newProduct->setApp_user_id($app_user_id);
 
             // If a new brand is created
             if(!isset($brand) && isset($newBrand)){
@@ -219,11 +223,12 @@ class ProductController extends CoreController
                     $newProduct->setBrandId($newBrandId);
                     if($newProduct->save()){
 
+                        $productId = $newProduct->getId();
                         self::addFlash(
                             'success',
                             'Votre produit a bien été enregistré'
                         );
-                        header('Location: ' . $this->router->generate('product-adding'));
+                        header('Location: ' . $this->router->generate('product-adding', ['productId' => $productId]));
                         exit;
                     }
                 }
@@ -233,11 +238,12 @@ class ProductController extends CoreController
                 $newProduct->setBrandId($brand);
                 if($newProduct->save()){
 
+                    $productId = $newProduct->getId();
                     self::addFlash(
                         'success',
                         'Votre produit a bien été enregistré'
                     );
-                    header('Location: ' . $this->router->generate('product-adding'));
+                    header('Location: ' . $this->router->generate('product-adding', ['productId' => $productId]));
                     exit;
                 }
             }
@@ -275,15 +281,93 @@ class ProductController extends CoreController
      *
      * @return void
      */
-    public function adding()
+    public function adding($productId)
     {
 
-
-
         $this->show('product/adding', [
-            'pageTitle' => 'Ajouterune annonce',
-
+            'pageTitle' => 'Ajouter une annonce',
             'product' => new Product(),
         ]);
+    }
+
+    /**
+     * Method which insert photos for carousel single product page
+     *
+     * @return void
+     */
+    public function insertCarousel($productId){
+
+        if(isset($_POST['upload'])) {
+
+            $errorList = [];
+            $imgList = [];
+            $images = $_FILES['images'];
+            $nbImages = count($images['name']);
+
+            // Get images info and store them in var
+            for ($i=0; $i < $nbImages; $i++) { 
+                $tmpName = $images['tmp_name'][$i];
+                $name    = $images['name'][$i];
+                $error   = $images['error'][$i];
+
+                // If ther is nor error occured while uploading
+                if($error === 0){
+
+                    // Get img extension and store it into lower case
+                    $imgExt = pathinfo($name, PATHINFO_EXTENSION);
+                    $extension = strtolower($imgExt);
+
+                    // var that authorized extensions
+                    $authorizedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+                    // Check extensions
+                    if(in_array($extension, $authorizedExtensions)){
+
+                        // Change the name for a unique random name
+                        $uniqueName = uniqid('IMG-', true);
+                        $pictureName = $uniqueName . '.' . $extension;
+
+                        move_uploaded_file($tmpName, __DIR__ . '/../../public/assets/uploads/' . $pictureName);
+
+                        $newPicture = new Picture();
+                        $newPicture->setName($pictureName);
+
+                        if($newPicture->save()) {
+
+                            $imgId = $newPicture->getId();
+                            $imgList[] = $imgId;
+                        }
+
+                    } else {
+                        $errorList[] = "Fichier non autorisé";
+                    }
+
+                }else{
+                    $errorList[] = "Une erreur s'est produite lors du l'upload des images";
+                }
+            }
+
+            $newProductPicture = new ProductHasPicture();
+
+            foreach ($imgList as $key => $value) {
+                $newProductPicture -> setProduct_id($productId);
+                $newProductPicture -> setPicture_id($value);
+                $newProductPicture -> addProductPicture();
+            }
+
+            self::addFlash(
+                'success',
+                'good'
+            );
+
+            header('Location: ' . $this->router->generate('main-home'));
+        }
+
+        $this->show('product/adding', [
+            'pageTitle' => 'Ajouter une annonce',
+            'product' => new Product(),
+            'errorList' => $errorList,
+        ]);
+
     }
 }

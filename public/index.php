@@ -105,12 +105,22 @@ $router->map(
 
 $router->map(
     'GET',
-    '/products/adding',
+    '/products/add/[i:productId]',
     [
         'method' => 'adding',
         'controller' => 'App\Controllers\ProductController'
     ],
     'product-adding'
+);
+
+$router->map(
+    'POST',
+    '/products/add/[i:productId]',
+    [
+        'method' => 'insertCarousel',
+        'controller' => 'App\Controllers\ProductController'
+    ],
+    'product-pictures'
 );
 
 /* -----------

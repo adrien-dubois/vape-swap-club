@@ -49,6 +49,10 @@ class Product extends CoreModel {
      * @var int
      */
     private $category_id;
+    /**
+     * @var int
+     */
+    private $app_user_id;
 
 
     /**
@@ -143,6 +147,21 @@ class Product extends CoreModel {
 
     }
 
+    public static function findCreatorProduct($app_user_id){
+
+        $pdo = Database::getPDO();
+
+        $sql = '
+                SELECT *
+                FROM `product`
+                WHERE `app_user_id` = ' . $app_user_id
+                ;
+        $pdoStatement = $pdo->query($sql);
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Product');
+
+        return $results;
+    }
+
 
     /**
      * Method to find the 3 products to displays in the news cards on the homepage
@@ -175,8 +194,8 @@ class Product extends CoreModel {
         $pdo = Database::getPDO();
 
         $sql = '
-        INSERT INTO `product` (name, description, subtitle, picture, price, rate, brand_id, type_id, category_id)
-        VALUES (:name, :description, :subtitle, :picture, :price, :rate,  :brand_id, :type_id, :category_id)
+        INSERT INTO `product` (name, description, subtitle, picture, price, rate, brand_id, type_id, category_id, app_user_id)
+        VALUES (:name, :description, :subtitle, :picture, :price, :rate,  :brand_id, :type_id, :category_id, :app_user_id)
         ';
 
         $pdoStatement = $pdo->prepare($sql);
@@ -190,7 +209,8 @@ class Product extends CoreModel {
             ':rate' => $this->rate,
             ':brand_id' => $this->brand_id,
             ':type_id' => $this->type_id,
-            ':category_id' => $this->category_id
+            ':category_id' => $this->category_id,
+            ':app_user_id' => $this->app_user_id
         ]);
 
         if ($pdoStatement->rowCount() > 0) {
@@ -222,6 +242,7 @@ class Product extends CoreModel {
                 brand_id = :brand_id,
                 type_id = :type_id,
                 category_id = :category_id,
+                app_user_id = :app_user_id,
                 updated_at = NOW()
                 WHERE id = :id
         ";
@@ -239,6 +260,7 @@ class Product extends CoreModel {
         $pdoStatement->bindValue(':brand_id', $this->brand_id, PDO::PARAM_STR);
         $pdoStatement->bindValue(':type_id', $this->type_id, PDO::PARAM_STR);
         $pdoStatement->bindValue(':category_id', $this->category_id, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':app_user_id', $this->app_user_id, PDO::PARAM_STR);
 
         $updatedRows = $pdoStatement->execute();
 
@@ -251,7 +273,7 @@ class Product extends CoreModel {
         $sql = '
         DELETE
         FROM `product`
-        WHERE id' . $productId;
+        WHERE id = ' . $productId;
         $pdo->exec($sql);
     }
 
@@ -504,6 +526,30 @@ class Product extends CoreModel {
     public function setSubtitle(string $subtitle)
     {
         $this->subtitle = $subtitle;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of app_user_id
+     *
+     * @return  int
+     */ 
+    public function getApp_user_id()
+    {
+        return $this->app_user_id;
+    }
+
+    /**
+     * Set the value of app_user_id
+     *
+     * @param  int  $app_user_id
+     *
+     * @return  self
+     */ 
+    public function setApp_user_id(int $app_user_id)
+    {
+        $this->app_user_id = $app_user_id;
 
         return $this;
     }

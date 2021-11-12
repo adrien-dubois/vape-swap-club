@@ -8,7 +8,9 @@
                 </div>
                 <?php require __DIR__ . '/../partials/_errors.tpl.php'; ?>
 
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="" 
+                      method="post" 
+                      enctype="multipart/form-data">
                     <div class="user-details">
 
                         <!-- NAME -->
@@ -45,7 +47,7 @@
                         <div class="input-box">
                             <span class="detail">Type de l'article</span>
                             <select name="type" class="input2" style="width: 200px;" required>
-                                <option disabled selected>Choisir un type</option>
+                                <option disabled selected>Choisir un type</zzzzzoption>
                                 <?php foreach ($allTypes as $currentType) : ?>
                                     <option value="<?= $currentType->getId() ?>"><?= $currentType->getName() ?></option>
                                 <?php endforeach; ?>
