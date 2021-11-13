@@ -3,12 +3,15 @@
 namespace App\Controllers;
 
 use App\Controllers\CoreController;
+use App\Models\AppUser;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Picture;
 use App\Models\Product;
 use App\Models\ProductHasPicture;
 use App\Models\Type;
+use App\Utils\Permissions;
+use App\Utils\ProductVoter;
 
 class ProductController extends CoreController
 {
@@ -283,11 +286,23 @@ class ProductController extends CoreController
      */
     public function adding($productId)
     {
+        $currentProduct = Product::find($productId);
+        $user = AppUser::find($_SESSION['userId']);
 
-        $this->show('product/adding', [
-            'pageTitle' => 'Ajouter une annonce',
-            'product' => new Product(),
-        ]);
+        $permission = new Permissions();
+        $post = $currentProduct;
+        $permission->addVoter(new ProductVoter());
+
+        if($permission->can($user, ProductVoter::READ, $post)){
+            $this->show('product/adding', [
+                'pageTitle' => 'Ajouter une annonce',
+                'product' => new Product(),
+            ]);
+        } $this->err403('
+            Vous n\'avez pas l\'autorisation d\'accéder à cette page
+        ');
+
+
     }
 
     /**
@@ -300,9 +315,9 @@ class ProductController extends CoreController
         if(isset($_POST['upload'])) {
 
             $errorList = [];
-            $imgList = [];
             $images = $_FILES['images'];
             $nbImages = count($images['name']);
+            $newProductPicture = new ProductHasPicture();
 
             // Get images info and store them in var
             for ($i=0; $i < $nbImages; $i++) { 
@@ -310,7 +325,7 @@ class ProductController extends CoreController
                 $name    = $images['name'][$i];
                 $error   = $images['error'][$i];
 
-                // If ther is nor error occured while uploading
+                // If there is no error occured while uploading
                 if($error === 0){
 
                     // Get img extension and store it into lower case
@@ -327,40 +342,39 @@ class ProductController extends CoreController
                         $uniqueName = uniqid('IMG-', true);
                         $pictureName = $uniqueName . '.' . $extension;
 
+                        // Put images in the upload dir
                         move_uploaded_file($tmpName, __DIR__ . '/../../public/assets/uploads/' . $pictureName);
 
+                        // Create new Picture object, set the name, and store it in DB
                         $newPicture = new Picture();
                         $newPicture->setName($pictureName);
 
                         if($newPicture->save()) {
 
-                            $imgId = $newPicture->getId();
-                            $imgList[] = $imgId;
+                            // If all's good, create new relation to get it back for the carousel
+                            $pictureId = $newPicture->getId();
+                            $newProductPicture -> setProduct_id($productId);
+                            $newProductPicture -> setPicture_id($pictureId);
+                            $newProductPicture -> addProductPicture();
+                            
                         }
 
                     } else {
                         $errorList[] = "Fichier non autorisé";
                     }
 
-                }else{
+                } else {
                     $errorList[] = "Une erreur s'est produite lors du l'upload des images";
                 }
             }
-
-            $newProductPicture = new ProductHasPicture();
-
-            foreach ($imgList as $key => $value) {
-                $newProductPicture -> setProduct_id($productId);
-                $newProductPicture -> setPicture_id($value);
-                $newProductPicture -> addProductPicture();
-            }
-
             self::addFlash(
                 'success',
                 'good'
             );
 
             header('Location: ' . $this->router->generate('main-home'));
+            // exit;
+            
         }
 
         $this->show('product/adding', [

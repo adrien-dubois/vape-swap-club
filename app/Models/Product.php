@@ -183,6 +183,27 @@ class Product extends CoreModel {
 
         return $newsCards;
     }
+
+    /**
+     * Method to find the 8 products to displays in the homepage's carousel 
+     *
+     * @return Product
+     */
+    public function findCarousel(){
+
+        $pdo = Database::getPDO();
+
+        $sql = "SELECT *
+                FROM `product`
+                ORDER BY `created_at` DESC
+                LIMIT 3, 8 
+        ";
+
+        $pdoStatement = $pdo->query($sql);
+        $carousel = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Product');
+
+        return $carousel;
+    }
     
     /**
      * Method to create a new product in DB

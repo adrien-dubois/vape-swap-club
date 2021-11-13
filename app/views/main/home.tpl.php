@@ -68,7 +68,7 @@
     <!-- CARDS PART -->
     <div class="card-section">    
         <h2 id="title">Brand news</h2>
-        <p id="subtitle">Découvrez les dernières rentrées</p>
+        <p id="subtitle">Découvrez les dernières rentrées du Club</p>
         <div class="body-card">
             <div class="contain">
 
@@ -93,6 +93,7 @@
 
 <hr style="height: 2px;border: none;background-color: #5A5D62; color: #5A5D62; margin-bottom: 2rem; ">
 <h2 id="trend">Tendances</h2>
+<p id="carousel-sub">Pour vous, voici une séléction des dernières tendances que nous avons pu rentrer dans le Club. Que ce soit du Old School ou la dernière pièce du nouveau modder à la mode, soyez sûrs que vous n'y trouverez que des classiques</p>
 <!-- CAROUSEL PART -->
     <div class="carousel">
         <!-- slider ------------------>
