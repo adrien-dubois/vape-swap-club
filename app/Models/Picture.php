@@ -100,6 +100,23 @@ class Picture extends CoreModel
         $pdo->exec($sql);
     }
 
+    public static function findListForProduct($productId)
+    {
+        $pdo = Database::getPDO();
+
+        $sql = "
+            SELECT *
+            FROM `picture`
+            WHERE id IN (
+                SELECT picture_id FROM `product_has_picture`
+                WHERE product_id = {$productId}
+        )";
+        $pdoStatement = $pdo->query($sql);
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
+
+        return $results;
+    }
+
     /**
      * Get the value of name
      *

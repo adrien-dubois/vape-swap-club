@@ -87,7 +87,7 @@ class ProductHasPicture extends CoreModel{
      * @param int $productId
      * @return void
      */
-    public function findFromProduct($productId){
+    public static function findFromProduct($productId){
         
         $pdo = Database::getPDO();
 
@@ -98,9 +98,9 @@ class ProductHasPicture extends CoreModel{
         ;
 
         $pdoStatement = $pdo->query($sql);
-        $product = $pdoStatement->fetchObject(self::class);
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
 
-        return $product;
+        return $results;
     }
 
     public function addProductPicture(){

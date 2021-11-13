@@ -8,20 +8,19 @@ $rating = $product->getRate();
             <img src="<?= $uploadsUri . $product->getPicture() ?>" id="ProductImg">
 
             <div class="small-img-row">
+
+                <!-- MAIN PICTURE -->
                 <div class="small-img-col">
                     <img src="<?= $uploadsUri . $product->getPicture() ?>" width="100%" class="small-img">
                 </div>
-                <div class="small-img-col">
-                    <img src="<?= $assetsBaseUri; ?>uploads/had2.jpg" width="100%" class="small-img">
-                </div>
-                <div class="small-img-col">
-                    <img src="<?= $assetsBaseUri; ?>uploads/had3.jpg" width="100%" class="small-img">
-                </div>
-                <div class="small-img-col">
-                    <img src="<?= $assetsBaseUri; ?>uploads/had4.png" width="100%" class="small-img">
-                </div>
-            </div>
 
+                <!-- ALL CAROUSEL PICTURES -->
+                <?php foreach($carousel as $currentCarousel): ?>
+                <div class="small-img-col">
+                    <img src="<?= $uploadsUri . $currentCarousel->getName() ?>" width="100%" class="small-img">
+                </div>
+                <?php endforeach; ?>
+            </div>
         </div>
         <div class="column-2">
             <p><a href="<?= $this->router->generate('product-list') ?>" class="breadcrumb">Annonces</a>  / <?= $category->getName() ?></p>

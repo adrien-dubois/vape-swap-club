@@ -76,11 +76,14 @@ class ProductController extends CoreController
         $categoryModel = new Category();
         $category = $categoryModel->find($relatedCategory);
 
+        $carousel = Picture::findListForProduct($id);
+
         $this->show('product/single', [
             'pageTitle' => 'Annonce',
             'product' => $product,
             'brand' => $brand,
-            'category' => $category
+            'category' => $category,
+            'carousel' => $carousel,
         ]);
     }
 
@@ -314,6 +317,7 @@ class ProductController extends CoreController
 
         if(isset($_POST['upload'])) {
 
+            $formIsValid = true;
             $errorList = [];
             $images = $_FILES['images'];
             $nbImages = count($images['name']);
@@ -361,25 +365,29 @@ class ProductController extends CoreController
 
                     } else {
                         $errorList[] = "Fichier non autorisé";
+                        $formIsValid = false;
                     }
 
                 } else {
                     $errorList[] = "Une erreur s'est produite lors du l'upload des images";
+                    $formIsValid = false;
                 }
             }
-            self::addFlash(
-                'success',
-                'good'
-            );
+            if($formIsValid === true){
 
-            header('Location: ' . $this->router->generate('main-home'));
-            // exit;
+                self::addFlash(
+                    'success',
+                    'Votre annonce a bien été enregistrée'
+                );
+    
+                header('Location: ' . $this->router->generate('main-home'));
+                exit;
+            }
             
         }
 
         $this->show('product/adding', [
             'pageTitle' => 'Ajouter une annonce',
-            'product' => new Product(),
             'errorList' => $errorList,
         ]);
 
