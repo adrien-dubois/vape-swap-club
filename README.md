@@ -37,6 +37,9 @@ If you want to test it, you'll have to :
 
     - Make a composer install
     - Create a DataBase named `vapeswap`
-    - Make the tables, I put a tables.sql if you want to import it directly
+    - For the tables, you have in the `docs` directory 2 sql docs :
+        - 1st which is the tables and some datas to start in the tables
+        - 2nd which is the tables empty, no datas in, you are free to start    
+          from scratch
     - Make a config.ini and configure it as explained in the config.ini.dist in `\app\`
     - Run with PHP server, you can run the `server.sh` script if you want
