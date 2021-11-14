@@ -318,6 +318,16 @@ $router->map(
     'msg-new'
 );
 
+$router->map(
+    'POST',
+    '/messages/new',
+    [
+        'method' => 'sendNew',
+        'controller' => 'App\Controllers\MsgController'
+    ],
+    'msg-send'
+);
+
 /* -------------
 --- DISPATCH ---
 -------------*/

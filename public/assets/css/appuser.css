@@ -425,17 +425,26 @@ th.pict{
     color: var(--second-color);
 }
 
-.mailbox .new-mess .mess-elements:hover
+.mailbox .new-mess .return-back{
+    display: block;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.mailbox .new-mess .mess-elements,
+.mailbox .new-mess .return-back:hover
 {
     color: white;
 }
 
-.mailbox .new-mess .mess-elements a{
+.mailbox .new-mess .mess-elements a,
+.mailbox .new-mess .return-back a{
     color: var(--second-color);
     transition: 0.5s;
 }
 
-.mailbox .new-mess .mess-elements a:hover{
+.mailbox .new-mess .mess-elements a:hover,
+.mailbox .new-mess .return-back a:hover{
     color: white;
 }
 
@@ -448,12 +457,12 @@ th.pict{
 
 .mail-box{
     display: flex;
-    height: 100vh;
     justify-content: center;
     align-items: center;
 }
 
 .contact-box{
+    margin-top: 2rem;
     width: 900px;
     background-color: var(--background-register);
     padding: 25px 30px;

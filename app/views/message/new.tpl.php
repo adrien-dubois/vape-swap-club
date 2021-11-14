@@ -2,6 +2,8 @@
     <div class="row">
         <div class="mail-box">
             <div class="contact-box">
+
+                <!-- TITLE -->
                 <div class="titler">Nouveau message</div>
                 <form action="" method="post">
                     <div class="contact-details">
@@ -26,7 +28,7 @@
                         <!-- MESSAGE -->
                         <div class="msg-box">
                             <span class="msg-details">Message</span>
-                            <textarea name="msg" cols="30" rows="10" placeholder="Votre message..." required></textarea>
+                            <textarea name="message" cols="30" rows="10" placeholder="Votre message..." required></textarea>
                         </div>
 
                         <!-- SUBMIT -->

@@ -31,12 +31,16 @@
 
             <div class="new-mess">
                 <div class="return-back">
-                    <i class="fas fa-reply"></i>
-                    <p>Retour à l'accueil</p>
+                    <a href="<?= $this->router->generate('main-home') ?>">
+                        <i class="fas fa-reply"></i>
+                        <p>Retour à l'accueil</p>
+                    </a>
                 </div>
                 <div class="mess-elements">
-                    <i class="far fa-comments"></i>
-                    <a href="<?= $this->router->generate('msg-new') ?>"><p>Nouveau message</p></a>
+                    <a href="<?= $this->router->generate('msg-new') ?>">
+                        <i class="far fa-comments"></i>
+                        <p>Nouveau message</p>
+                    </a>
                 </div>
             </div>
         </div>

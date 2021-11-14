@@ -25,7 +25,11 @@ class MsgController extends CoreController{
         $this->show('message/new',[
             'pageTitle' => 'Nouveau message',
             'contacts' => $contacts,
-            
+
         ]);
+    }
+
+    public function sendNew(){
+        
     }
 }
