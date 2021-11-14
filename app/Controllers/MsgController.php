@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\AppUser;
+
 class MsgController extends CoreController{
 
     /**
@@ -13,6 +15,17 @@ class MsgController extends CoreController{
 
         $this->show('message/main',[
             'pageTitle' => 'Messagerie',
+        ]);
+    }
+
+    public function new(){
+
+        $contacts = AppUser::findAllMessages();
+
+        $this->show('message/new',[
+            'pageTitle' => 'Nouveau message',
+            'contacts' => $contacts,
+            
         ]);
     }
 }

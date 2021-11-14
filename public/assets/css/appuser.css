@@ -419,9 +419,126 @@ th.pict{
 
 .mailbox .new-mess .mess-elements{
     text-align: center;
+    display: block;
+    cursor: pointer;
+    transition: 0.5s;
+    color: var(--second-color);
+}
+
+.mailbox .new-mess .mess-elements:hover
+{
+    color: white;
+}
+
+.mailbox .new-mess .mess-elements a{
+    color: var(--second-color);
+    transition: 0.5s;
+}
+
+.mailbox .new-mess .mess-elements a:hover{
+    color: white;
 }
 
 .mailbox .new-mess .return-back i,
 .mailbox .new-mess .mess-elements i{
     font-size: 1.8rem;
+}
+
+/* NEW MESSAGE */
+
+.mail-box{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-box{
+    width: 900px;
+    background-color: var(--background-register);
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 6px 8px 6px rgba(0, 0, 0, 0.520);
+}
+
+.contact-box .titler{
+    font-size: 25px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--second-color);
+    position: relative;
+}
+
+.contact-box .titler::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    background: var(--second-color);
+}
+
+.contact-box form .contact-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+}
+
+form .contact-details .msg-box{
+    margin-bottom: 15px;
+    width: calc(100% /2 -20px);
+}
+
+.contact-details .msg-box select{
+    width: 72%;
+}
+
+.contact-details .msg-box input{
+    height: 45px;
+    width: 70%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid grey;
+    color: grey;
+    background: var(--background-register);
+    padding-left: 15px;
+    font-size: 16px;
+    transition: all 0.5s ease;
+}
+
+.contact-details .msg-box textarea{
+    width: 70%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid grey;
+    color: grey;
+    background: var(--background-register);
+    padding-left: 15px;
+    font-size: 16px;
+    transition: all 0.5s ease;
+}
+
+.contact-details .msg-box input:focus,
+.contact-details .msg-box textarea:focus{
+    border-color: var(--second-color);
+}
+
+.contact-details .msg-box .msg-details{
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.contact-details .msg-box input:-webkit-autofill,
+.contact-details .msg-box textarea:-webkit-autofill,
+.contact-details .msg-box input:-webkit-autofill:hover, 
+.contact-details .msg-box textarea:-webkit-autofill:hover, 
+.contact-details .msg-box input:-webkit-autofill:focus, 
+.contact-details .msg-box textarea:-webkit-autofill:focus, 
+.contact-details .msg-box input:-webkit-autofill:active,
+.contact-details .msg-box textarea:-webkit-autofill:active{
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: gray !important;
 }

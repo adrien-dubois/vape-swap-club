@@ -36,7 +36,7 @@
                 </div>
                 <div class="mess-elements">
                     <i class="far fa-comments"></i>
-                    <p>Nouveau message</p>
+                    <a href="<?= $this->router->generate('msg-new') ?>"><p>Nouveau message</p></a>
                 </div>
             </div>
         </div>

@@ -99,6 +99,25 @@ class AppUser extends CoreModel{
     }
 
     /**
+     * Find all users that are Vapers for the messenger
+     *
+     * @return void
+     */
+    public static function findAllMessages(){
+
+        $pdo = Database::getPDO();
+        $sql = "
+                SELECT *
+                FROM `app_user`
+                WHERE `role` = 'Vaper' 
+        ";
+        $pdoStatement = $pdo->query($sql);
+        $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
+
+        return $result;
+    }
+
+    /**
      * Add a new user
      *
      * @return bool

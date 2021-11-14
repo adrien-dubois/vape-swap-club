@@ -315,7 +315,7 @@ $router->map(
         'method' => 'new',
         'controller' => 'App\Controllers\MsgController'
     ],
-    'msg-home'
+    'msg-new'
 );
 
 /* -------------
