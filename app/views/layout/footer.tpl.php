@@ -4,8 +4,8 @@
         <img src="<?= $assetsBaseUri; ?>images/logo-footer.png" alt="logo" style="width: 100px; margin-left: 75px;">
         <h3>Vape <span>Swap Club</span> </h3>
         <p class="footer-links">
-            <a href="#">Accueil</a>
-            <a href="#">Annonces</a>
+            <a href="<?= $this->router->generate('main-home'); ?>">Accueil</a>
+            <a href="<?= $this->router->generate('product-list'); ?>">Annonces</a>
             <a href="#">Catégories</a>
             <a href="#">Contact</a>
         </p>

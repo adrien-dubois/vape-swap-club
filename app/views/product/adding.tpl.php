@@ -13,7 +13,6 @@
                     <div class="user-details">
 
                         <div class="input-box">
-                            <!-- <span class="detail">Photos supplémentaires</span> -->
                             <?php require __DIR__ . '/../partials/_errors.tpl.php'; ?>
                             <input type="file" id="pics" name="images[]" class="input-cover" data-multiple-caption=" {count} images sélectionnées" multiple>
                             <label for="pics"><i class="fas fa-upload"></i> <span> Choisir une/des image(s)</span> </label>
