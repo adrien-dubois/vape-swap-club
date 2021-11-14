@@ -393,3 +393,35 @@ input-box input.numb{
 #street, #zip, #price, #rate{
     width: 100px;
 }
+
+/* MESSAGES */
+
+.mailbox h2{
+    color: var(--second-color);
+    text-shadow: 8px 6px 10px rgba(0, 0, 0, 0.520);
+    margin: 2rem 0;
+}
+
+td.pict,
+th.pict{
+    text-align: center;
+}
+.mailbox table{
+    width: 900px;
+}
+
+.mailbox .new-mess{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5rem;
+    color: var(--second-color);
+}
+
+.mailbox .new-mess .mess-elements{
+    text-align: center;
+}
+
+.mailbox .new-mess .return-back i,
+.mailbox .new-mess .mess-elements i{
+    font-size: 1.8rem;
+}

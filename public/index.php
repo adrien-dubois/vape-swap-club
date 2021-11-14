@@ -295,6 +295,30 @@ $router->map(
 );
 
 /* -------------
+--- MESSAGES ---
+--------------*/
+
+$router->map(
+    'GET',
+    '/messages',
+    [
+        'method' => 'home',
+        'controller' => 'App\Controllers\MsgController'
+    ],
+    'msg-home'
+);
+
+$router->map(
+    'GET',
+    '/messages/new',
+    [
+        'method' => 'new',
+        'controller' => 'App\Controllers\MsgController'
+    ],
+    'msg-home'
+);
+
+/* -------------
 --- DISPATCH ---
 -------------*/
 

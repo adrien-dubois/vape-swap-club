@@ -399,7 +399,7 @@ h4{
     font-weight: 400;
     font-size: 14px;
     letter-spacing: normal;
-    color: var(--input-color);
+    color: var(--second-color);
 }
 
 .column-2 .badges .fas{
@@ -453,11 +453,13 @@ td img{
     margin-right: 10px;
 }
 
+
 .cart-info{
     display: flex;
     flex-wrap: wrap;
-
+    
 }
+
 
 .total-price{
     display: flex;
@@ -477,6 +479,7 @@ td:last-child{
 th:last-child{
     text-align: right;
 }
+
 
 #card-errors{
     color: red;
