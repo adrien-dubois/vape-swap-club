@@ -103,7 +103,7 @@ class AppUser extends CoreModel{
      *
      * @return void
      */
-    public static function findAllMessages(){
+    public static function findAllForMessages(){
 
         $pdo = Database::getPDO();
         $sql = "

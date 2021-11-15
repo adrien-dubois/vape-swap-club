@@ -14,14 +14,22 @@ class MsgController extends CoreController{
      */
     public function home(){
 
+        $receivedMessages = Message::findAllMessageReceived();
+
         $this->show('message/main',[
             'pageTitle' => 'Messagerie',
+            'receivedMessages' => $receivedMessages,
         ]);
     }
 
+    /**
+     * Display form to write and send a new message
+     *
+     * @return void
+     */
     public function new(){
 
-        $contacts = AppUser::findAllMessages();
+        $contacts = AppUser::findAllForMessages();
 
         $this->show('message/new',[
             'pageTitle' => 'Nouveau message',
@@ -30,13 +38,17 @@ class MsgController extends CoreController{
         ]);
     }
 
+    /**
+     * Posting a new message & store it in DB
+     *
+     * @return void
+     */
     public function sendNew(){
         
         // Store datas & sanitize it
         $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
         $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING);
         $recipient_id = filter_input(INPUT_POST, 'recipientId', FILTER_SANITIZE_NUMBER_INT);
-        $is_read = 0;
         $sender_id = $_SESSION['userId'];
 
         // Variables to manage errors
@@ -71,7 +83,6 @@ class MsgController extends CoreController{
             $newMessage -> setMessage($message);
             $newMessage -> setRecipient_id($recipient_id);
             $newMessage -> setSender_id($sender_id);
-            $newMessage -> setIs_read($is_read);
 
             if($newMessage -> save()){
 
@@ -82,7 +93,7 @@ class MsgController extends CoreController{
                 $body = '
                 <h2>Vous avez reçu un message privé</h2>
 
-                <p>Bonjour ' . $recipientModel->getFirstname()  . ', vous venez de recevoir un message privé de la part de '. $_SESSION['username'] .' <br> Afin de pouvoir le lire, veuillez vous connecter à votre compte sur <strong>Vape Swap Club</strong> </p>
+                <p>Bonjour ' . $recipientModel->getFirstname()  . ', vous venez de recevoir un message privé de la part de '. $_SESSION['username'] .' <br> Afin de pouvoir le lire la discussion, veuillez vous connecter à votre compte sur <strong>Vape Swap Club</strong> </p>
                 <br>
                 <p>Merci de votre confiance, bonne vape, </p>
                 <p><i>Vape Swap Club</i></p>
@@ -105,12 +116,24 @@ class MsgController extends CoreController{
         $message->setTitle(filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING));
         $message->setMessage(filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING));
 
-        $contacts = AppUser::findAllMessages();
+        $contacts = AppUser::findAllForMessages();
 
         $this->show('message/new',[
             'pageTitle' => 'Nouveau message',
             'contacts' => $contacts,
             'errorList' => $errorList,
+        ]);
+    }
+
+    public function read($recipientId){
+
+        $conversation = Message::findMessageConversation($recipientId);
+
+        // dd($conversation);
+
+        $this->show('message/read',[
+            'pageTitle' => 'Messages',
+            'conversation' => $conversation,
         ]);
     }
 }

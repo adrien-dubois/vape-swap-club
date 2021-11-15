@@ -37,7 +37,7 @@
                             <button type="submit" name="upload" class="btn-register"> Envoyer </button>
                         </div>
                         <div class="btn-adress">
-                            <a href="<?= $this->router->generate('msg-home'); ?>"> <button style="cursor: pointer;" class="btn-modify">Retour</button></a>
+                            <a href="<?= $this->router->generate('msg-home'); ?>"> <button type="button" style="cursor: pointer;" class="btn-modify">Retour</button></a>
                         </div>
                     </div>
                 </form>

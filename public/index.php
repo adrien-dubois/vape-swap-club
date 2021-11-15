@@ -328,6 +328,16 @@ $router->map(
     'msg-send'
 );
 
+$router->map(
+    'GET',
+    '/messages/read/[i:recipientId]',
+    [
+        'method' => 'read',
+        'controller' => 'App\Controllers\MsgController'
+    ],
+    'msg-read'
+);
+
 /* -------------
 --- DISPATCH ---
 -------------*/

@@ -5,7 +5,8 @@ namespace App\Models;
 use App\Utils\Database;
 use PDO;
 
-class Message extends CoreModel{
+class Message extends CoreModel
+{
 
     /**
      * @var string
@@ -48,7 +49,6 @@ class Message extends CoreModel{
         $result = $pdoStatement->fetchObject('App\Models\Message');
 
         return $result;
-
     }
 
     /**
@@ -56,7 +56,8 @@ class Message extends CoreModel{
      *
      * @return Product
      */
-    public static function findAll(){
+    public static function findAll()
+    {
 
         $pdo = Database::getPDO();
         $sql = '
@@ -69,18 +70,68 @@ class Message extends CoreModel{
         return $result;
     }
 
-        /**
+    /**
+     * Get all messages of conversation
+     *
+     * @param int $recipient_id
+     * @return void
+     */
+    public static function findMessageConversation($recipient_id)
+    {
+        $sender_id = $_SESSION['userId'];
+
+        $pdo = Database::getPDO();
+        $sql = '
+            SELECT *
+            FROM `message`
+            WHERE `sender_id` = ' . $sender_id . '
+            AND `recipient_id` = ' . $recipient_id . '
+            OR `sender_id` = ' . $recipient_id . '
+            AND `recipient_id` =' . $sender_id . '
+            ORDER BY `created_at` DESC
+            ';
+        $pdoStatement = $pdo->query($sql);
+        $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Message');
+
+        return $result;
+    }
+
+    /**
+     * Get all messages received
+     *
+     * @param int $sender_id
+     * @return void
+     */
+    public static function findAllMessageReceived()
+    {
+
+        $recipient_id = $_SESSION['userId'];
+
+        $pdo = Database::getPDO();
+        $sql = '
+            SELECT *
+            FROM `message`
+            WHERE `recipient_id` = ' . $recipient_id;
+        $pdoStatement = $pdo->query($sql);
+        $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Message');
+
+        return $result;
+    }
+
+
+    /**
      * Method to create a new message in DB
      *
      * @return bool
      */
-    public function insert(){
+    public function insert()
+    {
 
         $pdo = Database::getPDO();
 
         $sql = '
-        INSERT INTO `message` (title, message, sender_id, recipient_id, is_read)
-        VALUES (:title, :message, :sender_id, :recipient_id, :is_read)
+        INSERT INTO `message` (title, message, sender_id, recipient_id)
+        VALUES (:title, :message, :sender_id, :recipient_id)
         ';
 
         $pdoStatement = $pdo->prepare($sql);
@@ -88,9 +139,8 @@ class Message extends CoreModel{
         $pdoStatement->execute([
             ':title' => $this->title,
             ':message' => $this->message,
-            ':sender_id' =>$this->sender_id,
+            ':sender_id' => $this->sender_id,
             ':recipient_id' => $this->recipient_id,
-            ':is_read' => $this->is_read
         ]);
 
         if ($pdoStatement->rowCount() > 0) {
@@ -149,7 +199,7 @@ class Message extends CoreModel{
      * Get the value of title
      *
      * @return  string
-     */ 
+     */
     public function getTitle()
     {
         return $this->title;
@@ -161,7 +211,7 @@ class Message extends CoreModel{
      * @param  string  $title
      *
      * @return  self
-     */ 
+     */
     public function setTitle(string $title)
     {
         $this->title = $title;
@@ -173,7 +223,7 @@ class Message extends CoreModel{
      * Get the value of message
      *
      * @return  string
-     */ 
+     */
     public function getMessage()
     {
         return $this->message;
@@ -185,7 +235,7 @@ class Message extends CoreModel{
      * @param  string  $message
      *
      * @return  self
-     */ 
+     */
     public function setMessage(string $message)
     {
         $this->message = $message;
@@ -197,7 +247,7 @@ class Message extends CoreModel{
      * Get the value of sender_id
      *
      * @return  int
-     */ 
+     */
     public function getSender_id()
     {
         return $this->sender_id;
@@ -209,7 +259,7 @@ class Message extends CoreModel{
      * @param  int  $sender_id
      *
      * @return  self
-     */ 
+     */
     public function setSender_id(int $sender_id)
     {
         $this->sender_id = $sender_id;
@@ -221,7 +271,7 @@ class Message extends CoreModel{
      * Get the value of recipient_id
      *
      * @return  int
-     */ 
+     */
     public function getRecipient_id()
     {
         return $this->recipient_id;
@@ -233,7 +283,7 @@ class Message extends CoreModel{
      * @param  int  $recipient_id
      *
      * @return  self
-     */ 
+     */
     public function setRecipient_id(int $recipient_id)
     {
         $this->recipient_id = $recipient_id;
@@ -245,7 +295,7 @@ class Message extends CoreModel{
      * Get the value of is_read
      *
      * @return  bool
-     */ 
+     */
     public function getIs_read()
     {
         return $this->is_read;
@@ -257,7 +307,7 @@ class Message extends CoreModel{
      * @param  bool $is_read
      *
      * @return  self
-     */ 
+     */
     public function setIs_read(bool $is_read)
     {
         $this->is_read = $is_read;

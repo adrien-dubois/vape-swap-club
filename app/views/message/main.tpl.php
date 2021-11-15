@@ -17,15 +17,34 @@
 
                 <tbody>
                     <!-- gérer si pas de messages -->
+                        <?php
+                        use App\Models\AppUser;
+                        if(!empty($receivedMessages)):
+                        foreach($receivedMessages as $currentMessage): 
+                        $senderId = $currentMessage->getSender_id();
+                        $sender = AppUser::find($senderId);
+                        $senderName = $sender->getFirstname() . ' ' . $sender->getLastname();
+                        ?>
                     <tr>
-                        <!-- gérer ouvert/non ouvert -->
-                        <td class="pict"><i class="far fa-envelope"></i></td>
-                        <td>Jean Claude</td>
-                        <td>Bonjour</td>
-                        <td>Date du jour</td>
+                        <!-- CHECK IF MESSAGE IS READ -->
+                        <?php if($currentMessage->getIs_read() ==  0): ?>
+                            <td class="pict"><i class="far fa-envelope"></i></td>
+                        <?php else: ?>
+                            <td class="pict"><i class="far fa-envelope-open"></i></td>
+                        <?php endif; ?>
+
+                        <td><?= $senderName ?></td>
+                        <td><a style="font-size: 18px; color: white;" href="<?= $this->router->generate('msg-read', ['recipientId'=>$senderId]) ?>"><?= $currentMessage->getTitle() ?></a></td>
+                        <td><?= date('d/m/Y', strtotime($currentMessage->getCreated_at())) ?></td>
                         <td class="pict"><i class="fas fa-trash-alt"></i></td>
                         <td></td>
                     </tr>
+                    <?php endforeach;
+                    else :?>
+                    <tr>
+                        <td>Vous n'avez pas de messages</td>
+                    </tr>
+                    <?php endif ?>
                 </tbody>
             </table>
 
@@ -39,7 +58,7 @@
                 <div class="mess-elements">
                     <a href="<?= $this->router->generate('msg-new') ?>">
                         <i class="far fa-comments"></i>
-                        <p>Nouveau message</p>
+                        <p>Nouvelle discussion</p>
                     </a>
                 </div>
             </div>
