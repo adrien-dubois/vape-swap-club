@@ -560,3 +560,7 @@ form .contact-details .msg-box{
     border-radius: 25px; 
     padding-top: 10px;
 }
+
+.chat-window{
+    margin-top: 2rem;
+}

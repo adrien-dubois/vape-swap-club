@@ -16,7 +16,7 @@ class MsgController extends CoreController
     public function home()
     {
 
-        $receivedMessages = Message::findAllMessageReceived();
+        $receivedMessages = Message::findMessagesMailbox();
 
         $this->show('message/main', [
             'pageTitle' => 'Messagerie',
@@ -97,7 +97,7 @@ class MsgController extends CoreController
                 $body = '
                 <h2>Vous avez reçu un message privé</h2>
 
-                <p>Bonjour ' . $recipientModel->getFirstname()  . ', vous venez de recevoir un message privé de la part de ' . $_SESSION['username'] . ' <br> Afin de pouvoir le lire la discussion, veuillez vous connecter à votre compte sur <strong>Vape Swap Club</strong> </p>
+                <p>Bonjour ' . $recipientModel->getFirstname()  . ', vous venez de recevoir un message privé de la part de ' . $_SESSION['username'] . ' afin de démarrer une discussion avec vous. <br> Afin de pouvoir le lire et prendre part à la discussion, veuillez vous connecter à votre compte sur <strong>Vape Swap Club</strong> </p>
                 <br>
                 <p>Merci de votre confiance, bonne vape, </p>
                 <p><i>Vape Swap Club</i></p>
@@ -139,20 +139,36 @@ class MsgController extends CoreController
     {
 
         $conversation = Message::findMessageConversation($recipientId);
+        $recipient = AppUser::find($recipientId);
+        $recipientName = $recipient->getFirstname() . ' ' . $recipient->getLastname();
 
         // dd($conversation);
 
         $this->show('message/read', [
             'pageTitle' => 'Messages',
             'conversation' => $conversation,
+            'recipientId' => $recipientId,
+            'recipientName' => $recipientName,
         ]);
     }
 
+    /**
+     * Method to send message the static way, without refreshing page
+     *
+     * @param int $recipientId
+     * @return void
+     */
     public function sendStatic($recipientId)
     {
 
         $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING);
         $sender_id = $_SESSION['userId'];
+
+        $updateMessage = new Message();
+        $updateMessage -> setSender_id($recipientId);
+        $updateMessage -> setRecipient_id($sender_id);
+        $updateMessage -> setIs_read(1);
+        $updateMessage -> update();
 
         // Variables to manage errors
         $formIsValid = true;
@@ -176,7 +192,7 @@ class MsgController extends CoreController
             $newMessage->setRecipient_id($recipientId);
             $newMessage->setSender_id($sender_id);
 
-            $newMessage->save();
+            $newMessage -> save();
         }
 
         $conversation = Message::findMessageConversation($recipientId);
@@ -184,6 +200,69 @@ class MsgController extends CoreController
         $this->show('message/read', [
             'pageTitle' => 'Messages',
             'conversation' => $conversation,
+            'recipientId' => $recipientId
         ]);
+    }
+
+    /**
+     * Method which manage Ajax function to display messages without refresh
+     *
+     * @return void
+     */
+    public function chat(){
+        
+        $recipient_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+        $message = urldecode(filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING)) ;
+        $sender_id = $_SESSION['userId'];
+
+        if($recipient_id <= 0 || empty($message)){
+            exit;
+        }
+
+        $newMessage = new Message();
+        $newMessage -> setSender_id($sender_id);
+        $newMessage -> setRecipient_id($recipient_id);
+        $newMessage -> setMessage($message);
+
+        $newMessage -> save();
+
+        // Adding NL2BR in the case of the user of the chat send message with line breaks
+        echo('<div style="background: #212121; color: grey;">'.
+             nl2br($message) 
+            .' </div>');
+    }
+
+    /**
+     * Load messages without refresh with upload to set if message is read
+     *
+     * @return void
+     */
+    public function loadChat(){
+
+        // From -> sender / To -> recipient
+        
+        $sender_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+        $recipient_id = $_SESSION['userId'];
+
+        if($sender_id <= 0 ){
+            exit;
+        }
+
+        $messages = Message::findMessageAutoload($sender_id);
+
+        $updateMessage = new Message();
+        $updateMessage -> setSender_id($sender_id);
+        $updateMessage -> setRecipient_id($recipient_id);
+        $updateMessage -> setIs_read(1);
+        $updateMessage -> update();
+
+
+            foreach($messages as $currentMessage){
+                echo(
+                    '<div>'.
+                        nl2br($currentMessage->getMessage())
+                    .'</div>'
+                );
+            }
     }
 }

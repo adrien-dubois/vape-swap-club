@@ -25,7 +25,7 @@ class Message extends CoreModel
      */
     private $recipient_id;
     /**
-     * @var bool
+     * @var int
      */
     private $is_read;
 
@@ -88,7 +88,7 @@ class Message extends CoreModel
             AND `recipient_id` = ' . $recipient_id . '
             OR `sender_id` = ' . $recipient_id . '
             AND `recipient_id` =' . $sender_id . '
-            ORDER BY `created_at` DESC
+            ORDER BY `created_at`
             LIMIT 25
             ';
         $pdoStatement = $pdo->query($sql);
@@ -97,22 +97,42 @@ class Message extends CoreModel
         return $result;
     }
 
-    /**
-     * Get all messages received
-     *
-     * @param int $sender_id
-     * @return void
-     */
-    public static function findAllMessageReceived()
+    public static function findMessageAutoload($sender_id)
     {
-
         $recipient_id = $_SESSION['userId'];
 
         $pdo = Database::getPDO();
         $sql = '
             SELECT *
             FROM `message`
-            WHERE `recipient_id` = ' . $recipient_id;
+            WHERE `recipient_id` = ' . $recipient_id . '
+            AND `sender_id` = '. $sender_id .'
+            AND `is_read` = 0
+            ';
+        $pdoStatement = $pdo->query($sql);
+        $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Message');
+
+        return $result;
+    }
+
+    /**
+     * Get messages for the mailbox
+     *
+     * @param int $sender_id
+     * @return void
+     */
+    public static function findMessagesMailbox()
+    {
+
+        $recipient_id = $_SESSION['userId'];
+
+        $pdo = Database::getPDO();
+        $sql = '
+        SELECT DISTINCT `message`.*, `app_user`.`firstname` AS `firstname`,`app_user`.`lastname` AS `lastname`
+        FROM `message`
+        INNER JOIN `app_user` ON `message`.`sender_id` = `app_user`.`id`
+        WHERE `recipient_id` = ' . $recipient_id .'
+        AND `title` IS NOT NULL' ;
         $pdoStatement = $pdo->query($sql);
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Message');
 
@@ -163,20 +183,14 @@ class Message extends CoreModel
         $sql = "
                 UPDATE `message`
                 SET
-                title = :title,
-                message = :message ,
-                sender_id = :sender_id,
-                recipient_id = :recipient_id,
                 is_read = :is_read,
                 updated_at = NOW()
-                WHERE id = :id
+                WHERE sender_id = :sender_id
+                AND recipient_id = :recipient_id
         ";
 
         $pdoStatement = $pdo->prepare($sql);
 
-        $pdoStatement->bindValue(':id', $this->id, PDO::PARAM_INT);
-        $pdoStatement->bindValue(':title', $this->title, PDO::PARAM_STR);
-        $pdoStatement->bindValue(':message', $this->message, PDO::PARAM_STR);
         $pdoStatement->bindValue(':sender_id', $this->sender_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':recipient_id', $this->recipient_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':is_read', $this->is_read, PDO::PARAM_INT);
@@ -295,7 +309,7 @@ class Message extends CoreModel
     /**
      * Get the value of is_read
      *
-     * @return  bool
+     * @return  int
      */
     public function getIs_read()
     {
@@ -305,11 +319,11 @@ class Message extends CoreModel
     /**
      * Set the value of is_read
      *
-     * @param  bool $is_read
+     * @param  int $is_read
      *
      * @return  self
      */
-    public function setIs_read(bool $is_read)
+    public function setIs_read(int $is_read)
     {
         $this->is_read = $is_read;
 

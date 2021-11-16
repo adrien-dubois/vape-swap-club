@@ -18,12 +18,10 @@
                 <tbody>
                     <!-- gérer si pas de messages -->
                         <?php
-                        use App\Models\AppUser;
+                        // Check if have any message
                         if(!empty($receivedMessages)):
-                        foreach($receivedMessages as $currentMessage): 
-                        $senderId = $currentMessage->getSender_id();
-                        $sender = AppUser::find($senderId);
-                        $senderName = $sender->getFirstname() . ' ' . $sender->getLastname();
+                        // For each message
+                        foreach($receivedMessages as $currentMessage):
                         ?>
                     <tr>
                         <!-- CHECK IF MESSAGE IS READ -->
@@ -33,13 +31,14 @@
                             <td class="pict"><i class="far fa-envelope-open"></i></td>
                         <?php endif; ?>
 
-                        <td><?= $senderName ?></td>
-                        <td><a style="font-size: 18px; color: white;" href="<?= $this->router->generate('msg-read', ['recipientId'=>$senderId]) ?>"><?= $currentMessage->getTitle() ?></a></td>
+                        <td><?= $currentMessage->firstname . ' ' . $currentMessage->lastname ?></td>
+                        <td><a style="font-size: 18px; color: white;" href="<?= $this->router->generate('msg-read', ['recipientId'=>$currentMessage->getSender_id()]) ?>"><?= $currentMessage->getTitle() ?></a></td>
                         <td><?= date('d/m/Y', strtotime($currentMessage->getCreated_at())) ?></td>
                         <td class="pict"><i class="fas fa-trash-alt"></i></td>
                         <td></td>
                     </tr>
-                    <?php endforeach;
+                    <?php 
+                    endforeach;
                     else :?>
                     <tr>
                         <td>Vous n'avez pas de messages</td>

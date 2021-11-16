@@ -348,6 +348,26 @@ $router->map(
     'msg-submit'
 );
 
+$router->map(
+    'POST',
+    '/messages/chat',
+    [
+        'method' => 'chat',
+        'controller' => 'App\Controllers\MsgController'
+    ],
+    'msg-chat'
+);
+
+$router->map(
+    'POST',
+    '/messages/load/chat',
+    [
+        'method' => 'loadChat',
+        'controller' => 'App\Controllers\MsgController'
+    ],
+    'msg-load'
+);
+
 /* -------------
 --- DISPATCH ---
 -------------*/
