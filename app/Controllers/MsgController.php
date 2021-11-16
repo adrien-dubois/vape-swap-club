@@ -5,18 +5,20 @@ namespace App\Controllers;
 use App\Models\AppUser;
 use App\Models\Message;
 
-class MsgController extends CoreController{
+class MsgController extends CoreController
+{
 
     /**
      * Display homepage of messages
      *
      * @return void
      */
-    public function home(){
+    public function home()
+    {
 
         $receivedMessages = Message::findAllMessageReceived();
 
-        $this->show('message/main',[
+        $this->show('message/main', [
             'pageTitle' => 'Messagerie',
             'receivedMessages' => $receivedMessages,
         ]);
@@ -27,11 +29,12 @@ class MsgController extends CoreController{
      *
      * @return void
      */
-    public function new(){
+    public function new()
+    {
 
         $contacts = AppUser::findAllForMessages();
 
-        $this->show('message/new',[
+        $this->show('message/new', [
             'pageTitle' => 'Nouveau message',
             'contacts' => $contacts,
 
@@ -43,8 +46,9 @@ class MsgController extends CoreController{
      *
      * @return void
      */
-    public function sendNew(){
-        
+    public function sendNew()
+    {
+
         // Store datas & sanitize it
         $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
         $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING);
@@ -57,17 +61,17 @@ class MsgController extends CoreController{
 
         // Testing if fields are emptys
 
-        if(empty($title)){
+        if (empty($title)) {
             $errorList[] = "Vous devez donner un titre à votre message";
             $formIsValid = false;
         }
 
-        if(empty($message)){
+        if (empty($message)) {
             $errorList[] = "Vous devez écrire un message";
             $formIsValid = false;
         }
 
-        if(empty($recipient_id)){
+        if (empty($recipient_id)) {
             $errorList[] = "Vous devez sélectionner un destinataire";
             $formIsValid = false;
         }
@@ -79,12 +83,12 @@ class MsgController extends CoreController{
         if ($formIsValid === true) {
 
             $newMessage = new Message();
-            $newMessage -> setTitle($title);
-            $newMessage -> setMessage($message);
-            $newMessage -> setRecipient_id($recipient_id);
-            $newMessage -> setSender_id($sender_id);
+            $newMessage->setTitle($title);
+            $newMessage->setMessage($message);
+            $newMessage->setRecipient_id($recipient_id);
+            $newMessage->setSender_id($sender_id);
 
-            if($newMessage -> save()){
+            if ($newMessage->save()) {
 
                 // Prepare email to inform the recipient
                 $recipientModel = AppUser::find($recipient_id);
@@ -93,7 +97,7 @@ class MsgController extends CoreController{
                 $body = '
                 <h2>Vous avez reçu un message privé</h2>
 
-                <p>Bonjour ' . $recipientModel->getFirstname()  . ', vous venez de recevoir un message privé de la part de '. $_SESSION['username'] .' <br> Afin de pouvoir le lire la discussion, veuillez vous connecter à votre compte sur <strong>Vape Swap Club</strong> </p>
+                <p>Bonjour ' . $recipientModel->getFirstname()  . ', vous venez de recevoir un message privé de la part de ' . $_SESSION['username'] . ' <br> Afin de pouvoir le lire la discussion, veuillez vous connecter à votre compte sur <strong>Vape Swap Club</strong> </p>
                 <br>
                 <p>Merci de votre confiance, bonne vape, </p>
                 <p><i>Vape Swap Club</i></p>
@@ -118,20 +122,66 @@ class MsgController extends CoreController{
 
         $contacts = AppUser::findAllForMessages();
 
-        $this->show('message/new',[
+        $this->show('message/new', [
             'pageTitle' => 'Nouveau message',
             'contacts' => $contacts,
             'errorList' => $errorList,
         ]);
     }
 
-    public function read($recipientId){
+    /**
+     * Display the page of the new discuss
+     *
+     * @param [type] $recipientId
+     * @return void
+     */
+    public function read($recipientId)
+    {
 
         $conversation = Message::findMessageConversation($recipientId);
 
         // dd($conversation);
 
-        $this->show('message/read',[
+        $this->show('message/read', [
+            'pageTitle' => 'Messages',
+            'conversation' => $conversation,
+        ]);
+    }
+
+    public function sendStatic($recipientId)
+    {
+
+        $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING);
+        $sender_id = $_SESSION['userId'];
+
+        // Variables to manage errors
+        $formIsValid = true;
+        $errorList = [];
+
+        // Testing if fields are emptys
+
+        if (empty($message)) {
+            $errorList[] = "Vous devez écrire un message";
+            $formIsValid = false;
+        }
+
+        // INSERT IN DB
+
+        // If all is OK, then we move to next step
+
+        if ($formIsValid === true) {
+
+            $newMessage = new Message();
+            $newMessage->setMessage($message);
+            $newMessage->setRecipient_id($recipientId);
+            $newMessage->setSender_id($sender_id);
+
+            $newMessage->save();
+        }
+
+        $conversation = Message::findMessageConversation($recipientId);
+
+        $this->show('message/read', [
             'pageTitle' => 'Messages',
             'conversation' => $conversation,
         ]);

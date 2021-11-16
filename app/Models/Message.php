@@ -89,6 +89,7 @@ class Message extends CoreModel
             OR `sender_id` = ' . $recipient_id . '
             AND `recipient_id` =' . $sender_id . '
             ORDER BY `created_at` DESC
+            LIMIT 25
             ';
         $pdoStatement = $pdo->query($sql);
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Message');

@@ -338,6 +338,16 @@ $router->map(
     'msg-read'
 );
 
+$router->map(
+    'POST',
+    '/messages/read/[i:recipientId]',
+    [
+        'method' => 'sendStatic',
+        'controller' => 'App\Controllers\MsgController'
+    ],
+    'msg-submit'
+);
+
 /* -------------
 --- DISPATCH ---
 -------------*/

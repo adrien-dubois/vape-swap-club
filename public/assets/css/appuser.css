@@ -551,3 +551,12 @@ form .contact-details .msg-box{
     transition: background-color 5000s ease-in-out 0s;
     -webkit-text-fill-color: gray !important;
 }
+
+/* CONVERSATION */
+
+#chatbox{
+    width: 300px; 
+    height: 36px; 
+    border-radius: 25px; 
+    padding-top: 10px;
+}
