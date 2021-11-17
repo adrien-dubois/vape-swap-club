@@ -4,8 +4,17 @@
             <div class="contact-box">
                 <div class="titler"><?= $recipientName ?></div>
 
-                <div class="chat-window">
-                    <?php foreach ($conversation as $message) : ?>
+                <div class="chat-window" id="msgScroll">
+                    <?php if ($number > $totalNbMessages) : ?>
+                        <button id="seeMore">
+                            Voir plus
+                        </button>
+                    <?php
+                    endif; ?>
+                    <div id="loadMore"></div>
+                    <?php
+                    foreach ($conversation as $message) :
+                    ?>
 
                         <!-- FOR MYSELF -->
                         <?php if ($message->getSender_id() ==  $_SESSION['userId']) : ?>
@@ -50,8 +59,13 @@
 </div>
 
 
+<!-- JS PART FOR DISPLAYING MESSAGES WITHOUT REFRESH -->
+
 <script>
     $(document).ready(function() {
+
+        document.getElementById('msgScroll').scrollTop = document.getElementById('msgScroll').scrollHeight;
+
         $('#chat').on("submit", function(e) {
             e.preventDefault();
 
@@ -75,6 +89,7 @@
 
                     success: function(data) {
                         $('#display').append(data);
+                        document.getElementById('msgScroll').scrollTop = document.getElementById('msgScroll').scrollHeight;
                     },
 
                     error: function(e, xhr, s) {
@@ -110,11 +125,14 @@
                     url: '/messages/load/chat',
                     method: 'POST',
                     dataType: 'html',
-                    data: {id: id,},
+                    data: {
+                        id: id,
+                    },
 
                     success: function(data) {
-                        if(data.trim() != '' ){
+                        if (data.trim() != '') {
                             $('#load-messages').append(data);
+                            document.getElementById('msgScroll').scrollTop = document.getElementById('msgScroll').scrollHeight;
                         }
                     },
 
@@ -136,6 +154,50 @@
             }
         }
 
+        <?php if ($number > $totalNbMessages) : ?>
+
+            var req = 0;
+
+            $('#seeMore').click(function(){
+                var id;
+                var element;
+
+                req += <?= $totalNbMessages ?>;
+                id = <?= json_encode($recipientId, JSON_UNESCAPED_UNICODE); ?>;
+
+                $.ajax({
+                    url: '/messages/load/more',
+                    method: 'POST',
+                    dataType: 'html',
+                    data: {
+                        limit: req,
+                        id: id,
+                    },
+
+                    success: function(data) {
+                            $(data).hide().appendTo('#loadMore').fadeIn(2000);
+                            document.getElementById('loadMore').removeAttribute('id');
+                    },
+
+                    error: function(e, xhr, s) {
+                        let error = e.responseJSON;
+                        if (e.status == 403 && typeof error !== 'undefined') {
+                            alert('Action non autorisée');
+                        } else if (e.status == 403) {
+                            alert('Action non autorisée');
+                        } else if (e.status == 401) {
+                            alert('Veuillez vous re-authentifier');
+                        } else if (e.status == 404) {
+                            alert('La page demandée n\'est pas disponible');
+                        } else {
+                            alert('Erreur');
+                        }
+                    }
+                });
+
+            });
+
+        <?php endif; ?>
 
     });
 </script>

@@ -368,6 +368,16 @@ $router->map(
     'msg-load'
 );
 
+$router->map(
+    'POST',
+    '/messages/load/more',
+    [
+        'method' => 'loadMore',
+        'controller' => 'App\Controllers\MsgController'
+    ],
+    'msg-more'
+);
+
 /* -------------
 --- DISPATCH ---
 -------------*/

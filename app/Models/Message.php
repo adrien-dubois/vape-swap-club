@@ -71,12 +71,80 @@ class Message extends CoreModel
     }
 
     /**
-     * Get all messages of conversation
+     * Count all messages of one conversation
      *
      * @param int $recipient_id
      * @return void
      */
+    public static function nbMessages($recipient_id)
+    {
+        $sender_id = $_SESSION['userId'];
+
+        $pdo = Database::getPDO();
+        $sql = '
+            SELECT COUNT(id) AS NbMessages
+            FROM `message`
+            WHERE `sender_id` = ' . $sender_id . '
+            AND `recipient_id` = ' . $recipient_id . '
+            OR `sender_id` = ' . $recipient_id . '
+            AND `recipient_id` =' . $sender_id . '
+            ';
+        $pdoStatement = $pdo->query($sql);
+        $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Message');
+
+        return $result;
+    }
+
+    /**
+     * Get all messages of conversation with calcul to display the good limit
+     * number well order
+     * 
+     * @param int $recipient_id
+     * @return void
+     */
     public static function findMessageConversation($recipient_id)
+    {
+        $sender_id = $_SESSION['userId'];
+
+        // Number of maximum messages to display
+        $totalNbMessages = 10;
+        $checkNbMessages = 0;
+        $nbMessages = Message::nbMessages($recipient_id);
+        $number = $nbMessages[0]->NbMessages;
+
+
+        if(($number - $totalNbMessages) > 0){
+            $checkNbMessages = ($number - $totalNbMessages);
+        }
+
+        $pdo = Database::getPDO();
+        $sql = '
+            SELECT *
+            FROM `message`
+            WHERE `sender_id` = ' . $sender_id . '
+            AND `recipient_id` = ' . $recipient_id . '
+            OR `sender_id` = ' . $recipient_id . '
+            AND `recipient_id` =' . $sender_id . '
+            ORDER BY `created_at`
+            LIMIT '. $checkNbMessages .','. $totalNbMessages .'
+            ';
+        $pdoStatement = $pdo->query($sql);
+        $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Message');
+
+        return $result;
+    }
+
+
+    /**
+     * Find the messages with limits to load messages we need
+     * with the button for load more messages
+     * 
+     * @param int $recipient_id
+     * @param int $minLimit
+     * @param int $maxLimit
+     * @return array
+     */
+    public static function findLimitConversation($recipient_id, $minLimit, $maxLimit)
     {
         $sender_id = $_SESSION['userId'];
 
@@ -89,7 +157,7 @@ class Message extends CoreModel
             OR `sender_id` = ' . $recipient_id . '
             AND `recipient_id` =' . $sender_id . '
             ORDER BY `created_at`
-            LIMIT 25
+            LIMIT '. $minLimit .','. $maxLimit .'
             ';
         $pdoStatement = $pdo->query($sql);
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Message');

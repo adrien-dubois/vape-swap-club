@@ -142,13 +142,18 @@ class MsgController extends CoreController
         $recipient = AppUser::find($recipientId);
         $recipientName = $recipient->getFirstname() . ' ' . $recipient->getLastname();
 
-        // dd($conversation);
+        $totalNbMessages = 10;
+        $checkNbMessages = 0;
+        $nbMessages = Message::nbMessages($recipientId);
+        $number = $nbMessages[0]->NbMessages;
 
         $this->show('message/read', [
             'pageTitle' => 'Messages',
             'conversation' => $conversation,
             'recipientId' => $recipientId,
             'recipientName' => $recipientName,
+            'totalNbMessages' => $totalNbMessages,
+            'number' => $number,
         ]);
     }
 
@@ -264,5 +269,74 @@ class MsgController extends CoreController
                     .'</div>'
                 );
             }
+    }
+
+    /**
+     * Load more messages
+     *
+     * @return void
+     */
+    public function loadMore(){
+
+        $limit = filter_input(INPUT_POST, 'limit', FILTER_SANITIZE_NUMBER_INT);
+        $recipientId = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+        
+        if($limit <= 0 || $recipientId <= 0){
+            exit;
+        }
+
+        $totalNbMessages = 10;
+
+        $minLimit = 0;
+        $maxLimit = 0;
+        
+        $checkNbMessages = 0;
+        $nbMessages = Message::nbMessages($recipientId);
+        $number = $nbMessages[0]->NbMessages;
+        
+        $minLimit = $number - $limit;
+        
+        if($minLimit > $totalNbMessages){
+            $maxLimit = $totalNbMessages;
+            $minLimit = $minLimit - $totalNbMessages;
+        } else {
+            if($minLimit > 0){
+                $maxLimit = $minLimit;
+            } else {
+                $maxLimit = 0;
+            }
+            $minLimit = 0;
+        }
+        
+        $conversation = Message::findLimitConversation($recipientId, $minLimit, $maxLimit);
+
+        // if(count($displayMessages) < 25){
+        //     echo("
+        //         <script>
+        //             $('.forSeeMore').addClass('forSeeMoreDisplay')
+        //         </script>
+        //     ");
+        // }
+        echo("
+             <div id='loadMore'></div>
+        ");
+
+        foreach($conversation as $message){
+            if($message->getSender_id() == $_SESSION['userId']){
+                echo('
+                <div style="background: #212121; color: grey;">
+                    '.  nl2br($message->getMessage()) .'
+                </div>
+                ');
+            } else {
+                echo('
+                <div>
+                    '. nl2br($message->getMessage()) .'
+                </div>
+                ');
+            }
+        }
+
+
     }
 }

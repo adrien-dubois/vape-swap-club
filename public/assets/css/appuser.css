@@ -3,6 +3,7 @@
     --second-color: #FC833C;
     --third-color: #5A5D62;
     --input-color: #555;
+    --backgroundOG-color: #222222;
     --background-color : #212121;
     --background-register : #34302F;
     --border-color: #DADCE0;
@@ -562,5 +563,12 @@ form .contact-details .msg-box{
 }
 
 .chat-window{
-    margin-top: 2rem;
+    background: var(--backgroundOG-color);
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, .4);
+    height: 250px;
+    overflow-y: scroll;
+    word-break: break-word;
 }
