@@ -6,9 +6,10 @@
 
                 <div class="chat-window" id="msgScroll">
                     <?php if ($number > $totalNbMessages) : ?>
-                        <button id="seeMore">
+                        <button id="seeMore" class="btn-seeMoreMsg">
                             Voir plus
                         </button>
+
                     <?php
                     endif; ?>
                     <div id="loadMore"></div>
@@ -41,16 +42,23 @@
 
                             <!-- CHAT BOX -->
                             <div class="msg-box">
-                                <span class="msg-details">Réponse: </span>
+                                <span class="msg-details">Réponse : </span>
                                 <textarea name="message" id="chatbox" placeholder="Votre message..."></textarea>
                             </div>
 
                             <!-- SUBMIT -->
                             <div>
-                                <button type="submit" name="send" class="btn-primary" style="margin: inherit;">Envoyer</button>
+                                <button type="submit" name="send" class="btn-sendChat" style="margin: inherit;">Envoyer</button>
                             </div>
                         </div>
                     </form>
+                    
+                        <div>
+                            <a href="<?= $this->router->generate('msg-home') ?>" style=" width: 45px; text-align: center;" class="btn-sendChat">
+                                Retour
+                            </a>
+                        </div>
+                    
                 </div>
 
             </div>
@@ -158,7 +166,7 @@
 
             var req = 0;
 
-            $('#seeMore').click(function(){
+            $('#seeMore').click(function() {
                 var id;
                 var element;
 
@@ -175,8 +183,8 @@
                     },
 
                     success: function(data) {
-                            $(data).hide().appendTo('#loadMore').fadeIn(2000);
-                            document.getElementById('loadMore').removeAttribute('id');
+                        $(data).hide().appendTo('#loadMore').fadeIn(2000);
+                        document.getElementById('loadMore').removeAttribute('id');
                     },
 
                     error: function(e, xhr, s) {

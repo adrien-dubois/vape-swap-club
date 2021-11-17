@@ -418,6 +418,12 @@ th.pict{
     color: var(--second-color);
 }
 
+.mailbox .new-mess .return-back{
+    display: block;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
 .mailbox .new-mess .mess-elements{
     text-align: center;
     display: block;
@@ -426,11 +432,6 @@ th.pict{
     color: var(--second-color);
 }
 
-.mailbox .new-mess .return-back{
-    display: block;
-    cursor: pointer;
-    transition: 0.5s;
-}
 
 .mailbox .new-mess .mess-elements,
 .mailbox .new-mess .return-back:hover
@@ -571,4 +572,29 @@ form .contact-details .msg-box{
     height: 250px;
     overflow-y: scroll;
     word-break: break-word;
+}
+
+.btn-seeMoreMsg,
+.btn-sendChat{
+    display: flex;
+    background: var(--button-color);
+    color: var(--first-color);
+    font-size: 14px;
+    padding: 5px 20px;
+    margin: 5px auto;
+    border-radius: 20px;
+    transition: all .5s ease;
+    border: none;
+    outline: none !important;
+    cursor: pointer;
+}
+
+.btn-seeMoreMsg:hover,
+.btn-sendChat:hover{
+    background: #a55323;
+    transition: all .5s ease;
+}
+
+.btn-hide-seeMoreMsg{
+    display: none;
 }

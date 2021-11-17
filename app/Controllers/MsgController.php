@@ -142,7 +142,7 @@ class MsgController extends CoreController
         $recipient = AppUser::find($recipientId);
         $recipientName = $recipient->getFirstname() . ' ' . $recipient->getLastname();
 
-        $totalNbMessages = 10;
+        $totalNbMessages = 15;
         $checkNbMessages = 0;
         $nbMessages = Message::nbMessages($recipientId);
         $number = $nbMessages[0]->NbMessages;
@@ -170,10 +170,10 @@ class MsgController extends CoreController
         $sender_id = $_SESSION['userId'];
 
         $updateMessage = new Message();
-        $updateMessage -> setSender_id($recipientId);
-        $updateMessage -> setRecipient_id($sender_id);
-        $updateMessage -> setIs_read(1);
-        $updateMessage -> update();
+        $updateMessage->setSender_id($recipientId);
+        $updateMessage->setRecipient_id($sender_id);
+        $updateMessage->setIs_read(1);
+        $updateMessage->update();
 
         // Variables to manage errors
         $formIsValid = true;
@@ -197,7 +197,7 @@ class MsgController extends CoreController
             $newMessage->setRecipient_id($recipientId);
             $newMessage->setSender_id($sender_id);
 
-            $newMessage -> save();
+            $newMessage->save();
         }
 
         $conversation = Message::findMessageConversation($recipientId);
@@ -214,27 +214,28 @@ class MsgController extends CoreController
      *
      * @return void
      */
-    public function chat(){
-        
+    public function chat()
+    {
+
         $recipient_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
-        $message = urldecode(filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING)) ;
+        $message = urldecode(filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING));
         $sender_id = $_SESSION['userId'];
 
-        if($recipient_id <= 0 || empty($message)){
+        if ($recipient_id <= 0 || empty($message)) {
             exit;
         }
 
         $newMessage = new Message();
-        $newMessage -> setSender_id($sender_id);
-        $newMessage -> setRecipient_id($recipient_id);
-        $newMessage -> setMessage($message);
+        $newMessage->setSender_id($sender_id);
+        $newMessage->setRecipient_id($recipient_id);
+        $newMessage->setMessage($message);
 
-        $newMessage -> save();
+        $newMessage->save();
 
         // Adding NL2BR in the case of the user of the chat send message with line breaks
-        echo('<div style="background: #212121; color: grey;">'.
-             nl2br($message) 
-            .' </div>');
+        echo ('<div style="background: #212121; color: grey;">' .
+            nl2br($message)
+            . ' </div>');
     }
 
     /**
@@ -242,33 +243,32 @@ class MsgController extends CoreController
      *
      * @return void
      */
-    public function loadChat(){
+    public function loadChat()
+    {
 
         // From -> sender / To -> recipient
-        
+
         $sender_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
         $recipient_id = $_SESSION['userId'];
 
-        if($sender_id <= 0 ){
+        if ($sender_id <= 0) {
             exit;
         }
 
         $messages = Message::findMessageAutoload($sender_id);
 
         $updateMessage = new Message();
-        $updateMessage -> setSender_id($sender_id);
-        $updateMessage -> setRecipient_id($recipient_id);
-        $updateMessage -> setIs_read(1);
-        $updateMessage -> update();
+        $updateMessage->setSender_id($sender_id);
+        $updateMessage->setRecipient_id($recipient_id);
+        $updateMessage->setIs_read(1);
+        $updateMessage->update();
 
 
-            foreach($messages as $currentMessage){
-                echo(
-                    '<div>'.
-                        nl2br($currentMessage->getMessage())
-                    .'</div>'
-                );
-            }
+        foreach ($messages as $currentMessage) {
+            echo ('<div>' .
+                nl2br($currentMessage->getMessage())
+                . '</div>');
+        }
     }
 
     /**
@@ -276,67 +276,69 @@ class MsgController extends CoreController
      *
      * @return void
      */
-    public function loadMore(){
+    public function loadMore()
+    {
 
         $limit = filter_input(INPUT_POST, 'limit', FILTER_SANITIZE_NUMBER_INT);
         $recipientId = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
-        
-        if($limit <= 0 || $recipientId <= 0){
+
+        if ($limit <= 0 || $recipientId <= 0) {
             exit;
         }
 
-        $totalNbMessages = 10;
+        $totalNbMessages = 15;
 
         $minLimit = 0;
         $maxLimit = 0;
-        
+
         $checkNbMessages = 0;
         $nbMessages = Message::nbMessages($recipientId);
         $number = $nbMessages[0]->NbMessages;
-        
+
         $minLimit = $number - $limit;
-        
-        if($minLimit > $totalNbMessages){
+
+        if ($minLimit > $totalNbMessages) {
             $maxLimit = $totalNbMessages;
             $minLimit = $minLimit - $totalNbMessages;
         } else {
-            if($minLimit > 0){
+            if ($minLimit > 0) {
                 $maxLimit = $minLimit;
             } else {
                 $maxLimit = 0;
             }
             $minLimit = 0;
         }
-        
+
         $conversation = Message::findLimitConversation($recipientId, $minLimit, $maxLimit);
 
-        // if(count($displayMessages) < 25){
-        //     echo("
-        //         <script>
-        //             $('.forSeeMore').addClass('forSeeMoreDisplay')
-        //         </script>
-        //     ");
-        // }
-        echo("
+        if ($minLimit <= 0) {
+            echo ("
+                <div>
+                    <script>
+                        var elem = document.getElementById('seeMore');
+                        elem.classList.add('btn-hide-seeMoreMsg');
+                    </script>
+                </div>
+            ");
+        }
+        echo ("
              <div id='loadMore'></div>
         ");
 
-        foreach($conversation as $message){
-            if($message->getSender_id() == $_SESSION['userId']){
-                echo('
+        foreach ($conversation as $message) {
+            if ($message->getSender_id() == $_SESSION['userId']) {
+                echo ('
                 <div style="background: #212121; color: grey;">
-                    '.  nl2br($message->getMessage()) .'
+                    ' .  nl2br($message->getMessage()) . '
                 </div>
                 ');
             } else {
-                echo('
+                echo ('
                 <div>
-                    '. nl2br($message->getMessage()) .'
+                    ' . nl2br($message->getMessage()) . '
                 </div>
                 ');
             }
         }
-
-
     }
 }

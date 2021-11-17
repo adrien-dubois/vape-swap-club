@@ -107,7 +107,7 @@ class Message extends CoreModel
         $sender_id = $_SESSION['userId'];
 
         // Number of maximum messages to display
-        $totalNbMessages = 10;
+        $totalNbMessages = 15;
         $checkNbMessages = 0;
         $nbMessages = Message::nbMessages($recipient_id);
         $number = $nbMessages[0]->NbMessages;
