@@ -2,6 +2,11 @@
     <div class="row">
         <div class="mail-box">
             <div class="contact-box">
+                
+                    <a class="btn-return-mailbox" href="<?= $this->router->generate('msg-home') ?>" >
+                            < Retour
+                    </a>
+                
                 <div class="titler"><?= $recipientName ?></div>
 
                 <div class="chat-window" id="msgScroll">
@@ -13,21 +18,27 @@
                     <?php
                     endif; ?>
                     <div id="loadMore"></div>
+
+                    <!-- EXTRACT ALL MESSAGES -->
                     <?php
                     foreach ($conversation as $message) :
                     ?>
+                        <!-- AND FOR EACH MESSAGE SELECT WHO'S TALKING -->
 
                         <!-- FOR MYSELF -->
                         <?php if ($message->getSender_id() ==  $_SESSION['userId']) : ?>
-                            <div style="background: #212121; color: grey;">
+
+                            <div class="myself-message">
                                 <?= nl2br($message->getMessage()); ?>
                             </div>
 
-                            <!-- FOR INTERLOCUTOR -->
+                            <!-- FOR MY INTERLOCUTOR -->
                         <?php else : ?>
-                            <div>
+
+                            <div class="user-message">
                                 <?= nl2br($message->getMessage()); ?>
                             </div>
+
                         <?php endif; ?>
                     <?php endforeach; ?>
                     <div id="display"></div>
@@ -42,7 +53,6 @@
 
                             <!-- CHAT BOX -->
                             <div class="msg-box">
-                                <span class="msg-details">Réponse : </span>
                                 <textarea name="message" id="chatbox" placeholder="Votre message..."></textarea>
                             </div>
 
@@ -52,13 +62,9 @@
                             </div>
                         </div>
                     </form>
-                    
-                        <div>
-                            <a href="<?= $this->router->generate('msg-home') ?>" style=" width: 45px; text-align: center;" class="btn-sendChat">
-                                Retour
-                            </a>
-                        </div>
-                    
+
+
+
                 </div>
 
             </div>

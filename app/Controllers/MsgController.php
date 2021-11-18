@@ -233,7 +233,7 @@ class MsgController extends CoreController
         $newMessage->save();
 
         // Adding NL2BR in the case of the user of the chat send message with line breaks
-        echo ('<div style="background: #212121; color: grey;">' .
+        echo ('<div class="myself-message">' .
             nl2br($message)
             . ' </div>');
     }
@@ -265,7 +265,7 @@ class MsgController extends CoreController
 
 
         foreach ($messages as $currentMessage) {
-            echo ('<div>' .
+            echo ('<div class="user-message">' .
                 nl2br($currentMessage->getMessage())
                 . '</div>');
         }
@@ -328,17 +328,50 @@ class MsgController extends CoreController
         foreach ($conversation as $message) {
             if ($message->getSender_id() == $_SESSION['userId']) {
                 echo ('
-                <div style="background: #212121; color: grey;">
+                <div class="myself-message">
                     ' .  nl2br($message->getMessage()) . '
                 </div>
                 ');
             } else {
                 echo ('
-                <div>
+                <div class="user-message">
                     ' . nl2br($message->getMessage()) . '
                 </div>
                 ');
             }
         }
+    }
+
+    /**
+     * Delete an entire conversation between 2 persons
+     *
+     * @param int $recipient_id
+     * @return void
+     */
+    public function deleteConversation($recipient_id){
+
+        $deleteValid = true;
+        $conversation = Message::findAllMessagesConversation($recipient_id);
+
+        foreach($conversation as $message){
+
+            $delete = $message->deleteConversation();
+            if ($delete) {
+                $deleteValid = true;
+            } else{
+                $deleteValid = false;
+            }
+        }
+
+        if($deleteValid === true){
+            self::addFlash(
+                'danger',
+                'La conversation a bien été supprimée'
+            );
+    
+            header("Location: " . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+        
     }
 }

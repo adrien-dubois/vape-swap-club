@@ -378,6 +378,16 @@ $router->map(
     'msg-more'
 );
 
+$router->map(
+    'GET',
+    '/messages/delete/[i:recipientId]',
+    [
+        'method' => 'deleteConversation',
+        'controller' => 'App\Controllers\MsgController'
+    ],
+    'msg-delete'
+);
+
 /* -------------
 --- DISPATCH ---
 -------------*/

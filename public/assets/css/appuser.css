@@ -8,6 +8,8 @@
     --background-register : #34302F;
     --border-color: #DADCE0;
     --button-color: #FF523B;
+    --messageMe-color: #3498db;
+    --messageRecipient-color: #bdc3c7;
     --register-font: 'Montserrat', sans-serif;
 }
 
@@ -569,12 +571,25 @@ form .contact-details .msg-box{
     margin-top: 20px;
     border-radius: 10px;
     box-shadow: 4px 4px 6px rgba(0, 0, 0, .4);
-    height: 250px;
+    height: 300px;
     overflow-y: scroll;
     word-break: break-word;
 }
 
-.btn-seeMoreMsg,
+.btn-seeMoreMsg{
+    display: flex;
+    background: var(--messageMe-color);
+    color: var(--first-color);
+    font-size: 14px;
+    padding: 5px 20px;
+    margin: 5px auto;
+    border-radius: 20px;
+    transition: all .5s ease;
+    border: none;
+    outline: none !important;
+    cursor: pointer;
+}
+
 .btn-sendChat{
     display: flex;
     background: var(--button-color);
@@ -589,7 +604,11 @@ form .contact-details .msg-box{
     cursor: pointer;
 }
 
-.btn-seeMoreMsg:hover,
+.btn-seeMoreMsg:hover{
+    background: #0083da;
+    transition: all .5s ease;
+}
+
 .btn-sendChat:hover{
     background: #a55323;
     transition: all .5s ease;
@@ -597,4 +616,45 @@ form .contact-details .msg-box{
 
 .btn-hide-seeMoreMsg{
     display: none;
+}
+
+.btn-return-mailbox{
+    color: var(--first-color);
+    font-size: 14px;
+    transition: all 0.5s ease;
+}
+
+.btn-return-mailbox:hover{
+    color: var(--input-color);
+}
+
+.myself-message{
+    position: relative;
+    font-size: 16px;
+    background: var(--messageMe-color);
+    color: white;
+    max-width: 80%;
+    width: auto;
+    margin: 10px 0;
+    padding: 6px 10px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, .4);
+    border-radius: 20px 20px 0 20px;
+    float: right;
+    clear: both;
+}
+
+.user-message{
+    position: relative;
+    font-size: 16px;
+    background: var(--messageRecipient-color);
+    color: black;
+    font-weight: inherit;
+    max-width: 80%;
+    width: auto;
+    margin: 10px 0;
+    padding: 6px 10px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, .4);
+    border-radius: 0 20px 20px 20px;
+    float: left;
+    clear: both;
 }

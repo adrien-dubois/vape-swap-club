@@ -34,7 +34,7 @@
                         <td><?= $currentMessage->firstname . ' ' . $currentMessage->lastname ?></td>
                         <td><a style="font-size: 18px; color: white;" href="<?= $this->router->generate('msg-read', ['recipientId'=>$currentMessage->getSender_id()]) ?>"><?= $currentMessage->getTitle() ?></a></td>
                         <td><?= date('d/m/Y', strtotime($currentMessage->getCreated_at())) ?></td>
-                        <td class="pict"><i class="fas fa-trash-alt"></i></td>
+                        <td class="pict"><a href="<?= $this->router->generate('msg-delete', ['recipientId' => $currentMessage->getSender_id()]) ?>"><i style="color: white;" class="fas fa-trash-alt"></i></a></td>
                         <td></td>
                     </tr>
                     <?php 

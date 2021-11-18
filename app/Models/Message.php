@@ -134,6 +134,32 @@ class Message extends CoreModel
         return $result;
     }
 
+    /**
+     * Find all messages of a conversation with no limits
+     *
+     * @param int $recipient_id
+     * @return Message
+     */
+    public static function findAllMessagesConversation($recipient_id)
+    {
+        $sender_id = $_SESSION['userId'];
+
+
+        $pdo = Database::getPDO();
+        $sql = '
+            SELECT *
+            FROM `message`
+            WHERE `sender_id` = ' . $sender_id . '
+            AND `recipient_id` = ' . $recipient_id . '
+            OR `sender_id` = ' . $recipient_id . '
+            AND `recipient_id` =' . $sender_id . '
+            ';
+        $pdoStatement = $pdo->query($sql);
+        $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Message');
+
+        return $result;
+    }
+
 
     /**
      * Find the messages with limits to load messages we need
@@ -268,14 +294,45 @@ class Message extends CoreModel
         return ($updatedRows > 0);
     }
 
+    /**
+     * Delete on precise message
+     *
+     * @param int $messageId
+     * @return void
+     */
     public static function delete($messageId)
     {
         $pdo = Database::getPDO();
         $sql = '
-        DELETE
-        FROM `message`
-        WHERE id = ' . $messageId;
+                DELETE
+                FROM `message`
+                WHERE id = ' . $messageId;
         $pdo->exec($sql);
+    }
+
+    /**
+     * Delete all conversation between 2 interlocutors
+     *
+     * @param int $recipient_id
+     * @return void
+     */
+    public function deleteConversation()
+    {
+
+        $pdo = Database::getPDO();
+        $sql = '
+                DELETE
+                FROM `message`
+                WHERE `sender_id` = :sender_id
+                AND `recipient_id` = :recipient_id
+        ';
+
+        $pdoStatement = $pdo->prepare($sql);
+
+        $pdoStatement->bindValue(':sender_id', $this->sender_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':recipient_id', $this->recipient_id, PDO::PARAM_INT);
+        
+        return $pdoStatement->execute();
     }
 
     /**
