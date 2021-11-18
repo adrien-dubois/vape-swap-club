@@ -46,21 +46,18 @@
                 </div>
 
                 <!-- SEND MESSAGE PART -->
-                <div style="margin-top: 20px;;">
+                <div class="sendChatBox" style="margin-top: 20px;">
                     <?php require __DIR__ . '/../partials/_errors.tpl.php'; ?>
                     <form action="" method="post" id="chat">
-                        <div class="contact-details">
 
-                            <!-- CHAT BOX -->
-                            <div class="msg-box">
-                                <textarea name="message" id="chatbox" placeholder="Votre message..."></textarea>
-                            </div>
-
+                            <!-- CHAT BOX -->   
+                                <textarea rows="1" data-min-rows="1" name="message" id="chatbox" placeholder="Votre message..." class="textareaChat" style="border: none; overflow: none; resize: none; width: 90%; outline: none; padding: 0 5px"></textarea>
+                            
                             <!-- SUBMIT -->
-                            <div>
-                                <button type="submit" name="send" class="btn-sendChat" style="margin: inherit;">Envoyer</button>
+                            <div class="btn-sendChat">
+                                <input type="submit" name="send" class="fa fa-arrow-circle-up" value="&#xf0aa;" style="border: none; background: transparent; outline: none; cursor: pointer; color: grey; font-size: 24px;"/>
                             </div>
-                        </div>
+                            
                     </form>
 
 

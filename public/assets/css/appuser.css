@@ -590,27 +590,8 @@ form .contact-details .msg-box{
     cursor: pointer;
 }
 
-.btn-sendChat{
-    display: flex;
-    background: var(--button-color);
-    color: var(--first-color);
-    font-size: 14px;
-    padding: 5px 20px;
-    margin: 5px auto;
-    border-radius: 20px;
-    transition: all .5s ease;
-    border: none;
-    outline: none !important;
-    cursor: pointer;
-}
-
 .btn-seeMoreMsg:hover{
     background: #0083da;
-    transition: all .5s ease;
-}
-
-.btn-sendChat:hover{
-    background: #a55323;
     transition: all .5s ease;
 }
 
@@ -636,11 +617,39 @@ form .contact-details .msg-box{
     max-width: 80%;
     width: auto;
     margin: 10px 0;
-    padding: 6px 10px;
+    margin-left: 25%;
+    padding: 6px 15px;
     box-shadow: 3px 3px 6px rgba(0, 0, 0, .4);
-    border-radius: 20px 20px 0 20px;
+    border-radius: 20px;
+    background-attachment: fixed;
     float: right;
     clear: both;
+}
+
+.myself-message::before{
+    content: '';
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+    right: -8px;
+    height: 20px;
+    width: 20px;
+    background: var(--messageMe-color);
+    background-attachment: fixed;
+    border-bottom-left-radius: 15px;
+}
+
+.myself-message::after{
+    content: '';
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    right: -10px;
+    height: 20px;
+    width: 10px;
+    background: var(--backgroundOG-color);
+    background-attachment: fixed;
+    border-bottom-left-radius: 10px;
 }
 
 .user-message{
@@ -652,9 +661,66 @@ form .contact-details .msg-box{
     max-width: 80%;
     width: auto;
     margin: 10px 0;
-    padding: 6px 10px;
+    padding: 6px 15px;
     box-shadow: 3px 3px 6px rgba(0, 0, 0, .4);
-    border-radius: 0 20px 20px 20px;
+    border-radius:20px;
     float: left;
     clear: both;
+    background-attachment: fixed;
 }
+
+.user-message::before{
+    content: '';
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+    left: -8px;
+    height: 20px;
+    width: 20px;
+    background: var(--messageRecipient-color);
+    background-attachment: fixed;
+    border-bottom-right-radius: 15px;
+}
+
+.user-message::after{
+    content: '';
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: -10px;
+    height: 20px;
+    width: 10px;
+    background: var(--backgroundOG-color);
+    background-attachment: fixed;
+    border-bottom-right-radius: 10px;
+}
+
+.sendChatBox{
+    border: 1px solid grey;
+    border-radius: 5px;
+    position: relative;
+    padding-top: 5px;
+    background: var(--background-register);
+    height: 28px;
+}
+
+.textareaChat{
+    height: 26px;
+    width: 90%;
+    resize: none;
+    border: none;
+    max-width: 90%;
+    padding-left: 10px;
+    background: 0 0;
+    font-size: 16px;
+    outline: 0;
+    color: grey;
+}
+
+.btn-sendChat{
+    position: absolute;
+    top: -5px;
+    right: 2px;
+    font-size: 28px;
+}
+
