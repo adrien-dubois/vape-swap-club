@@ -46,7 +46,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="<?= $this->router->generate('msg-home') ?>">
                                 <i class="far fa-envelope"></i>
                                 Messagerie
                             </a>

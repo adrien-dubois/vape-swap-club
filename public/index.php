@@ -315,7 +315,77 @@ $router->map(
         'method' => 'new',
         'controller' => 'App\Controllers\MsgController'
     ],
-    'msg-home'
+    'msg-new'
+);
+
+$router->map(
+    'POST',
+    '/messages/new',
+    [
+        'method' => 'sendNew',
+        'controller' => 'App\Controllers\MsgController'
+    ],
+    'msg-send'
+);
+
+$router->map(
+    'GET',
+    '/messages/read/[i:recipientId]',
+    [
+        'method' => 'read',
+        'controller' => 'App\Controllers\MsgController'
+    ],
+    'msg-read'
+);
+
+$router->map(
+    'POST',
+    '/messages/read/[i:recipientId]',
+    [
+        'method' => 'sendStatic',
+        'controller' => 'App\Controllers\MsgController'
+    ],
+    'msg-submit'
+);
+
+$router->map(
+    'POST',
+    '/messages/chat',
+    [
+        'method' => 'chat',
+        'controller' => 'App\Controllers\MsgController'
+    ],
+    'msg-chat'
+);
+
+$router->map(
+    'POST',
+    '/messages/load/chat',
+    [
+        'method' => 'loadChat',
+        'controller' => 'App\Controllers\MsgController'
+    ],
+    'msg-load'
+);
+
+$router->map(
+    'POST',
+    '/messages/load/more',
+    [
+        'method' => 'loadMore',
+        'controller' => 'App\Controllers\MsgController'
+    ],
+    'msg-more'
+);
+
+$router->map(
+    'GET',
+    '/messages/delete/[i:recipientId]',
+    [
+        'method' => 'deleteConversation',
+        'controller' => 'App\Controllers\MsgController'
+    ],
+    'msg-delete'
 );
 
 /* -------------

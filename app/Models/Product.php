@@ -68,16 +68,16 @@ class Product extends CoreModel {
 
         // we write the SQL query to retrieve the product
         $sql = '
-        SELECT *
-        FROM product
-        WHERE id = ' . $productId;
+        SELECT p.*, u.firstname, u.lastname
+        FROM product p
+        INNER JOIN app_user u ON p.app_user_id = u.id
+        WHERE p.id = ' . $productId;
 
         $pdoStatement = $pdo->query($sql);
 
         $result = $pdoStatement->fetchObject('App\Models\Product');
 
         return $result;
-
     }
 
     /**

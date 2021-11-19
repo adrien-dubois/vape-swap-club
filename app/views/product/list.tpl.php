@@ -6,7 +6,9 @@
                 <div class="column-2">
                     <span>Last hotest news</span>
                     <h1>Annonces</h1>
-                    <p>Voici nos dernières annonces de produits High-End vérifiés, que ce soit du RTA MTL au Dripper pour Cloud Chasers, en passant par des mods mécas custom ou aux boxs BF faites à la mano en bois stab. <br> Tout le monde peut y trouver chaussure à son pied ou même changer de style, qu'importe tant que c'est votre vape et que c'est du lourd !!</p>
+                    <p>Voici toutes nos annonces de produits High-End vérifiés, que ce soit du RTA MTL au Dripper pour Cloud Chasers, en passant par des mods mécas custom ou aux boxs BF faites à la mano en bois stab. <br> Tout le monde peut y trouver chaussure à son pied ou même changer de style, qu'importe tant que c'est votre vape et que c'est du lourd !!! 
+                    <br>
+                    N'oubliez pas la messagerie privé, qui vous permets de rentrer en contact avec les vendeurs en cas de questions subsidiaires. </p>
                     <a href="#prod-section" class="btn-primary">Explorer &#8594; </a>
                 </div>
                 <div class="column-2">

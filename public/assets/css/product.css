@@ -409,6 +409,14 @@ h4{
     color: red;
 }
 
+.small-img{
+    transition: .5s;
+}
+
+.small-img:hover{
+    opacity: .3;
+}
+
 /* -------- CART ITEMS ---------*/
 
 .cart-number{
