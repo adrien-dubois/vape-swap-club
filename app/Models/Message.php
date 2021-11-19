@@ -147,12 +147,12 @@ class Message extends CoreModel
 
         $pdo = Database::getPDO();
         $sql = '
-            SELECT *
-            FROM `message`
-            WHERE `sender_id` = ' . $sender_id . '
-            AND `recipient_id` = ' . $recipient_id . '
-            OR `sender_id` = ' . $recipient_id . '
-            AND `recipient_id` =' . $sender_id . '
+                SELECT *
+                FROM `message`
+                WHERE `sender_id` = ' . $sender_id . '
+                AND `recipient_id` = ' . $recipient_id . '
+                OR `sender_id` = ' . $recipient_id . '
+                AND `recipient_id` =' . $sender_id . '
             ';
         $pdoStatement = $pdo->query($sql);
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Message');
@@ -210,27 +210,55 @@ class Message extends CoreModel
     }
 
     /**
-     * Get messages for the mailbox
+     * Get titles messages for the mailbox
      *
-     * @param int $sender_id
      * @return void
      */
-    public static function findMessagesMailbox()
+    public static function findTitlesMailbox()
     {
-
-        $recipient_id = $_SESSION['userId'];
 
         $pdo = Database::getPDO();
         $sql = '
-        SELECT DISTINCT `message`.*, `app_user`.`firstname` AS `firstname`,`app_user`.`lastname` AS `lastname`
-        FROM `message`
-        INNER JOIN `app_user` ON `message`.`sender_id` = `app_user`.`id`
-        WHERE `recipient_id` = ' . $recipient_id .'
-        AND `title` IS NOT NULL' ;
+                SELECT DISTINCT `message`.*
+                FROM `message`
+                WHERE `title` IS NOT NULL' ;
         $pdoStatement = $pdo->query($sql);
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Message');
 
         return $result;
+    }
+
+    /**
+     * Select only the last message of each conversation to get the good
+     * status of notification reading
+     *
+     * @return void
+     */
+    public static function findLastMessageMailbox()
+    {
+        $recipient_id = $_SESSION['userId'];
+
+        $pdo = Database::getPDO();
+
+        $sql = '
+                SELECT firstname, lastname, m.*
+                FROM app_user u
+                INNER JOIN message m ON u.id = m.sender_id
+                INNER JOIN (
+                    SELECT sender_id,
+                        MAX(created_at) AS created_at
+                    FROM message
+                    GROUP BY sender_id
+                ) r ON m.sender_id = r.sender_id
+                    AND m.created_at = r.created_at
+                WHERE m.recipient_id = '. $recipient_id .'
+                ORDER BY m.created_at DESC
+        ';
+        $pdoStatement = $pdo->query($sql);
+        $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Message');
+
+        return $result;
+
     }
 
 

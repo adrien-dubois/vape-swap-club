@@ -45,6 +45,7 @@ $rating = $product->getRate();
                     <?php } else { ?>
                     <li><i class="far fa-times-circle"></i> Disponibilité:<span>  Out of stock</span></li> <?php } ?>
                     <li><i class="fas fa-check-circle"></i> Catégorie:<span> <?= $category->getName() ?></span></li>
+                    <li><i class="fas fa-user-tie"></i> Vendeur:<span> <?= $product->firstname .' '. $product->lastname ?></span> </li>
                 </ul>
             </div>
         </div>

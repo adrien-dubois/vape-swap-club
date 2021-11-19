@@ -99,7 +99,7 @@ class AppUser extends CoreModel{
     }
 
     /**
-     * Find all users that are Vapers for the messenger
+     * Find all users that are Vendors for the messenger
      *
      * @return void
      */
@@ -109,7 +109,7 @@ class AppUser extends CoreModel{
         $sql = "
                 SELECT *
                 FROM `app_user`
-                WHERE `role` = 'Vaper' 
+                WHERE `role` = 'Vendor' 
         ";
         $pdoStatement = $pdo->query($sql);
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);

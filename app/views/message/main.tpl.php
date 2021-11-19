@@ -30,10 +30,17 @@
                         <?php else: ?>
                             <td class="pict"><i class="far fa-envelope-open"></i></td>
                         <?php endif; ?>
-
+                        
+                        <!-- NAME -->
                         <td><?= $currentMessage->firstname . ' ' . $currentMessage->lastname ?></td>
-                        <td><a style="font-size: 18px; color: white;" href="<?= $this->router->generate('msg-read', ['recipientId'=>$currentMessage->getSender_id()]) ?>"><?= $currentMessage->getTitle() ?></a></td>
-                        <td><?= date('d/m/Y', strtotime($currentMessage->getCreated_at())) ?></td>
+
+                        <!-- TITLE -->
+                        <td><a style="font-size: 18px; color: white;" href="<?= $this->router->generate('msg-read', ['recipientId'=>$currentMessage->getSender_id()]) ?>">A REGLER</a></td>
+
+                        <!-- DATE & TIME -->
+                        <td><?= date('d/m/Y H:i', strtotime($currentMessage->getCreated_at())) ?></td>
+
+                        <!-- DELETE CONVERSATION -->
                         <td class="pict"><a href="<?= $this->router->generate('msg-delete', ['recipientId' => $currentMessage->getSender_id()]) ?>"><i style="color: white;" class="fas fa-trash-alt"></i></a></td>
                         <td></td>
                     </tr>
