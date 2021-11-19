@@ -169,6 +169,16 @@ $router->map(
     'user-activation'
 );
 
+$router->map(
+    'GET',
+    '/profil',
+    [
+        'method' => 'showProfile',
+        'controller' => '\App\Controllers\AppUserController'
+    ],
+    'user-show'
+);
+
 
 /* -----------
 --- CART   ---

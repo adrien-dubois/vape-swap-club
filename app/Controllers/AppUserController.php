@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Adress;
 use App\Models\AppUser;
 
 class AppUserController extends CoreController{
@@ -325,6 +326,19 @@ class AppUserController extends CoreController{
         $this->show('main/otp', [
             'pageTitle' => 'Confirmation d\'inscription',
             'errorList' => $errorList,
+        ]);
+    }
+
+
+    public function showProfile(){
+
+        $adress = Adress::findByUser($_SESSION['userId']);
+
+        $this->show('user/profil',[
+            'pageTitle' => 'Profil',
+            'profil' => $_SESSION['userObject'],
+            'adress' => $adress,
+
         ]);
     }
 }

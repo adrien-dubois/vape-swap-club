@@ -172,7 +172,7 @@
 }
 
 .label{
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     color: grey;
     line-height: 1.5;
@@ -735,4 +735,6 @@ form .contact-details .msg-box{
     right: 2px;
     font-size: 28px;
 }
+
+/* PROFIL PART */
 

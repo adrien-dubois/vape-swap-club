@@ -34,7 +34,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="<?= $this->router->generate('user-show') ?>">
                                 <i class="far fa-user-circle"></i>
                                 Mon Profil
                             </a>
