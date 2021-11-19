@@ -35,7 +35,7 @@ CREATE TABLE `app_user` (
   `lastname` varchar(64) NOT NULL,
   `password` varchar(60) NOT NULL,
   `picture` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `role` enum('Vaper','Hard Vaper','Great Seller','Admin') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `role` enum('Vaper','Vendor','Admin') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `activation_code` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `status` enum('not verified','verified') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `otp` int NOT NULL,
@@ -50,8 +50,8 @@ CREATE TABLE `app_user` (
 
 INSERT INTO `app_user` (`id`, `email`, `firstname`, `lastname`, `password`, `picture`, `role`, `activation_code`, `status`, `otp`, `created_at`, `updated_at`, `adress_id`) VALUES
 (3,	'adrien@vape-swap.io',	'Adrien',	'Dubois',	'$2y$10$38R6KFGZ7/u6hRd7SB2F6uKmT9.H67kp740ved69nbXHOIHoFT/aS',	'id.jpg',	'Admin',	'',	'verified',	0,	'2021-07-19 09:40:14',	NULL,	NULL),
-(18,	'juicy.snoos@gmail.com',	'Jean Claude',	'DUSSE',	'$2y$10$hUi8cDTXGUUGyY/TTywpyOQgudoACSjbu.oGJuEsDLXBuVnIcBmHi',	'6179649debdad3.86830600.png',	'Vaper',	'57c3c7548c5d7114783e80a72b50f2eb',	'verified',	122145,	'2021-10-27 14:39:26',	'2021-10-27 14:41:31',	NULL),
-(20,	'dubois.adrien.dev@gmail.com',	'Harry',	'Potter',	'$2y$10$wAyfUr16rumcQwCqHa19GuYnEGGZZiBXTw/x5tLUb34.4WfE9aVJK',	'6182f89ddc8755.80428918.png',	'Vaper',	'd0f33491f25a65e1e91ce27ed2169ce3',	'verified',	228390,	'2021-11-03 21:01:17',	'2021-11-03 21:01:59',	NULL);
+(18,	'juicy.snoos@gmail.com',	'Jean Claude',	'DUSSE',	'$2y$10$hUi8cDTXGUUGyY/TTywpyOQgudoACSjbu.oGJuEsDLXBuVnIcBmHi',	'6179649debdad3.86830600.png',	'Vendor',	'57c3c7548c5d7114783e80a72b50f2eb',	'verified',	122145,	'2021-10-27 14:39:26',	'2021-10-27 14:41:31',	NULL),
+(20,	'dubois.adrien.dev@gmail.com',	'John',	'Doe',	'$2y$10$wAyfUr16rumcQwCqHa19GuYnEGGZZiBXTw/x5tLUb34.4WfE9aVJK',	'6182f89ddc8755.80428918.png',	'Vendor',	'd0f33491f25a65e1e91ce27ed2169ce3',	'verified',	228390,	'2021-11-03 21:01:17',	'2021-11-03 21:01:59',	NULL);
 
 DROP TABLE IF EXISTS `brand`;
 CREATE TABLE `brand` (
@@ -100,8 +100,8 @@ INSERT INTO `category` (`id`, `name`, `subtitle`, `home_order`, `created_at`, `u
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `message` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `title` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `message` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `sender_id` int unsigned NOT NULL COMMENT 'La personne qui envoie',
   `recipient_id` int unsigned NOT NULL COMMENT 'La personne qui reçoit',
   `is_read` tinyint unsigned NOT NULL DEFAULT '0' COMMENT 'Non lu = 0 , Lu = 1',
@@ -110,8 +110,32 @@ CREATE TABLE `message` (
   PRIMARY KEY (`id`),
   KEY `fk_message_app_user1_idx` (`sender_id`),
   KEY `fk_message_app_user2_idx` (`recipient_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+INSERT INTO `message` (`id`, `title`, `message`, `sender_id`, `recipient_id`, `is_read`, `created_at`, `updated_at`) VALUES
+(1,	'Essai',	'Ceci est un message d&#39;essai',	18,	3,	1,	'2021-11-14 22:55:49',	'2021-11-19 09:15:00'),
+(3,	NULL,	'Comment vas tu ?',	3,	18,	0,	'2021-11-16 09:43:08',	NULL),
+(17,	NULL,	'?',	3,	18,	0,	'2021-11-16 22:06:47',	NULL),
+(18,	NULL,	'Nikel merci ',	18,	3,	1,	'2021-11-16 22:11:15',	'2021-11-19 09:15:00'),
+(19,	NULL,	'Bon ben perfeto alors',	3,	18,	0,	'2021-11-16 22:34:11',	NULL),
+(20,	NULL,	'Si tuto bene',	3,	18,	0,	'2021-11-16 22:34:18',	NULL),
+(21,	NULL,	'Si si grazie',	18,	3,	1,	'2021-11-16 22:35:06',	'2021-11-19 09:15:00'),
+(22,	NULL,	'Tuto bene',	18,	3,	1,	'2021-11-16 22:35:18',	'2021-11-19 09:15:00'),
+(23,	NULL,	'Toutou beignet ?',	3,	18,	0,	'2021-11-16 22:35:36',	NULL),
+(24,	NULL,	'Hmmmm wait',	3,	18,	0,	'2021-11-16 22:35:47',	NULL),
+(25,	NULL,	'POUAP !!',	3,	18,	0,	'2021-11-16 22:41:20',	NULL),
+(26,	NULL,	'Essai',	3,	18,	0,	'2021-11-17 09:36:10',	NULL),
+(27,	NULL,	'Salut salut',	18,	3,	1,	'2021-11-17 09:36:41',	'2021-11-19 09:15:00'),
+(28,	NULL,	'Joyeux Noël',	3,	18,	0,	'2021-11-17 21:07:53',	NULL),
+(29,	NULL,	'Et joyeuses pâques',	3,	18,	0,	'2021-11-17 21:08:02',	NULL),
+(30,	NULL,	'by the way',	3,	18,	0,	'2021-11-17 21:08:08',	NULL),
+(31,	NULL,	'Hello',	3,	18,	0,	'2021-11-18 09:44:26',	NULL),
+(32,	NULL,	'Hello to you too bro',	18,	3,	1,	'2021-11-18 09:45:30',	'2021-11-19 09:15:00'),
+(33,	NULL,	'Bien le bonjour',	3,	18,	0,	'2021-11-18 10:01:56',	NULL),
+(34,	NULL,	'Bonjour bonjour, comment allez-vous?',	18,	3,	1,	'2021-11-18 10:02:18',	'2021-11-19 09:15:00'),
+(36,	NULL,	'test',	3,	18,	0,	'2021-11-18 17:37:49',	NULL),
+(37,	NULL,	'How are U today ?',	18,	3,	0,	'2021-11-19 09:15:32',	NULL),
+(38,	'Question sur le matériel',	'Bonjour, j\'aurais une question sur votre annonce',	20,	3,	1,	'2021-11-19 09:17:20',	'2021-11-19 10:11:35');
 
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
@@ -251,4 +275,4 @@ INSERT INTO `type` (`id`, `name`, `footer_order`, `created_at`, `updated_at`) VA
 (2,	'Box',	0,	'2021-10-22 13:14:50',	NULL),
 (3,	'Mod Mecha',	0,	'2021-10-22 13:28:25',	NULL);
 
--- 2021-11-14 22:03:42
+-- 2021-11-19 13:53:48
