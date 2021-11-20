@@ -341,4 +341,14 @@ class AppUserController extends CoreController{
 
         ]);
     }
+
+    public function editProfile(){
+
+
+        $this->show('user/edit',[
+            'pageTitle' => 'Éditer profil',
+            'profil' => $_SESSION['userObject'],
+
+        ]);
+    }
 }

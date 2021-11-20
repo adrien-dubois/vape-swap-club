@@ -179,6 +179,16 @@ $router->map(
     'user-show'
 );
 
+$router->map(
+    'GET',
+    '/profil/edit',
+    [
+        'method' => 'editProfile',
+        'controller' => '\App\Controllers\AppUserController'
+    ],
+    'user-edit'
+);
+
 
 /* -----------
 --- CART   ---
