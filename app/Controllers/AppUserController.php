@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Adress;
 use App\Models\AppUser;
+use App\Models\Order;
 
 class AppUserController extends CoreController{
 
@@ -256,8 +257,8 @@ class AppUserController extends CoreController{
 
         $this->show('main/register', [
             'pageTitle' => 'S\'enregistrer',
-            'user'=>$user,
-            'errorList'=>$errorList,
+            'user'      =>$user,
+            'errorList' =>$errorList,
         ]);
     }
 
@@ -333,12 +334,13 @@ class AppUserController extends CoreController{
     public function showProfile(){
 
         $adress = Adress::findByUser($_SESSION['userId']);
+        $orders = Order::findOwnerOrder($_SESSION['userId']);
 
         $this->show('user/profil',[
             'pageTitle' => 'Profil',
-            'profil' => $_SESSION['userObject'],
-            'adress' => $adress,
-
+            'profil'    => $_SESSION['userObject'],
+            'adress'    => $adress,
+            'orders'    => $orders,
         ]);
     }
 
@@ -347,7 +349,7 @@ class AppUserController extends CoreController{
 
         $this->show('user/edit',[
             'pageTitle' => 'Éditer profil',
-            'profil' => $_SESSION['userObject'],
+            'profil'    => $_SESSION['userObject'],
 
         ]);
     }

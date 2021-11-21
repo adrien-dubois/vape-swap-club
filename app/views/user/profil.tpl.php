@@ -60,6 +60,38 @@
             </div>
         </div>
     </div>
+
+    <div class="container-orders">
+        <div class="recent-grid">
+            <div class="order-cards">
+                <div class="cards">
+                    <div class="cards-header">
+                        <h2>Commandes</h2>
+                    </div>
+                    <div class="cards-body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Numéro de commande</td>
+                                    <td>Prix</td>
+                                    <td>Date</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($orders as $currentOrder): ?>
+                                    <tr>
+                                        <td><?= $currentOrder->getId() ?></td>
+                                        <td><?= $currentOrder->getPrice() ?></td>
+                                        <td><?= date(('d-m-Y'), strtotime($currentOrder->getCreated_at()))  ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
