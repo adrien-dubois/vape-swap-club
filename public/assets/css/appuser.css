@@ -794,6 +794,7 @@ form .contact-details .msg-box{
 .main-container p>span,
 .main-container p>b>span{
     color: var(--second-color);
+    text-decoration: underline;
 }
 
 .main-container a{
@@ -809,4 +810,61 @@ form .contact-details .msg-box{
 .profil-info{
     color: var(--second-color);
     margin-right: 16px;
+}
+
+.container-profil{
+    max-width: 1900px;
+    margin: 0 auto;
+}
+
+.containeur-profil{
+    display: none;
+    justify-content: center;
+    height: 60vh;
+    align-items: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    border: none;
+    position: absolute;
+    top: 8%;
+    right: 5%;
+    transition: all 0.5s;
+}
+
+/* SWITCH CHECKBOX CSS */
+
+input.switch{
+    appearance: none;
+    background: var(--input-color);
+    width: 4rem;
+    height: 1.5rem;
+    border-radius: 1.5rem;
+    vertical-align: middle;
+}
+
+input.switch + label{
+    margin-left: -1rem;
+}
+
+input:checked.switch{
+    background-color: grey;
+}
+
+input.switch + label::before{
+    display: inline-block;
+    content: '';
+    background-color: var(--second-color);
+    height: 1.2rem;
+    width: 1.2rem;
+    border-radius: 50%;
+    vertical-align: middle;
+    position: relative;
+    left: -3rem;
+    transition: all 0.5s;
+}
+
+input:checked.switch + label::before{
+    position: relative;
+    left: -0.8rem;
+    transition: all 0.5s;
 }

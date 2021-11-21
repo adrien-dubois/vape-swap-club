@@ -345,6 +345,7 @@ a{
 
 .action .menu-dropdown{
     position: absolute;
+    z-index: 10000;
     top: 120px;
     right: -10px;
     padding: 10px 20px;
