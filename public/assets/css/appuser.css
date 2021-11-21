@@ -868,3 +868,46 @@ input:checked.switch + label::before{
     left: -0.8rem;
     transition: all 0.5s;
 }
+
+/* ORDER PART */
+
+.recent-grid{
+    position: absolute;
+    top: 24%;
+    left: 5%;
+    display: none;
+    grid-template-columns: 100% auto;
+    row-gap: 2rem;
+    column-gap: 2rem;
+}
+
+.cards{
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, .5);
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.cards-header,
+.cards-body{
+    padding: 1rem;
+}
+
+.cards-header>h3{
+    color: var(--second-color);
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.cards-body>table{
+    border-collapse: collapse;
+}
+
+.cards-body>table>tbody>tr:hover{
+    background: var(--background-register);
+}
+
+.cards-body>table>tbody>tr>td>a{
+    display: block;
+    font-size: initial;
+    color: inherit;
+}

@@ -16,12 +16,12 @@
 
             <!-- CHECKBOXES TO MAKES SWITCHES ON CSS -->
             <form action="">
-                
+
                 <div>
                     <input type="checkbox" name="adress" id="adr" class="switch">
                     <label for="adr">Adresse de livraison</label>
                 </div>
-                
+
                 <br>
                 <div>
                     <input type="checkbox" name="order" id="ord" class="switch">
@@ -46,7 +46,7 @@
                 </div>
 
                 <h2>Adresse de livraison</h2>
-                <?php if(!empty($adress)): ?>
+                <?php if (!empty($adress)) : ?>
                     <p><?= $adress->getName() ?></p>
                     <p><?= $adress->getNumber() . ' ' . $adress->getAdress() ?></p>
                     <p><?= $adress->getZip() . ' ' . $adress->getCity() ?></p>
@@ -61,46 +61,67 @@
         </div>
     </div>
 
-    <div class="container-orders">
-        <div class="recent-grid">
-            <div class="order-cards">
-                <div class="cards">
-                    <div class="cards-header">
-                        <h2>Commandes</h2>
-                    </div>
-                    <div class="cards-body">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td>Numéro de commande</td>
-                                    <td>Prix</td>
-                                    <td>Date</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach($orders as $currentOrder): ?>
+
+    <div class="recent-grid">
+        <div class="order-cards">
+            <div class="cards">
+                <div class="cards-header">
+                    <h3>Commandes</h3>
+                </div>
+                <div class="cards-body">
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <th>N° de commande</th>
+                                <th>Prix</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (!empty($orders)) :
+                                foreach ($orders as $currentOrder) : ?>
                                     <tr>
-                                        <td><?= $currentOrder->getId() ?></td>
-                                        <td><?= $currentOrder->getPrice() ?></td>
-                                        <td><?= date(('d-m-Y'), strtotime($currentOrder->getCreated_at()))  ?></td>
+                                        <td><a href="<?= $this->router->generate('cart-confirm', ['orderId' => $currentOrder->getId()]) ?>"> <?= $currentOrder->getId() ?></a></td>
+                                        <td><a href="<?= $this->router->generate('cart-confirm', ['orderId' => $currentOrder->getId()]) ?>"> <?= $currentOrder->getPrice() ?> €</a></td>
+                                        <td><a href="<?= $this->router->generate('cart-confirm', ['orderId' => $currentOrder->getId()]) ?>"> <?php setlocale(LC_TIME, "fr_FR.utf8");
+                                        echo strftime("Le %d %b %Y", strtotime($currentOrder->getCreated_at()))  ?></a></td>
                                     </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
+                                <?php endforeach;
+                            else : ?>
+                                <tr>
+                                    <td></td>
+                                    <td>Vous n'avez pas encore passé de commande</td>
+                                    <td></td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
+
+<!-- SCRIPT FOR THE SWITCHES -->
+<!-- IF SWITCH IS ON THEN CHANGE DISPLAY STYLE TO DISPLAY IT -->
 
 <script>
     var adress = document.getElementById('adr');
-    adress.addEventListener('change', function(){
-        if(adress.checked){
-        document.querySelector('.containeur-profil').style.display = 'flex';
-    } else {
-        document.querySelector('.containeur-profil').style.display ='none';
-    }
-});
+    adress.addEventListener('change', function() {
+        if (adress.checked) {
+            document.querySelector('.containeur-profil').style.display = 'flex';
+        } else {
+            document.querySelector('.containeur-profil').style.display = 'none';
+        }
+    });
+
+    var order = document.getElementById('ord');
+    order.addEventListener('change', function() {
+        if (order.checked) {
+            document.querySelector('.recent-grid').style.display = 'grid';
+        } else {
+            document.querySelector('.recent-grid').style.display = 'none';
+        }
+    });
 </script>
