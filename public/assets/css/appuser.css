@@ -32,7 +32,6 @@
     font-weight: 600;
     text-transform: uppercase;
     color: var(--second-color);
-    /* margin-top: -50px; */
     position: relative;
     text-align: center;
 }
@@ -172,7 +171,7 @@
 }
 
 .label{
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     color: grey;
     line-height: 1.5;
@@ -315,8 +314,6 @@
 
 #check{
     margin-right: 40px;
-    /* display: flex; */
-    /* justify-content: start; */
 }
 
 /* ADRESS FORM */
@@ -677,7 +674,7 @@ form .contact-details .msg-box{
     height: 20px;
     width: 10px;
     background: var(--backgroundOG-color);
-    background-attachment: fixed;
+    
     border-bottom-left-radius: 10px;
 }
 
@@ -734,5 +731,226 @@ form .contact-details .msg-box{
     top: -5px;
     right: 2px;
     font-size: 28px;
+}
+
+/* PROFIL PART */
+
+.profil-card{
+    width: 400px;
+    margin: 2rem auto;
+    padding: 0.5rem;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, .5);
+}
+
+.profil-title h3{
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--second-color);
+    position: relative;
+}
+
+.profil-title h3::before{
+    content: '';
+    position: absolute;
+    left: 50;
+    bottom: 0;
+    height: 3px;
+    width: 92px;
+    background: var(--second-color);
+}
+
+.image-container{
+    position: relative;
+    margin: 1.5rem auto;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.main-container{
+    padding: 20px;
+    position: relative;
+}
+
+.main-container .btn-edit-profile{
+    position: absolute;
+    top: 0;
+    right: 15px;
+    color: white;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.main-container p{
+    color: var(--input-color);
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.main-container p>span,
+.main-container p>b>span{
+    color: var(--second-color);
+    text-decoration: underline;
+}
+
+.main-container a{
+    color: var(--first-color);
+    margin: 10px 0;
+    transition: 0.3s;
+}
+
+.main-container a:hover{
+    color: var(--input-color);
+}
+
+.profil-info{
+    color: var(--second-color);
+    margin-right: 16px;
+}
+
+.container-profil{
+    max-width: 1900px;
+    /* margin: 0 auto; */
+}
+
+.containeur-profil{
+    display: flex;
+    justify-content: center;
+    height: 60vh;
+    align-items: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    border: none;
+    position: absolute;
+    top: 8%;
+    right: 5%;
+    transition: all 0.5s;
+}
+
+/* SWITCH CHECKBOX CSS */
+
+input.switch{
+    appearance: none;
+    background: var(--input-color);
+    width: 4rem;
+    height: 1.5rem;
+    border-radius: 1.5rem;
+    vertical-align: middle;
+}
+
+input.switch + label{
+    margin-left: -1rem;
+}
+
+input:checked.switch{
+    background-color: grey;
+}
+
+input.switch + label::before{
+    display: inline-block;
+    content: '';
+    background-color: var(--second-color);
+    height: 1.2rem;
+    width: 1.2rem;
+    border-radius: 50%;
+    vertical-align: middle;
+    position: relative;
+    left: -3rem;
+    transition: all 0.5s;
+}
+
+input:checked.switch + label::before{
+    position: relative;
+    left: -0.8rem;
+    transition: all 0.5s;
+}
+
+/* ORDER PART */
+
+.recent-grid{
+    position: absolute;
+    top: 24%;
+    left: 5%;
+    display: grid;
+    grid-template-columns: 100% auto;
+    row-gap: 2rem;
+    column-gap: 2rem;
+}
+
+.cards{
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, .5);
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.cards-header,
+.cards-body{
+    padding: 1rem;
+}
+
+.cards-header>h3{
+    color: var(--second-color);
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.cards-body>table{
+    border-collapse: collapse;
+}
+
+.cards-body>table>tbody>tr:hover{
+    background: var(--background-register);
+}
+
+.cards-body>table>tbody>tr>td>a{
+    display: block;
+    font-size: initial;
+    color: inherit;
+}
+
+/* PICTURE EDIT */
+
+.input-profil-pic{
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.input-profil-pic + label {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    right: 150px;
+    bottom: 326px;
+    padding: 10px;
+    color: grey;
+    background: var(--backgroundOG-color);
+    border-radius: 5px;
+    border: 1px solid grey;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all .5s ease;
+}
+
+.input-profil-pic:focus + label,
+.input-profil-pic + label:hover{
+    padding: 10px ;
+    color: var(--second-color);
+}
+
+.profil-form{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    letter-spacing: unset;
 }
 

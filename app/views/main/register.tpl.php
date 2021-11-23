@@ -33,7 +33,7 @@
             <!-- PASSWORD -->
             <div class="wrap2">
                 <label class="label">Mot de passe</label>
-                <input class="input" name="password" type="password">
+                <input class="input" name="password" type="password" placeholder="(min. 8 caractères, 1 majuscule et 1 chiffre)">
                 <span class="focus-input2"></span>
             </div>
 

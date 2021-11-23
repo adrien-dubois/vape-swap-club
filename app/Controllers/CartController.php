@@ -25,6 +25,7 @@ class CartController extends CoreController{
             $_SESSION['cart'] = [];
         }
 
+        $getCart = [];
         // Set the total price at zero
         $total = 0;
         // And the cart in a var

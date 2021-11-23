@@ -240,6 +240,8 @@ a{
 
 /* NAVBAR PART */
 
+
+
 .navigation{
     padding: 10px 100px;
     display: flex;
@@ -343,6 +345,7 @@ a{
 
 .action .menu-dropdown{
     position: absolute;
+    z-index: 10000;
     top: 120px;
     right: -10px;
     padding: 10px 20px;
@@ -801,7 +804,7 @@ a{
     display: flex;
     justify-content: center;
     margin-top: 3rem;
-    text-decoration: underline overline solid #5A5D62;
+    text-decoration: underline solid #5A5D62;
     font-size: 50px;
     font-weight: 900;
     letter-spacing: 1.6px;
@@ -811,7 +814,6 @@ a{
 }
 
 .card-section #subtitle{
-    /* font-family: 'Roboto', sans-serif; */
     display: flex;
     justify-content: center;
     letter-spacing: 1px;
@@ -934,7 +936,7 @@ a{
     display: flex;
     justify-content: center;
     margin-bottom: 2rem;
-    text-decoration: underline overline solid #5A5D62;
+    text-decoration: underline solid #5A5D62;
     font-size: 50px;
     font-weight: 900;
     letter-spacing: 1.6px;
