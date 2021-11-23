@@ -189,6 +189,16 @@ $router->map(
     'user-edit'
 );
 
+$router->map(
+    'POST',
+    '/profil/edit',
+    [
+        'method' => 'updateProfil',
+        'controller' => '\App\Controllers\AppUserController'
+    ],
+    'user-update'
+);
+
 
 /* -----------
 --- CART   ---

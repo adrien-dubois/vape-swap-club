@@ -32,7 +32,6 @@
     font-weight: 600;
     text-transform: uppercase;
     color: var(--second-color);
-    /* margin-top: -50px; */
     position: relative;
     text-align: center;
 }
@@ -315,8 +314,6 @@
 
 #check{
     margin-right: 40px;
-    /* display: flex; */
-    /* justify-content: start; */
 }
 
 /* ADRESS FORM */
@@ -677,7 +674,7 @@ form .contact-details .msg-box{
     height: 20px;
     width: 10px;
     background: var(--backgroundOG-color);
-    background-attachment: fixed;
+    
     border-bottom-left-radius: 10px;
 }
 
@@ -745,30 +742,32 @@ form .contact-details .msg-box{
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, .5);
 }
 
+.profil-title h3{
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--second-color);
+    position: relative;
+}
+
+.profil-title h3::before{
+    content: '';
+    position: absolute;
+    left: 50;
+    bottom: 0;
+    height: 3px;
+    width: 92px;
+    background: var(--second-color);
+}
+
 .image-container{
     position: relative;
-    margin: 2rem auto;
-    text-align: center;
+    margin: 1.5rem auto;
     width: 240px;
     height: 240px;
     border-radius: 50%;
     overflow: hidden;
-}
-
-.image-title a{
-    position: absolute;
-    left: 13%;
-    bottom: 0.5%;
-    padding: 9px 50px;
-    color: black;
-    font-size: 14px;
-    font-weight: bold;
-    transition: all 0.5s ease;
-}
-
-.image-title a:hover{
-    padding: 9px 50px;
-    background: rgba(255, 255, 255, 0.575);
 }
 
 .main-container{
@@ -814,11 +813,11 @@ form .contact-details .msg-box{
 
 .container-profil{
     max-width: 1900px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
 }
 
 .containeur-profil{
-    display: none;
+    display: flex;
     justify-content: center;
     height: 60vh;
     align-items: center;
@@ -875,7 +874,7 @@ input:checked.switch + label::before{
     position: absolute;
     top: 24%;
     left: 5%;
-    display: none;
+    display: grid;
     grid-template-columns: 100% auto;
     row-gap: 2rem;
     column-gap: 2rem;
@@ -911,3 +910,47 @@ input:checked.switch + label::before{
     font-size: initial;
     color: inherit;
 }
+
+/* PICTURE EDIT */
+
+.input-profil-pic{
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.input-profil-pic + label {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    right: 150px;
+    bottom: 326px;
+    padding: 10px;
+    color: grey;
+    background: var(--backgroundOG-color);
+    border-radius: 5px;
+    border: 1px solid grey;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all .5s ease;
+}
+
+.input-profil-pic:focus + label,
+.input-profil-pic + label:hover{
+    padding: 10px ;
+    color: var(--second-color);
+}
+
+.profil-form{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    letter-spacing: unset;
+}
+

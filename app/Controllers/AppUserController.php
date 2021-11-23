@@ -121,8 +121,6 @@ class AppUserController extends CoreController{
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
         $pass = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
-        // Hashing right now the password
-        $password = password_hash($pass,PASSWORD_DEFAULT);
         $role = 'Vaper';
         $activation_code = md5(rand());
         $otp = rand(100000, 999999);
@@ -190,8 +188,10 @@ class AppUserController extends CoreController{
         }
 
         // Add regex for the password and test it
-        if(preg_match('/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/', $password)){
+        if(preg_match('/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/', $pass)){
             $formIsValid = true;
+            // Hashing right now the password
+            $password = password_hash($pass,PASSWORD_DEFAULT);
         } else {
             $formIsValid = false;
             $errorList[] = 'Attention, votre mot de passe doit contenir au moins 8 caractères, une lettre en minuscule, une lettre en majuscule, ainsi qu\'un chiffre';
@@ -335,10 +335,11 @@ class AppUserController extends CoreController{
 
         $adress = Adress::findByUser($_SESSION['userId']);
         $orders = Order::findOwnerOrder($_SESSION['userId']);
+        $profil = AppUser::find($_SESSION['userId']);
 
         $this->show('user/profil',[
             'pageTitle' => 'Profil',
-            'profil'    => $_SESSION['userObject'],
+            'profil'    => $profil,
             'adress'    => $adress,
             'orders'    => $orders,
         ]);
@@ -346,11 +347,111 @@ class AppUserController extends CoreController{
 
     public function editProfile(){
 
+        $id = $_SESSION['userId'];
+        $user = AppUser::find($id);
 
         $this->show('user/edit',[
             'pageTitle' => 'Éditer profil',
             'profil'    => $_SESSION['userObject'],
+            'user' => $user,
+        ]);
+    }
 
+    public function updateProfil(){
+
+        // dd($_POST, $_FILES);
+
+        $firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
+        $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
+        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+        $confirm = filter_input(INPUT_POST, 'confirm', FILTER_SANITIZE_STRING);
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+
+        $id = $_SESSION['userId'];
+        $update = AppUser::find($id);
+        $formIsValid = true;
+        $errorList = [];
+
+        if(!empty($password)){
+            if ($password != $confirm) {
+                $formIsValid = false;
+                $errorList[] = 'Les mots de passes ne sont pas identiques';
+            } elseif ($password == $confirm) {
+                if (preg_match('/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/', $password)) {
+                    $formIsValid = true;
+                    // Hashing now the password
+                    $pass = password_hash($password, PASSWORD_DEFAULT);
+                } else {
+                    $formIsValid = false;
+                    $errorList[] = 'Attention, votre mot de passe doit contenir au moins 8 caractères, une lettre en minuscule, une lettre en majuscule, ainsi qu\'un chiffre';
+                }
+            }
+        }
+
+        if(isset($_FILES['picture']) && !empty($_FILES['picture']['name'])) {
+            $tmpName = $_FILES['picture']['tmp_name'];
+            $name = $_FILES['picture']['name'];
+            $error = $_FILES['picture']['error'];
+
+            $tabExtension = explode('.', $name);
+            $extension = strtolower(end($tabExtension));
+
+            // var that authorized extensions
+            $authorizedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+            if (in_array($extension, $authorizedExtensions) && $error == 0) {
+
+                $uniqueName = uniqid('IMG-', true);
+                $pictureName = $uniqueName . '.' . $extension;
+
+                move_uploaded_file($tmpName, __DIR__ . '/../../public/assets/uploads/' . $pictureName);
+            } else {
+                self::addFlash(
+                    'danger',
+                    'Image non compatible'
+                );
+            }
+        }
+
+        if($formIsValid === true){
+
+            if(isset($pass)){
+                $update->setPassword($pass);
+            }
+
+            if(isset($pictureName)){
+                $update->setPicture($pictureName);
+            }
+
+            $update->setFirstname($firstname);
+            $update->setLastname($lastname);
+            $update->setEmail($email);
+           
+            
+
+            if($update->update()){
+
+                self::addFlash(
+                    'success',
+                    'Votre profil a bien été modifié'
+                );
+
+                header('Location: ' . $this->router->generate('user-show'));
+                exit;
+            }
+        }
+        
+        $user = new AppUser();
+
+        $user->setLastname(filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING));
+        $user->setFirstname(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING));
+        $user->setEmail(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING));
+
+        $this->show('user/edit',[
+            'pageTitle' => 'Éditer profil',
+            'profil'    => $_SESSION['userObject'],
+            'errorList' => $errorList,
+            'user' => $user,
         ]);
     }
 }

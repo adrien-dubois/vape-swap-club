@@ -1,9 +1,12 @@
 <div class="container-profil" style="position: relative;">
     <div class="profil-card">
+        <div class="profil-title">
+            <h3>Mon profil</h3>
+        </div>
         <div class="image-container">
             <img src="<?= $uploadsUri . $profil->getPicture(); ?>" width="100%">
         </div>
-        <h2 style="text-align: center;"><?= $_SESSION['username'] ?></h2>
+        <h2 style="text-align: center;"><?= $profil->getFirstname() .' '. $profil->getLastname() ?></h2>
         <div class="main-container">
 
             <a class="btn-edit-profile" href="<?= $this->router->generate('user-edit') ?>"><i class="fas fa-edit"></i>Éditer le profil</a>
@@ -18,13 +21,13 @@
             <form action="">
 
                 <div>
-                    <input type="checkbox" name="adress" id="adr" class="switch">
+                    <input type="checkbox" name="adress" id="adr" class="switch" checked>
                     <label for="adr">Adresse de livraison</label>
                 </div>
 
                 <br>
                 <div>
-                    <input type="checkbox" name="order" id="ord" class="switch">
+                    <input type="checkbox" name="order" id="ord" class="switch" checked>
                     <label for="ord">Commandes passées</label>
                 </div>
             </form>
