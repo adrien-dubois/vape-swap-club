@@ -99,7 +99,7 @@ class MsgController extends CoreController
                 $body = '
                 <h2>Vous avez reçu un message privé</h2>
 
-                <p>Bonjour ' . $recipientModel->getFirstname()  . ', vous venez de recevoir un message privé de la part de ' . $_SESSION['username'] . ' afin de démarrer une discussion avec vous. <br> Afin de pouvoir le lire et prendre part à la discussion, veuillez vous connecter à votre compte sur <strong>Vape Swap Club</strong> </p>
+                <p>Bonjour ' . $recipientModel->getFirstname()  . ', vous venez de recevoir un message privé de la part de ' . $_SESSION['username'] . ' afin de démarrer une discussion avec vous. <br> Pour pouvoir le lire et prendre part à la discussion, veuillez vous connecter à votre compte sur <strong>Vape Swap Club</strong> </p>
                 <br>
                 <p>Merci de votre confiance, bonne vape, </p>
                 <p><i>Vape Swap Club</i></p>

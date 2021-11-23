@@ -30,11 +30,16 @@
                         <li>
                             <a href="<?= $this->router->generate('cart-home'); ?>">
                                 <i class="fas fa-shopping-cart"></i>
-                                Mon Panier <span class="cart-number"> <?= array_sum($_SESSION['cart']) ?> </span>
+                                Mon Panier 
+                                <span class="cart-number"> 
+                                    <?php if(isset($_SESSION['cart'])){
+                                        echo array_sum($_SESSION['cart']);
+                                    }?> 
+                                </span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="<?= $this->router->generate('user-show') ?>">
                                 <i class="far fa-user-circle"></i>
                                 Mon Profil
                             </a>

@@ -169,6 +169,36 @@ $router->map(
     'user-activation'
 );
 
+$router->map(
+    'GET',
+    '/profil',
+    [
+        'method' => 'showProfile',
+        'controller' => '\App\Controllers\AppUserController'
+    ],
+    'user-show'
+);
+
+$router->map(
+    'GET',
+    '/profil/edit',
+    [
+        'method' => 'editProfile',
+        'controller' => '\App\Controllers\AppUserController'
+    ],
+    'user-edit'
+);
+
+$router->map(
+    'POST',
+    '/profil/edit',
+    [
+        'method' => 'updateProfil',
+        'controller' => '\App\Controllers\AppUserController'
+    ],
+    'user-update'
+);
+
 
 /* -----------
 --- CART   ---
