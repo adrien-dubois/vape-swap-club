@@ -1,7 +1,7 @@
 window.onload = () => {
     // variables
     let stripe = Stripe('pk_test_51JpySjKyQTIUNcxLn7kxOVC4R3BEa1yWEJx3oXYUHSo0yjk26yATyVsw4TfvFD0VVLPLxFRxtUlzhBl70yiPXVvq00c2N5C1tB');
-    let redirect = "http://ec2-3-86-88-21.compute-1.amazonaws.com/cart/accept";
+    let redirect = "/cart/accept";
     
     // Page objects
     let cardHolderName = document.getElementById("cardholder-name");
@@ -36,7 +36,7 @@ window.onload = () => {
         stripe.confirmPayment({
             elements, 
             confirmParams:{
-                return_url: 'http://ec2-3-86-88-21.compute-1.amazonaws.com/cart/accept',
+                return_url: '/cart/accept',
                 payment_method_data: {
                         billing_details: {
                             name: cardHolderName.value
