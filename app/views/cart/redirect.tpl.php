@@ -3,7 +3,7 @@
     <div class="redirect-elements">
         <p>Votre paiement a été accepté</p> 
         <p>Vous allez être redirigé automatiquement dans </p><div id="counter">5</div>
-        <a href="http://localhost:8080/"><p class="fst-italic">Ou cliquez directement ici ...</p></a>
+        <a href="http://ec2-3-86-88-21.compute-1.amazonaws.com/"><p class="fst-italic">Ou cliquez directement ici ...</p></a>
     </div>
 </div>
 
@@ -14,7 +14,7 @@
         var count = div.textContent * 1 - 1;
         div.textContent = count;
         if (count <= 0) {
-            window.location.replace("http://localhost:8080/")
+            window.location.replace("http://ec2-3-86-88-21.compute-1.amazonaws.com/")
         }
     }, 1000);
 </script>
