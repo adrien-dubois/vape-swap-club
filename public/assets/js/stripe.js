@@ -36,7 +36,7 @@ window.onload = () => {
         stripe.confirmPayment({
             elements, 
             confirmParams:{
-                return_url: 'http://localhost:8080/cart/accept',
+                return_url: 'http://ec2-3-86-88-21.compute-1.amazonaws.com/cart/accept',
                 payment_method_data: {
                         billing_details: {
                             name: cardHolderName.value
