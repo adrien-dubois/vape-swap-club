@@ -77,48 +77,56 @@
 
         document.getElementById('msgScroll').scrollTop = document.getElementById('msgScroll').scrollHeight;
 
-        $('#chat').on("submit", function(e) {
-            e.preventDefault();
+        
+        $(function(){
+            $("#chat").keypress(function(e){
 
-            var id;
-            var message;
+                if(e.which == 13 && !event.shiftKey){
 
-            id = <?= json_encode($recipientId, JSON_UNESCAPED_UNICODE); ?>;
-            message = document.getElementById('chatbox').value;
+                
+                    e.preventDefault();
 
-            document.getElementById('chatbox').value = '';
+                    var id;
+                    var message;
 
-            if (id > 0 && message != '') {
-                $.ajax({
-                    url: '/messages/chat',
-                    method: 'POST',
-                    dataType: 'html',
-                    data: {
-                        id: id,
-                        message: message
-                    },
+                    id = <?= json_encode($recipientId, JSON_UNESCAPED_UNICODE); ?>;
+                    message = document.getElementById('chatbox').value;
 
-                    success: function(data) {
-                        $('#display').append(data);
-                        document.getElementById('msgScroll').scrollTop = document.getElementById('msgScroll').scrollHeight;
-                    },
+                    document.getElementById('chatbox').value = '';
 
-                    error: function(e, xhr, s) {
-                        let error = e.responseJSON;
-                        if (e.status == 403 && typeof error !== 'undefined') {
-                            alert('Action non autorisée');
-                        } else if (e.status == 403) {
-                            alert('Action non autorisée');
-                        } else if (e.status == 401) {
-                            alert('Veuillez vous re-authentifier');
-                        } else if (e.status == 404) {
-                            alert('La page demandée n\'est pas disponible');
-                        } else {
-                            alert('Erreur');
-                        }
+                    if (id > 0 && message != '') {
+                        $.ajax({
+                            url: '/messages/chat',
+                            method: 'POST',
+                            dataType: 'html',
+                            data: {
+                                id: id,
+                                message: message
+                            },
+
+                            success: function(data) {
+                                $('#display').append(data);
+                                document.getElementById('msgScroll').scrollTop = document.getElementById('msgScroll').scrollHeight;
+                            },
+                
+                            error: function(e, xhr, s) {
+                                let error = e.responseJSON;
+                                if (e.status == 403 && typeof error !== 'undefined') {
+                                    alert('Action non autorisée');
+                                } else if (e.status == 403) {
+                                    alert('Action non autorisée');
+                                } else if (e.status == 401) {
+                                    alert('Veuillez vous re-authentifier');
+                                } else if (e.status == 404) {
+                                    alert('La page demandée n\'est pas disponible');
+                                } else {
+                                    alert('Erreur');
+                                }
+                            }
+                        });
                     }
-                });
-            }
+                }
+            });
         });
 
         var auto_loading_messages = 0;
