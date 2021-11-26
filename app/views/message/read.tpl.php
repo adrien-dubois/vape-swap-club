@@ -142,7 +142,7 @@
 
                     success: function(data) {
                         if (data.trim() != '') {
-                            $('#load-messages').append(data);
+                            $('#display').append(data);
                             document.getElementById('msgScroll').scrollTop = document.getElementById('msgScroll').scrollHeight;
                         }
                     },

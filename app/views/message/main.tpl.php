@@ -35,7 +35,9 @@
                         <td><?= $currentMessage->firstname . ' ' . $currentMessage->lastname ?></td>
 
                         <!-- TITLE -->
-                        <td><a style="font-size: 18px; color: white;" href="<?= $this->router->generate('msg-read', ['recipientId'=>$currentMessage->getSender_id()]) ?>">A REGLER</a></td>
+                        <td><a style="font-size: 18px; color: white;" href="<?= $this->router->generate('msg-read', ['recipientId'=>$currentMessage->getSender_id()]) ?>">
+                        A REGLER
+                        </a></td>
 
                         <!-- DATE & TIME -->
                         <td><?php setlocale(LC_TIME, "fr_FR.utf8");
