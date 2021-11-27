@@ -241,7 +241,7 @@ class Message extends CoreModel
         $pdo = Database::getPDO();
 
         $sql = '
-                SELECT firstname, lastname, m.*
+                SELECT firstname, lastname, picture, m.*
                 FROM app_user u
                 INNER JOIN message m ON u.id = m.sender_id
                 INNER JOIN (

@@ -17,11 +17,13 @@ class MsgController extends CoreController
     {
         $receivedMessages = Message::findLastMessageMailbox();
         $contacts = AppUser::findAllForMessages();
+        $currentUser = $_SESSION['userObject'];
 
         $this->show('message/main', [
             'pageTitle' => 'Messagerie',
             'receivedMessages' => $receivedMessages,
             'contacts' => $contacts,
+            'currentUser' =>$currentUser,
         ]);
     }
 

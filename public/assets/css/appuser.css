@@ -1104,3 +1104,8 @@ input:checked.switch + label::before{
 .mailbox-users-list a .status-dot.nomessage{
     color: #ccc;
 }
+
+.mailbox-title{
+    color: var(--second-color);
+    margin: .5rem 0;
+}
