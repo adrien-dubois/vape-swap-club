@@ -18,11 +18,13 @@ class MsgController extends CoreController
 
         $titles = Message::findTitlesMailbox();
         $receivedMessages = Message::findLastMessageMailbox();
+        $contacts = AppUser::findAllForMessages();
 
         $this->show('message/main', [
             'pageTitle' => 'Messagerie',
             'receivedMessages' => $receivedMessages,
             'titles' => $titles,
+            'contacts' => $contacts,
         ]);
     }
 

@@ -59,6 +59,16 @@ $router->map(
     'main-logout'
 );
 
+$router->map(
+    'GET',
+    '/contact',
+    [
+        'method'=> 'contact',
+        'controller' => '\App\Controllers\MainController'
+    ],
+    'main-contact'
+);
+
 /* -----------
 --- PRODUCT ---
 ------------*/

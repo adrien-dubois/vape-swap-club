@@ -28,4 +28,18 @@ class MainController extends CoreController {
             'newsCards' => $newsCards,
         ]);
     }
+
+    /**
+     * method displaying contact form
+     *
+     * @return void
+     */
+    public function contact(){
+
+
+        $this->show('main/contact',[
+            'pageTitle' => 'Contact',
+            
+        ]);
+    }
 }
