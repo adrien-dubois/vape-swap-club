@@ -1,74 +1,92 @@
-<div class="container">
-    <div class="row">
-        <div class="mailbox">
-            <h2 >Boîte de réception <i class="fas fa-inbox"></i></h2>
+<div class="mailbox-body">
+    <div class="mailbox-wrapper">
+        <section class="mailbox-users">
+            <h2 class="mailbox-title">Messagerie <i class="fas fa-comment"></i></h2>
+            <header>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th class="pict">Lu / Non lu</th>
-                        <th>De</th>
-                        <th>Sujet</th>
-                        <th>Date</th>
-                        <th class="pict">Supprimer</th>
-                        <th></th>
-                    </tr>
-                </thead>
+                <!-- FOR CURRENT USER -->
+                <div class="mailbox-content">
 
-                <tbody>
-                    <!-- gérer si pas de messages -->
-                        <?php
-                        // Check if have any message
-                        if(!empty($receivedMessages)):
-                        // For each message
-                        foreach($receivedMessages as $currentMessage):
-                        ?>
-                    <tr>
-                        <!-- CHECK IF MESSAGE IS READ -->
-                        <?php if($currentMessage->getIs_read() ==  0): ?>
-                            <td class="pict"><i class="far fa-envelope"></i></td>
-                        <?php else: ?>
-                            <td class="pict"><i class="far fa-envelope-open"></i></td>
-                        <?php endif; ?>
-                        
+                    <!-- PICTURE -->
+                    <img src="<?= $uploadsUri . $currentUser->getPicture() ?>" alt="">
+                    <div class="mailbox-details">
+
                         <!-- NAME -->
-                        <td><?= $currentMessage->firstname . ' ' . $currentMessage->lastname ?></td>
+                        <span><?= $currentUser->getFirstname() . ' ' . $currentUser->getLastname() ?></span>
 
-                        <!-- TITLE -->
-                        <td><a style="font-size: 18px; color: white;" href="<?= $this->router->generate('msg-read', ['recipientId'=>$currentMessage->getSender_id()]) ?>">A REGLER</a></td>
+                        <!-- ROLE -->
+                        <p><?= $currentUser->getRole() ?></p>
+                    </div>
+                </div>
 
-                        <!-- DATE & TIME -->
-                        <td><?php setlocale(LC_TIME, "fr_FR.utf8");
-                            echo strftime("Le %d %b %Y à %R", strtotime($currentMessage->getCreated_at())) ?></td>
+                <!-- LOGOUT BUTTON -->
+                <a href="<?= $this->router->generate('main-logout') ?>" class="mailbox-logout">Logout</a>
+            </header>
 
-                        <!-- DELETE CONVERSATION -->
-                        <td class="pict"><a href="<?= $this->router->generate('msg-delete', ['recipientId' => $currentMessage->getSender_id()]) ?>"><i style="color: white;" class="fas fa-trash-alt"></i></a></td>
-                        <td></td>
-                    </tr>
-                    <?php 
+            <!-- SELECT VENDOR TO DISCUSS -->
+            <form action="" method="post">
+                <div class="mailbox-search">
+                    <span class="mailbox-text">Sélectionnez un vendeur </span>
+                    <select name="recipientId">
+                        <option disabled selected>Sélectionnez un vendeur pour discuter ...</option>
+                        <?php foreach ($contacts as $currentContact) : ?>
+                            <option value="<?= $currentContact->getId() ?>"> <?= $currentContact->getFirstname() . ' ' . $currentContact->getLastname() ?> </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <button type="submit"><i class="fas fa-envelope"></i></button>
+                </div>
+            </form>
+
+            <!-- CONVERSATION LIST -->
+            <div class="mailbox-users-list">
+
+                <?php
+                // Check if have any message
+                if (!empty($receivedMessages)) :
+                    // For each message
+                    foreach ($receivedMessages as $currentMessage) :
+                ?>
+                        <!-- FOREACH CONVERSATION-->
+                        <a href="#">
+                            <div class="mailbox-content">
+
+                                <!-- PICTURE -->
+                                <img src="<?= $uploadsUri . $currentMessage->picture ?>">
+                                <div class="mailbox-details">
+
+                                    <!-- NAME -->
+                                    <span><?= $currentMessage->firstname . ' ' . $currentMessage->lastname ?></span>
+
+                                    <!-- DATE & TIME -->
+                                    <p><?php setlocale(LC_TIME, "fr_FR.utf8");
+                                        echo strftime("Le %d %b %Y à %R", strtotime($currentMessage->getCreated_at())) ?></p>
+                                </div>
+                            </div>
+
+                            <!-- IF IS READ -->
+                            <?php if ($currentMessage->getIs_read() ==  0) : ?>
+                                <div class="status-dot"><i class="fas fa-circle"></i></div>
+
+                                <!-- IF IS NOT READ -->
+                            <?php else : ?>
+                                <div class="status-dot nomessage"><i class="fas fa-circle"></i></div>
+                            <?php endif; ?>
+
+                        </a>
+                        <!-- ENDFOREACH -->
+
+                    <?php
                     endforeach;
-                    else :?>
-                    <tr>
-                        <td>Vous n'avez pas de messages</td>
-                    </tr>
-                    <?php endif ?>
-                </tbody>
-            </table>
+                else : ?>
 
-            <div class="new-mess">
-                <div class="return-back">
-                    <a href="<?= $this->router->generate('main-home') ?>">
-                        <i class="fas fa-reply"></i>
-                        <p>Retour à l'accueil</p>
-                    </a>
-                </div>
-                <div class="mess-elements">
-                    <a href="<?= $this->router->generate('msg-new') ?>">
-                        <i class="far fa-comments"></i>
-                        <p>Nouvelle discussion</p>
-                    </a>
-                </div>
+                    <!-- IF NO CONVERSATION  -->
+                    <div class="mailbox-content">
+                        <p>Vous n'avez pas encore de conversation</p>
+                    </div>
+
+                <?php endif; ?>
+
             </div>
-        </div>
+        </section>
     </div>
 </div>

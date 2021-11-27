@@ -59,6 +59,17 @@ $router->map(
     'main-logout'
 );
 
+$router->map(
+    'GET',
+    '/contact',
+    [
+        'method'=> 'contact',
+        'controller' => '\App\Controllers\MainController'
+    ],
+    'main-contact'
+);
+
+
 /* -----------
 --- PRODUCT ---
 ------------*/
@@ -336,6 +347,16 @@ $router->map(
         'controller' => 'App\Controllers\MsgController'
     ],
     'msg-home'
+);
+
+$router->map(
+    'POST',
+    '/messages',
+    [
+        'method' => 'redirectConversation',
+        'controller' => 'App\Controllers\MsgController'
+    ],
+    'msg-redirect'
 );
 
 $router->map(

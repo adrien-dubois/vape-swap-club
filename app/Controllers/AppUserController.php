@@ -132,7 +132,7 @@ class AppUserController extends CoreController{
         $errorList = [];
 
         // Manage the avatar picture
-        if(isset($_FILES['picture'])){
+        if(isset($_FILES['picture']) && !empty($_FILES['picture']['name'])){
             $tmpName = $_FILES['picture']['tmp_name'];
             $name = $_FILES['picture']['name'];
             $error = $_FILES['picture']['error'];
@@ -156,7 +156,7 @@ class AppUserController extends CoreController{
                 );
             }
 
-        } else {
+        } elseif(empty($_FILES['picture']['name'])){
             $pictureName = 'nopic.png';
         }
 
@@ -181,7 +181,7 @@ class AppUserController extends CoreController{
             $formIsValid = false;
         }
 
-        if (empty($password))
+        if (empty($pass))
         {
             $errorList[] = 'Attention il faut définir un mot de passe';
             $formIsValid = false;
@@ -192,7 +192,7 @@ class AppUserController extends CoreController{
             $formIsValid = true;
             // Hashing right now the password
             $password = password_hash($pass,PASSWORD_DEFAULT);
-        } else {
+        } elseif(!preg_match('/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/', $pass)) {
             $formIsValid = false;
             $errorList[] = 'Attention, votre mot de passe doit contenir au moins 8 caractères, une lettre en minuscule, une lettre en majuscule, ainsi qu\'un chiffre';
         }
