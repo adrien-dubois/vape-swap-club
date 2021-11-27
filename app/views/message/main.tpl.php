@@ -12,16 +12,18 @@
                 </div>
                 <a href="<?= $this->router->generate('main-logout') ?>" class="mailbox-logout">Logout</a>
             </header>
-            <div class="mailbox-search">
-                <span class="mailbox-text">Sélectionnez un vendeur </span>
-                <select name="recipientId">
-                    <option disabled selected>Sélectionnez un vendeur pour discuter ...</option>
-                    <?php foreach($contacts as $currentContact): ?>
-                        <option value="<?= $currentContact->getId() ?>"> <?= $currentContact->getFirstname() . ' ' . $currentContact->getLastname() ?> </option>
-                    <?php endforeach; ?>
-                </select>
-                <a href=""><button><i class="fas fa-envelope"></i></button></a>
-            </div>
+            <form action="" method="post">
+                <div class="mailbox-search">
+                    <span class="mailbox-text">Sélectionnez un vendeur </span>
+                    <select name="recipientId">
+                        <option disabled selected>Sélectionnez un vendeur pour discuter ...</option>
+                        <?php foreach ($contacts as $currentContact) : ?>
+                            <option value="<?= $currentContact->getId() ?>"> <?= $currentContact->getFirstname() . ' ' . $currentContact->getLastname() ?> </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <button type="submit"><i class="fas fa-envelope"></i></button>
+                </div>
+            </form>
             <div class="mailbox-users-list">
 
                 <!-- FOREACH -->
@@ -118,4 +120,3 @@
         </section>
     </div>
 </div>
-            

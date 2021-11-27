@@ -15,15 +15,31 @@ class MsgController extends CoreController
      */
     public function home()
     {
-
-        $titles = Message::findTitlesMailbox();
         $receivedMessages = Message::findLastMessageMailbox();
         $contacts = AppUser::findAllForMessages();
 
         $this->show('message/main', [
             'pageTitle' => 'Messagerie',
             'receivedMessages' => $receivedMessages,
-            'titles' => $titles,
+            'contacts' => $contacts,
+        ]);
+    }
+
+    public function redirectConversation(){
+
+        $receivedMessages = Message::findLastMessageMailbox();
+        $contacts = AppUser::findAllForMessages();
+
+        $recipientId = filter_input(INPUT_POST, 'recipientId', FILTER_SANITIZE_NUMBER_INT);
+
+        if(!empty($recipientId)){
+            header('Location: ' . $this->router->generate('msg-read', ['recipientId'=>$recipientId]));
+            exit;
+        }
+
+        $this->show('message/main', [
+            'pageTitle' => 'Messagerie',
+            'receivedMessages' => $receivedMessages,
             'contacts' => $contacts,
         ]);
     }
