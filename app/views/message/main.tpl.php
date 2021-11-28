@@ -47,7 +47,7 @@
                     foreach ($receivedMessages as $currentMessage) :
                 ?>
                         <!-- FOREACH CONVERSATION-->
-                        <a href="#">
+                        <a href="<?= $this->router->generate('msg-read', ['recipientId'=>$currentMessage->getSender_id()]) ?>">
                             <div class="mailbox-content">
 
                                 <!-- PICTURE -->
