@@ -20,6 +20,8 @@
                     </div>
                     <div id="errors"></div>
 
+                    <small><i><a href="<?= $this->router->generate('main-register') ?>" style="color: #fff">Pas encore inscrit(e)? Cliquez ici</a></i></small>
+
                     <input type="submit" id="submit" class="btn-register" style="text-align: center;" value="Connexion">
                     
                 </form>
