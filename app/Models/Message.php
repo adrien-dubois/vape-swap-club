@@ -241,24 +241,42 @@ class Message extends CoreModel
         $pdo = Database::getPDO();
 
         $sql = '
-                SELECT firstname, lastname, picture, m.*
-                FROM app_user u
-                INNER JOIN message m ON u.id = m.sender_id
+                SELECT `firstname`, `lastname`, `picture`,m.*
+                FROM `app_user` u
+                INNER JOIN `message` m ON u.`id` = m.`sender_id`
                 INNER JOIN (
-                    SELECT sender_id,
-                        MAX(created_at) AS created_at
-                    FROM message
-                    GROUP BY sender_id
-                ) r ON m.sender_id = r.sender_id
-                    AND m.created_at = r.created_at
-                WHERE m.recipient_id = '. $recipient_id .'
-                ORDER BY m.created_at DESC
+                    SELECT `sender_id`,
+                        MAX(`created_at`) AS `created_at`
+                    FROM `message`
+                    GROUP BY `sender_id`
+                ) r ON m.`sender_id` = r.`sender_id`
+                    AND m.`created_at` = r.`created_at`
+                WHERE m.`recipient_id` = '. $recipient_id .'
+                ORDER BY m.`created_at` DESC
         ';
         $pdoStatement = $pdo->query($sql);
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Message');
 
         return $result;
 
+    }
+
+    public static function countNotif(){
+        $recipient_id = $_SESSION['userId'];
+
+        $pdo = Database::getPDO();
+
+        $sql = '
+                SELECT *
+                FROM `message`
+                WHERE `is_read` = 0
+                AND `recipient_id` = '. $recipient_id .'
+        ';
+        $pdoStatement = $pdo -> query($sql);
+
+        $result = $pdoStatement->rowCount();
+
+        return $result;
     }
 
 

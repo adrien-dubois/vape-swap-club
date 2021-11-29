@@ -1,3 +1,7 @@
+<?php
+use App\Models\Message;
+$countMsg = Message::countNotif();
+?>
     <!-- NAVBAR -->
     <nav class="navigation">   
         <a href="/" class="logo-link">
@@ -6,9 +10,13 @@
 
         <!-- LINKS NAVIGATION -->
         <div class="links">
+
             <a href="<?= $this->router->generate('main-home'); ?>" class="nav-links <?= ($currentPage === 'main/home') ? 'act' : '' ?>">Accueil</a>
+
             <a href="<?= $this->router->generate('product-list') ?>" class="nav-links <?= ($currentPage === 'product/list' || $currentPage === 'product/single') ? 'act' : '' ?>">Annonces</a>
+
             <a href="#" class="nav-links">Catégories</a>
+            
             <a href="#" class="nav-links">Contact</a>
         </div>
 
@@ -24,9 +32,21 @@
                 <div class="profile" onclick="menuToggle();">
                     <img src="<?= $uploadsUri . $currentUser->getPicture() ?>" alt="">
                 </div>
+                <!-- NOTIFICATION -->
+                <?php if($countMsg > 0): ?>
+                <div class="notif-msg">
+                    <span>
+                        <?= $countMsg ?>
+                    </span>
+                </div>
+                <?php endif; ?>
+
+                <!-- MENU & USERS METAS -->
                 <div class="menu-dropdown">
                     <h3><?= $username; ?> <br><span><?= $currentUser->getRole(); ?></span></h3>
                     <ul>
+
+                        <!-- CART -->
                         <li>
                             <a href="<?= $this->router->generate('cart-home'); ?>">
                                 <i class="fas fa-shopping-cart"></i>
@@ -38,6 +58,8 @@
                                 </span>
                             </a>
                         </li>
+
+                        <!-- USER PROFILE -->
                         <li>
                             <a href="<?= $this->router->generate('user-show') ?>">
                                 <i class="far fa-user-circle"></i>
@@ -50,12 +72,18 @@
                                 Vendre du matos
                             </a>
                         </li>
+
+                        <!-- MESSENGER -->
                         <li>
                             <a href="<?= $this->router->generate('msg-home') ?>">
                                 <i class="far fa-envelope"></i>
-                                Messagerie
+                                Messagerie <?php if($countMsg > 0){
+                                    echo $countMsg;
+                                } ?>
                             </a>
                         </li>
+
+                        <!-- LOGOUT -->
                         <li>
                             <a href="<?= $router->generate('main-logout') ?>">
                                 <i class="fas fa-sign-out-alt"></i>
