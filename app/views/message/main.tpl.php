@@ -62,7 +62,7 @@
                                         echo strftime("Le %d %b %Y à %R", strtotime($currentMessage->getCreated_at())) ?></p>
                                 </div>
                             </div>
-
+                            
                             <!-- IF IS READ -->
                             <?php if ($currentMessage->getIs_read() ==  0) : ?>
                                 <div class="status-dot"><i class="fas fa-circle"></i></div>

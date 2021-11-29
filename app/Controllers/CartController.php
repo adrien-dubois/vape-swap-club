@@ -531,7 +531,10 @@ class CartController extends CoreController{
             'success',
             'Produit ajouté au panier'
         );
-        header("Location: " . $_SERVER['HTTP_REFERER']);
+        if(isset($_SERVER['HTTP_REFERER'])) {
+            $previous = $_SERVER['HTTP_REFERER'];
+        }
+        header("Location: " . $previous);
         exit;
     }
 
@@ -552,7 +555,10 @@ class CartController extends CoreController{
             'danger',
             'Produit supprimé du panier'
         );
-        header("Location: " . $_SERVER['HTTP_REFERER']);
+        if(isset($_SERVER['HTTP_REFERER'])) {
+            $previous = $_SERVER['HTTP_REFERER'];
+        }
+        header("Location: " . $previous);
         exit;
     }
 
@@ -570,7 +576,10 @@ class CartController extends CoreController{
             'danger',
             'La commande a été annulée'
         );
-        header("Location: " . $_SERVER['HTTP_REFERER']);
+        if(isset($_SERVER['HTTP_REFERER'])) {
+            $previous = $_SERVER['HTTP_REFERER'];
+        }
+        header("Location: " . $previous);
         exit;
     }
 }

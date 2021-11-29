@@ -171,7 +171,10 @@ class MsgController extends CoreController
         $nbMessages = Message::nbMessages($recipientId);
         $number = $nbMessages[0]->NbMessages;
 
+<<<<<<< HEAD
         // TODO
+=======
+>>>>>>> develop
         $updateMessage = new Message();
         $updateMessage->setSender_id($recipientId);
         $updateMessage->setRecipient_id($sender_id);
@@ -365,6 +368,7 @@ class MsgController extends CoreController
         }
     }
 
+
     /**
      * Delete an entire conversation between 2 persons
      *
@@ -392,7 +396,10 @@ class MsgController extends CoreController
                 'La conversation a bien été supprimée'
             );
     
-            header("Location: " . $_SERVER['HTTP_REFERER']);
+            if(isset($_SERVER['HTTP_REFERER'])) {
+                $previous = $_SERVER['HTTP_REFERER'];
+            }
+            header("Location: " . $previous);
             exit;
         }
         
