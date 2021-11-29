@@ -171,10 +171,6 @@ class MsgController extends CoreController
         $nbMessages = Message::nbMessages($recipientId);
         $number = $nbMessages[0]->NbMessages;
 
-<<<<<<< HEAD
-        // TODO
-=======
->>>>>>> develop
         $updateMessage = new Message();
         $updateMessage->setSender_id($recipientId);
         $updateMessage->setRecipient_id($sender_id);
