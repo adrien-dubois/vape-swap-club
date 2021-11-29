@@ -1,7 +1,3 @@
-<?php
-use App\Models\Message;
-$countMsg = Message::countNotif();
-?>
     <!-- NAVBAR -->
     <nav class="navigation">   
         <a href="/" class="logo-link">
@@ -16,7 +12,7 @@ $countMsg = Message::countNotif();
             <a href="<?= $this->router->generate('product-list') ?>" class="nav-links <?= ($currentPage === 'product/list' || $currentPage === 'product/single') ? 'act' : '' ?>">Annonces</a>
 
             <a href="#" class="nav-links">Catégories</a>
-            
+
             <a href="#" class="nav-links">Contact</a>
         </div>
 
@@ -24,9 +20,14 @@ $countMsg = Message::countNotif();
         <aside class="menu">
             
             <!-- If user is connected -->
-            <?php if(isset($_SESSION['userId'])) : 
+            <?php 
+            use App\Models\Message;
+            
+            if(isset($_SESSION['userId'])) : 
             $currentUser = $_SESSION['userObject'];
             $username = $_SESSION['username']; 
+            $countMsg = Message::countNotif();
+
             ?>
             <div class="action">
                 <div class="profile" onclick="menuToggle();">
