@@ -269,7 +269,7 @@ class Message extends CoreModel
         $sql = '
                 SELECT *
                 FROM `message`
-                WHERE `is_read` = 0
+                WHERE `is_read` = "0"
                 AND `recipient_id` = '. $recipient_id .'
         ';
         $pdoStatement = $pdo -> query($sql);
