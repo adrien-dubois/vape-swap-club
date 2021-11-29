@@ -157,17 +157,25 @@ class MsgController extends CoreController
      * @param [type] $recipientId
      * @return void
      */
-    public function read($recipientId)
+    public function read(int $recipientId)
     {
 
         $conversation = Message::findMessageConversation($recipientId);
         $recipient = AppUser::find($recipientId);
         $recipientName = $recipient->getFirstname() . ' ' . $recipient->getLastname();
 
+        $sender_id = $_SESSION['userId'];
+
         $totalNbMessages = 15;
         $checkNbMessages = 0;
         $nbMessages = Message::nbMessages($recipientId);
         $number = $nbMessages[0]->NbMessages;
+
+        $updateMessage = new Message();
+        $updateMessage->setSender_id($recipientId);
+        $updateMessage->setRecipient_id($sender_id);
+        $updateMessage->setIs_read(1);
+        $updateMessage->update();
 
         $this->show('message/read', [
             'pageTitle' => 'Messages',
@@ -190,12 +198,6 @@ class MsgController extends CoreController
 
         $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING);
         $sender_id = $_SESSION['userId'];
-
-        $updateMessage = new Message();
-        $updateMessage->setSender_id($recipientId);
-        $updateMessage->setRecipient_id($sender_id);
-        $updateMessage->setIs_read(1);
-        $updateMessage->update();
 
         // Variables to manage errors
         $formIsValid = true;
@@ -267,8 +269,6 @@ class MsgController extends CoreController
      */
     public function loadChat()
     {
-
-        // From -> sender / To -> recipient
 
         $sender_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
         $recipient_id = $_SESSION['userId'];
@@ -364,6 +364,7 @@ class MsgController extends CoreController
         }
     }
 
+
     /**
      * Delete an entire conversation between 2 persons
      *
@@ -391,7 +392,10 @@ class MsgController extends CoreController
                 'La conversation a bien été supprimée'
             );
     
-            header("Location: " . $_SERVER['HTTP_REFERER']);
+            if(isset($_SERVER['HTTP_REFERER'])) {
+                $previous = $_SERVER['HTTP_REFERER'];
+            }
+            header("Location: " . $previous);
             exit;
         }
         
