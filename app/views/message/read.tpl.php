@@ -79,13 +79,11 @@
 
         
         $(function(){
-            $("#chat").keypress(function(e){
-
-                if(e.which == 13 && !event.shiftKey){
-
+            $("#chat").keydown(function(e){
                 
+                if(e.keyCode == 13 && !event.shiftKey){
                     e.preventDefault();
-
+                    
                     var id;
                     var message;
 

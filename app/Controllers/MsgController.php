@@ -225,11 +225,20 @@ class MsgController extends CoreController
         }
 
         $conversation = Message::findMessageConversation($recipientId);
+        $recipient = AppUser::find($recipientId);
+        $recipientName = $recipient->getFirstname() . ' ' . $recipient->getLastname();
+
+        $totalNbMessages = 15;
+        $nbMessages = Message::nbMessages($recipientId);
+        $number = $nbMessages[0]->NbMessages;
 
         $this->show('message/read', [
             'pageTitle' => 'Messages',
             'conversation' => $conversation,
-            'recipientId' => $recipientId
+            'recipientId' => $recipientId,
+            'recipientName' => $recipientName,
+            'totalNbMessages' => $totalNbMessages,
+            'number' => $number,
         ]);
     }
 
