@@ -75,40 +75,84 @@
 <script>
     $(document).ready(function() {
 
-document.getElementById('msgScroll').scrollTop = document.getElementById('msgScroll').scrollHeight;
-
-
-$(function(){
-    $("#chat").keypress(function(e){
-
-        if(e.which == 13 && !event.shiftKey){
+        document.getElementById('msgScroll').scrollTop = document.getElementById('msgScroll').scrollHeight;
 
         
-            e.preventDefault();
+        $(function(){
+            $("#chat").keydown(function(e){
+                
+                if(e.keyCode == 13 && !event.shiftKey){
+                    e.preventDefault();
+                    
+                    var id;
+                    var message;
 
-            var id;
-            var message;
+                    id = <?= json_encode($recipientId, JSON_UNESCAPED_UNICODE); ?>;
+                    message = document.getElementById('chatbox').value;
 
-            id = <?= json_encode($recipientId, JSON_UNESCAPED_UNICODE); ?>;
-            message = document.getElementById('chatbox').value;
+                    document.getElementById('chatbox').value = '';
 
-            document.getElementById('chatbox').value = '';
+                    if (id > 0 && message != '') {
+                        $.ajax({
+                            url: '/messages/chat',
+                            method: 'POST',
+                            dataType: 'html',
+                            data: {
+                                id: id,
+                                message: message
+                            },
 
-            if (id > 0 && message != '') {
+                            success: function(data) {
+                                $('#display').append(data);
+                                document.getElementById('msgScroll').scrollTop = document.getElementById('msgScroll').scrollHeight;
+                            },
+                
+                            error: function(e, xhr, s) {
+                                let error = e.responseJSON;
+                                if (e.status == 403 && typeof error !== 'undefined') {
+                                    alert('Action non autorisée');
+                                } else if (e.status == 403) {
+                                    alert('Action non autorisée');
+                                } else if (e.status == 401) {
+                                    alert('Veuillez vous re-authentifier');
+                                } else if (e.status == 404) {
+                                    alert('La page demandée n\'est pas disponible');
+                                } else {
+                                    alert('Erreur');
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+        var auto_loading_messages = 0;
+
+        auto_loading_messages = clearInterval(auto_loading_messages);
+
+        auto_loading_messages = setInterval(autoLoadMessage, 2000);
+
+        function autoLoadMessage() {
+
+            var id = <?= json_encode($recipientId, JSON_UNESCAPED_UNICODE); ?>;
+
+            if (id > 0) {
                 $.ajax({
-                    url: '/messages/chat',
+                    url: '/messages/load/chat',
                     method: 'POST',
                     dataType: 'html',
                     data: {
                         id: id,
-                        message: message
                     },
 
                     success: function(data) {
-                        $('#display').append(data);
-                        document.getElementById('msgScroll').scrollTop = document.getElementById('msgScroll').scrollHeight;
+                        if (data.trim() != '') {
+                            $('#display').append(data);
+                            document.getElementById('msgScroll').scrollTop = document.getElementById('msgScroll').scrollHeight;
+                        }
                     },
-        
+
                     error: function(e, xhr, s) {
                         let error = e.responseJSON;
                         if (e.status == 403 && typeof error !== 'undefined') {
@@ -126,97 +170,51 @@ $(function(){
                 });
             }
         }
-    });
-});
 
-var auto_loading_messages = 0;
+        <?php if ($number > $totalNbMessages) : ?>
 
-auto_loading_messages = clearInterval(auto_loading_messages);
+            var req = 0;
 
-auto_loading_messages = setInterval(autoLoadMessage, 2000);
+            $('#seeMore').click(function() {
+                var id;
+                var element;
 
-function autoLoadMessage() {
+                req += <?= $totalNbMessages ?>;
+                id = <?= json_encode($recipientId, JSON_UNESCAPED_UNICODE); ?>;
 
-    var id = <?= json_encode($recipientId, JSON_UNESCAPED_UNICODE); ?>;
+                $.ajax({
+                    url: '/messages/load/more',
+                    method: 'POST',
+                    dataType: 'html',
+                    data: {
+                        limit: req,
+                        id: id,
+                    },
 
-    if (id > 0) {
-        $.ajax({
-            url: '/messages/load/chat',
-            method: 'POST',
-            dataType: 'html',
-            data: {
-                id: id,
-            },
+                    success: function(data) {
+                        $(data).hide().appendTo('#loadMore').fadeIn(2000);
+                        document.getElementById('loadMore').removeAttribute('id');
+                    },
 
-            success: function(data) {
-                if (data.trim() != '') {
-                    $('#display').append(data);
-                    document.getElementById('msgScroll').scrollTop = document.getElementById('msgScroll').scrollHeight;
-                }
-            },
+                    error: function(e, xhr, s) {
+                        let error = e.responseJSON;
+                        if (e.status == 403 && typeof error !== 'undefined') {
+                            alert('Action non autorisée');
+                        } else if (e.status == 403) {
+                            alert('Action non autorisée');
+                        } else if (e.status == 401) {
+                            alert('Veuillez vous re-authentifier');
+                        } else if (e.status == 404) {
+                            alert('La page demandée n\'est pas disponible');
+                        } else {
+                            alert('Erreur');
+                        }
+                    }
+                });
 
-            error: function(e, xhr, s) {
-                let error = e.responseJSON;
-                if (e.status == 403 && typeof error !== 'undefined') {
-                    alert('Action non autorisée');
-                } else if (e.status == 403) {
-                    alert('Action non autorisée');
-                } else if (e.status == 401) {
-                    alert('Veuillez vous re-authentifier');
-                } else if (e.status == 404) {
-                    alert('La page demandée n\'est pas disponible');
-                } else {
-                    alert('Erreur');
-                }
-            }
-        });
-    }
-}
+            });
 
-<?php if ($number > $totalNbMessages) : ?>
-
-    var req = 0;
-
-    $('#seeMore').click(function() {
-        var id;
-        var element;
-
-        req += <?= $totalNbMessages ?>;
-        id = <?= json_encode($recipientId, JSON_UNESCAPED_UNICODE); ?>;
-
-        $.ajax({
-            url: '/messages/load/more',
-            method: 'POST',
-            dataType: 'html',
-            data: {
-                limit: req,
-                id: id,
-            },
-
-            success: function(data) {
-                $(data).hide().appendTo('#loadMore').fadeIn(2000);
-                document.getElementById('loadMore').removeAttribute('id');
-            },
-
-            error: function(e, xhr, s) {
-                let error = e.responseJSON;
-                if (e.status == 403 && typeof error !== 'undefined') {
-                    alert('Action non autorisée');
-                } else if (e.status == 403) {
-                    alert('Action non autorisée');
-                } else if (e.status == 401) {
-                    alert('Veuillez vous re-authentifier');
-                } else if (e.status == 404) {
-                    alert('La page demandée n\'est pas disponible');
-                } else {
-                    alert('Erreur');
-                }
-            }
-        });
+        <?php endif; ?>
 
     });
-
-<?php endif; ?>
-
-});
 </script>
