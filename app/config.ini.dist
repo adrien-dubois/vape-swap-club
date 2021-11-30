@@ -13,3 +13,5 @@ DB_PASSWORD=mdp_connexion
 ; Same for Stripe, you'll have to put your own
 PWD_MAIL=mdp_de_votre_mail
 STRIPE_KEY=clé_de_stripe
+
+ADMIN_EMAIL=mail du webmaster pour le contact form
