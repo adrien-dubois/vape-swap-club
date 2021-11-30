@@ -13,7 +13,7 @@
 
             <a href="#" class="nav-links">Catégories</a>
 
-            <a href="#" class="nav-links">Contact</a>
+            <a href="<?= $this->router->generate('main-contact') ?>" class="nav-links <?= ($currentPage === 'main/contact') ? 'act' : '' ?>">Contact</a>
         </div>
 
         <!-- PERSONNAL MENU -->

@@ -7,7 +7,7 @@
             <a href="<?= $this->router->generate('main-home'); ?>">Accueil</a>
             <a href="<?= $this->router->generate('product-list'); ?>">Annonces</a>
             <a href="#">Catégories</a>
-            <a href="#">Contact</a>
+            <a href="<?= $this->router->generate('main-contact') ?>">Contact</a>
         </p>
         <p class="footer-comp-name">&copy;2021 Adrien Dubois Dev</p>
     </div>
@@ -18,8 +18,8 @@
             <p><span>Vape Swap Club</span>Vape World, France</p>
         </div>
         <div>
-            <i class="fa fa-phone"></i>
-                <p>+33 240 506 070</p>
+            <i class="fas fa-balance-scale"></i>
+                <p><a href="#">Mentions Légales</a></p>
             </div>
             <div>
                 <i class="fa fa-envelope"></i>
@@ -29,12 +29,13 @@
         
         <div class="footer-right">
             <p class="footer-comp-about">
-                <span>Réseaux Sociaux</span>
-                Officia aute est ipsum duis laborum occaecat ut incididunt dolore. Aliquip culpa minim reprehenderit do. Laborum Lorem est exercitation elit do ut incididunt adipisicing consequat nulla sit adipisicing. Laboris do velit laboris qui exercitation aute et ad. Incididunt nostrud cillum quis non et incididunt cupidatat eu cupidatat pariatur voluptate.
+                <span>Disclaimer</span>
+                Ce site est un site de présentation, un side project juste destiné à partager mon code, et permettre de servir d'exemple de mes capacités. Vous pouvez vous inscrire, tester les diverses features, tout est fonctionnel, mais en aucun cas ce site est à but lucratif et/ou ne vends quelconque matériel ou objet.
+                Vous pouvez retrouver le code du site sur mon GitHub, me retrouver sur LinkedIn ou me contacter via le formulaire de contact. Vous trouveres les liens vers mes réseaux ci-dessous.
             </p>
             <div class="footer-icons">
-                <a href="#"><i class="fa fa-linkedin"></i></a>
-                <a href="#"><i class="fa fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/adrien-dubois-03/"><i class="fa fa-linkedin"></i></a>
+                <a href="https://github.com/adrien-dubois"><i class="fa fa-github"></i></a>
                 <a href="#"><i class="fa fa-twitter"></i></a>
             </div>
         </div>
