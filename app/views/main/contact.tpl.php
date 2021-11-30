@@ -1,7 +1,7 @@
 <section class="contact-form">
     <div class="contact-content">
         <h2>Formulaire de contact</h2>
-        <p>Si vous souhaitez contacter l'équipe de Vape Swap Club, vous pouvez le faire via le formulaire de contact présent sur cette page, après avoir renseigné vos informations. <br> N'oubliez pas que pour contacter un vendeur, vous avez la messagerie privée à votre disposition, à partir de votre menu personnel.</p>
+        <p>Si vous souhaitez contacter l'équipe de <b>Vape Swap Club</b>, vous pouvez le faire via le formulaire de contact présent sur cette page, après avoir renseigné vos informations. <br> N'oubliez pas que pour contacter un vendeur, vous avez la messagerie privée à votre disposition, à partir de votre menu personnel.</p>
     </div>
     <div class="contact-container">
         <div class="contact-info">
@@ -34,22 +34,27 @@
         <div class="contactForm">
             <form action="" method="post">
                 <h2>Envoyer un message</h2>
+                <?php require __DIR__ . '/../partials/_errors.tpl.php' ?>
 
+                <!-- FULL NAME -->
                 <div class="contact-inputBox">
                     <input type="text" name="name" required>
                     <span>Nom complet</span>
                 </div>
 
+                <!-- EMAIL -->
                 <div class="contact-inputBox">
                     <input type="text" name="email" required>
                     <span>E-Mail</span>
                 </div>
 
+                <!-- MESSAGE -->
                 <div class="contact-inputBox">
                     <textarea name="message" required="required"></textarea>
                     <span>Votre message...</span>
                 </div>
 
+                <!-- SUBMIT -->
                 <div class="contact-inputBox">
                     <input type="submit" value="Envoyer">
                 </div>

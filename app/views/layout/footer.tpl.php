@@ -31,7 +31,7 @@
             <p class="footer-comp-about">
                 <span>Disclaimer</span>
                 Ce site est un site de présentation, un side project juste destiné à partager mon code, et permettre de servir d'exemple de mes capacités. Vous pouvez vous inscrire, tester les diverses features, tout est fonctionnel, mais en aucun cas ce site est à but lucratif et/ou ne vends quelconque matériel ou objet.
-                Vous pouvez retrouver le code du site sur mon GitHub, me retrouver sur LinkedIn ou me contacter via le formulaire de contact. Vous trouveres les liens vers mes réseaux ci-dessous.
+                Vous pouvez retrouver le code du site sur mon GitHub, me retrouver sur LinkedIn ou me contacter via le formulaire de contact. Vous trouverez les liens vers mes réseaux ci-dessous.
             </p>
             <div class="footer-icons">
                 <a href="https://www.linkedin.com/in/adrien-dubois-03/"><i class="fa fa-linkedin"></i></a>
