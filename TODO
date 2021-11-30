@@ -1,13 +1,14 @@
-- Notifications messages
-- Ajouter register sur login
 - Commencer ACL
-- Modifier le visuel de la page de redirection ( pas centré )
-- Tester Referer
 - Mention légales
+- Error pages
 
 
 DONE :
 
+- Tester Referer
+- Ajouter register sur login
+- Notifications messages
+- Modifier le visuel de la page de redirection ( pas centré )
 - Afficher le nom du vendeur sur la page produit
 - Gérer les photos du carousel single product --> la création de produits 
 - sidebar
