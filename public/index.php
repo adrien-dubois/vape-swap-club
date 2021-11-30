@@ -69,6 +69,25 @@ $router->map(
     'main-contact'
 );
 
+$router->map(
+    'POST',
+    '/contact',
+    [
+        'method'=> 'sendContact',
+        'controller' => '\App\Controllers\MainController'
+    ],
+    'main-sendContact'
+);
+
+$router->map(
+    'GET',
+    '/contact/redirect',
+    [
+        'method'=> 'redirection',
+        'controller' => '\App\Controllers\MainController'
+    ],
+    'main-redirect'
+);
 
 /* -----------
 --- PRODUCT ---
