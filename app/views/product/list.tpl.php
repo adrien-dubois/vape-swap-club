@@ -8,6 +8,7 @@
                     <h1>Annonces</h1>
                     <p>Voici toutes nos annonces de produits High-End vérifiés, que ce soit du RTA MTL au Dripper pour Cloud Chasers, en passant par des mods mécas custom ou aux boxs BF faites à la mano en bois stab. <br> Tout le monde peut y trouver chaussure à son pied ou même changer de style, qu'importe tant que c'est votre vape et que c'est du lourd !!! 
                     <br>
+                    <br>
                     N'oubliez pas la messagerie privé, qui vous permets de rentrer en contact avec les vendeurs en cas de questions subsidiaires. </p>
                     <a href="#prod-section" class="btn-primary">Explorer &#8594; </a>
                 </div>
@@ -24,9 +25,32 @@
         <div class="row">
             <h2 class="list-title">Nos produits disponibles</h2>
         </div>
+
         <div class="row">
-            <?php foreach($products as $currentProduct) : ?>
-                <div class="column-4">
+        <p><i>Trier par catégorie :</i></p>
+        </div>
+
+    <div class="row">
+        <div class="category-btns">
+            <button type="button" id="all" class="cat-btn active-btn">Tout</button>
+            <button type="button" id="dripper" class="cat-btn">Dripper</button>
+            <button type="button" id="atos" class="cat-btn">Atomiseurs</button>
+            <button type="button" id="mech" class="cat-btn">Mod mech</button>
+        </div>
+    </div>
+
+        <div class="row">
+            <?php foreach($products as $currentProduct) : 
+                // Stock category ID in var to add category's class for btns
+                $category = $currentProduct -> getCategory_id();
+            ?>
+
+                <!-- ADDING RIGHT CATEGORIES IN DIV'S CLASS TO ORDER BY CATS -->
+                <div class="column-4 all <?= ($category == 1 || $category == 2) ? 'dripper' : 
+                (($category ==  4 || $category == 3 || $category == 7) ? 'atos' : 
+                (($category == 6 || $category == 9 || $category == 10 || $category == 5) ? 'mech'
+                : '')) 
+                ?>">
                     <img src="<?= $uploadsUri . $currentProduct->getPicture() ?>">
                     <?php if($currentProduct->getStatus() == 2): ?>
                         <img src="<?= $assetsBaseUri ?>images/out.png" style="position: absolute; top: 0px; right: 0px;">
@@ -57,3 +81,40 @@
         </div>
 
     </div>
+
+
+<script>
+
+const menuBtns = document.querySelectorAll('.cat-btn');
+const vapeItems = document.querySelectorAll('.column-4');
+
+let activeBtn = "all";
+
+showVapeMenu(activeBtn);
+
+menuBtns.forEach((btn) => {
+    btn.addEventListener('click',() =>{
+        resetActiveBtn();
+        showVapeMenu(btn.id);
+        btn.classList.add('active-btn');
+    });
+});
+
+function resetActiveBtn(){
+    menuBtns.forEach((btn) => {
+        btn.classList.remove('active-btn');
+    });
+}
+
+function showVapeMenu(newMenuBtn){
+    activeBtn = newMenuBtn;
+    vapeItems.forEach((item) => {
+        if(item.classList.contains(activeBtn)){
+            item.style.display = "block";
+        } else {
+            item.style.display = "none";
+        }
+    });
+}
+
+</script>
