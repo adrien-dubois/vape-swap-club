@@ -11,7 +11,7 @@
 
             <a href="<?= $this->router->generate('product-list') ?>" class="nav-links <?= ($currentPage === 'product/list' || $currentPage === 'product/single') ? 'act' : '' ?>">Annonces</a>
 
-            <a href="#" class="nav-links">Vendeur</a>
+            <a href="<?= $this->router->generate('user-vendor') ?>" class="nav-links <?= ($currentUser === 'user/vendor') ? 'act' : '' ?>">Vendeur</a>
 
             <a href="<?= $this->router->generate('main-contact') ?>" class="nav-links <?= ($currentPage === 'main/contact') ? 'act' : '' ?>">Contact</a>
         </div>
@@ -25,7 +25,8 @@
             
             if(isset($_SESSION['userId'])) : 
             $currentUser = $_SESSION['userObject'];
-            $username = $_SESSION['username']; 
+            $username = $_SESSION['username'];
+            $role =  $currentUser->getRole();
             $countMsg = Message::countNotif();
 
             ?>
@@ -44,7 +45,7 @@
 
                 <!-- MENU & USERS METAS -->
                 <div class="menu-dropdown">
-                    <h3><?= $username; ?> <br><span><?= $currentUser->getRole(); ?></span></h3>
+                    <h3><?= $username; ?> <br><span><?= $role; ?></span></h3>
                     <ul>
 
                         <!-- CART -->
@@ -67,12 +68,17 @@
                                 Mon Profil
                             </a>
                         </li>
+
+                        <!-- ADD A PRODUCT -->
+                        <?php if($role == 'Admin' || $role == 'Vendor'): ?>
+                        
                         <li>
                             <a href="<?= $this->router->generate('product-add') ?>">
                                 <i class="far fa-edit"></i>
                                 Vendre du matos
                             </a>
                         </li>
+                        <?php endif; ?>
 
                         <!-- MESSENGER -->
                         <li>
@@ -83,6 +89,16 @@
                                 } ?>
                             </a>
                         </li>
+
+                        <!-- BACKOFFICE -->
+                        <?php if($role == 'Admin'): ?>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-laptop-code"></i>
+                                Backoffice
+                            </a>
+                        </li>
+                        <?php endif; ?>
 
                         <!-- LOGOUT -->
                         <li>
