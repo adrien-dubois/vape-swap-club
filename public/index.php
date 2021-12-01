@@ -89,6 +89,26 @@ $router->map(
     'main-redirect'
 );
 
+$router->map(
+    'GET',
+    '/privacy-policy',
+    [
+        'method'=> 'privacy',
+        'controller' => '\App\Controllers\MainController'
+    ],
+    'main-privacy'
+);
+
+$router->map(
+    'GET',
+    '/mentions-legales',
+    [
+        'method'=> 'legals',
+        'controller' => '\App\Controllers\MainController'
+    ],
+    'main-legals'
+);
+
 /* -----------
 --- PRODUCT ---
 ------------*/

@@ -14,18 +14,18 @@
     
     <div class="footer-center">
         <div>
-            <i class="fa fa-map-marker"></i>
-            <p><span>Vape Swap Club</span>Vape World, France</p>
+            <i class="fas fa-balance-scale"></i>
+            <p><a href="<?= $this->router->generate('main-legals') ?>">Mentions Légales</a></p>
         </div>
         <div>
-            <i class="fas fa-balance-scale"></i>
-                <p><a href="#">Mentions Légales</a></p>
-            </div>
-            <div>
-                <i class="fa fa-envelope"></i>
-                <p><a href="mailto: dubois.adrien.dev@gmail.com">Webmaster Contact</a></p>
-            </div>
+            <i class="fas fa-key"></i>
+            <p><a href="<?= $this->router->generate('main-privacy') ?>">Politique de confidentialité</a></p>
         </div>
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto: dubois.adrien.dev@gmail.com">Webmaster Contact</a></p>
+        </div>
+    </div>
         
         <div class="footer-right">
             <p class="footer-comp-about">

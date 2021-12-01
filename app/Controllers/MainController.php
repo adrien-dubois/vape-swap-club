@@ -109,4 +109,15 @@ class MainController extends CoreController {
 
         $this->show('main/redirect');
     }
+
+    public function privacy(){
+        $this->show('main/privacy',[
+            'pageTitle' => 'Politique de confidentialité'
+        ]);
+    }
+    public function legals(){
+        $this->show('main/legal',[
+            'pageTitle' => 'Mentions légales'
+        ]);
+    }
 }
