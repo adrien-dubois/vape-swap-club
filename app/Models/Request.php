@@ -110,8 +110,11 @@ class Request extends CoreModel{
         $pdoStatement = $pdo->prepare($sql);
 
         $pdoStatement->execute([
+            ':name' => $this->telephone,
             ':email' => $this->email,
-
+            ':telephone' => $this->telephone,
+            ':adress' => $this->adress,
+            ':app_user_id' => $this->app_user_id
         ]
     );
 

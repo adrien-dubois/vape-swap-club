@@ -41,14 +41,14 @@
 
                 <!-- EMAIL -->
                 <div class="input-container-vendor">
-                    <input type="text" name="email" class="input-vendor" required>
+                    <input type="text" name="email" class="input-vendor" value="<?= $request->getEmail() ?>" required>
                     <label for="" class="vendor-label">E-Mail</label>
                     <span>E-Mail</span>
                 </div>
 
                 <!-- PHONE -->
                 <div class="input-container-vendor">
-                    <input type="tel" name="phone" class="input-vendor" <?= $request->getTelephone() ?> required>
+                    <input type="tel" name="phone" class="input-vendor" value="<?= $request->getTelephone() ?>" required>
                     <label for="" class="vendor-label">Téléphone</label>
                     <span>Téléphone</span>
                 </div>
