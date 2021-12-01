@@ -459,20 +459,6 @@ $router->map(
 );
 
 /* -------------
---- CATEGORY ---
---------------*/
-
-$router->map(
-    'GET',
-    '/category',
-    [
-        'method' => 'home',
-        'controller' => 'App\Controllers\CategoryController'
-    ],
-    'category-home'
-);
-
-/* -------------
 --- DISPATCH ---
 -------------*/
 

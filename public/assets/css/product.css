@@ -9,6 +9,7 @@
     --button-color: #FF523B;
     --membercard-color: #17171D;
     --danger-color: rgb(143, 2, 2);
+    --inter-font: 'Inter', sans-serif;
 }
 
 .header{
@@ -605,4 +606,53 @@ th:last-child{
 .input-cover:focus + label{
     outline: 1px dotted var(--second-color);
     outline: -webkit-focus-ring-color auto 5px;
+}
+
+
+/* CATEGORIES LIST PAGE */
+
+.category-btns{
+    padding: 0.6rem 0;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.cat-btn{
+    font-family: var(--inter-font);
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: none;
+    border: none;
+    color: var(--second-color);
+    display: block;
+    margin: 0 1rem;
+    cursor: pointer;
+    outline: 0;
+    transition: opacity 0.4s ease-out;
+}
+
+.cat-btn::after{
+    content: '';
+    display: block;
+    height: 2px;
+    margin-left: auto;
+    margin-right: auto;
+    background: var(--second-color);
+    margin-top: 0.5rem;
+    width: 0;
+    transition: width 0.4s ease-out;
+}
+
+.cat-btn:hover::after{
+    width: 100%;
+}
+
+.cat-btn:hover{
+    opacity: 0.8;
+}
+
+.active-btn{
+    color: var(--first-color);
 }

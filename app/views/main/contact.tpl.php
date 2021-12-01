@@ -1,7 +1,10 @@
 <section class="contact-form">
     <div class="contact-content">
         <h2>Formulaire de contact</h2>
-        <p>Si vous souhaitez contacter l'équipe de <b>Vape Swap Club</b>, vous pouvez le faire via le formulaire de contact présent sur cette page, après avoir renseigné vos informations. <br> N'oubliez pas que pour contacter un vendeur, vous avez la messagerie privée à votre disposition, à partir de votre menu personnel.</p>
+        <p>Si vous souhaitez contacter l'équipe de <b>Vape Swap Club</b>, vous pouvez le faire via le formulaire de contact présent sur cette page, après avoir renseigné vos informations. 
+        <br>
+        <br>
+        N'oubliez pas que pour contacter un vendeur, vous avez la messagerie privée à votre disposition, à partir de votre menu personnel.</p>
     </div>
     <div class="contact-container">
         <div class="contact-info">

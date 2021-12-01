@@ -24,9 +24,30 @@
         <div class="row">
             <h2 class="list-title">Nos produits disponibles</h2>
         </div>
+
+    <div class="row">
+        <div class="category-btns">
+            <button type="button" id="dripper" class="cat-btn active-btn">Dripper</button>
+            <button type="button" id="atos" class="cat-btn">Atomiseurs</button>
+            <button type="button" id="mech" class="cat-btn">Mod mech</button>
+            <button type="button" id="bf" class="cat-btn">Bottom Feeder</button>
+        </div>
+    </div>
+
         <div class="row">
-            <?php foreach($products as $currentProduct) : ?>
-                <div class="column-4">
+            <?php foreach($products as $currentProduct) : 
+                // Stock category ID in var to add category's class for btns
+                $category = $currentProduct -> getCategory_id();
+            ?>
+
+                <!-- ADDING RIGHT CATEGORIES IN DIV'S CLASS TO ORDER BY CATS -->
+                <div class="column-4 <?= ($category == 1 || $category == 2) ? 'dripper' : 
+                (($category ==  4 || $category == 3 || $category == 7) ? 'atos' : 
+                (($category == 6 || $category == 9 || $category == 10) ? 'mech'
+                :
+                (($category == 5) ? 'bf'
+                : ''))) 
+                ?>">
                     <img src="<?= $uploadsUri . $currentProduct->getPicture() ?>">
                     <?php if($currentProduct->getStatus() == 2): ?>
                         <img src="<?= $assetsBaseUri ?>images/out.png" style="position: absolute; top: 0px; right: 0px;">
@@ -57,3 +78,5 @@
         </div>
 
     </div>
+
+    

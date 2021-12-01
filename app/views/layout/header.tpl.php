@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Roboto:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
     <script src="https://js.stripe.com/v3/"></script>
     <script src="<?= $assetsBaseUri; ?>js/stripe.js" defer></script>
     <script src="<?= $assetsBaseUri; ?>js/lightslider.js" defer></script>
