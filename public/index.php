@@ -230,6 +230,16 @@ $router->map(
 );
 
 
+$router->map(
+    'GET',
+    '/vendor',
+    [
+        'method' => 'vendor',
+        'controller' => '\App\Controllers\AppUserController'
+    ],
+    'user-vendor'
+);
+
 /* -----------
 --- CART   ---
 ------------*/

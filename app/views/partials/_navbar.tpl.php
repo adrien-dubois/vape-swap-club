@@ -11,7 +11,7 @@
 
             <a href="<?= $this->router->generate('product-list') ?>" class="nav-links <?= ($currentPage === 'product/list' || $currentPage === 'product/single') ? 'act' : '' ?>">Annonces</a>
 
-            <a href="#" class="nav-links">Vendeur</a>
+            <a href="<?= $this->router->generate('user-vendor') ?>" class="nav-links <?= ($currentUser === 'user/vendor') ? 'act' : '' ?>">Vendeur</a>
 
             <a href="<?= $this->router->generate('main-contact') ?>" class="nav-links <?= ($currentPage === 'main/contact') ? 'act' : '' ?>">Contact</a>
         </div>

@@ -454,4 +454,11 @@ class AppUserController extends CoreController{
             'user' => $user,
         ]);
     }
+
+    public function vendor(){
+
+        $this->show('user/vendor', [
+            'pageTitle' => 'Vendeur',
+        ]);
+    }
 }

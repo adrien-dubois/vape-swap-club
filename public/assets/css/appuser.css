@@ -1262,3 +1262,64 @@ input:checked.switch + label::before{
         margin-bottom: 40px;
     }
 }
+
+/* VENDOR PART */
+
+.container-form{
+    position: relative;
+    width: 100%;
+    padding: 2rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vendor-form{
+    width: 100%;
+    max-width: 820px;
+    height: 500px;
+    background: var(--background-register);
+    border-radius: 10px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, .4);
+    z-index: 1000;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.contact-vendor{
+    background-color: var(--backgroundOG-color);
+    position: relative;
+}
+
+.contact-vendor::before{
+    content: '';
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    background-color: var(--backgroundOG-color);
+    transform: rotate(45deg);
+    top: 50px;
+    left: -13px;
+}
+
+.circle{
+    border-radius: 50%;
+    background: linear-gradient(135deg, transparent 20%, var(--background-register));
+    position: absolute;
+}
+
+.circle.one{
+    width: 130px;
+    height: 130px;
+    top: 130px;
+    right: -40px;
+}
+
+.circle.two{
+    width: 80px;
+    height: 80px;
+    top: 10px;
+    right: 30px;
+}
