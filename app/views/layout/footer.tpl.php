@@ -6,7 +6,7 @@
         <p class="footer-links">
             <a href="<?= $this->router->generate('main-home'); ?>">Accueil</a>
             <a href="<?= $this->router->generate('product-list'); ?>">Annonces</a>
-            <a href="#">Catégories</a>
+            <!-- <a href="#">Catégories</a> -->
             <a href="<?= $this->router->generate('main-contact') ?>">Contact</a>
         </p>
         <p class="footer-comp-name">&copy;2021 Adrien Dubois Dev</p>

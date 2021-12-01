@@ -25,12 +25,16 @@
             <h2 class="list-title">Nos produits disponibles</h2>
         </div>
 
+        <div class="row">
+        <p><i>Trier par catégorie :</i></p>
+        </div>
+
     <div class="row">
         <div class="category-btns">
-            <button type="button" id="dripper" class="cat-btn active-btn">Dripper</button>
+            <button type="button" id="all" class="cat-btn active-btn">Tout</button>
+            <button type="button" id="dripper" class="cat-btn">Dripper</button>
             <button type="button" id="atos" class="cat-btn">Atomiseurs</button>
             <button type="button" id="mech" class="cat-btn">Mod mech</button>
-            <button type="button" id="bf" class="cat-btn">Bottom Feeder</button>
         </div>
     </div>
 
@@ -41,12 +45,10 @@
             ?>
 
                 <!-- ADDING RIGHT CATEGORIES IN DIV'S CLASS TO ORDER BY CATS -->
-                <div class="column-4 <?= ($category == 1 || $category == 2) ? 'dripper' : 
+                <div class="column-4 all <?= ($category == 1 || $category == 2) ? 'dripper' : 
                 (($category ==  4 || $category == 3 || $category == 7) ? 'atos' : 
-                (($category == 6 || $category == 9 || $category == 10) ? 'mech'
-                :
-                (($category == 5) ? 'bf'
-                : ''))) 
+                (($category == 6 || $category == 9 || $category == 10 || $category == 5) ? 'mech'
+                : '')) 
                 ?>">
                     <img src="<?= $uploadsUri . $currentProduct->getPicture() ?>">
                     <?php if($currentProduct->getStatus() == 2): ?>
@@ -79,4 +81,39 @@
 
     </div>
 
-    
+
+<script>
+
+const menuBtns = document.querySelectorAll('.cat-btn');
+const vapeItems = document.querySelectorAll('.column-4');
+
+let activeBtn = "all";
+
+showVapeMenu(activeBtn);
+
+menuBtns.forEach((btn) => {
+    btn.addEventListener('click',() =>{
+        resetActiveBtn();
+        showVapeMenu(btn.id);
+        btn.classList.add('active-btn');
+    });
+});
+
+function resetActiveBtn(){
+    menuBtns.forEach((btn) => {
+        btn.classList.remove('active-btn');
+    });
+}
+
+function showVapeMenu(newMenuBtn){
+    activeBtn = newMenuBtn;
+    vapeItems.forEach((item) => {
+        if(item.classList.contains(activeBtn)){
+            item.style.display = "block";
+        } else {
+            item.style.display = "none";
+        }
+    });
+}
+
+</script>
