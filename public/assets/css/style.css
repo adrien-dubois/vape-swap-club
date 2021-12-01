@@ -31,6 +31,7 @@ textarea{
     --input-color: #555;
     --border-color: #DADCE0;
     --body-font: 'Roboto', sans-serif;
+    --inter-font: 'Inter', sans-serif;
     --normal-font-size: 1rem;
     --small-font-size: .75rem;
 }

@@ -6,7 +6,7 @@
         <p class="footer-links">
             <a href="<?= $this->router->generate('main-home'); ?>">Accueil</a>
             <a href="<?= $this->router->generate('product-list'); ?>">Annonces</a>
-            <a href="#">Catégories</a>
+            <a href="#">Vendeur</a>
             <a href="<?= $this->router->generate('main-contact') ?>">Contact</a>
         </p>
         <p class="footer-comp-name">&copy;2021 Adrien Dubois Dev</p>
@@ -30,7 +30,7 @@
         <div class="footer-right">
             <p class="footer-comp-about">
                 <span>Disclaimer</span>
-                Ce site est un site de présentation, un side project juste destiné à partager mon code, et permettre de servir d'exemple de mes capacités. Vous pouvez vous inscrire, tester les diverses features, tout est fonctionnel, mais en aucun cas ce site est à but lucratif et/ou ne vends quelconque matériel ou objet.
+                Ce site est un site de présentation, un side project juste destiné à partager mon code, et permettre de servir d'exemple de mes capacités. Vous pouvez vous inscrire, tester les diverses features, tout est fonctionnel, mais en aucun cas ce site est à but lucratif et/ou ne vend quelconque matériel ou objet.
                 Vous pouvez retrouver le code du site sur mon GitHub, me retrouver sur LinkedIn ou me contacter via le formulaire de contact. Vous trouverez les liens vers mes réseaux ci-dessous.
             </p>
             <div class="footer-icons">
