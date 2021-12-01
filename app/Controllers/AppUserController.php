@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\Adress;
 use App\Models\AppUser;
 use App\Models\Order;
+use App\Models\Request;
 
 class AppUserController extends CoreController{
 
@@ -359,8 +360,6 @@ class AppUserController extends CoreController{
 
     public function updateProfil(){
 
-        // dd($_POST, $_FILES);
-
         $firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
         $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
         $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
@@ -455,10 +454,83 @@ class AppUserController extends CoreController{
         ]);
     }
 
+    /**
+     * Display vendor's request form
+     *
+     * @return void
+     */
     public function vendor(){
 
         $this->show('user/vendor', [
             'pageTitle' => 'Vendeur',
+            'request' => new Request(),
         ]);
+    }
+
+    public function sendRequest(){
+
+        $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+        $telephone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING);
+        $adress = filter_input(INPUT_POST, 'adress', FILTER_SANITIZE_STRING);
+        $app_user_id = filter_input(INPUT_POST, 'app_user_id', FILTER_SANITIZE_STRING);
+
+        $formIsValid = true;
+        $errorList = [];
+
+        if(empty($name)){
+            $errorList[] = "Merci de renseigner votre nom/prénom";
+            $formIsValid = false;
+        }
+        if(empty($email)){
+            $errorList[] = "Veuillez renseigner votre mail";
+            $formIsValid = false;
+        }
+        if(empty($telephone)){
+            $errorList[] = "Merci de saisir votre numéro de téléphone";
+            $formIsValid = false;
+        }
+        if(empty($adress)){
+            $errorList[] = "Veuillez remplir le champ adresse";
+            $formIsValid = false;
+        }
+
+        if($formIsValid === true){
+
+            $newRequest = new Request();
+            $newRequest->setName($name);
+            $newRequest->setEmail($email);
+            $newRequest->setTelephone($telephone);
+            $newRequest->setAdress($adress);
+            $newRequest->setApp_user_id($app_user_id);
+
+            if($newRequest->save()){
+
+                self::addFlash(
+                    'success',
+                    'Votre demande a bien été prise en compte.'
+                );
+
+                header('Location: ' . $this->router->generate('main-home'));
+                exit;
+            } else {
+                $errorList[] = "Une erreur s'est produite lors de la transmission de votre demande. Merci réessayer plus tard";
+            }
+        } else {
+            $errorList[] = "Une erreur s'est produite lors de la transmission de votre demande. Merci réessayer plus tard";
+        }
+
+        $request = new Request();
+        $request->setName(filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING));
+        $request->setEmail(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
+        $request->setTelephone(filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING));
+        $request->setAdress(filter_input(INPUT_POST, 'adress', FILTER_SANITIZE_STRING));
+
+        $this->show('user/vendor', [
+            'pageTitle' => 'Vendeur',
+            'errorList' => $errorList,
+            'request' => $request,
+        ]);
+
     }
 }

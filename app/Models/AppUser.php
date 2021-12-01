@@ -60,7 +60,7 @@ class AppUser extends CoreModel{
 
     
     /**
-     * Find auser by its ID
+     * Find a user by its ID
      *
      * @param int $userId
      * @return AppUser

@@ -2,7 +2,7 @@
     <div class="vendor-form">
         <div class="vendor-info">
             <h3 class="vendor-title">Devenir vendeur</h3>
-            <p class="vendor-text">Eu aute cillum eu aliquip est ipsum voluptate nisi ipsum occaecat ipsum Lorem sit esse. Enim ad consequat proident ad anim laboris aliquip consectetur.</p>
+            <p class="vendor-text">Pour pouvoir rejoindre notre équipe de vendeur et ainsi poster des annonces, merci de remplir le formulaire ci-contre. Soyez sûr de pouvoir justifier de l'authenticité de vos articles. Vous recevrez un message afin de vous confirmer votre nouveau statut.</p>
 
             <div class="infos-container">
 
@@ -25,15 +25,16 @@
         </div>
 
         <div class="contact-vendor">
-            <span class="circle one"></span>
-            <span class="circle two"></span>
 
             <form method="post" class="formulaire">
                 <h3 class="vendor-title">Infos vendeur</h3>
 
+                <?php require __DIR__ . '/../partials/_errors.tpl.php' ; ?>
+
+
                 <!-- FULL NAME -->
                 <div class="input-container-vendor">
-                    <input type="text" name="name" class="input-vendor" required>
+                    <input type="text" name="name" class="input-vendor" value="<?= $request->getName() ?>" required>
                     <label for="" class="vendor-label">Nom complet</label>
                     <span>Nom complet</span>
                 </div>
@@ -47,17 +48,20 @@
 
                 <!-- PHONE -->
                 <div class="input-container-vendor">
-                    <input type="tel" name="phone" class="input-vendor" required>
+                    <input type="tel" name="phone" class="input-vendor" <?= $request->getTelephone() ?> required>
                     <label for="" class="vendor-label">Téléphone</label>
                     <span>Téléphone</span>
                 </div>
 
                 <!-- ADRESS -->
                 <div class="input-container-vendor textarea">
-                    <textarea name="adress" class="input-vendor"></textarea>
+                    <textarea name="adress" class="input-vendor"><?= $request->getAdress() ?></textarea>
                     <label for="" class="vendor-label">Adresse complète</label>
                     <span>Adresse complète</span>
                 </div>
+
+                <!-- APP USER -->
+                <input type="text" value="<?= $_SESSION['userId'] ?>" name="app_user_id" hidden>
 
                 <!-- SUBMIT -->
                 <input type="submit" value="Envoyer" class="btn-vendor">

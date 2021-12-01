@@ -1303,26 +1303,6 @@ input:checked.switch + label::before{
     left: -13px;
 }
 
-.circle{
-    border-radius: 50%;
-    background: linear-gradient(135deg, transparent 20%, #161616);
-    position: absolute;
-}
-
-.circle.one{
-    width: 130px;
-    height: 130px;
-    top: 130px;
-    right: -40px;
-}
-
-.circle.two{
-    width: 80px;
-    height: 80px;
-    top: 10px;
-    right: 30px;
-}
-
 .formulaire{
     padding: 2.3rem 2.2rem;
     z-index: 10;
@@ -1508,6 +1488,10 @@ textarea.input-vendor{
 
 @media (max-width: 480px){
     .container-form{
-        padding: 1.5rem;
+        padding: 1.5rem-;
+    }
+
+    .vendor-info::before{
+        display: none;
     }
 }

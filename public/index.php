@@ -229,7 +229,6 @@ $router->map(
     'user-update'
 );
 
-
 $router->map(
     'GET',
     '/vendor',
@@ -238,6 +237,16 @@ $router->map(
         'controller' => '\App\Controllers\AppUserController'
     ],
     'user-vendor'
+);
+
+$router->map(
+    'POST',
+    '/vendor',
+    [
+        'method' => 'sendRequest',
+        'controller' => '\App\Controllers\AppUserController'
+    ],
+    'user-request'
 );
 
 /* -----------
