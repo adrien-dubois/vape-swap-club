@@ -1,0 +1,17 @@
+:root{
+    --first-color: #FFF;
+    --second-color: #FC833C;
+    --third-color: #5A5D62;
+    --input-color: #555;
+    --backgroundOG-color: #222222;
+    --background-color : #212121;
+    --background-register : #34302F;
+    --border-color: #DADCE0;
+    --button-color: #FF523B;
+    --messageMe-color: #3498db;
+    --messageRecipient-color: #bdc3c7;
+    --membercard-color: #17171D;
+    --danger-color: rgb(143, 2, 2);
+    --register-font: 'Montserrat', sans-serif;
+    --inter-font: 'Inter', sans-serif;
+}

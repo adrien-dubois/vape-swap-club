@@ -497,6 +497,20 @@ $router->map(
     'msg-delete'
 );
 
+/* ---------------
+--- BackOffice ---
+----------------*/
+
+$router->map(
+    'GET',
+    '/backoffice',
+    [
+        'method' => 'home',
+        'controller' => 'App\Controllers\BackOfficeController'
+    ],
+    'backoffice-home'
+);
+
 /* -------------
 --- DISPATCH ---
 -------------*/
