@@ -15,3 +15,91 @@
     --register-font: 'Montserrat', sans-serif;
     --inter-font: 'Inter', sans-serif;
 }
+
+.glob{
+    display: flex;
+}
+
+.sidebar{
+    width: 300px;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    background: var(--background-register);
+    z-index: 100;
+    transition: width 300ms;
+}
+
+.sidebar-brand{
+    height: 90px;
+    padding: 14px 0 14px 28px;
+    color: var(--second-color);
+}
+
+.sidebar-brand span{
+    display: inline-block;
+    margin-right: 14px;
+}
+
+.sidebar-menu{
+    margin-top: 14px;
+}
+
+.sidebar-menu a{
+    text-decoration: none;
+    padding-left: 14px;
+    display: block;
+    color: var(--first-color);
+    font-size: 15.4px;
+}
+
+.sidebar-menu li{
+    width: 90%;
+    margin-bottom: 28px;
+    padding-left: 10%;
+}
+
+.sidebar-menu a span:first-child{
+    padding-left: 14px;
+    font-size: 21px;
+    margin: 0 1rem;
+}
+
+.sidebar-menu a.active{
+    background: var(--backgroundOG-color);
+    padding-top: 14px;
+    padding-bottom: 14px;
+    color: var(--first-color);
+    border-radius:  30px 0 0 0;
+}
+
+.bo-content{
+    transition: margin-left 300ms;
+    margin-left: 28px;
+    margin-top: 14px;
+}
+
+.bo-cards{
+    display: flex;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 28px;
+    margin-top: 14px;
+}
+
+.card-single{
+    display: flex;
+    background: var(--background-register);
+    justify-content: space-between;
+    padding: 28px;
+    border-radius: 10px;
+    box-shadow: 2px 5px 10px 2px rgba(0 0 0 / 10%);
+}
+
+.card-single span:first-child{
+    color: var(--second-color);
+}
+
+.card-single span:last-child{
+    font-size: 28px;
+}
