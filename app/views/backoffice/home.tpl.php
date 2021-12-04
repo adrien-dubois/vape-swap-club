@@ -1,24 +1,11 @@
 <div class="glob">
 
-    <div class="sidebar">
-        <div class="sidebar-brand">
-            <h2><span class="fas fa-tools"></span>Administration</h2>
-        </div>
-
-        <div class="sidebar-menu">
-            <ul>
-                <li><a href="#" class="active" ><span class="fa fa-home"></span><span>Accueil</span></a></li>
-                <li><a href="#"><span class="fa fa-user-o" ></span><span>Utilisateurs</span></a></li>
-                <li><a href="#"><span class="fas fa-user-tie" ></span><span>Demande vendeurs</span></a></li>
-                <li><a href="#"><span class="fas fa-shopping-cart" ></span><span>Articles</span></a></li>
-                <li><a href="#"><span class="fas fa-tags" ></span><span>Catégories </span></a></li>
-            </ul>
-        </div>
-
-    </div>
+<?php require __DIR__ . '/../partials/_sidebar.tpl.php'; ?>
 
     <div class="bo-content">
-
+        <div class="bo-title">
+            <h3>Accueil</h3>
+        </div>
         <main>
             <div class="bo-cards">
 
@@ -37,10 +24,10 @@
                 <div class="card-single">
                     <div>
                         <h2>50</h2>
-                        <small>Vendeurs</small>
+                        <small>Ventes</small>
                     </div>
                     <div>
-                        <span class="fas fa-user-tie"></span>
+                        <span class="fas fa-money-bill-wave"></span>
                     </div>
                 </div>
 
@@ -72,9 +59,114 @@
                 <div class="ventes">
                     <div class="case">
                         <div class="header-case">
-                            <h2>Listes produits</h2>
+                            <h2>Derniers articles</h2>
                             <button class="bo-button">Voir plus<span class="fa fa-arrow-right"></span></button>
                         </div>
+                        <div class="body-case">
+                            <div class="tableau">
+                                <table width="100%" >
+                                    <thead>
+                                        <tr>
+                                            <td>ID</td>
+                                            <td>Nom</td>
+                                            <td>Prix</td>
+                                            <td>Vendeur</td>
+                                            <td>Date ajout</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <!-- PRODUCT -->
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Recoil</td>
+                                            <td>30€</td>
+                                            <td>Chen Zehn</td>
+                                            <td>04 décembre 21</td>
+                                        </tr>
+
+                                        <!-- PRODUCT -->
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Recoil</td>
+                                            <td>30€</td>
+                                            <td>Chen Zehn</td>
+                                            <td>04 décembre 21</td>
+                                        </tr>
+
+                                        <!-- PRODUCT -->
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Recoil</td>
+                                            <td>30€</td>
+                                            <td>Chen Zehn</td>
+                                            <td>04 décembre 21</td>
+                                        </tr>
+                                            
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stock">
+                    <div class="case">
+                        <div class="header-case">
+                            <h2>Vendeurs</h2>
+                        </div>
+
+                        <div class="body-case">
+
+                            <!-- VENDOR -->
+                            <div class="all-users">
+                                <div class="infs">
+                                    <img src="<?= $uploadsUri ?>id.jpg" width="30" height="30">
+                                    <div>
+                                        <h4>Omar</h4>
+                                        <small>Vendor</small>
+                                    </div>
+                                </div>
+
+                                <div class="vendor-ctact">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+
+                            <!-- VENDOR -->
+                            <div class="all-users">
+                                <div class="infs">
+                                    <img src="<?= $uploadsUri ?>id.jpg" width="30" height="30">
+                                    <div>
+                                        <h4>Omar</h4>
+                                        <small>Vendor</small>
+                                    </div>
+                                </div>
+
+                                <div class="vendor-ctact">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+
+                            <!-- VENDOR -->
+                            <div class="all-users">
+                                <div class="infs">
+                                    <img src="<?= $uploadsUri ?>id.jpg" width="30" height="30">
+                                    <div>
+                                        <h4>Omar</h4>
+                                        <small>Vendor</small>
+                                    </div>
+                                </div>
+
+                                <div class="vendor-ctact">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <button class="bo-button">Voir plus<span class="fa fa-arrow-right"></span></button>
                     </div>
                 </div>
             </div>
