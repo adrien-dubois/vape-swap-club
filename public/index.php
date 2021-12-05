@@ -89,6 +89,26 @@ $router->map(
     'main-redirect'
 );
 
+$router->map(
+    'GET',
+    '/privacy-policy',
+    [
+        'method'=> 'privacy',
+        'controller' => '\App\Controllers\MainController'
+    ],
+    'main-privacy'
+);
+
+$router->map(
+    'GET',
+    '/mentions-legales',
+    [
+        'method'=> 'legals',
+        'controller' => '\App\Controllers\MainController'
+    ],
+    'main-legals'
+);
+
 /* -----------
 --- PRODUCT ---
 ------------*/
@@ -247,6 +267,16 @@ $router->map(
         'controller' => '\App\Controllers\AppUserController'
     ],
     'user-request'
+);
+
+$router->map(
+    'GET',
+    '/user/delete/[i:userId]',
+    [
+        'method' => 'delete',
+        'controller' => '\App\Controllers\AppUserController'
+    ],
+    'user-delete'
 );
 
 /* -----------
@@ -475,6 +505,40 @@ $router->map(
         'controller' => 'App\Controllers\MsgController'
     ],
     'msg-delete'
+);
+
+/* ---------------
+--- BackOffice ---
+----------------*/
+
+$router->map(
+    'GET',
+    '/backoffice',
+    [
+        'method' => 'home',
+        'controller' => 'App\Controllers\BackOfficeController'
+    ],
+    'backoffice-home'
+);
+
+$router->map(
+    'GET',
+    '/backoffice/user',
+    [
+        'method' => 'user',
+        'controller' => 'App\Controllers\BackOfficeController'
+    ],
+    'backoffice-user'
+);
+
+$router->map(
+    'GET',
+    '/backoffice/products',
+    [
+        'method' => 'products',
+        'controller' => 'App\Controllers\BackOfficeController'
+    ],
+    'backoffice-products'
 );
 
 /* -------------

@@ -1,13 +1,14 @@
 - Commencer ACL
 - Backoffice
-- Mention légales
 - Error pages
 - MAJ Readme
-
+- Privacy Policy mise en page
+- Redirect after confirmation
 
 DONE :
 
 - Demande vendor
+- Mention légales
 - Tester Referer
 - Ajouter register sur login
 - Notifications messages

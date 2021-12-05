@@ -533,4 +533,20 @@ class AppUserController extends CoreController{
         ]);
 
     }
+
+    public function delete($id){
+
+        AppUser::delete($id);
+
+        self::addFlash(
+            'danger',
+            'Utilisateur supprimé'
+        );
+        
+        if(isset($_SERVER['HTTP_REFERER'])) {
+            $previous = $_SERVER['HTTP_REFERER'];
+        }
+        header("Location: " . $previous);
+        exit;
+    }
 }

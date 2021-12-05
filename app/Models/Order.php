@@ -49,6 +49,22 @@ class Order extends CoreModel{
         return $results;
     }
 
+    public static function findNbOrder(){
+        $pdo = Database::getPDO();
+        $sql = '
+            SELECT COUNT(*)
+            AS nb_order
+            FROM `order`
+            ';
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->execute();
+        $result = $pdoStatement->fetch();
+
+        $nbOrders = (int) $result['nb_order'];
+
+        return $nbOrders;
+    }
+
     /**
      * Find all orders from on user, searched by his ID
      *

@@ -58,6 +58,18 @@
     width: 100%;
 }
 
+.longtext{
+    margin: 1rem auto;
+    margin-top: 2rem;
+    padding: 25px;
+    border-radius: 15px;
+    background: var(--background-register);
+}
+
+.longtext a{
+    color: var(--messageMe-color);
+}
+
 .redirect-elements{
     margin: 0 auto;
     text-align: center;

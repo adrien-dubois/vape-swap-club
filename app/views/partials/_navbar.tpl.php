@@ -93,7 +93,7 @@
                         <!-- BACKOFFICE -->
                         <?php if($role == 'Admin'): ?>
                         <li>
-                            <a href="#">
+                            <a href="<?= $this->router->generate('backoffice-home') ?>">
                                 <i class="fas fa-laptop-code"></i>
                                 Backoffice
                             </a>
