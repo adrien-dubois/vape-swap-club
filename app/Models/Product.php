@@ -98,6 +98,27 @@ class Product extends CoreModel {
         return $result;
     }
 
+
+    /**
+     * Method to find all products that are in DB with options
+     *
+     * @return Product
+     */
+    public static function findAllForBackOffice(){
+
+        $pdo = Database::getPDO();
+        $sql = '
+                SELECT p.*, u.firstname, u.lastname, c.name AS cat_name
+                FROM product p
+                INNER JOIN app_user u ON p.app_user_id = u.id
+                INNER JOIN category c ON p.category_id = c.id
+            ';
+        $pdoStatement = $pdo->query($sql);
+        $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Product');
+
+        return $result;
+    }
+
     /**
      * Method to count the number of products that are in DB for the pagination
      *

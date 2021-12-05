@@ -60,7 +60,7 @@
                     <div class="case">
                         <div class="header-case">
                             <h2>Derniers articles</h2>
-                            <button class="bo-button">Voir plus<span class="fa fa-arrow-right"></span></button>
+                            <a href="<?= $this->router->generate('backoffice-products') ?>"><button class="bo-button">Voir plus<span class="fa fa-arrow-right"></span></button></a>
                         </div>
                         <div class="body-case">
                             <div class="tableau">

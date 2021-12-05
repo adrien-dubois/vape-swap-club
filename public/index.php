@@ -269,6 +269,16 @@ $router->map(
     'user-request'
 );
 
+$router->map(
+    'GET',
+    '/user/delete/[i:userId]',
+    [
+        'method' => 'delete',
+        'controller' => '\App\Controllers\AppUserController'
+    ],
+    'user-delete'
+);
+
 /* -----------
 --- CART   ---
 ------------*/
@@ -519,6 +529,16 @@ $router->map(
         'controller' => 'App\Controllers\BackOfficeController'
     ],
     'backoffice-user'
+);
+
+$router->map(
+    'GET',
+    '/backoffice/products',
+    [
+        'method' => 'products',
+        'controller' => 'App\Controllers\BackOfficeController'
+    ],
+    'backoffice-products'
 );
 
 /* -------------

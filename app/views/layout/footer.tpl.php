@@ -1,3 +1,4 @@
+</div>
 <!-- FOOTER -->
 <footer class="footer-distributed">
     <div class="footer-left">

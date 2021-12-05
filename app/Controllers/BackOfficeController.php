@@ -28,8 +28,21 @@ class BackOfficeController extends CoreController{
 
     public function user(){
 
+        $users = AppUser::findAll();
+
         $this->show('backoffice/user',[
-            'pageTitle' => 'Utilisateurs'
+            'pageTitle' => 'Utilisateurs',
+            'users'     => $users
+        ]);
+    }
+
+    public function products(){
+
+        $products = Product::findAllForBackOffice();
+
+        $this->show('backoffice/products',[
+            'pageTitle' => 'Articles',
+            'products' => $products
         ]);
     }
 }

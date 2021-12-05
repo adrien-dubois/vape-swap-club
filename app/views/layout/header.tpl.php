@@ -30,3 +30,4 @@
     require __DIR__ . '/../partials/_login-modal.tpl.php';
     require __DIR__ . '/../partials/_flash.tpl.php';
     ?>
+    <div class="all">
