@@ -511,6 +511,16 @@ $router->map(
     'backoffice-home'
 );
 
+$router->map(
+    'GET',
+    '/backoffice/user',
+    [
+        'method' => 'user',
+        'controller' => 'App\Controllers\BackOfficeController'
+    ],
+    'backoffice-user'
+);
+
 /* -------------
 --- DISPATCH ---
 -------------*/

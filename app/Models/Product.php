@@ -103,7 +103,7 @@ class Product extends CoreModel {
      *
      * @return Product
      */
-    public function findNbProducts(){
+    public static function findNbProducts(){
         $pdo = Database::getPDO();
         $sql = '
             SELECT COUNT(*)
@@ -168,13 +168,14 @@ class Product extends CoreModel {
      *
      * @return Product
      */
-    public function findCards(){
+    public static function findCards(){
 
         $pdo = Database::getPDO();
 
-        $sql = "SELECT *
-                FROM `product`
-                ORDER BY `created_at` DESC
+        $sql = "SELECT p.*, u.firstname, u.lastname
+                FROM `product` p
+                INNER JOIN `app_user` u ON p.app_user_id = u.id
+                ORDER BY p.created_at DESC
                 LIMIT 3 
         ";
 

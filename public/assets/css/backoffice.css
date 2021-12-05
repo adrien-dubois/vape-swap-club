@@ -84,6 +84,7 @@
     transition: margin-left 300ms;
     margin-left: 28px;
     margin-top: 14px;
+    width: calc(100% - 22%);
 }
 
 .bo-title h3{
@@ -241,7 +242,7 @@ main{
     margin-left: 7px;
 }
 
-.vendor-ctact .fas.fa-envelope{
+.vendor-ctact .fas{
     color: var(--second-color);
     cursor: pointer;
 }

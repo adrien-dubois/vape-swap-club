@@ -6,11 +6,20 @@
 
     <div class="sidebar-menu">
         <ul>
-            <li><a href="#" class="active"><span class="fa fa-home"></span><span>Accueil</span></a></li>
-            <li><a href="#"><span class="fa fa-user-o"></span><span>Utilisateurs</span></a></li>
-            <li><a href="#"><span class="fas fa-user-tie"></span><span>Demande vendeurs</span></a></li>
-            <li><a href="#"><span class="fas fa-shopping-cart"></span><span>Articles</span></a></li>
-            <li><a href="#"><span class="fas fa-tags"></span><span>Catégories </span></a></li>
+            <!-- HOME -->
+            <li><a href="<?= $this->router->generate('backoffice-home') ?>" class="active"><span class="fa fa-home"></span><span>Accueil</span></a></li>
+
+            <!-- USER -->
+            <li><a href="<?= $this->router->generate('backoffice-user') ?>" class=""><span class="fa fa-user-o"></span><span>Utilisateurs</span></a></li>
+
+            <!-- REQUEST -->
+            <li><a href="#" class=""><span class="fas fa-user-tie"></span><span>Demande vendeurs</span></a></li>
+
+            <!-- PRODUCTS -->
+            <li><a href="#" class=""><span class="fas fa-shopping-cart"></span><span>Articles</span></a></li>
+
+            <!-- CATEGORIES -->
+            <li><a href="#" class=""><span class="fas fa-tags"></span><span>Catégories </span></a></li>
         </ul>
     </div>
 

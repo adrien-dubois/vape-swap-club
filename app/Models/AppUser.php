@@ -98,6 +98,22 @@ class AppUser extends CoreModel{
         return $result;
     }
 
+    public static function findNbUsers(){
+        $pdo = Database::getPDO();
+        $sql = '
+            SELECT COUNT(*)
+            AS nb_users
+            FROM `app_user`
+            ';
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->execute();
+        $result = $pdoStatement->fetch();
+
+        $nbUsers = (int) $result['nb_users'];
+
+        return $nbUsers;
+    }
+
     /**
      * Find all users that are Vendors for the messenger
      *
