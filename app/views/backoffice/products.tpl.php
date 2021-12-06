@@ -7,7 +7,7 @@
             <h3>Produits</h3>
         </div>
         <main>
-            <div class="composant">
+            <div class="composant-full">
                 <div class="ventes">
                     <div class="case">
                         <div>
@@ -36,34 +36,48 @@
                                         ?>
                                             <tr>
                                                 <!-- ID -->
-                                                <td><?= $currentProduct->getId() ?></td>
+                                                <td>
+                                                    <?= $currentProduct->getId() ?>
+                                                </td>
 
                                                 <!-- NAME -->
-                                                <td><?= $currentProduct->getName() ?></td>
+                                                <td>
+                                                    <?= $currentProduct->getName() ?>
+                                                </td>
 
                                                 <!-- PRICE -->
-                                                <td><?= $currentProduct->getPrice() ?>€</td>
+                                                <td>
+                                                    <?= $currentProduct->getPrice() ?>€
+                                                </td>
 
                                                 <!-- CATEGORY -->
-                                                <td><?= $currentProduct->cat_name ?></td>
+                                                <td>
+                                                    <?= $currentProduct->cat_name ?>
+                                                </td>
 
                                                 <!-- VENDOR -->
-                                                <td><?= $currentProduct->firstname . ' ' . $currentProduct->lastname ?></td>
+                                                <td>
+                                                    <?= $currentProduct->firstname . ' ' . $currentProduct->lastname ?>
+                                                </td>
 
                                                 <!-- STATUS -->
                                                 <td>
-                                                    <?php
-                                                        if($currentProduct->getStatus() == 1){
-                                                            echo 'Disponible';
-                                                        } else{
-                                                            echo 'Vendu';
-                                                        }
-                                                    ?>
+                                                    <span class="status-element
+                                                    <?=
+                                                    ($currentProduct->getStatus() == 1) ? 'color-ok' :
+                                                    (($currentProduct->getStatus() == 2 ) ? 'color-no': '')
+                                                    ?>">
+
+                                                    </span>
+                                                    
+                                                    
                                                 </td>
 
                                                 <!-- CREATED DATE -->
-                                                <td><?php setlocale(LC_TIME, "fr_FR.utf8");
-                                                    echo strftime("%d %b %Y", strtotime($currentProduct->getCreated_at()))  ?></td>
+                                                <td>
+                                                    <?php setlocale(LC_TIME, "fr_FR.utf8");
+                                                    echo strftime("%d %b %Y", strtotime($currentProduct->getCreated_at()))  ?>
+                                                </td>
 
                                                 <!-- ACTIONS -->
                                                 <td style="justify-content: space-between;">

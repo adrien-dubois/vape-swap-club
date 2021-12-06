@@ -541,6 +541,16 @@ $router->map(
     'backoffice-products'
 );
 
+$router->map(
+    'GET',
+    '/backoffice/vendor',
+    [
+        'method' => 'vendor',
+        'controller' => 'App\Controllers\BackOfficeController'
+    ],
+    'backoffice-vendor'
+);
+
 /* -------------
 --- DISPATCH ---
 -------------*/

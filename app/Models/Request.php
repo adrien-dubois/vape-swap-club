@@ -64,8 +64,10 @@ class Request extends CoreModel{
     {
         $pdo = Database::getPDO();
         $sql = '
-            SELECT *
-            FROM `request`';
+                SELECT r.*, u.*
+                FROM `request` r
+                INNER JOIN `app_user` u ON r.app_user_id = u.id     
+        ';
         $pdoStatement = $pdo->query($sql);
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
 

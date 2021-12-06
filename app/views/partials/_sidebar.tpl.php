@@ -13,7 +13,7 @@
             <li><a href="<?= $this->router->generate('backoffice-user') ?>" class="<?= ($currentPage === 'backoffice/user') ? 'active' : '' ?>"><span class="fa fa-user-o"></span><span>Utilisateurs</span></a></li>
 
             <!-- REQUEST -->
-            <li><a href="#" class=""><span class="fas fa-user-tie"></span><span>Demande vendeurs</span></a></li>
+            <li><a href="<?= $this->router->generate('backoffice-vendor') ?>" class="<?= ($currentPage === 'backoffice/request') ?'active' : '' ?>"><span class="fas fa-user-tie"></span><span>Demande vendeurs</span></a></li>
 
             <!-- PRODUCTS -->
             <li><a href="<?= $this->router->generate('backoffice-products') ?>" class="<?= ($currentPage === 'backoffice/products') ? 'active' : '' ?>"><span class="fas fa-shopping-cart"></span><span>Articles</span></a></li>

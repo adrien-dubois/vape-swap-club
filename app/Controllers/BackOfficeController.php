@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\AppUser;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Request;
 
 class BackOfficeController extends CoreController{
 
@@ -42,7 +43,17 @@ class BackOfficeController extends CoreController{
 
         $this->show('backoffice/products',[
             'pageTitle' => 'Articles',
-            'products' => $products
+            'products'  => $products
+        ]);
+    }
+    
+    public function vendor(){
+
+        $request = Request::findAll();
+
+        $this->show('backoffice/request',[
+            'pageTitle' => 'Demande vendeur',
+            'request'   => $request,
         ]);
     }
 }

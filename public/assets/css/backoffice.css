@@ -150,6 +150,13 @@ main{
     grid-template-columns: 69% auto;
 }
 
+.composant-full{
+    margin-top: 49px;
+    display: grid;
+    grid-gap: 28px;
+    grid-template-columns: 85% auto;
+}
+
 .case{
     background: var(--background-register);
     border-radius: 10px;
@@ -212,6 +219,22 @@ main{
 .tableau tr td:last-child{
     display: flex;
     align-items: center;
+}
+
+.tableau td .status-element{
+    display: inline-block;
+    height: 15px;
+    width: 15px;
+    margin-left: 14px;
+    border-radius: 50%;
+}
+
+.status-element.color-ok{
+    background: #2ecc71;
+}
+
+.status-element.color-no{
+    background: #c0392b;
 }
 
 .tableau{
