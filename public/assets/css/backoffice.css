@@ -150,6 +150,13 @@ main{
     grid-template-columns: 69% auto;
 }
 
+.composant-full{
+    margin-top: 49px;
+    display: grid;
+    grid-gap: 28px;
+    grid-template-columns: 90% auto;
+}
+
 .case{
     background: var(--background-register);
     border-radius: 10px;
@@ -183,6 +190,28 @@ main{
     background: #aa5726;
 }
 
+#bo-button{
+    background: transparent;
+    display: flex;
+    border-radius: 10px;
+    border: 1px solid var(--second-color);
+    color: var(--first-color);
+    font-size: 14px;
+    padding: 7px 14px;
+    cursor: pointer;
+    transition: all .4s ease;
+}
+
+#bo-button:hover{
+    opacity: .8;
+    background: #aa5726;
+}
+
+span.fas.fa-check-circle{
+    color: #2ecc71;
+    margin-left: .5rem;
+}
+
 .tableau table{
     border-collapse: collapse;
 }
@@ -212,6 +241,22 @@ main{
 .tableau tr td:last-child{
     display: flex;
     align-items: center;
+}
+
+.tableau td .status-element{
+    display: inline-block;
+    height: 15px;
+    width: 15px;
+    margin-left: 14px;
+    border-radius: 50%;
+}
+
+.status-element.color-ok{
+    background: #2ecc71;
+}
+
+.status-element.color-no{
+    background: #c0392b;
 }
 
 .tableau{

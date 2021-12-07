@@ -7,7 +7,7 @@
             <h3>Utilisateurs</h3>
         </div>
         <main>
-            <div class="composant">
+            <div class="composant-full">
                 <div class="ventes">
                     <div class="case">
                         <div>
@@ -36,28 +36,43 @@
                                         ?>
                                             <tr>
                                                 <!-- ID -->
-                                                <td><?= $currentUser->getId() ?></td>
+                                                <td>
+                                                    <?= $currentUser->getId() ?>
+                                                </td>
 
                                                 <!-- NAME -->
-                                                <td><?= $currentUser->getFirstname() .' '. $currentUser->getLastname() ?></td>
+                                                <td>
+                                                    <?= $currentUser->getFirstname() .' '. $currentUser->getLastname() ?>
+                                                </td>
 
                                                 <!-- EMAIL -->
-                                                <td><?= $currentUser->getEmail() ?></td>
+                                                <td>
+                                                    <?= $currentUser->getEmail() ?>
+                                                </td>
 
                                                 <!-- PICTURE -->
                                                 <td>
-                                                    <img src="<?= $uploadsUri . $currentUser->getPicture() ?>" style="border-radius: 50%; width:30px; height: 30px;">
+                                                    <img src="<?= $uploadsUri . $currentUser->getPicture() ?>" style="border-radius: 50%; width:40px; height: 40px;">
                                                 </td>
 
                                                 <!-- ROLE -->
-                                                <td><?= $currentUser->getRole() ?></td>
+                                                <td>
+                                                    <?= $currentUser->getRole() ?>
+                                                </td>
 
                                                 <!-- STATUS -->
-                                                <td><?= $currentUser->getStatus() ?></td>
+                                                <td>
+                                                    <span class="status-element 
+                                                    <?= ($currentUser->getStatus() == 'verified') ? 'color-ok' :
+                                                    (($currentUser->getStatus() == 'not verified') ? 'color-no' :'')
+                                                    ?>"></span>
+                                                </td>
 
                                                 <!-- CREATED DATE -->
-                                                <td><?php setlocale(LC_TIME, "fr_FR.utf8");
-                                                    echo strftime("%d %b %Y", strtotime($currentUser->getCreated_at()))  ?></td>
+                                                <td>
+                                                    <?php setlocale(LC_TIME, "fr_FR.utf8");
+                                                    echo strftime("%d %b %Y", strtotime($currentUser->getCreated_at()))  ?>
+                                                </td>
 
                                                 <!-- ACTIONS -->
                                                 <td style="justify-content: space-between;">

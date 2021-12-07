@@ -541,6 +541,26 @@ $router->map(
     'backoffice-products'
 );
 
+$router->map(
+    'GET',
+    '/backoffice/vendor',
+    [
+        'method' => 'vendor',
+        'controller' => 'App\Controllers\BackOfficeController'
+    ],
+    'backoffice-vendor'
+);
+
+$router->map(
+    'POST',
+    '/backoffice/vendor',
+    [
+        'method' => 'vendorValidate',
+        'controller' => 'App\Controllers\BackOfficeController'
+    ],
+    'backoffice-vendorValidate'
+);
+
 /* -------------
 --- DISPATCH ---
 -------------*/
