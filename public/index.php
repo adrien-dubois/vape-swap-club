@@ -561,6 +561,26 @@ $router->map(
     'backoffice-vendorValidate'
 );
 
+$router->map(
+    'GET',
+    '/backoffice/products/edit/[i:productId]',
+    [
+        'method' => 'editProduct',
+        'controller' => 'App\Controllers\BackOfficeController'
+    ],
+    'backoffice-edit-product'
+);
+
+$router->map(
+    'POST',
+    '/backoffice/products/edit/[i:productId]',
+    [
+        'method' => 'updateProduct',
+        'controller' => 'App\Controllers\BackOfficeController'
+    ],
+    'backoffice-update-product'
+);
+
 /* -------------
 --- DISPATCH ---
 -------------*/

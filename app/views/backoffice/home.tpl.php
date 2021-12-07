@@ -9,7 +9,7 @@
         <main>
             <div class="bo-cards">
 
-                <!-- CARD -->
+                <!-- CARD NB USERS-->
                 <div class="card-single">
                     <div>
                         <h2><?=$nbUsers; ?></h2>
@@ -20,7 +20,7 @@
                     </div>
                 </div>
 
-                <!-- CARD -->
+                <!-- CARD NB ORDERS -->
                 <div class="card-single">
                     <div>
                         <h2><?= $nbOrders; ?></h2>
@@ -30,8 +30,19 @@
                         <span class="fas fa-money-bill-wave"></span>
                     </div>
                 </div>
+                
+                <!-- CARD NB VENDORS -->
+                <div class="card-single">
+                    <div>
+                        <h2><?= $nbVendors; ?></h2>
+                        <small>Vendeurs</small>
+                    </div>
+                    <div>
+                        <span class="fas fa-user-tie"></span>
+                    </div>
+                </div>
 
-                <!-- CARD -->
+                <!-- CARD NB PRODUCTS -->
                 <div class="card-single">
                     <div>
                         <h2><?= $nbProducts ?></h2>
@@ -42,16 +53,6 @@
                     </div>
                 </div>
 
-                <!-- CARD -->
-                <div class="card-single">
-                    <div>
-                        <h2>50</h2>
-                        <small>Catégories</small>
-                    </div>
-                    <div>
-                        <span class="fas fa-tags"></span>
-                    </div>
-                </div>
 
             </div>
     

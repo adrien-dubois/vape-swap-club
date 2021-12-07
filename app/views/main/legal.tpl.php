@@ -8,7 +8,7 @@ Merci de lire avec attention les différentes modalités d’utilisation du pré
 Responsable editorial : Dubois Adrien
 164 avenue des graviers
 Téléphone :0665354481
-Email : dubois.adrien.dev@gmail.com
+Email : adrien-dubois@white-umbrella.fr
 Site Web : <a href="http://vape-swap-club.white-umbrella.fr/">http://vape-swap-club.white-umbrella.fr/</a>
 </br>
 <p style="color: #FC833C;"><b>Hébergement : </b></p>
@@ -42,7 +42,7 @@ Dans l'hypothèse où un utilisateur ou visiteur souhaiterait mettre en place un
 <p style="color: #000;">Hostinger s’efforce de fournir sur le site http://vape-swap-club.white-umbrella.fr/ des informations aussi précises que possible. les renseignements figurant sur le site <a href="http://vape-swap-club.white-umbrella.fr/">http://vape-swap-club.white-umbrella.fr/</a> ne sont pas exhaustifs et les photos non contractuelles. Ils sont donnés sous réserve de modifications ayant été apportées depuis leur mise en ligne. Par ailleurs, tous les informations indiquées sur le site http://vape-swap-club.white-umbrella.fr/<span style="color: #000000;"><b> </b></span>sont données à titre indicatif, et sont susceptibles de changer ou d’évoluer sans préavis.  </p>
 </br>
 <p style="color: #FC833C;"><b>Limitation contractuelles sur les données : </b></p>
-Les informations contenues sur ce site sont aussi précises que possible et le site remis à jour à différentes périodes de l’année, mais peut toutefois contenir des inexactitudes ou des omissions. Si vous constatez une lacune, erreur ou ce qui parait être un dysfonctionnement, merci de bien vouloir le signaler par email, à l’adresse dubois.adrien.dev@gmail.com, en décrivant le problème de la manière la plus précise possible (page posant problème, type d’ordinateur et de navigateur utilisé, …).
+Les informations contenues sur ce site sont aussi précises que possible et le site remis à jour à différentes périodes de l’année, mais peut toutefois contenir des inexactitudes ou des omissions. Si vous constatez une lacune, erreur ou ce qui parait être un dysfonctionnement, merci de bien vouloir le signaler par email, à l’adresse adrien-dubois@white-umbrella.fr, en décrivant le problème de la manière la plus précise possible (page posant problème, type d’ordinateur et de navigateur utilisé, …).
 
 Tout contenu téléchargé se fait aux risques et périls de l'utilisateur et sous sa seule responsabilité. En conséquence, ne saurait être tenu responsable d'un quelconque dommage subi par l'ordinateur de l'utilisateur ou d'une quelconque perte de données consécutives au téléchargement. <span style="color: #000;">De plus, l’utilisateur du site s’engage à accéder au site en utilisant un matériel récent, ne contenant pas de virus et avec un navigateur de dernière génération mis-à-jour</span>
 

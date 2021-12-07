@@ -29,7 +29,7 @@
                 <div class="contact-icon"><i class="far fa-envelope"></i></div>
                 <div class="contact-text">
                     <h3>Email</h3>
-                    <p>dubois.adrien.dev@gmail.com</p>
+                    <p>adrien-dubois@white-umbrella.fr</p>
                 </div>
             </div>
         </div>

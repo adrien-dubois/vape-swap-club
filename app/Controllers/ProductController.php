@@ -264,8 +264,8 @@ class ProductController extends CoreController
         $product->setSubtitle(filter_input(INPUT_POST, 'subtitle', FILTER_SANITIZE_STRING));
         $product->setPrice((float) filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_FLOAT));
         $product->setRate((int) filter_input(INPUT_POST, 'rate', FILTER_SANITIZE_NUMBER_INT));
-        $product->setCategory_id((int) filter_input(INPUT_POST, 'category', FILTER_SANITIZE_STRING));
-        $product->setTypeId((int) filter_input(INPUT_POST, 'type', FILTER_SANITIZE_STRING));
+        $product->setCategory_id((int) filter_input(INPUT_POST, 'category', FILTER_SANITIZE_NUMBER_INT));
+        $product->setTypeId((int) filter_input(INPUT_POST, 'type', FILTER_SANITIZE_NUMBER_INT));
 
         // Re-fill all selects in case of error
         $allTypes = Type::findAll();

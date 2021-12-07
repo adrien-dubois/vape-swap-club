@@ -18,8 +18,6 @@
             <!-- PRODUCTS -->
             <li><a href="<?= $this->router->generate('backoffice-products') ?>" class="<?= ($currentPage === 'backoffice/products') ? 'active' : '' ?>"><span class="fas fa-shopping-cart"></span><span>Articles</span></a></li>
 
-            <!-- CATEGORIES -->
-            <li><a href="#" class=""><span class="fas fa-tags"></span><span>Catégories </span></a></li>
         </ul>
     </div>
 
