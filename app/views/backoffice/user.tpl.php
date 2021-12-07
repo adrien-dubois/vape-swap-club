@@ -80,9 +80,6 @@
                                                     <!-- DELETE -->
                                                     <a href="<?= $this->router->generate('user-delete', ['userId' => $currentUser->getId()]) ?>" onclick="return confirm('Supprimer l\'utilisateur n° <?= $currentUser->getId() ?> ?')"><span class="fas fa-trash-alt"></span></a>
 
-                                                    <!-- EDIT -->
-                                                    <a href=""><span class="fas fa-edit"></span></a>
-
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

@@ -10,7 +10,7 @@
             <a href="<?= $this->router->generate('user-vendor'); ?>">Vendeur</a>
             <a href="<?= $this->router->generate('main-contact'); ?>">Contact</a>
         </p>
-        <p class="footer-comp-name">&copy;2021 Adrien Dubois Dev</p>
+        <p class="footer-comp-name">&copy;2021 White Umbrella - Adrien Dubois</p>
     </div>
     
     <div class="footer-center">

@@ -27,7 +27,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php 
+                                        
+                                        <?php if(empty($requests)): ?>
+
+                                            <tr>
+                                                <td>
+                                                   <i>
+                                                       Vous n'avez pas de requêtes pour le moment.
+                                                   </i> 
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        else :    
                                         foreach($requests as $currentRequest): 
                                         ?>
                                         <tr>
@@ -71,8 +82,8 @@
 
                                                     <input type="hidden" name="request_id" value="<?= $currentRequest->getId() ?> ">
 
-                                                    <button id="bo-button" type="submit">Valider
-                                                        <span class="fas fa-check-circle"></span>
+                                                    <button style="font-size: 14px;" type="submit">
+                                                        Accepter
                                                     </button>
                                                 </form>
                                                 
@@ -82,7 +93,9 @@
                                             </td>
                                         </tr>
 
-                                        <?php endforeach; ?>
+                                        <?php endforeach;
+                                            endif;
+                                        ?>
                                     </tbody>
 
                                 </table>

@@ -47,7 +47,7 @@
                         <div class="input-box">
                             <span class="detail">Type de l'article</span>
                             <select name="type" class="input2" style="width: 200px;" required>
-                                <option disabled selected>Choisir un type</zzzzzoption>
+                                <option disabled selected>Choisir un type</option>
                                 <?php foreach ($allTypes as $currentType) : ?>
                                     <option value="<?= $currentType->getId() ?>"><?= $currentType->getName() ?></option>
                                 <?php endforeach; ?>
