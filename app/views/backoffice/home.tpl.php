@@ -124,7 +124,7 @@
                         <?php endforeach;  ?>
 
                         </div>
-                        <a href="<?= $this->router->generate('backoffice-user') ?>">
+                        <a href="<?= $this->router->generate('backoffice-vendor') ?>">
                             <button class="bo-button" style="margin: 1rem;">Voir plus<span class="fa fa-arrow-right"></span></button>
                         </a>
                     </div>

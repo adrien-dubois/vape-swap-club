@@ -154,7 +154,7 @@ main{
     margin-top: 49px;
     display: grid;
     grid-gap: 28px;
-    grid-template-columns: 85% auto;
+    grid-template-columns: 90% auto;
 }
 
 .case{
@@ -188,6 +188,28 @@ main{
 .header-case button:hover,
 .case button:hover{
     background: #aa5726;
+}
+
+#bo-button{
+    background: transparent;
+    display: flex;
+    border-radius: 10px;
+    border: 1px solid var(--second-color);
+    color: var(--first-color);
+    font-size: 14px;
+    padding: 7px 14px;
+    cursor: pointer;
+    transition: all .4s ease;
+}
+
+#bo-button:hover{
+    opacity: .8;
+    background: #aa5726;
+}
+
+span.fas.fa-check-circle{
+    color: #2ecc71;
+    margin-left: .5rem;
 }
 
 .tableau table{

@@ -30,6 +30,11 @@ class Request extends CoreModel{
     /**
      * @var int
      */
+    private $accepted;
+
+    /**
+     * @var int
+     */
     private $app_user_id;
     
 
@@ -64,9 +69,8 @@ class Request extends CoreModel{
     {
         $pdo = Database::getPDO();
         $sql = '
-                SELECT r.*, u.*
-                FROM `request` r
-                INNER JOIN `app_user` u ON r.app_user_id = u.id     
+                SELECT *
+                FROM `request`      
         ';
         $pdoStatement = $pdo->query($sql);
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
@@ -112,7 +116,7 @@ class Request extends CoreModel{
         $pdoStatement = $pdo->prepare($sql);
 
         $pdoStatement->execute([
-            ':name' => $this->telephone,
+            ':name' => $this->name,
             ':email' => $this->email,
             ':telephone' => $this->telephone,
             ':adress' => $this->adress,
@@ -143,11 +147,12 @@ class Request extends CoreModel{
         $sql = "
                 UPDATE `request`
                 SET
-                name = :name
+                name = :name,
                 email = :email,
-                telephone = :telephone
-                adress = :adress
-                app_user_id = :app_user_id
+                telephone = :telephone,
+                adress = :adress,
+                accepted = :accepted,
+                app_user_id = :app_user_id,
                 updated_at = NOW()
                 WHERE id = :id
                 ";
@@ -160,6 +165,7 @@ class Request extends CoreModel{
         $pdoStatement->bindValue(':email', $this->email, PDO::PARAM_STR);
         $pdoStatement->bindValue(':telephone', $this->telephone, PDO::PARAM_STR);
         $pdoStatement->bindValue(':adress', $this->adress, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':accepted', $this->accepted, PDO::PARAM_INT);
         $pdoStatement->bindValue(':app_user_id', $this->app_user_id, PDO::PARAM_INT);
 
         $updatedRows = $pdoStatement->execute();
@@ -302,6 +308,30 @@ class Request extends CoreModel{
     public function setApp_user_id(int $app_user_id)
     {
         $this->app_user_id = $app_user_id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of accepted
+     *
+     * @return  int
+     */ 
+    public function getAccepted()
+    {
+        return $this->accepted;
+    }
+
+    /**
+     * Set the value of accepted
+     *
+     * @param  int  $accepted
+     *
+     * @return  self
+     */ 
+    public function setAccepted(int $accepted)
+    {
+        $this->accepted = $accepted;
 
         return $this;
     }
