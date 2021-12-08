@@ -278,6 +278,27 @@ button .btn-delete,
     color: var(--first-color);
 }
 
+.btn-login{
+    margin: 20px auto;
+    width: 200px;
+    height: 50px;
+    border-radius: 40px;
+    outline: none;
+    font-weight: 500;
+    font-size: 1rem;
+    border: none;
+    background: var(--second-color);
+    color: var(--first-color);
+    cursor: pointer;
+    box-shadow: 8px 10px 30px rgba(0, 0, 0, 0.493);
+    transition: 0.4s;
+}
+
+.btn-login:hover{
+    background-color: #c7662e;
+    color: var(--first-color);
+}
+
 .btn-modify{
     margin-top: 20px;
     margin-right: 15px;

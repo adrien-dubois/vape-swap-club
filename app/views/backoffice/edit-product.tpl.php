@@ -12,6 +12,8 @@
                     <div class="cont">
                         <?php require __DIR__ . '/../partials/_errors.tpl.php'; ?>
                         <form action="" method="post" enctype="multipart/form-data">
+                            <!-- CSRF TOKEN -->
+                            <input type="hidden" name="token" value="<?= $csrfToken; ?>">
                             <div class="user-details">
 
                                 <!-- NAME -->

@@ -88,6 +88,9 @@
 
                     <div class="user-details">
 
+                        <!-- CSRF TOKEN -->
+                        <input type="hidden" name="token" value="<?= $csrfToken; ?>">
+
                         <!-- NAME -->
                         <div class="input-box">
                             <span class="detail">Nom complet</span>

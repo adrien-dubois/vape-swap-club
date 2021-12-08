@@ -25,6 +25,8 @@
 
             <!-- SELECT VENDOR TO DISCUSS -->
             <form action="" method="post">
+                <!-- CSRF TOKEN -->
+                <input type="hidden" name="token" value="<?= $csrfToken; ?>">
                 <div class="mailbox-search">
                     <span class="mailbox-text">Sélectionnez un vendeur </span>
                     <select name="recipientId">

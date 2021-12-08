@@ -36,7 +36,49 @@ class CoreController{
             $currentRoute = $match['name'];
 
             $acl = [
-
+                // PRODUCT
+                'product-add' => ['Vendor', 'Admin'],
+                'product-insert' => ['Vendor', 'Admin'],
+                'product-adding' => ['Vendor', 'Admin'],
+                'product-pictures' => ['Vendor', 'Admin'],
+                // USER
+                'user-show' => ['Vaper', 'Vendor', 'Admin'],
+                'user-edit' => ['Vaper', 'Vendor', 'Admin'],
+                'user-update' => ['Vaper', 'Vendor', 'Admin'],
+                'user-delete' => ['Admin'],
+                // CART
+                'cart-home' => ['Vaper', 'Vendor', 'Admin'],
+                'cart-command' => ['Vaper', 'Vendor', 'Admin'],
+                'cart-order' => ['Vaper', 'Vendor', 'Admin'],
+                'cart-confirm' => ['Vaper', 'Vendor', 'Admin'],
+                'cart-add' => ['Vaper', 'Vendor', 'Admin'],
+                'cart-remove' => ['Vaper', 'Vendor', 'Admin'],
+                'cart-empty' => ['Vaper', 'Vendor', 'Admin'],
+                'cart-paiement' => ['Vaper', 'Vendor', 'Admin'],
+                'cart-form' => ['Vaper', 'Vendor', 'Admin'],
+                'cart-redirect' => ['Vaper', 'Vendor', 'Admin'],
+                'adress-update' => ['Vaper', 'Vendor', 'Admin'],
+                'adress-edit' => ['Vaper', 'Vendor', 'Admin'],
+                // MESSAGES
+                'msg-home' => ['Vaper', 'Vendor', 'Admin'],
+                'msg-redirect' => ['Vaper', 'Vendor', 'Admin'],
+                'msg-new' => ['Vaper', 'Vendor', 'Admin'],
+                'msg-send' => ['Vaper', 'Vendor', 'Admin'],
+                'msg-read' => ['Vaper', 'Vendor', 'Admin'],
+                'msg-submit' => ['Vaper', 'Vendor', 'Admin'],
+                'msg-chat' => ['Vaper', 'Vendor', 'Admin'],
+                'msg-load' => ['Vaper', 'Vendor', 'Admin'],
+                'msg-more' => ['Vaper', 'Vendor', 'Admin'],
+                'msg-delete' => ['Vaper', 'Vendor', 'Admin'],
+                // BACKOFFICE
+                'backoffice-home' => ['Admin'],
+                'backoffice-user' => ['Admin'],
+                'backoffice-products' => ['Admin'],
+                'backoffice-vendor' => ['Admin'],
+                'backoffice-vendorValidate' => ['Admin'],
+                'backoffice-edit-product' => ['Admin'],
+                'backoffice-update-product' => ['Admin'],
+                
             ];
 
             // We check if the current route is a protected route
@@ -51,8 +93,20 @@ class CoreController{
 
             // We check the routes which are protected by CSRF Token
 
-            $csrfRoutes = [
-
+            $csrfRoutes = 
+            [
+                'main-sendContact',
+                'product-insert',
+                'product-pictures',
+                'user-insert',
+                'user-activation',
+                'user-update',
+                'user-request',
+                'cart-order',
+                'adress-edit',
+                'msg-redirect',
+                'backoffice-vendorValidate',
+                'backoffice-update-product',
             ];
 
             // We check the current route is a CSRF protected route
@@ -78,6 +132,17 @@ class CoreController{
         header('Location: '.$this->router->generate($page));
     }
 
+    protected function generateToken(){
+
+        // We generate anti CSRF key, that we send to form
+        $csrfToken = bin2hex(random_bytes(32));
+
+        // And we stock a copy into user's session
+        $_SESSION['csrfToken'] = $csrfToken;
+
+        return $csrfToken;
+    }
+
     public function checkAuthorization($roles = []){
         // If user not connected, redirect to home
         if(!isset($_SESSION['userObject'])){
@@ -85,7 +150,7 @@ class CoreController{
                 'danger',
                 'Merci de vous connecter'
             );
-            $this->redirect('main-home');
+            $this->redirect('main-login');
             exit;
         } else {
             // else we check the user role

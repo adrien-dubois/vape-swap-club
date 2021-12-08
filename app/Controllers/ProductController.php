@@ -100,11 +100,12 @@ class ProductController extends CoreController
         $allBrands = Brand::findAll();
 
         $this->show('product/add', [
-            'pageTitle' => 'Ajouter une annonce',
-            'allTypes' => $allTypes,
+            'pageTitle'     => 'Ajouter une annonce',
+            'allTypes'      => $allTypes,
             'allCategories' => $allCategories,
-            'allBrands' => $allBrands,
-            'product' => new Product(),
+            'allBrands'     => $allBrands,
+            'product'       => new Product(),
+            'csrfToken'     => $this->generateToken(),
         ]);
     }
 
@@ -299,7 +300,8 @@ class ProductController extends CoreController
         if($permission->can($user, ProductVoter::READ, $post)){
             $this->show('product/adding', [
                 'pageTitle' => 'Ajouter une annonce',
-                'product' => new Product(),
+                'product'   => new Product(),
+                'csrfToken' => $this->generateToken(),
             ]);
         } $this->err403('
             Vous n\'avez pas l\'autorisation d\'accéder à cette page

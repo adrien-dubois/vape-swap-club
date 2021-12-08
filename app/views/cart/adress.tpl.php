@@ -13,6 +13,9 @@
                 <!-- FORM -->
                 <form action="" method="POST" autocomplete="off">
 
+                    <!-- CSRF TOKEN -->
+                    <input type="hidden" name="token" value="<?= $csrfToken; ?>">
+
                     <div class="user-details">
 
                         <!-- NAME -->

@@ -77,6 +77,8 @@
                                             <td>
                                                 <?php if($currentRequest->getAccepted() == 1 ): ?>
                                                 <form action="" method="post">
+                                                    <!-- CSRF TOKEN -->
+                                                    <input type="hidden" name="token" value="<?= $csrfToken; ?>">
 
                                                     <input type="hidden" name="user_id" value="<?= $currentRequest->getApp_user_id() ?>">
 

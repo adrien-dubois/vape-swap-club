@@ -13,6 +13,10 @@
     <div class="profil-form">
         <div class="cont">
             <form autocomplete="off" method="post" enctype="multipart/form-data">
+
+            <!-- CSRF TOKEN -->
+            <input type="hidden" name="token" value="<?= $csrfToken; ?>">
+            
                 <div class="user-details">
 
                     <!--  LASTNAME -->

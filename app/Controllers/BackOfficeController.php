@@ -57,8 +57,9 @@ class BackOfficeController extends CoreController{
         $request = Request::findAll();
 
         $this->show('backoffice/request',[
-            'pageTitle' => 'Demande vendeur',
+            'pageTitle'  => 'Demande vendeur',
             'requests'   => $request,
+            'csrfToken'  => $this->generateToken(),
         ]);
     }
 
@@ -110,6 +111,7 @@ class BackOfficeController extends CoreController{
             'allCategories'  => $allCategories,
             'allBrands'      => $allBrands,
             'currentProduct' => $currentProduct,
+            'csrfToken'      => $this->generateToken(),
         ]);
     }
 

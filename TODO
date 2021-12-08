@@ -1,12 +1,12 @@
-- Commencer ACL
-- Backoffice
 - Error pages
 - MAJ Readme
 - Privacy Policy mise en page
-- Redirect after confirmation
 
 DONE :
-
+- CSRF Protection List
+- Commencer ACL
+- Redirect after confirmation
+- Backoffice
 - Demande vendor
 - Mention légales
 - Tester Referer
