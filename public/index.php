@@ -39,14 +39,33 @@ $router->map(
 );
 
 $router->map(
-        'POST',
-        '/',
-        [
-            'method' => 'connect',
-            'controller' => '\App\Controllers\AppUserController'
-        ],
-        'main-connect'
+    'POST',
+    '/',
+    [
+        'method' => 'connect',
+        'controller' => '\App\Controllers\AppUserController'
+    ],
+    'main-connect'
+);
 
+$router->map(
+    'GET',
+    '/login',
+    [
+        'method' => 'login',
+        'controller' => '\App\Controllers\AppUserController'
+    ],
+    'main-login'
+);
+
+$router->map(
+    'POST',
+    '/login',
+    [
+        'method' => 'loginCheck',
+        'controller' => '\App\Controllers\AppUserController'
+    ],
+    'main-login-check'
 );
 
 $router->map(

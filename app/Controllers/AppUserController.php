@@ -108,6 +108,69 @@ class AppUserController extends CoreController{
 
     }
 
+    public function login(){
+
+        $this->show('main/login',[
+            'pageTitle' => 'Connexion',
+        ]);
+    }
+
+    public function loginCheck(){
+        
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+
+        $formIsValid = true;
+        $errorList = [];
+
+        if(empty($email)){
+            $errorList[] = "Vous devez saisir votre email";
+            $formIsValid = false;
+        }
+
+        if(empty($password)){
+            $errorList[] = "Veuillez renseigner votre mot de passe";
+            $formIsValid = false;
+        }
+
+        if($formIsValid === true){
+
+            /**@var AppUser $newConnect */
+            $newConnect = AppUser::findByEmail($email);
+
+            if($newConnect === false){
+                $errorList = "Email/Mot de passe incorrect";
+                $formIsValid = false;
+            } else {
+                $userPass = $newConnect->getPassword();
+
+                if(password_verify($password, $userPass)){
+
+                    $_SESSION['userObject'] = $newConnect;
+                    $_SESSION['userId'] = $newConnect->getId();
+                    $_SESSION['username'] = $newConnect->getFirstname() . ' ' . $newConnect->getLastname();
+
+                    self::addFlash(
+                        'success', 
+                        'Connexion effectuée'
+                    );
+
+                    header('Location: ' . $this->router->generate('main-home'));
+                    exit;
+                } else {
+                    $errorList = "Email/Mot de passe incorrect";
+                    $formIsValid = false;
+                }
+            }
+        }
+
+        $this->show('main/login',[
+            'pageTitle' => 'Connexion',
+            'errorList' => $errorList,
+
+        ]);
+    }
+
 
     /**
      * Method to register a new account
@@ -318,7 +381,7 @@ class AppUserController extends CoreController{
                                 'Votre compte a bien été activé'
                             );
             
-                            header('Location: ' . $this->router->generate('main-home'));
+                            header('Location: ' . $this->router->generate('main-login'));
                             exit;
                         }
                     }

@@ -36,7 +36,31 @@ class CoreController{
             $currentRoute = $match['name'];
 
             $acl = [
-
+                // PRODUCT
+                'product-add' => ['Vendor', 'Admin'],
+                'product-insert' => ['Vendor', 'Admin'],
+                'product-adding' => ['Vendor', 'Admin'],
+                'product-pictures' => ['Vendor', 'Admin'],
+                // USER
+                'user-show' => ['Vaper', 'Vendor', 'Admin'],
+                'user-edit' => ['Vaper', 'Vendor', 'Admin'],
+                'user-update' => ['Vaper', 'Vendor', 'Admin'],
+                'user-delete' => ['Admin'],
+                // CART
+                'cart-home' => ['Vaper', 'Vendor', 'Admin'],
+                'cart-command' => ['Vaper', 'Vendor', 'Admin'],
+                'cart-order' => ['Vaper', 'Vendor', 'Admin'],
+                'cart-confirm' => ['Vaper', 'Vendor', 'Admin'],
+                'cart-add' => ['Vaper', 'Vendor', 'Admin'],
+                'cart-remove' => ['Vaper', 'Vendor', 'Admin'],
+                'cart-empty' => ['Vaper', 'Vendor', 'Admin'],
+                'cart-paiement' => ['Vaper', 'Vendor', 'Admin'],
+                'cart-form' => ['Vaper', 'Vendor', 'Admin'],
+                'cart-redirect' => ['Vaper', 'Vendor', 'Admin'],
+                'adress-update' => ['Vaper', 'Vendor', 'Admin'],
+                'adress-edit' => ['Vaper', 'Vendor', 'Admin'],
+                // MESSAGES
+                
             ];
 
             // We check if the current route is a protected route
@@ -85,7 +109,7 @@ class CoreController{
                 'danger',
                 'Merci de vous connecter'
             );
-            $this->redirect('main-home');
+            $this->redirect('main-login');
             exit;
         } else {
             // else we check the user role
