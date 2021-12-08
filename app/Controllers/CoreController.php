@@ -60,6 +60,24 @@ class CoreController{
                 'adress-update' => ['Vaper', 'Vendor', 'Admin'],
                 'adress-edit' => ['Vaper', 'Vendor', 'Admin'],
                 // MESSAGES
+                'msg-home' => ['Vaper', 'Vendor', 'Admin'],
+                'msg-redirect' => ['Vaper', 'Vendor', 'Admin'],
+                'msg-new' => ['Vaper', 'Vendor', 'Admin'],
+                'msg-send' => ['Vaper', 'Vendor', 'Admin'],
+                'msg-read' => ['Vaper', 'Vendor', 'Admin'],
+                'msg-submit' => ['Vaper', 'Vendor', 'Admin'],
+                'msg-chat' => ['Vaper', 'Vendor', 'Admin'],
+                'msg-load' => ['Vaper', 'Vendor', 'Admin'],
+                'msg-more' => ['Vaper', 'Vendor', 'Admin'],
+                'msg-delete' => ['Vaper', 'Vendor', 'Admin'],
+                // BACKOFFICE
+                'backoffice-home' => ['Admin'],
+                'backoffice-user' => ['Admin'],
+                'backoffice-products' => ['Admin'],
+                'backoffice-vendor' => ['Admin'],
+                'backoffice-vendorValidate' => ['Admin'],
+                'backoffice-edit-product' => ['Admin'],
+                'backoffice-update-product' => ['Admin'],
                 
             ];
 
@@ -75,8 +93,11 @@ class CoreController{
 
             // We check the routes which are protected by CSRF Token
 
-            $csrfRoutes = [
-
+            $csrfRoutes = 
+            [
+                'main-sendContact',
+                'product-insert',
+                'product-pictures',
             ];
 
             // We check the current route is a CSRF protected route
@@ -100,6 +121,17 @@ class CoreController{
 
     protected function redirect($page){
         header('Location: '.$this->router->generate($page));
+    }
+
+    protected function generateToken(){
+
+        // We generate anti CSRF key, that we send to form
+        $csrfToken = bin2hex(random_bytes(32));
+
+        // And we stock a copy into user's session
+        $_SESSION['csrfToken'] = $csrfToken;
+
+        return $csrfToken;
     }
 
     public function checkAuthorization($roles = []){

@@ -38,7 +38,7 @@ class MainController extends CoreController {
 
         $this->show('main/contact',[
             'pageTitle' => 'Contact',
-            
+            'csrfToken' => $this->generateToken(),
         ]);
     }
 
@@ -107,7 +107,9 @@ class MainController extends CoreController {
 
     public function redirection(){
 
-        $this->show('main/redirect');
+        $this->show('main/redirect',[
+            'pageTitle' => 'Redirection'
+        ]);
     }
 
     public function privacy(){

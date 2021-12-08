@@ -39,6 +39,8 @@
                 <h2>Envoyer un message</h2>
                 <?php require __DIR__ . '/../partials/_errors.tpl.php' ?>
 
+                <input type="hidden" name="token" value="<?= $csrfToken; ?>">
+
                 <!-- FULL NAME -->
                 <div class="contact-inputBox">
                     <input type="text" name="name" required>
