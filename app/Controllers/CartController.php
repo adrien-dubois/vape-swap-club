@@ -109,12 +109,13 @@ class CartController extends CoreController{
         }
 
         $this->show('cart/command',[
-            'pageTitle'=>'Commande',
-            'cart' => $getCart,
-            'total' => $total,
-            'totalTva' => $totalTva,
-            'adress' => new Adress(),
+            'pageTitle'  =>'Commande',
+            'cart'       => $getCart,
+            'total'      => $total,
+            'totalTva'   => $totalTva,
+            'adress'     => new Adress(),
             'findAdress' => $findAdress,
+            'csrfToken'  => $this->generateToken(),
         ]);
     }
 
@@ -264,8 +265,9 @@ class CartController extends CoreController{
         $adress = Adress::find($adress_id);
 
         $this->show('cart/adress', [
-            'adress' => $adress,
+            'adress'    => $adress,
             'pageTitle' => 'Changer l\'adresse',
+            'csrfToken' => $this->generateToken(),
         ]);
     }
 

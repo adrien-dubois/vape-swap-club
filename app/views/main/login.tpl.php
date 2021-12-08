@@ -9,6 +9,7 @@
                     <h1 class="form__title">Connexion</h1>
                     <?php require __DIR__ . '/../partials/_errors.tpl.php'; ?>
 
+
                     <!-- EMAIL -->
                     <div class="form__div">
                         <input type="text" placeholder=" " name="email" class="form__input">

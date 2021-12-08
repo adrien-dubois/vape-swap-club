@@ -1,10 +1,10 @@
-- Commencer ACL
 - Error pages
 - MAJ Readme
 - Privacy Policy mise en page
 
 DONE :
-
+- CSRF Protection List
+- Commencer ACL
 - Redirect after confirmation
 - Backoffice
 - Demande vendor

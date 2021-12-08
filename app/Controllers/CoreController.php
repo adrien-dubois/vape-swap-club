@@ -98,6 +98,15 @@ class CoreController{
                 'main-sendContact',
                 'product-insert',
                 'product-pictures',
+                'user-insert',
+                'user-activation',
+                'user-update',
+                'user-request',
+                'cart-order',
+                'adress-edit',
+                'msg-redirect',
+                'backoffice-vendorValidate',
+                'backoffice-update-product',
             ];
 
             // We check the current route is a CSRF protected route

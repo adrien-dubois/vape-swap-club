@@ -20,10 +20,11 @@ class MsgController extends CoreController
         $currentUser = $_SESSION['userObject'];
 
         $this->show('message/main', [
-            'pageTitle' => 'Messagerie',
+            'pageTitle'        => 'Messagerie',
             'receivedMessages' => $receivedMessages,
-            'contacts' => $contacts,
-            'currentUser' =>$currentUser,
+            'contacts'         => $contacts,
+            'currentUser'      => $currentUser,
+            'csrfToken'        => $this->generateToken(),
         ]);
     }
 

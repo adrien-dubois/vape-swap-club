@@ -104,6 +104,7 @@ class AppUserController extends CoreController{
 
         $this->show('main/register', [
             'pageTitle' => 'S\'enregistrer',
+            'csrfToken' => $this->generateToken(),
         ]);
 
     }
@@ -334,7 +335,8 @@ class AppUserController extends CoreController{
     public function otp(){
 
         $this->show('main/otp', [
-            'pageTitle' => 'Confirmation d\'inscription'
+            'pageTitle' => 'Confirmation d\'inscription',
+            'csrfToken' => $this->generateToken(),
         ]);
     }
 
@@ -417,7 +419,8 @@ class AppUserController extends CoreController{
         $this->show('user/edit',[
             'pageTitle' => 'Éditer profil',
             'profil'    => $_SESSION['userObject'],
-            'user' => $user,
+            'user'      => $user,
+            'csrfToken' => $this->generateToken(),
         ]);
     }
 
@@ -526,7 +529,8 @@ class AppUserController extends CoreController{
 
         $this->show('user/vendor', [
             'pageTitle' => 'Vendeur',
-            'request' => new Request(),
+            'request'   => new Request(),
+            'csrfToken' => $this->generateToken(),
         ]);
     }
 

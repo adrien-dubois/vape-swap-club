@@ -31,6 +31,8 @@
 
                 <?php require __DIR__ . '/../partials/_errors.tpl.php' ; ?>
 
+                <!-- CSRF TOKEN -->
+                <input type="hidden" name="token" value="<?= $csrfToken; ?>">
 
                 <!-- FULL NAME -->
                 <div class="input-container-vendor">

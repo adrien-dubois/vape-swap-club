@@ -7,6 +7,9 @@
 
         <!-- FORM -->
         <form action="" method="POST" class="user-form">
+            
+            <!-- CSRF TOKEN -->
+            <input type="hidden" name="token" value="<?= $csrfToken; ?>">
 
             <!-- OTP -->
             <div class="wrap2">
