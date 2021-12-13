@@ -1,20 +1,20 @@
 # Vape Swap Club
 
-This is a project for a bargain website around vape stuff on the base of an e-commerce website.
+This is a project for a bargain website around vape stuff based-on an e-commerce website.
 
 You'll can sell your vape stuff, but just high end / moders pieces. To be part of the club, you have to sell / research a certain kind of vape stuff.
 
 ## Project
 
-/!\ __*WORK IN PROGRESS*__ /!\
+The purpose of this project is to just back to the basics. After long time on Symfony, I don't want to miss my PHP skills.
 
-The purpose of this project is to just back to the basics. After long time on Symfony, I don't want to miss my PHP Vanilla skills. I love PHP to much for that!
+So I'm making all functionnality of an E-Commerce website from scratch : cart / commands / orders / announce / authentication / acl / voters etc...
 
-So I'm making all functionnality from scratch : cart / commands / orders / announce / authentication / acl etc...
+This is a E-Commerce website, with register / account. Sell/buy by announces. 
 
-This is a E-Commerce website, with register / account. Sell by announces or buy. I will think about a system to check originals
+A simple user can make a request to became vendor and post his own products.
 
-## Technos
+### `Technos`
 
 - HTML
 - CSS Vanilla
@@ -31,15 +31,24 @@ This is a E-Commerce website, with register / account. Sell by announces or buy.
     - PhpUnit
     - Spatie PhpUnit Watcher
 
-## Install
+### `Features`
 
-If you want to test it, you'll have to :
+- Register / Authentication system
+- Profile section with information & customize
+- Voter system to make a personal permission access system
+- Internal personnal Messenger to discuss with vendors
+- Stripe paiment module
+- Cart system
+- Backoffice for admins to manage website
+- Contact form to message the webmaster
+- A vendor form to send a request for become vendor
 
-    - Make a composer install
-    - Create a DataBase named `vapeswap`
-    - For the tables, you have in the `docs` directory 2 sql docs :
-        - 1st which is the tables and some datas to start in the tables
-        - 2nd which is the tables empty, no datas in, you are free to start    
-          from scratch
-    - Make a config.ini and configure it as explained in the config.ini.dist in `\app\`
-    - Run with PHP server, you can run the `server.sh` script if you want
+### `Install`
+
+If you want to install it, you'll have to :
+
+- Make a composer install
+- Create a DataBase named `vapeswap`
+- Make the tables, I put two sql files into `docs` directory if you want to import it directly. One with datas, other is empty.
+- Make a config.ini and configure it as explained in the config.ini.dist in `\app\`
+- Run with PHP server, you can run the `server.sh` script if you want

@@ -24,7 +24,7 @@
         </div>
         <div>
             <i class="fa fa-envelope"></i>
-            <p><a href="mailto: dubois.adrien.dev@gmail.com">Webmaster Contact</a></p>
+            <p><a href="mailto: contact@vape-swap-club.white-umbrella.fr">Contact</a></p>
         </div>
     </div>
         
@@ -37,7 +37,7 @@
             <div class="footer-icons">
                 <a href="https://www.linkedin.com/in/adrien-dubois-03/"><i class="fa fa-linkedin"></i></a>
                 <a href="https://github.com/adrien-dubois"><i class="fa fa-github"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="https://twitter.com/AdrienDuboisDev"><i class="fa fa-twitter"></i></a>
             </div>
         </div>
             
