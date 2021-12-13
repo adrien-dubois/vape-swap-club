@@ -21,7 +21,7 @@ Site Web :  <a href="https://www.hostinger.fr/">https://www.hostinger.fr/</a>
 <p style="color: #FC833C;"><b>Développement</b><b> : </b></p>
 Dubois Adrien
 Adresse : 164 avenue des graviers 03200 Abrest
-Site Web : <a href="http://https://www.linkedin.com/in/adrien-dubois-03/">https://www.linkedin.com/in/adrien-dubois-03/</a>
+Site Web : <a href="https://white-umbrella.fr/">https://white-umbrella.fr/</a>
 </br>
 <p style="color: #FC833C;"><b>Conditions d’utilisation : </b></p>
 Ce site (<a href="http://vape-swap-club.white-umbrella.fr/">http://vape-swap-club.white-umbrella.fr/</a>) est proposé en différents langages web (HTML, HTML5, Javascript, CSS, etc…) pour un meilleur confort d'utilisation et un graphisme plus agréable, nous vous recommandons de recourir à des navigateurs modernes comme Internet explorer, Safari, Firefox, Google Chrome, etc…
