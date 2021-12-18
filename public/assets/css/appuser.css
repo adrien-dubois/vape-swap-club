@@ -75,6 +75,10 @@
     text-align: center;
 }
 
+.all-page{
+    height: 100vh;
+}
+
 .container-register{
     font-family: var(--register-font);
     width: 80%;
@@ -82,7 +86,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
-    height: 90vh;
+    height: 90%;
     display: flex;
     background-color: var(--background-register);
     box-shadow: 5px 10px 38px rgba(0, 0, 0, 0.527);

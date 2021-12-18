@@ -95,7 +95,7 @@
 <h2 id="trend">Tendances</h2>
 <p id="carousel-sub">Pour vous, voici une séléction des dernières tendances que nous avons pu rentrer dans le Club. Que ce soit du Old School ou la dernière pièce du nouveau modder à la mode, soyez sûrs que vous n'y trouverez que des classiques</p>
 <!-- CAROUSEL PART -->
-    <div class="carousel">
+    <div class="carousel" style="padding-bottom: 35px;">
         <!-- slider ------------------>
         <ul id="autoWidth" class="cs-hidden">
         <!--1------------------------->
