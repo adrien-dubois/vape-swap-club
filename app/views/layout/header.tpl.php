@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="<?= $assetsBaseUri; ?>css/product.css">
     <link rel="stylesheet" href="<?= $assetsBaseUri; ?>css/appuser.css">
     <link rel="stylesheet" href="<?= $assetsBaseUri; ?>css/backoffice.css">
+    <link rel="stylesheet" href="<?= $assetsBaseUri; ?>css/responsive.css">
     <link rel="stylesheet" href="<?= $assetsBaseUri; ?>css/lightslider.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

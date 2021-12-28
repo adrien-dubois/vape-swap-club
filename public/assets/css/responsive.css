@@ -1,0 +1,198 @@
+/* NAVBAR */
+
+@media only screen and (max-width: 1240px){
+    .nav-links:link,
+    .nav-links:visited,
+    .nav-menu{
+        font-size: 16px;
+        padding: 10px;
+    }
+    .navigation{
+        padding: 10px 50px;
+    } 
+
+    .logo-image{
+        width: 150px;
+    }
+
+    .contain{
+        height: 100%;
+    }
+}
+
+@media only screen and (max-width: 950px){
+    .navigation{
+        flex-direction: column;
+    }
+
+    .logo-link{
+        margin-right: 0;
+    }
+
+    .picto ul{
+        padding: 10px 0;
+    }
+
+    .picto ul li a{
+        padding: 5px 25px;
+    }
+    
+    .picto ul li a .icon{
+        width: 30px;
+        height: 30px;
+    }
+    
+    .picto ul li a .icon .fas,
+    .picto ul li a .icon .far,
+    .picto ul li a .icon .fab{
+        font-size: 21px;
+    }
+
+    .picto ul li a .name{
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 630px){
+    .nav-links:link,
+    .nav-links:visited,
+    .nav-menu{
+        display: block;
+    }
+    .nav-links:not(:last-child){
+        border-right: none;
+        border-bottom: 1px solid #FC833C;
+    }
+}
+
+/* HERO SECTION */
+
+@media(max-width: 1200px){
+    .banner-content{
+        padding-top: 100px;
+    }
+}
+
+@media(max-width: 970px){
+    .banner{
+        height: 50vh;
+    }
+    .banner-content span{
+        font-size: 12px;
+    }
+    .banner-content h1{
+        font-size: 30px;
+        font-weight: 400;
+    }
+
+    .banner-content p{
+        font-size: 12px;
+    }
+}
+
+@media(max-width: 860px){
+    .banner-content .btn-one,
+    .banner-content .btn-two{
+        padding: 5px 15px;
+        font-size: 14px;
+        font-weight: 400;
+    }
+}
+
+@media(max-width: 610px){
+    .banner{
+        height: 40vh;
+        background-size: cover;
+    }
+    .banner-content{
+        padding-top: 5px;
+        width: 70%;
+    }
+    .banner-content h1{
+        font-size: 18px;
+        font-weight: 300;
+    }
+    .banner-content .btn-one,
+    .banner-content .btn-two{
+        display: block;
+        margin-bottom: 10px;
+    }
+    .banner-content span,
+    .banner-content p{
+        font-size: 8px;
+    }
+
+}
+
+/* PICTO */
+
+@media(max-width:750px){
+    .picto{
+        display: none;
+    }
+
+    .banner-content p{
+        margin-bottom: 5px;
+    }
+}
+
+/* CAROUSEL */
+
+@media(max-width:720px){
+    .box{
+        width: 94%;
+        height: 500px;
+    }
+    .model{
+        height: 250px;
+    }
+    .details p{
+        font-size: 16px;
+        width: 250px;
+    }
+
+    #carousel-sub{
+        width: 500px;
+        font-size: 14px;
+    }
+}
+
+@media(max-width:500px){
+    #carousel-sub{
+        width: 200px;
+        font-size: 12px;
+    }
+
+    .card-section #subtitle{
+        width: 200px;
+        font-size: 12px;
+        margin: 0 auto;
+    }
+
+    #trend{
+        margin-bottom: 1rem;
+        font-size: 25px;
+    }
+
+    .card-section #title{
+        margin-top: 2rem;
+        font-size: 25px;
+    }
+}
+
+/* FOOTER */
+
+@media(max-width:880px)
+{
+    .footer-distributed .footer-left,
+    .footer-distributed .footer-center,
+    .footer-distributed .footer-right{
+        display: block;
+        width: 100%;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    .footer-distributed .footer-center i{
+        margin-left: 0;
+    }
+}
